@@ -5,7 +5,11 @@ import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/feature/auth/repo/auth_repo.dart';
 import 'package:matching_app/feature/auth/view/auth_page.dart';
 import 'package:matching_app/feature/auth/view/password_remainder_page.dart';
+import 'package:matching_app/feature/navigation/view/bottom_navigation_page.dart';
+import 'package:matching_app/feature/talk/view/talk_list_page.dart';
 import 'package:matching_app/feature/tweet/view/tweet_list_page.dart';
+import 'package:matching_app/feature/user/view/my_page.dart';
+import 'package:matching_app/feature/user/view/user_list_page.dart';
 import 'package:matching_app/routing/go_router_refresh_stream.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -63,12 +67,41 @@ GoRouter appRouter(ref) {
           ),
         ],
       ),
-      GoRoute(
-        path: AppRoute.tweetList.path,
-        name: AppRoute.tweetList.name,
-        pageBuilder: (context, state) {
-          return const NoTransitionPage(child: TweetListPage());
+      ShellRoute(
+        navigatorKey: _shellNavigatorKey,
+        builder: (context, state, child) {
+          return BottomNavigationPage(child: child);
         },
+        routes: [
+          GoRoute(
+            path: AppRoute.tweetList.path,
+            name: AppRoute.tweetList.name,
+            pageBuilder: (context, state) {
+              return const NoTransitionPage(child: TweetListPage());
+            },
+          ),
+          GoRoute(
+            path: AppRoute.userList.path,
+            name: AppRoute.userList.name,
+            pageBuilder: (context, state) {
+              return const NoTransitionPage(child: UserListPage());
+            },
+          ),
+          GoRoute(
+            path: AppRoute.talkList.path,
+            name: AppRoute.talkList.name,
+            pageBuilder: (context, state) {
+              return const NoTransitionPage(child: TalkListPage());
+            },
+          ),
+          GoRoute(
+            path: AppRoute.myPage.path,
+            name: AppRoute.myPage.name,
+            pageBuilder: (context, state) {
+              return const NoTransitionPage(child: MyPage());
+            },
+          ),
+        ],
       ),
     ],
   );

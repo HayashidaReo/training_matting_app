@@ -9,6 +9,9 @@ class AuthTopNavigationPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final TextEditingController emailController = useTextEditingController();
+    final TextEditingController passwordController = useTextEditingController();
+
     final selectedIndex = useState<int>(0);
     return DefaultTabController(
       initialIndex: selectedIndex.value,
@@ -25,7 +28,18 @@ class AuthTopNavigationPage extends HookConsumerWidget {
             ],
           ),
         ),
-        body: TabBarView(children: [CreateUserPage(), SigninPage()]),
+        body: TabBarView(
+          children: [
+            CreateUserPage(
+              emailController: emailController,
+              passwordController: passwordController,
+            ),
+            SigninPage(
+              emailController: emailController,
+              passwordController: passwordController,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -7,6 +7,7 @@ import 'package:matching_app/common_widget/custom_button.dart';
 import 'package:matching_app/common_widget/loading_dialog.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
+import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/auth_controller.dart';
 import 'package:matching_app/feature/component/email_text_form_field.dart';
@@ -14,18 +15,22 @@ import 'package:matching_app/feature/component/password_text_form_field.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 
 class CreateUserPage extends HookConsumerWidget {
-  const CreateUserPage({super.key});
+  const CreateUserPage({
+    super.key,
+    required this.emailController,
+    required this.passwordController,
+  });
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    final TextEditingController emailController = useTextEditingController();
-    final TextEditingController passwordController = useTextEditingController();
     final passwordVisible = useState<bool>(false);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('新規登録画面', style: TextStyle(fontSize: 32)),
+        title: Text('新規登録画面', style: TextStyle(fontSize: FontSize.extraLarge)),
       ),
       body: Form(
         key: formKey,
@@ -54,19 +59,19 @@ class CreateUserPage extends HookConsumerWidget {
                   visible: !passwordVisible.value,
                 ),
                 HeightMarginSizedBox.normal,
-                SizedBox(
-                  width: double.infinity,
-                  child: InkWell(
-                    onTap: () {
-                      context.pushNamed(AppRoute.passwordRemainder.name);
-                    },
-                    child: Text(
-                      'パスワードを忘れた方はこちら>',
-                      style: TextStyle(color: defaultColors.mainTextColor),
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ),
+                // SizedBox(
+                //   width: double.infinity,
+                //   child: InkWell(
+                //     onTap: () {
+                //       context.pushNamed(AppRoute.passwordRemainder.name);
+                //     },
+                //     child: Text(
+                //       'パスワードを忘れた方はこちら>',
+                //       style: TextStyle(color: defaultColors.mainTextColor),
+                //       textAlign: TextAlign.right,
+                //     ),
+                //   ),
+                // ),
                 HeightMarginSizedBox.normal,
                 Icon(
                   Icons.remove,
@@ -91,20 +96,20 @@ class CreateUserPage extends HookConsumerWidget {
                   ),
                 ),
 
-                HeightMarginSizedBox.normal,
-                CustomButton(
-                  text: 'ログイン',
-                  onPressed: () async {
-                    await _signIn(
-                      formKey,
-                      ref,
-                      emailController,
-                      passwordController,
-                      context,
-                    );
-                  },
-                  isColorReversed: true,
-                ),
+                // HeightMarginSizedBox.normal,
+                // CustomButton(
+                //   text: 'ログイン',
+                //   onPressed: () async {
+                //     await _signIn(
+                //       formKey,
+                //       ref,
+                //       emailController,
+                //       passwordController,
+                //       context,
+                //     );
+                //   },
+                //   isColorReversed: true,
+                // ),
               ],
             ),
           ),
@@ -147,31 +152,31 @@ Future<void> _createUser(
   return;
 }
 
-Future<void> _signIn(
-  GlobalKey<FormState> formKey,
-  WidgetRef ref,
-  TextEditingController emailController,
-  TextEditingController passwordController,
-  BuildContext context,
-) async {
-  if (!formKey.currentState!.validate()) {
-    return;
-  }
-  // ログイン処理
-  showLoadingDialog('ログイン中...');
-  final String signinUserResult = await ref
-      .read(authControllerProvider.notifier)
-      .signIn(email: emailController.text, password: passwordController.text);
-  if (signinUserResult != 'success') {
-    hideLoadingDialog();
-    if (context.mounted) {
-      showCloseOnlyDialog(context, 'エラー', signinUserResult);
-    }
-    return;
-  }
-  hideLoadingDialog();
-  if (context.mounted) {
-    context.goNamed(AppRoute.tweetList.name);
-  }
-  return;
-}
+// Future<void> _signIn(
+//   GlobalKey<FormState> formKey,
+//   WidgetRef ref,
+//   TextEditingController emailController,
+//   TextEditingController passwordController,
+//   BuildContext context,
+// ) async {
+//   if (!formKey.currentState!.validate()) {
+//     return;
+//   }
+//   // ログイン処理
+//   showLoadingDialog('ログイン中...');
+//   final String signinUserResult = await ref
+//       .read(authControllerProvider.notifier)
+//       .signIn(email: emailController.text, password: passwordController.text);
+//   if (signinUserResult != 'success') {
+//     hideLoadingDialog();
+//     if (context.mounted) {
+//       showCloseOnlyDialog(context, 'エラー', signinUserResult);
+//     }
+//     return;
+//   }
+//   hideLoadingDialog();
+//   if (context.mounted) {
+//     context.goNamed(AppRoute.tweetList.name);
+//   }
+//   return;
+// }

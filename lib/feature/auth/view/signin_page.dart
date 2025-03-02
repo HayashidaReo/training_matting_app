@@ -12,7 +12,6 @@ import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/auth_controller.dart';
 import 'package:matching_app/feature/component/email_text_form_field.dart';
 import 'package:matching_app/feature/component/password_text_form_field.dart';
-import 'package:matching_app/feature/user/controller/user_controller.dart';
 
 class SigninPage extends HookConsumerWidget {
   const SigninPage({
@@ -77,24 +76,6 @@ class SigninPage extends HookConsumerWidget {
                   size: 40,
                   color: defaultColors.mainTextColor,
                 ),
-
-                // HeightMarginSizedBox.normal,
-                // SizedBox(
-                //   width: double.infinity,
-                //   height: 54,
-                //   child: CustomButton(
-                //     text: '会員登録',
-                //     onPressed: () async {
-                //       await _createUser(
-                //         formKey,
-                //         ref,
-                //         emailController,
-                //         passwordController,
-                //         context,
-                //       );
-                //     },
-                //   ),
-                // ),
                 HeightMarginSizedBox.normal,
                 CustomButton(
                   text: 'ログイン',
@@ -117,39 +98,6 @@ class SigninPage extends HookConsumerWidget {
     );
   }
 }
-
-// Future<void> _createUser(
-//   GlobalKey<FormState> formKey,
-//   WidgetRef ref,
-//   TextEditingController emailController,
-//   TextEditingController passwordController,
-//   BuildContext context,
-// ) async {
-//   if (!formKey.currentState!.validate()) {
-//     return;
-//   }
-//   showLoadingDialog('会員登録中...');
-//   // 新規登録処理
-//   final String createUserResult = await ref
-//       .read(authControllerProvider.notifier)
-//       .createUser(
-//         email: emailController.text,
-//         password: passwordController.text,
-//       );
-//   if (createUserResult != 'success') {
-//     hideLoadingDialog();
-//     if (context.mounted) {
-//       showCloseOnlyDialog(context, 'エラー', createUserResult);
-//     }
-//     return;
-//   }
-//   await ref.read(userControllerProvider.notifier).createUser();
-//   hideLoadingDialog();
-//   if (context.mounted) {
-//     context.goNamed(AppRoute.tweetList.name);
-//   }
-//   return;
-// }
 
 Future<void> _signIn(
   GlobalKey<FormState> formKey,

@@ -58,20 +58,12 @@ class CreateUserPage extends HookConsumerWidget {
                   ),
                   visible: !passwordVisible.value,
                 ),
-                HeightMarginSizedBox.normal,
-                // SizedBox(
-                //   width: double.infinity,
-                //   child: InkWell(
-                //     onTap: () {
-                //       context.pushNamed(AppRoute.passwordRemainder.name);
-                //     },
-                //     child: Text(
-                //       'パスワードを忘れた方はこちら>',
-                //       style: TextStyle(color: defaultColors.mainTextColor),
-                //       textAlign: TextAlign.right,
-                //     ),
-                //   ),
-                // ),
+                // TODO: 名前の入力欄を追加
+                // TODO: 性別の選択欄を追加
+                // TODO: 生年月日の選択欄を追加
+
+                // TODO: これらを保存する処理を追加
+                // TODO: これらのdata_modelを追加
                 HeightMarginSizedBox.normal,
                 Icon(
                   Icons.remove,
@@ -95,21 +87,6 @@ class CreateUserPage extends HookConsumerWidget {
                     },
                   ),
                 ),
-
-                // HeightMarginSizedBox.normal,
-                // CustomButton(
-                //   text: 'ログイン',
-                //   onPressed: () async {
-                //     await _signIn(
-                //       formKey,
-                //       ref,
-                //       emailController,
-                //       passwordController,
-                //       context,
-                //     );
-                //   },
-                //   isColorReversed: true,
-                // ),
               ],
             ),
           ),
@@ -151,32 +128,3 @@ Future<void> _createUser(
   }
   return;
 }
-
-// Future<void> _signIn(
-//   GlobalKey<FormState> formKey,
-//   WidgetRef ref,
-//   TextEditingController emailController,
-//   TextEditingController passwordController,
-//   BuildContext context,
-// ) async {
-//   if (!formKey.currentState!.validate()) {
-//     return;
-//   }
-//   // ログイン処理
-//   showLoadingDialog('ログイン中...');
-//   final String signinUserResult = await ref
-//       .read(authControllerProvider.notifier)
-//       .signIn(email: emailController.text, password: passwordController.text);
-//   if (signinUserResult != 'success') {
-//     hideLoadingDialog();
-//     if (context.mounted) {
-//       showCloseOnlyDialog(context, 'エラー', signinUserResult);
-//     }
-//     return;
-//   }
-//   hideLoadingDialog();
-//   if (context.mounted) {
-//     context.goNamed(AppRoute.tweetList.name);
-//   }
-//   return;
-// }

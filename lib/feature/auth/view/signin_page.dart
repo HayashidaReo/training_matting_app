@@ -13,8 +13,8 @@ import 'package:matching_app/feature/component/email_text_form_field.dart';
 import 'package:matching_app/feature/component/password_text_form_field.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 
-class AuthPage extends HookConsumerWidget {
-  const AuthPage({super.key});
+class SigninPage extends HookConsumerWidget {
+  const SigninPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,8 +25,7 @@ class AuthPage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('GonTwitter', style: TextStyle(fontSize: 32)),
-        toolbarHeight: 100,
+        title: const Text('ログイン画面', style: TextStyle(fontSize: 32)),
       ),
       body: Form(
         key: formKey,

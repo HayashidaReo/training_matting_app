@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/feature/auth/repo/auth_repo.dart';
-import 'package:matching_app/feature/auth/view/auth_page.dart';
+import 'package:matching_app/feature/auth/view/auth_top_navigation_page.dart';
+import 'package:matching_app/feature/auth/view/create_user_page.dart';
 import 'package:matching_app/feature/auth/view/password_remainder_page.dart';
 import 'package:matching_app/feature/navigation/view/bottom_navigation_page.dart';
 import 'package:matching_app/feature/talk/view/talk_list_page.dart';
@@ -36,13 +37,13 @@ GoRouter appRouter(ref) {
       final bool loggedIn = ref.read(authRepoProvider) != null;
       final String currentPath = state.uri.toString();
       final bool onAuthPage =
-          (currentPath == AppRoute.auth.name) ||
+          (currentPath == AppRoute.authTopNavigation.name) ||
           (currentPath ==
-              '/${AppRoute.auth.name}/${AppRoute.passwordRemainder.name}');
+              '/${AppRoute.authTopNavigation.name}/${AppRoute.passwordRemainder.name}');
 
       // ログインしていない場合、認証ページ, パスワード再設定ページ以外なら認証ページへリダイレクト
       if (!loggedIn) {
-        return onAuthPage ? null : AppRoute.auth.path;
+        return onAuthPage ? null : AppRoute.authTopNavigation.path;
       }
       // ログイン済みで認証ページにいる場合はホームページへリダイレクト
       if (loggedIn && onAuthPage) {
@@ -52,10 +53,10 @@ GoRouter appRouter(ref) {
     },
     routes: [
       GoRoute(
-        path: AppRoute.auth.path,
-        name: AppRoute.auth.name,
+        path: AppRoute.authTopNavigation.path,
+        name: AppRoute.authTopNavigation.name,
         pageBuilder: (context, state) {
-          return const NoTransitionPage(child: AuthPage());
+          return const NoTransitionPage(child: AuthTopNavigationPage());
         },
         routes: [
           GoRoute(

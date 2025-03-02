@@ -142,6 +142,9 @@ Future<void> _createUser(
   }
   await ref.read(userControllerProvider.notifier).createUser();
   hideLoadingDialog();
+  if (context.mounted) {
+    context.goNamed(AppRoute.tweetList.name);
+  }
   return;
 }
 
@@ -168,5 +171,8 @@ Future<void> _signIn(
     return;
   }
   hideLoadingDialog();
+  if (context.mounted) {
+    context.goNamed(AppRoute.tweetList.name);
+  }
   return;
 }

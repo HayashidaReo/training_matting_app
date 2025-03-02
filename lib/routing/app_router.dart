@@ -5,6 +5,7 @@ import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/feature/auth/repo/auth_repo.dart';
 import 'package:matching_app/feature/auth/view/auth_page.dart';
 import 'package:matching_app/feature/auth/view/password_remainder_page.dart';
+import 'package:matching_app/feature/tweet/view/tweet_list_page.dart';
 import 'package:matching_app/routing/go_router_refresh_stream.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -23,7 +24,6 @@ GoRouter appRouter(ref) {
     // FirebaseAuth の認証状態変化を監視
     // 変更を感知すると、通常はページ遷移時にしか実行されない redirect を実行する
     refreshListenable: GoRouterRefreshStream(
-      // TODO: repoじゃなくてcontrollerにする
       ref.watch(authRepoProvider.notifier).authStateChange(),
     ),
 
@@ -62,6 +62,13 @@ GoRouter appRouter(ref) {
             },
           ),
         ],
+      ),
+      GoRoute(
+        path: AppRoute.tweetList.path,
+        name: AppRoute.tweetList.name,
+        pageBuilder: (context, state) {
+          return const NoTransitionPage(child: TweetListPage());
+        },
       ),
     ],
   );

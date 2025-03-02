@@ -11,7 +11,7 @@ class UserData with _$UserData {
     required String userName,
     required String profile,
     required String userId,
-    required String imageUrl,
+    required String iconImageUrl,
     @TimestampConverter() required Timestamp createdAt,
     @TimestampConverter() required Timestamp updatedAt,
   }) = _UserData;

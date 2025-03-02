@@ -12,8 +12,7 @@ part of 'userdata.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserData _$UserDataFromJson(Map<String, dynamic> json) {
   return _UserData.fromJson(json);
@@ -24,7 +23,7 @@ mixin _$UserData {
   String get userName => throw _privateConstructorUsedError;
   String get profile => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
-  String get imageUrl => throw _privateConstructorUsedError;
+  String get iconImageUrl => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp get createdAt => throw _privateConstructorUsedError;
   @TimestampConverter()
@@ -45,14 +44,13 @@ abstract class $UserDataCopyWith<$Res> {
   factory $UserDataCopyWith(UserData value, $Res Function(UserData) then) =
       _$UserDataCopyWithImpl<$Res, UserData>;
   @useResult
-  $Res call({
-    String userName,
-    String profile,
-    String userId,
-    String imageUrl,
-    @TimestampConverter() Timestamp createdAt,
-    @TimestampConverter() Timestamp updatedAt,
-  });
+  $Res call(
+      {String userName,
+      String profile,
+      String userId,
+      String iconImageUrl,
+      @TimestampConverter() Timestamp createdAt,
+      @TimestampConverter() Timestamp updatedAt});
 }
 
 /// @nodoc
@@ -73,45 +71,36 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
     Object? userName = null,
     Object? profile = null,
     Object? userId = null,
-    Object? imageUrl = null,
+    Object? iconImageUrl = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(
-      _value.copyWith(
-            userName:
-                null == userName
-                    ? _value.userName
-                    : userName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            profile:
-                null == profile
-                    ? _value.profile
-                    : profile // ignore: cast_nullable_to_non_nullable
-                        as String,
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            imageUrl:
-                null == imageUrl
-                    ? _value.imageUrl
-                    : imageUrl // ignore: cast_nullable_to_non_nullable
-                        as String,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as Timestamp,
-            updatedAt:
-                null == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as Timestamp,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      profile: null == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      iconImageUrl: null == iconImageUrl
+          ? _value.iconImageUrl
+          : iconImageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as Timestamp,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as Timestamp,
+    ) as $Val);
   }
 }
 
@@ -119,19 +108,17 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
 abstract class _$$UserDataImplCopyWith<$Res>
     implements $UserDataCopyWith<$Res> {
   factory _$$UserDataImplCopyWith(
-    _$UserDataImpl value,
-    $Res Function(_$UserDataImpl) then,
-  ) = __$$UserDataImplCopyWithImpl<$Res>;
+          _$UserDataImpl value, $Res Function(_$UserDataImpl) then) =
+      __$$UserDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String userName,
-    String profile,
-    String userId,
-    String imageUrl,
-    @TimestampConverter() Timestamp createdAt,
-    @TimestampConverter() Timestamp updatedAt,
-  });
+  $Res call(
+      {String userName,
+      String profile,
+      String userId,
+      String iconImageUrl,
+      @TimestampConverter() Timestamp createdAt,
+      @TimestampConverter() Timestamp updatedAt});
 }
 
 /// @nodoc
@@ -139,9 +126,8 @@ class __$$UserDataImplCopyWithImpl<$Res>
     extends _$UserDataCopyWithImpl<$Res, _$UserDataImpl>
     implements _$$UserDataImplCopyWith<$Res> {
   __$$UserDataImplCopyWithImpl(
-    _$UserDataImpl _value,
-    $Res Function(_$UserDataImpl) _then,
-  ) : super(_value, _then);
+      _$UserDataImpl _value, $Res Function(_$UserDataImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of UserData
   /// with the given fields replaced by the non-null parameter values.
@@ -151,58 +137,49 @@ class __$$UserDataImplCopyWithImpl<$Res>
     Object? userName = null,
     Object? profile = null,
     Object? userId = null,
-    Object? imageUrl = null,
+    Object? iconImageUrl = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(
-      _$UserDataImpl(
-        userName:
-            null == userName
-                ? _value.userName
-                : userName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        profile:
-            null == profile
-                ? _value.profile
-                : profile // ignore: cast_nullable_to_non_nullable
-                    as String,
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        imageUrl:
-            null == imageUrl
-                ? _value.imageUrl
-                : imageUrl // ignore: cast_nullable_to_non_nullable
-                    as String,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as Timestamp,
-        updatedAt:
-            null == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as Timestamp,
-      ),
-    );
+    return _then(_$UserDataImpl(
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      profile: null == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      iconImageUrl: null == iconImageUrl
+          ? _value.iconImageUrl
+          : iconImageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as Timestamp,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as Timestamp,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserDataImpl implements _UserData {
-  _$UserDataImpl({
-    required this.userName,
-    required this.profile,
-    required this.userId,
-    required this.imageUrl,
-    @TimestampConverter() required this.createdAt,
-    @TimestampConverter() required this.updatedAt,
-  });
+  _$UserDataImpl(
+      {required this.userName,
+      required this.profile,
+      required this.userId,
+      required this.iconImageUrl,
+      @TimestampConverter() required this.createdAt,
+      @TimestampConverter() required this.updatedAt});
 
   factory _$UserDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDataImplFromJson(json);
@@ -214,7 +191,7 @@ class _$UserDataImpl implements _UserData {
   @override
   final String userId;
   @override
-  final String imageUrl;
+  final String iconImageUrl;
   @override
   @TimestampConverter()
   final Timestamp createdAt;
@@ -224,7 +201,7 @@ class _$UserDataImpl implements _UserData {
 
   @override
   String toString() {
-    return 'UserData(userName: $userName, profile: $profile, userId: $userId, imageUrl: $imageUrl, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserData(userName: $userName, profile: $profile, userId: $userId, iconImageUrl: $iconImageUrl, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -236,8 +213,8 @@ class _$UserDataImpl implements _UserData {
                 other.userName == userName) &&
             (identical(other.profile, profile) || other.profile == profile) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl) &&
+            (identical(other.iconImageUrl, iconImageUrl) ||
+                other.iconImageUrl == iconImageUrl) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -246,15 +223,8 @@ class _$UserDataImpl implements _UserData {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    userName,
-    profile,
-    userId,
-    imageUrl,
-    createdAt,
-    updatedAt,
-  );
+  int get hashCode => Object.hash(runtimeType, userName, profile, userId,
+      iconImageUrl, createdAt, updatedAt);
 
   /// Create a copy of UserData
   /// with the given fields replaced by the non-null parameter values.
@@ -266,19 +236,21 @@ class _$UserDataImpl implements _UserData {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserDataImplToJson(this);
+    return _$$UserDataImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _UserData implements UserData {
-  factory _UserData({
-    required final String userName,
-    required final String profile,
-    required final String userId,
-    required final String imageUrl,
-    @TimestampConverter() required final Timestamp createdAt,
-    @TimestampConverter() required final Timestamp updatedAt,
-  }) = _$UserDataImpl;
+  factory _UserData(
+          {required final String userName,
+          required final String profile,
+          required final String userId,
+          required final String iconImageUrl,
+          @TimestampConverter() required final Timestamp createdAt,
+          @TimestampConverter() required final Timestamp updatedAt}) =
+      _$UserDataImpl;
 
   factory _UserData.fromJson(Map<String, dynamic> json) =
       _$UserDataImpl.fromJson;
@@ -290,7 +262,7 @@ abstract class _UserData implements UserData {
   @override
   String get userId;
   @override
-  String get imageUrl;
+  String get iconImageUrl;
   @override
   @TimestampConverter()
   Timestamp get createdAt;

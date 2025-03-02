@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/common_widget/close_only_dialog.dart';
@@ -11,10 +9,9 @@ import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/auth_controller.dart';
-import 'package:matching_app/feature/auth/repo/auth_repo.dart';
 import 'package:matching_app/feature/component/email_text_form_field.dart';
 import 'package:matching_app/feature/component/password_text_form_field.dart';
-import 'package:matching_app/feature/user/data_model/userdata.dart';
+import 'package:matching_app/feature/user/controller/user_controller.dart';
 
 class AuthPage extends HookConsumerWidget {
   const AuthPage({super.key});
@@ -143,16 +140,7 @@ Future<void> _createUser(
     }
     return;
   }
-  UserData accountData = UserData(
-    userId: ref.read(authRepoProvider)!.uid,
-    userName: '',
-    createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
-    imageUrl: '',
-    profile: '',
-  );
-  // TODO: 作成処理作る
-  await ref.read(userRepoProvider.notifier).createUser(accountData);
+  await ref.read(userControllerProvider.notifier).createUser();
   hideLoadingDialog();
   return;
 }
@@ -170,7 +158,7 @@ Future<void> _signIn(
   // ログイン処理
   showLoadingDialog('ログイン中...');
   final String signinUserResult = await ref
-      .read(authRepoProvider.notifier)
+      .read(authControllerProvider.notifier)
       .signIn(email: emailController.text, password: passwordController.text);
   if (signinUserResult != 'success') {
     hideLoadingDialog();

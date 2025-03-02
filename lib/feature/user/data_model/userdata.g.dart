@@ -11,13 +11,11 @@ _$UserDataImpl _$$UserDataImplFromJson(Map<String, dynamic> json) =>
       userName: json['userName'] as String,
       profile: json['profile'] as String,
       userId: json['userId'] as String,
-      imageUrl: json['imageUrl'] as String,
-      createdAt: const TimestampConverter().fromJson(
-        json['createdAt'] as Timestamp,
-      ),
-      updatedAt: const TimestampConverter().fromJson(
-        json['updatedAt'] as Timestamp,
-      ),
+      iconImageUrl: json['iconImageUrl'] as String,
+      createdAt:
+          const TimestampConverter().fromJson(json['createdAt'] as Timestamp),
+      updatedAt:
+          const TimestampConverter().fromJson(json['updatedAt'] as Timestamp),
     );
 
 Map<String, dynamic> _$$UserDataImplToJson(_$UserDataImpl instance) =>
@@ -25,7 +23,7 @@ Map<String, dynamic> _$$UserDataImplToJson(_$UserDataImpl instance) =>
       'userName': instance.userName,
       'profile': instance.profile,
       'userId': instance.userId,
-      'imageUrl': instance.imageUrl,
+      'iconImageUrl': instance.iconImageUrl,
       'createdAt': const TimestampConverter().toJson(instance.createdAt),
       'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
     };

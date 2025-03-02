@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:twitter_test/common_widget/default_button.dart';
-import 'package:twitter_test/config/utils/margin_sized_box.dart';
-import 'package:twitter_test/functions/global_functions.dart';
-import 'package:twitter_test/repo/auth/auth_repo.dart';
-import 'package:twitter_test/views/components/email_text_form_field.dart';
+import 'package:matching_app/common_widget/custom_button.dart';
+import 'package:matching_app/common_widget/loading_dialog.dart';
+import 'package:matching_app/common_widget/toast.dart';
+import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
+import 'package:matching_app/feature/auth/repo/auth_repo.dart';
+import 'package:matching_app/feature/component/email_text_form_field.dart';
 
 class PasswordRemainderPage extends HookConsumerWidget {
   const PasswordRemainderPage({super.key});
@@ -24,12 +25,12 @@ class PasswordRemainderPage extends HookConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                MarginSizedBox.mediumHeightMargin,
+                HeightMarginSizedBox.large,
                 EmailTextFormField(controller: emailController, label: 'Email'),
-                MarginSizedBox.largeHeightMargin,
-                DefaultButton(
-                  buttonText: 'パスワード再設定メールを送信する',
-                  onDefaultButtonPressed: () async {
+                HeightMarginSizedBox.large,
+                CustomButton(
+                  text: 'パスワード再設定メールを送信する',
+                  onPressed: () async {
                     if (!formKey.currentState!.validate()) return;
                     showLoadingDialog('送信中...');
                     ref

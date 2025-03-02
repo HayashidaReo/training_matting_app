@@ -66,12 +66,12 @@ class AuthRepo extends _$AuthRepo {
     });
   }
 
-  //パスワードリマインダーメールの送信
-  Future<String> sendPasswordResetEmail() async {
+  //パスワード再設定メールの送信
+  Future<String> sendPasswordResetEmail([String? email]) async {
     try {
       await ref
           .read(firebaseAuthInstanceProvider)
-          .sendPasswordResetEmail(email: state!.email!);
+          .sendPasswordResetEmail(email: (email ?? state!.email!));
       return 'success';
     } on FirebaseAuthException catch (e) {
       return FirebaseAuthErrorExt.fromCode(e.code).message;

@@ -34,7 +34,7 @@ dependencies:
   hooks_riverpod:
   flutter_riverpod:
   riverpod_annotation:
-
+  freezed_annotation:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
@@ -58,6 +58,9 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   build_runner:
   riverpod_generator:
+  freezed:
+  freezed_annotation:
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

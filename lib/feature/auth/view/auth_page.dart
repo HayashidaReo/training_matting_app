@@ -4,6 +4,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:matching_app/common_widget/close_only_dialog.dart';
+import 'package:matching_app/common_widget/custom_button.dart';
+import 'package:matching_app/common_widget/loading_dialog.dart';
+import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/enum/router_enum.dart';
+import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
+import 'package:matching_app/feature/auth/repo/auth_repo.dart';
+import 'package:matching_app/feature/component/email_text_form_field.dart';
+import 'package:matching_app/feature/component/password_text_form_field.dart';
+import 'package:matching_app/feature/user/data_model/userdata.dart';
 
 class AuthPage extends HookConsumerWidget {
   const AuthPage({super.key});
@@ -31,7 +41,7 @@ class AuthPage extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 EmailTextFormField(controller: emailController, label: 'Email'),
-                MarginSizedBox.smallHeightMargin,
+                HeightMarginSizedBox.normal,
                 PasswordTextFormField(
                   controller: passwordController,
                   suffixIcon: IconButton(
@@ -46,33 +56,33 @@ class AuthPage extends HookConsumerWidget {
                   ),
                   visible: !passwordVisible.value,
                 ),
-                MarginSizedBox.smallHeightMargin,
+                HeightMarginSizedBox.normal,
                 SizedBox(
                   width: double.infinity,
                   child: InkWell(
                     onTap: () {
-                      context.push(AppRoute.passwordRemainder.toRoute);
+                      // context.push(AppRoute.passwordRemainder.toRoute);
                     },
                     child: Text(
                       'パスワードを忘れた方はこちら>',
-                      style: TextStyle(color: defaultColors.blueTextColor),
+                      style: TextStyle(color: defaultColors.mainTextColor),
                       textAlign: TextAlign.right,
                     ),
                   ),
                 ),
-                MarginSizedBox.largeHeightMargin,
+                HeightMarginSizedBox.normal,
                 Icon(
                   Icons.remove,
                   size: 40,
-                  color: defaultColors.blueTextColor,
+                  color: defaultColors.mainTextColor,
                 ),
-                MarginSizedBox.smallHeightMargin,
+                HeightMarginSizedBox.normal,
                 SizedBox(
                   width: double.infinity,
                   height: 54,
-                  child: DefaultButton(
-                    buttonText: '会員登録',
-                    onDefaultButtonPressed: () async {
+                  child: CustomButton(
+                    text: '会員登録',
+                    onPressed: () async {
                       await _createUser(
                         formKey,
                         ref,
@@ -84,10 +94,10 @@ class AuthPage extends HookConsumerWidget {
                   ),
                 ),
 
-                MarginSizedBox.smallHeightMargin,
-                DefaultButton(
-                  buttonText: 'ログイン',
-                  onDefaultButtonPressed: () async {
+                HeightMarginSizedBox.normal,
+                CustomButton(
+                  text: 'ログイン',
+                  onPressed: () async {
                     await _signIn(
                       formKey,
                       ref,
@@ -96,8 +106,7 @@ class AuthPage extends HookConsumerWidget {
                       context,
                     );
                   },
-                  backgroundColor: defaultColors.whiteBackgroundColor,
-                  textColor: defaultColors.blueTextColor,
+                  isColorReversed: true,
                 ),
               ],
             ),
@@ -141,7 +150,8 @@ Future<void> _createUser(
     imageUrl: '',
     profile: '',
   );
-  await ref.read(userRepoProvider.notifier).createUser(accountData);
+  // TODO: 作成処理作る
+  // await ref.read(userRepoProvider.notifier).createUser(accountData);
   hideLoadingDialog();
   return;
 }

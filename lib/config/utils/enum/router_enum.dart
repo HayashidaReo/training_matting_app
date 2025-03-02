@@ -1,10 +1,12 @@
-enum AppRoute { auth, tweetList, userList, talkList, myPage }
+enum AppRoute { auth, passwordRemainder, tweetList, userList, talkList, myPage }
 
 extension AppRouteExtention on AppRoute {
   String get path {
     switch (this) {
       case AppRoute.auth:
         return '/auth';
+      case AppRoute.passwordRemainder:
+        return '/passwordRemainder';
       case AppRoute.tweetList:
         return '/tweetList';
       case AppRoute.userList:

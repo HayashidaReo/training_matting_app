@@ -10,6 +10,7 @@ import 'package:matching_app/common_widget/loading_dialog.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
+import 'package:matching_app/feature/auth/controller/auth_controller.dart';
 import 'package:matching_app/feature/auth/repo/auth_repo.dart';
 import 'package:matching_app/feature/component/email_text_form_field.dart';
 import 'package:matching_app/feature/component/password_text_form_field.dart';
@@ -61,7 +62,7 @@ class AuthPage extends HookConsumerWidget {
                   width: double.infinity,
                   child: InkWell(
                     onTap: () {
-                      // context.push(AppRoute.passwordRemainder.toRoute);
+                      context.pushNamed(AppRoute.passwordRemainder.name);
                     },
                     child: Text(
                       'パスワードを忘れた方はこちら>',
@@ -130,7 +131,7 @@ Future<void> _createUser(
   showLoadingDialog('会員登録中...');
   // 新規登録処理
   final String createUserResult = await ref
-      .read(authRepoProvider.notifier)
+      .read(authControllerProvider.notifier)
       .createUser(
         email: emailController.text,
         password: passwordController.text,
@@ -151,7 +152,7 @@ Future<void> _createUser(
     profile: '',
   );
   // TODO: 作成処理作る
-  // await ref.read(userRepoProvider.notifier).createUser(accountData);
+  await ref.read(userRepoProvider.notifier).createUser(accountData);
   hideLoadingDialog();
   return;
 }

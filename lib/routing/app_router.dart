@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/feature/auth/repo/auth_repo.dart';
 import 'package:matching_app/feature/auth/view/auth_page.dart';
+import 'package:matching_app/feature/auth/view/password_remainder_page.dart';
 import 'package:matching_app/routing/go_router_refresh_stream.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -28,8 +29,20 @@ GoRouter appRouter(ref) {
 
     // 認証状態に応じてリダイレクト処理を実装
     redirect: (BuildContext context, GoRouterState state) {
-      if (ref.read(authRepoProvider) == null) {
-        return AppRoute.auth.path;
+      final bool loggedIn = ref.read(authRepoProvider) != null;
+      final String currentPath = state.uri.toString();
+      final bool onAuthPage =
+          (currentPath == AppRoute.auth.name) ||
+          (currentPath ==
+              '/${AppRoute.auth.name}/${AppRoute.passwordRemainder.name}');
+
+      // ログインしていない場合、認証ページ, パスワード再設定ページ以外なら認証ページへリダイレクト
+      if (!loggedIn) {
+        return onAuthPage ? null : AppRoute.auth.path;
+      }
+      // ログイン済みで認証ページにいる場合はホームページへリダイレクト
+      if (loggedIn && onAuthPage) {
+        return AppRoute.tweetList.path;
       }
       return null;
     },
@@ -40,6 +53,15 @@ GoRouter appRouter(ref) {
         pageBuilder: (context, state) {
           return const NoTransitionPage(child: AuthPage());
         },
+        routes: [
+          GoRoute(
+            path: AppRoute.passwordRemainder.path,
+            name: AppRoute.passwordRemainder.name,
+            pageBuilder: (context, state) {
+              return const MaterialPage(child: PasswordRemainderPage());
+            },
+          ),
+        ],
       ),
     ],
   );

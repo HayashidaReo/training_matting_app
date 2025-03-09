@@ -14,9 +14,16 @@ class UserController extends _$UserController {
     return const AsyncData(null);
   }
 
-  Future<void> updateUserName(UserData myUserData, String newUserName) async {
+  Future<void> updateUserProfile(
+    UserData myUserData,
+    String newUserName,
+    newProfile,
+  ) async {
     state = const AsyncLoading();
-    final updateUserData = myUserData.copyWith(userName: newUserName);
+    final updateUserData = myUserData.copyWith(
+      userName: newUserName,
+      profile: newProfile,
+    );
     await ref.read(userRepoProvider.notifier).updateUser(updateUserData);
     state = const AsyncData(null);
   }

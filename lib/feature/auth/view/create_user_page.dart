@@ -136,6 +136,7 @@ class CreateUserPage extends HookConsumerWidget {
                   onTap: () {
                     showDatePicker(
                       context: context,
+                      locale: const Locale('ja'),
                       initialDate: DateTime(
                         DateTime.now().year - 20,
                         DateTime.now().month,

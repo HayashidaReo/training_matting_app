@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:matching_app/common_widget/custom_button.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
+import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 
 void showConfirmDialog({
   required BuildContext context,
@@ -63,7 +64,7 @@ class ConfirmDialog extends StatelessWidget {
                 isColorReversed: true,
               ),
             ),
-            HeightMarginSizedBox.small,
+            WidthMarginSizedBox.small,
             Expanded(
               child: CustomButton(
                 onPressed: () {

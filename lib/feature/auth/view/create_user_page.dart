@@ -230,7 +230,7 @@ Future<void> _createUser({
       );
   hideLoadingDialog();
   if (context.mounted) {
-    context.goNamed(AppRoute.tweetList.name);
+    context.goNamed(AppRoute.postList.name);
   }
   return;
 }

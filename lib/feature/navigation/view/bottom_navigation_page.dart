@@ -5,7 +5,7 @@ import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/feature/component/badge_count_widget.dart';
 import 'package:matching_app/feature/navigation/controller/bottom_navigation_controller.dart';
 
-class BottomNavigationPage extends HookConsumerWidget {
+class BottomNavigationPage extends ConsumerWidget {
   const BottomNavigationPage({super.key, required this.child});
   final Widget child;
 
@@ -40,7 +40,7 @@ class BottomNavigationPage extends HookConsumerWidget {
               .updateIndex(value);
           switch (value) {
             case 0:
-              context.goNamed(AppRoute.tweetList.name);
+              context.goNamed(AppRoute.postList.name);
               break;
             case 1:
               context.goNamed(AppRoute.userList.name);

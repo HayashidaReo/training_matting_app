@@ -89,6 +89,6 @@ Stream<UserData?> watchMyUserDataController(ref) {
 
 @riverpod
 // streamでuserListを取得
-Stream<List<UserData>> watchUsersController(ref) {
-  return ref.watch(userRepoProvider.notifier).watchUsers();
+Stream<List<UserData>> watchAllUsersController(ref) {
+  return ref.watch(userRepoProvider.notifier).watchAllUsers();
 }

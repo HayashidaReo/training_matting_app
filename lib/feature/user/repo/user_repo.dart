@@ -55,7 +55,7 @@ class UserRepo extends _$UserRepo {
   }
 
   // streamでuserListを取得
-  Stream<List<UserData>> watchUsers() {
+  Stream<List<UserData>> watchAllUsers() {
     return state
         .orderBy(FirebaseUserDataKey.createdAt, descending: true)
         .snapshots()

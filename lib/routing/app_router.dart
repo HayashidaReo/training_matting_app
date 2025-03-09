@@ -7,7 +7,7 @@ import 'package:matching_app/feature/auth/view/auth_top_navigation_page.dart';
 import 'package:matching_app/feature/auth/view/password_remainder_page.dart';
 import 'package:matching_app/feature/navigation/view/bottom_navigation_page.dart';
 import 'package:matching_app/feature/talk/view/talk_list_page.dart';
-import 'package:matching_app/feature/tweet/view/tweet_list_page.dart';
+import 'package:matching_app/feature/post/view/all_post_list_page.dart';
 import 'package:matching_app/feature/user/view/edit/edit_email_page.dart';
 import 'package:matching_app/feature/user/view/edit/edit_my_icon_page.dart';
 import 'package:matching_app/feature/user/view/edit/edit_my_profile_page.dart';
@@ -25,7 +25,7 @@ final GlobalKey<NavigatorState> _shellNavigatorKey =
 @riverpod
 GoRouter appRouter(ref) {
   return GoRouter(
-    initialLocation: AppRoute.tweetList.path,
+    initialLocation: AppRoute.postList.path,
     navigatorKey: rootNavigatorKey,
 
     debugLogDiagnostics: true,
@@ -50,7 +50,7 @@ GoRouter appRouter(ref) {
       }
       // ログイン済みで認証ページにいる場合はホームページへリダイレクト
       if (loggedIn && onAuthPage) {
-        return AppRoute.tweetList.path;
+        return AppRoute.postList.path;
       }
       return null;
     },
@@ -78,10 +78,10 @@ GoRouter appRouter(ref) {
         },
         routes: [
           GoRoute(
-            path: AppRoute.tweetList.path,
-            name: AppRoute.tweetList.name,
+            path: AppRoute.postList.path,
+            name: AppRoute.postList.name,
             pageBuilder: (context, state) {
-              return const NoTransitionPage(child: TweetListPage());
+              return const NoTransitionPage(child: AllPostListPage());
             },
           ),
           GoRoute(

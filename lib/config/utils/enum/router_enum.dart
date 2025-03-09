@@ -1,7 +1,8 @@
 enum AppRoute {
   authTopNavigation,
   passwordRemainder,
-  tweetList,
+  postList,
+  addPost,
   userList,
   talkList,
   myPage,
@@ -18,8 +19,10 @@ extension AppRouteExtention on AppRoute {
         return '/authTopNavigation';
       case AppRoute.passwordRemainder:
         return '/passwordRemainder';
-      case AppRoute.tweetList:
-        return '/tweetList';
+      case AppRoute.postList:
+        return '/postList';
+      case AppRoute.addPost:
+        return '/addPost';
       case AppRoute.userList:
         return '/userList';
       case AppRoute.talkList:

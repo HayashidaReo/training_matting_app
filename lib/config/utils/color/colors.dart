@@ -24,6 +24,9 @@ class DefaultColors {
 
   final Color hamburgerMenuBackColor = Colors.white;
   final Color hamburgerMenuTextColor = Colors.black87;
+
+  final Color postTileTextColor = Colors.black87;
+  final Color postTileBackColor = Colors.white;
 }
 
 final defaultColors = DefaultColors();

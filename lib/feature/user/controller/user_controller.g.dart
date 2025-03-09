@@ -171,26 +171,27 @@ final watchMyUserDataControllerProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef WatchMyUserDataControllerRef = AutoDisposeStreamProviderRef<UserData?>;
-String _$watchUsersControllerHash() =>
-    r'f101f553303cdd4023fefb1b023c5451740fac3d';
+String _$watchAllUsersControllerHash() =>
+    r'f266e1ae7de7f2000752b19c65dbabca7bec318f';
 
-/// See also [watchUsersController].
-@ProviderFor(watchUsersController)
-final watchUsersControllerProvider =
+/// See also [watchAllUsersController].
+@ProviderFor(watchAllUsersController)
+final watchAllUsersControllerProvider =
     AutoDisposeStreamProvider<List<UserData>>.internal(
-      watchUsersController,
-      name: r'watchUsersControllerProvider',
+      watchAllUsersController,
+      name: r'watchAllUsersControllerProvider',
       debugGetCreateSourceHash:
           const bool.fromEnvironment('dart.vm.product')
               ? null
-              : _$watchUsersControllerHash,
+              : _$watchAllUsersControllerHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef WatchUsersControllerRef = AutoDisposeStreamProviderRef<List<UserData>>;
+typedef WatchAllUsersControllerRef =
+    AutoDisposeStreamProviderRef<List<UserData>>;
 String _$userControllerHash() => r'22855f078a3f2a602c308e124eefbe9de2f5c334';
 
 /// See also [UserController].

@@ -4,8 +4,8 @@ import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/feature/user/controller/follow_list_top_navigation.dart';
 import 'package:matching_app/feature/user/view/follow_list_page.dart';
 
-class FollowListTopNavigation extends ConsumerWidget {
-  const FollowListTopNavigation({super.key});
+class FollowListTopNavigationPage extends ConsumerWidget {
+  const FollowListTopNavigationPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -9,6 +9,7 @@ import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
+import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/auth_controller.dart';
 import 'package:matching_app/feature/component/hamburger_tile.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
@@ -90,61 +91,126 @@ class MyPage extends ConsumerWidget {
                         );
                       }
 
-                      return Column(
-                        children: [
-                          if (data.iconImageUrl == '')
-                            InkWell(
-                              onTap: () {
-                                context.pushNamed(AppRoute.editMyIcon.name);
-                              },
-                              child: const Icon(
-                                Icons.account_circle,
-                                size: 100,
-                              ),
-                            )
-                          else
-                            InkWell(
-                              onTap: () {
-                                context.pushNamed(AppRoute.editMyIcon.name);
-                              },
-                              child: ClipOval(
-                                child: CachedNetworkImage(
-                                  imageUrl: data.iconImageUrl,
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                  progressIndicatorBuilder: (
-                                    context,
-                                    url,
-                                    downloadProgress,
-                                  ) {
-                                    return SizedBox(
-                                      width: 100,
-                                      height: 100,
-                                      child: Center(
-                                        child: CircularProgressIndicator(
-                                          value: downloadProgress.progress,
+                      return Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (data.iconImageUrl == '')
+                              InkWell(
+                                onTap: () {
+                                  context.pushNamed(AppRoute.editMyIcon.name);
+                                },
+                                child: const Icon(
+                                  Icons.account_circle,
+                                  size: 100,
+                                ),
+                              )
+                            else
+                              InkWell(
+                                onTap: () {
+                                  context.pushNamed(AppRoute.editMyIcon.name);
+                                },
+                                child: ClipOval(
+                                  child: CachedNetworkImage(
+                                    imageUrl: data.iconImageUrl,
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                    progressIndicatorBuilder: (
+                                      context,
+                                      url,
+                                      downloadProgress,
+                                    ) {
+                                      return SizedBox(
+                                        width: 100,
+                                        height: 100,
+                                        child: Center(
+                                          child: CircularProgressIndicator(
+                                            value: downloadProgress.progress,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                  errorWidget: (context, url, error) {
-                                    return SizedBox(
-                                      width: 100,
-                                      height: 100,
-                                      child: Icon(
-                                        Icons.image_not_supported_rounded,
-                                      ),
-                                    );
-                                  },
+                                      );
+                                    },
+                                    errorWidget: (context, url, error) {
+                                      return SizedBox(
+                                        width: 100,
+                                        height: 100,
+                                        child: Icon(
+                                          Icons.image_not_supported_rounded,
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
+                            WidthMarginSizedBox.normal,
+                            Expanded(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      data.userName,
+                                      style: TextStyle(
+                                        fontSize: FontSize.normal,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '10',
+                                            style: TextStyle(
+                                              fontSize: FontSize.large,
+                                            ),
+                                          ),
+                                          Text(
+                                            'フォロー',
+                                            style: TextStyle(
+                                              fontSize: FontSize.normal,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '10',
+                                            style: TextStyle(
+                                              fontSize: FontSize.large,
+                                            ),
+                                          ),
+                                          Text(
+                                            'フォロワー',
+                                            style: TextStyle(
+                                              fontSize: FontSize.normal,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          Text(
-                            data.userName,
-                            style: TextStyle(fontSize: FontSize.large),
-                          ),
-                        ],
+                          ],
+                        ),
                       );
                     },
                     error: (error, _) {

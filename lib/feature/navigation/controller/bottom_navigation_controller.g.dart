@@ -1,28 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'follow_list_top_navigation.dart';
+part of 'bottom_navigation_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$followListTopNavigationHash() =>
-    r'0bbc545e62e5dda3b7df5eb16ea106e14b850d9d';
+String _$bottomNavigationControllerHash() =>
+    r'5b7a6f0ca8bca599a166e1af26259b7056b2c125';
 
-/// See also [FollowListTopNavigation].
-@ProviderFor(FollowListTopNavigation)
-final followListTopNavigationProvider =
-    NotifierProvider<FollowListTopNavigation, int>.internal(
-      FollowListTopNavigation.new,
-      name: r'followListTopNavigationProvider',
+/// See also [BottomNavigationController].
+@ProviderFor(BottomNavigationController)
+final bottomNavigationControllerProvider =
+    NotifierProvider<BottomNavigationController, int>.internal(
+      BottomNavigationController.new,
+      name: r'bottomNavigationControllerProvider',
       debugGetCreateSourceHash:
           const bool.fromEnvironment('dart.vm.product')
               ? null
-              : _$followListTopNavigationHash,
+              : _$bottomNavigationControllerHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$FollowListTopNavigation = Notifier<int>;
+typedef _$BottomNavigationController = Notifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

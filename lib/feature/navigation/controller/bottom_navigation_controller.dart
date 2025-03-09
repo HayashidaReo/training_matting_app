@@ -1,9 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'follow_list_top_navigation.g.dart';
+part 'bottom_navigation_controller.g.dart';
 
 @Riverpod(keepAlive: true)
-class FollowListTopNavigation extends _$FollowListTopNavigation {
+class BottomNavigationController extends _$BottomNavigationController {
   @override
   int build() {
     return 0;

@@ -15,6 +15,7 @@ import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/auth_controller.dart';
 import 'package:matching_app/feature/component/badge_count_widget.dart';
 import 'package:matching_app/feature/component/hamburger_tile.dart';
+import 'package:matching_app/feature/navigation/controller/bottom_navigation_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/data_model/userdata.dart';
 
@@ -32,7 +33,10 @@ class MyPage extends ConsumerWidget {
               IconButton(
                 icon: const Icon(Icons.message),
                 onPressed: () {
-                  context.pushNamed(AppRoute.talkList.name);
+                  ref
+                      .read(bottomNavigationControllerProvider.notifier)
+                      .updateIndex(2);
+                  context.goNamed(AppRoute.talkList.name);
                 },
               ),
               Positioned(top: 4, right: 4, child: badgeCountWidget(ref)),

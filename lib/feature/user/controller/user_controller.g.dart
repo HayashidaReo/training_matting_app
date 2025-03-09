@@ -191,7 +191,7 @@ final watchUsersControllerProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef WatchUsersControllerRef = AutoDisposeStreamProviderRef<List<UserData>>;
-String _$userControllerHash() => r'5676a11814fd604e8682efd5001fc7582734b2db';
+String _$userControllerHash() => r'22855f078a3f2a602c308e124eefbe9de2f5c334';
 
 /// See also [UserController].
 @ProviderFor(UserController)

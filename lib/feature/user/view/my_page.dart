@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -91,15 +92,50 @@ class MyPage extends ConsumerWidget {
                       return Column(
                         children: [
                           if (data.iconImageUrl == '')
-                            const Icon(Icons.account_circle, size: 100)
+                            InkWell(
+                              onTap: () {
+                                context.pushNamed(AppRoute.editMyIcon.name);
+                              },
+                              child: const Icon(
+                                Icons.account_circle,
+                                size: 100,
+                              ),
+                            )
                           else
-                            ClipOval(
-                              child: SizedBox(
-                                width: 100,
-                                height: 100,
-                                child: Image.network(
-                                  data.iconImageUrl,
+                            InkWell(
+                              onTap: () {
+                                context.pushNamed(AppRoute.editMyIcon.name);
+                              },
+                              child: ClipOval(
+                                child: CachedNetworkImage(
+                                  imageUrl: data.iconImageUrl,
+                                  width: 100,
+                                  height: 100,
                                   fit: BoxFit.cover,
+                                  progressIndicatorBuilder: (
+                                    context,
+                                    url,
+                                    downloadProgress,
+                                  ) {
+                                    return SizedBox(
+                                      width: 100,
+                                      height: 100,
+                                      child: Center(
+                                        child: CircularProgressIndicator(
+                                          value: downloadProgress.progress,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  errorWidget: (context, url, error) {
+                                    return SizedBox(
+                                      width: 100,
+                                      height: 100,
+                                      child: Icon(
+                                        Icons.image_not_supported_rounded,
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             ),

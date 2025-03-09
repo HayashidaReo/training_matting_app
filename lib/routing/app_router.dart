@@ -109,7 +109,7 @@ GoRouter appRouter(ref) {
                 path: AppRoute.editEmail.path,
                 name: AppRoute.editEmail.name,
                 pageBuilder: (context, state) {
-                  return const NoTransitionPage(child: EditEmailPage());
+                  return const MaterialPage(child: EditEmailPage());
                 },
               ),
               GoRoute(
@@ -117,7 +117,7 @@ GoRouter appRouter(ref) {
                 path: AppRoute.editMyIcon.path,
                 name: AppRoute.editMyIcon.name,
                 pageBuilder: (context, state) {
-                  return const NoTransitionPage(child: EditMyIconPage());
+                  return const MaterialPage(child: EditMyIconPage());
                 },
               ),
               GoRoute(
@@ -125,7 +125,7 @@ GoRouter appRouter(ref) {
                 path: AppRoute.editMyProfile.path,
                 name: AppRoute.editMyProfile.name,
                 pageBuilder: (context, state) {
-                  return const NoTransitionPage(child: EditMyProfilePage());
+                  return const MaterialPage(child: EditMyProfilePage());
                 },
               ),
             ],

@@ -9,7 +9,6 @@ import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/auth_controller.dart';
-import 'package:matching_app/feature/auth/repo/auth_repo.dart';
 import 'package:matching_app/feature/component/hamburger_tile.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/data_model/userdata.dart';
@@ -134,7 +133,9 @@ class MyPage extends ConsumerWidget {
       text: 'パスワード再設定メールを送信しますか？',
       onPressed: () async {
         final String result =
-            await ref.read(authRepoProvider.notifier).sendPasswordResetEmail();
+            await ref
+                .read(authControllerProvider.notifier)
+                .sendPasswordResetEmail();
         showToast('パスワード再設定メールを送信しました');
         if (result == 'success') {
           if (context.mounted) {

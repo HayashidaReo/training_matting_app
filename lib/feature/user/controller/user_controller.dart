@@ -28,16 +28,24 @@ class UserController extends _$UserController {
     state = const AsyncData(null);
   }
 
-  Future<void> createUser() async {
+  Future<void> createUser({
+    required String username,
+    required String birthDate,
+    required List<bool> genderList,
+  }) async {
     state = const AsyncLoading();
+    final gender = genderList[0] ? "男性" : "女性";
     UserData addUserData = UserData(
       userId: ref.read(currentUserControllerProvider)!.uid,
-      userName: '',
+      userName: username,
+      birthDate: birthDate,
+      gender: gender,
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
       profile: '',
       iconImageUrl: '',
     );
+
     await ref.read(userRepoProvider.notifier).createUser(addUserData);
     state = const AsyncData(null);
   }

@@ -15,7 +15,6 @@ import 'package:matching_app/feature/component/email_text_form_field.dart';
 import 'package:matching_app/feature/component/password_text_form_field.dart';
 import 'package:matching_app/feature/component/username_text_form_field.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
-import 'package:intl/intl.dart';
 import 'package:matching_app/function/timestamp_converter.dart';
 
 class CreateUserPage extends HookConsumerWidget {
@@ -100,10 +99,6 @@ class CreateUserPage extends HookConsumerWidget {
                 HeightMarginSizedBox.small,
                 // TODO: これらを保存する処理を追加
                 // TODO: これらのdata_modelを追加
-                // Text(
-                //   '選択: ${selectedGenderList.value[0] ? "男性" : "女性"}',
-                //   style: TextStyle(fontSize: 16),
-                // ),
                 ToggleButtons(
                   isSelected: selectedGenderList.value,
                   onPressed: (int index) {
@@ -177,11 +172,14 @@ class CreateUserPage extends HookConsumerWidget {
                     text: '会員登録',
                     onPressed: () async {
                       await _createUser(
-                        formKey,
-                        ref,
-                        emailController,
-                        passwordController,
-                        context,
+                        formKey: formKey,
+                        ref: ref,
+                        emailController: emailController,
+                        passwordController: passwordController,
+                        usernameController: usernameController,
+                        genderList: selectedGenderList.value,
+                        birthDateController: birthDateController,
+                        context: context,
                       );
                     },
                   ),
@@ -195,13 +193,16 @@ class CreateUserPage extends HookConsumerWidget {
   }
 }
 
-Future<void> _createUser(
-  GlobalKey<FormState> formKey,
-  WidgetRef ref,
-  TextEditingController emailController,
-  TextEditingController passwordController,
-  BuildContext context,
-) async {
+Future<void> _createUser({
+  required GlobalKey<FormState> formKey,
+  required WidgetRef ref,
+  required TextEditingController emailController,
+  required TextEditingController passwordController,
+  required BuildContext context,
+  required TextEditingController usernameController,
+  required List<bool> genderList,
+  required TextEditingController birthDateController,
+}) async {
   if (!formKey.currentState!.validate()) {
     return;
   }
@@ -220,7 +221,13 @@ Future<void> _createUser(
     }
     return;
   }
-  await ref.read(userControllerProvider.notifier).createUser();
+  await ref
+      .read(userControllerProvider.notifier)
+      .createUser(
+        username: usernameController.text,
+        birthDate: birthDateController.text,
+        genderList: genderList,
+      );
   hideLoadingDialog();
   if (context.mounted) {
     context.goNamed(AppRoute.tweetList.name);

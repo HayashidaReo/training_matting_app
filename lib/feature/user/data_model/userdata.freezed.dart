@@ -24,6 +24,8 @@ mixin _$UserData {
   String get profile => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
   String get iconImageUrl => throw _privateConstructorUsedError;
+  String get birthDate => throw _privateConstructorUsedError;
+  String get gender => throw _privateConstructorUsedError;
   @TimestampConverter()
   Timestamp get createdAt => throw _privateConstructorUsedError;
   @TimestampConverter()
@@ -49,6 +51,8 @@ abstract class $UserDataCopyWith<$Res> {
       String profile,
       String userId,
       String iconImageUrl,
+      String birthDate,
+      String gender,
       @TimestampConverter() Timestamp createdAt,
       @TimestampConverter() Timestamp updatedAt});
 }
@@ -72,6 +76,8 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
     Object? profile = null,
     Object? userId = null,
     Object? iconImageUrl = null,
+    Object? birthDate = null,
+    Object? gender = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -91,6 +97,14 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
       iconImageUrl: null == iconImageUrl
           ? _value.iconImageUrl
           : iconImageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      birthDate: null == birthDate
+          ? _value.birthDate
+          : birthDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: null == createdAt
           ? _value.createdAt
@@ -117,6 +131,8 @@ abstract class _$$UserDataImplCopyWith<$Res>
       String profile,
       String userId,
       String iconImageUrl,
+      String birthDate,
+      String gender,
       @TimestampConverter() Timestamp createdAt,
       @TimestampConverter() Timestamp updatedAt});
 }
@@ -138,6 +154,8 @@ class __$$UserDataImplCopyWithImpl<$Res>
     Object? profile = null,
     Object? userId = null,
     Object? iconImageUrl = null,
+    Object? birthDate = null,
+    Object? gender = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -157,6 +175,14 @@ class __$$UserDataImplCopyWithImpl<$Res>
       iconImageUrl: null == iconImageUrl
           ? _value.iconImageUrl
           : iconImageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      birthDate: null == birthDate
+          ? _value.birthDate
+          : birthDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: null == createdAt
           ? _value.createdAt
@@ -178,6 +204,8 @@ class _$UserDataImpl implements _UserData {
       required this.profile,
       required this.userId,
       required this.iconImageUrl,
+      required this.birthDate,
+      required this.gender,
       @TimestampConverter() required this.createdAt,
       @TimestampConverter() required this.updatedAt});
 
@@ -193,6 +221,10 @@ class _$UserDataImpl implements _UserData {
   @override
   final String iconImageUrl;
   @override
+  final String birthDate;
+  @override
+  final String gender;
+  @override
   @TimestampConverter()
   final Timestamp createdAt;
   @override
@@ -201,7 +233,7 @@ class _$UserDataImpl implements _UserData {
 
   @override
   String toString() {
-    return 'UserData(userName: $userName, profile: $profile, userId: $userId, iconImageUrl: $iconImageUrl, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserData(userName: $userName, profile: $profile, userId: $userId, iconImageUrl: $iconImageUrl, birthDate: $birthDate, gender: $gender, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -215,6 +247,9 @@ class _$UserDataImpl implements _UserData {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.iconImageUrl, iconImageUrl) ||
                 other.iconImageUrl == iconImageUrl) &&
+            (identical(other.birthDate, birthDate) ||
+                other.birthDate == birthDate) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -224,7 +259,7 @@ class _$UserDataImpl implements _UserData {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, userName, profile, userId,
-      iconImageUrl, createdAt, updatedAt);
+      iconImageUrl, birthDate, gender, createdAt, updatedAt);
 
   /// Create a copy of UserData
   /// with the given fields replaced by the non-null parameter values.
@@ -248,6 +283,8 @@ abstract class _UserData implements UserData {
           required final String profile,
           required final String userId,
           required final String iconImageUrl,
+          required final String birthDate,
+          required final String gender,
           @TimestampConverter() required final Timestamp createdAt,
           @TimestampConverter() required final Timestamp updatedAt}) =
       _$UserDataImpl;
@@ -263,6 +300,10 @@ abstract class _UserData implements UserData {
   String get userId;
   @override
   String get iconImageUrl;
+  @override
+  String get birthDate;
+  @override
+  String get gender;
   @override
   @TimestampConverter()
   Timestamp get createdAt;

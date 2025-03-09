@@ -6,7 +6,7 @@ part of 'storage_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$storageControllerHash() => r'188f60d60f2c55ba2063668496cd07a498fdc123';
+String _$storageControllerHash() => r'78d1842553d5a2f4ef0bec3e7fa70461c0c92fe0';
 
 /// See also [StorageController].
 @ProviderFor(StorageController)

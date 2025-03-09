@@ -75,156 +75,144 @@ class MyPage extends ConsumerWidget {
       ),
 
       body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ref
-                  .watch(watchMyUserDataControllerProvider)
-                  .when(
-                    data: (UserData? data) {
-                      if (data == null) {
-                        return Text(
-                          'ユーザー情報が取得できませんでした。',
-                          style: TextStyle(fontSize: FontSize.large),
-                        );
-                      }
-
-                      return Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (data.iconImageUrl == '')
-                              InkWell(
-                                onTap: () {
-                                  context.pushNamed(AppRoute.editMyIcon.name);
-                                },
-                                child: const Icon(
-                                  Icons.account_circle,
-                                  size: 100,
-                                ),
-                              )
-                            else
-                              InkWell(
-                                onTap: () {
-                                  context.pushNamed(AppRoute.editMyIcon.name);
-                                },
-                                child: ClipOval(
-                                  child: CachedNetworkImage(
-                                    imageUrl: data.iconImageUrl,
-                                    width: 100,
-                                    height: 100,
-                                    fit: BoxFit.cover,
-                                    progressIndicatorBuilder: (
-                                      context,
-                                      url,
-                                      downloadProgress,
-                                    ) {
-                                      return SizedBox(
-                                        width: 100,
-                                        height: 100,
-                                        child: Center(
-                                          child: CircularProgressIndicator(
-                                            value: downloadProgress.progress,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    errorWidget: (context, url, error) {
-                                      return SizedBox(
-                                        width: 100,
-                                        height: 100,
-                                        child: Icon(
-                                          Icons.image_not_supported_rounded,
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                            WidthMarginSizedBox.normal,
-                            Expanded(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      data.userName,
-                                      style: TextStyle(
-                                        fontSize: FontSize.normal,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            '10',
-                                            style: TextStyle(
-                                              fontSize: FontSize.large,
-                                            ),
-                                          ),
-                                          Text(
-                                            'フォロー',
-                                            style: TextStyle(
-                                              fontSize: FontSize.normal,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            '10',
-                                            style: TextStyle(
-                                              fontSize: FontSize.large,
-                                            ),
-                                          ),
-                                          Text(
-                                            'フォロワー',
-                                            style: TextStyle(
-                                              fontSize: FontSize.normal,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                    error: (error, _) {
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ref
+                .watch(watchMyUserDataControllerProvider)
+                .when(
+                  data: (UserData? data) {
+                    if (data == null) {
                       return Text(
-                        'エラーが発生しました。再度お試しください。',
+                        'ユーザー情報が取得できませんでした。',
                         style: TextStyle(fontSize: FontSize.large),
                       );
-                    },
-                    loading: () {
-                      return const CircularProgressIndicator();
-                    },
-                  ),
-            ],
-          ),
+                    }
+
+                    return Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (data.iconImageUrl == '')
+                            InkWell(
+                              onTap: () {
+                                context.pushNamed(AppRoute.editMyIcon.name);
+                              },
+                              child: const Icon(
+                                Icons.account_circle,
+                                size: 100,
+                              ),
+                            )
+                          else
+                            InkWell(
+                              onTap: () {
+                                context.pushNamed(AppRoute.editMyIcon.name);
+                              },
+                              child: ClipOval(
+                                child: CachedNetworkImage(
+                                  imageUrl: data.iconImageUrl,
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                  progressIndicatorBuilder: (
+                                    context,
+                                    url,
+                                    downloadProgress,
+                                  ) {
+                                    return SizedBox(
+                                      width: 100,
+                                      height: 100,
+                                      child: Center(
+                                        child: CircularProgressIndicator(
+                                          value: downloadProgress.progress,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  errorWidget: (context, url, error) {
+                                    return SizedBox(
+                                      width: 100,
+                                      height: 100,
+                                      child: Icon(
+                                        Icons.image_not_supported_rounded,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          WidthMarginSizedBox.normal,
+                          Expanded(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    8,
+                                    8,
+                                    8,
+                                    16,
+                                  ),
+                                  child: Text(
+                                    data.userName,
+                                    style: TextStyle(fontSize: FontSize.normal),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    FollowCountPanel(
+                                      followCount: 10,
+                                      typeName: 'フォロー',
+                                    ),
+                                    FollowCountPanel(
+                                      followCount: 10,
+                                      typeName: 'フォロワー',
+                                    ),
+                                    FollowCountPanel(
+                                      followCount: 10,
+                                      typeName: '相互フォロー',
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  error: (error, _) {
+                    return Text(
+                      'エラーが発生しました。再度お試しください。',
+                      style: TextStyle(fontSize: FontSize.large),
+                    );
+                  },
+                  loading: () {
+                    return const CircularProgressIndicator();
+                  },
+                ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    context.pushNamed(AppRoute.editMyProfile.name);
+                  },
+                  child: const Text('プロフィール編集'),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -264,5 +252,34 @@ class MyPage extends ConsumerWidget {
       },
     );
     return;
+  }
+}
+
+class FollowCountPanel extends StatelessWidget {
+  const FollowCountPanel({
+    super.key,
+    required this.followCount,
+    required this.typeName,
+  });
+
+  final int followCount;
+  final String typeName;
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        context.pushNamed(AppRoute.followList.name);
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            followCount.toString(),
+            style: TextStyle(fontSize: FontSize.normal),
+          ),
+          Text(typeName, style: TextStyle(fontSize: FontSize.small)),
+        ],
+      ),
+    );
   }
 }

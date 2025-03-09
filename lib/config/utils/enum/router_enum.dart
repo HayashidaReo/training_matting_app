@@ -8,6 +8,7 @@ enum AppRoute {
   editMyProfile,
   editMyIcon,
   editEmail,
+  followList,
 }
 
 extension AppRouteExtention on AppRoute {
@@ -31,6 +32,8 @@ extension AppRouteExtention on AppRoute {
         return '/editMyProfile';
       case AppRoute.editEmail:
         return '/editEmail';
+      case AppRoute.followList:
+        return '/followList';
     }
   }
 }

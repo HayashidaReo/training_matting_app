@@ -14,10 +14,12 @@ _$UserDataImpl _$$UserDataImplFromJson(Map<String, dynamic> json) =>
       iconImageUrl: json['iconImageUrl'] as String,
       birthDate: json['birthDate'] as String,
       gender: json['gender'] as String,
-      createdAt:
-          const TimestampConverter().fromJson(json['createdAt'] as Timestamp),
-      updatedAt:
-          const TimestampConverter().fromJson(json['updatedAt'] as Timestamp),
+      createdAt: const TimestampConverter().fromJson(
+        json['createdAt'] as Timestamp,
+      ),
+      updatedAt: const TimestampConverter().fromJson(
+        json['updatedAt'] as Timestamp,
+      ),
     );
 
 Map<String, dynamic> _$$UserDataImplToJson(_$UserDataImpl instance) =>

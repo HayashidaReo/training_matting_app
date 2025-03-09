@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/feature/auth/repo/auth_repo.dart';
 import 'package:matching_app/feature/auth/view/auth_top_navigation_page.dart';
-import 'package:matching_app/feature/auth/view/create_user_page.dart';
 import 'package:matching_app/feature/auth/view/password_remainder_page.dart';
 import 'package:matching_app/feature/navigation/view/bottom_navigation_page.dart';
 import 'package:matching_app/feature/talk/view/talk_list_page.dart';

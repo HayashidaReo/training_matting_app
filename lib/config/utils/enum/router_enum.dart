@@ -5,6 +5,9 @@ enum AppRoute {
   userList,
   talkList,
   myPage,
+  editMyProfile,
+  editMyIcon,
+  editEmail,
 }
 
 extension AppRouteExtention on AppRoute {
@@ -22,6 +25,12 @@ extension AppRouteExtention on AppRoute {
         return '/talkList';
       case AppRoute.myPage:
         return '/myPage';
+      case AppRoute.editMyIcon:
+        return '/editMyIcon';
+      case AppRoute.editMyProfile:
+        return '/editMyProfile';
+      case AppRoute.editEmail:
+        return '/editEmail';
     }
   }
 }

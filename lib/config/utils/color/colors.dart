@@ -18,6 +18,9 @@ class DefaultColors {
 
   final Color textFiledLabelColor = Color.fromARGB(255, 254, 182, 235);
   final Color textFiledBorderColor = Colors.pink;
+
+  final Color hamburgerMenuBackColor = Color.fromARGB(255, 255, 233, 244);
+  final Color hamburgerMenuTextColor = defaultColors.mainTextColor;
 }
 
 final defaultColors = DefaultColors();

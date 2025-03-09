@@ -41,7 +41,7 @@ class MyPage extends ConsumerWidget {
             HamburgerTile(
               buttonTitle: 'メールアドレス変更',
               onPressed: () async {
-                context.push(AppRoute.editEmail.name);
+                context.pushNamed(AppRoute.editEmail.name);
               },
             ),
             HamburgerTile(
@@ -53,13 +53,13 @@ class MyPage extends ConsumerWidget {
             HamburgerTile(
               buttonTitle: 'アイコン編集',
               onPressed: () {
-                context.push(AppRoute.editMyIcon.name);
+                context.pushNamed(AppRoute.editMyIcon.name);
               },
             ),
             HamburgerTile(
               buttonTitle: 'プロフィール編集',
               onPressed: () {
-                context.push(AppRoute.editMyProfile.name);
+                context.pushNamed(AppRoute.editMyProfile.name);
               },
             ),
             HamburgerTile(

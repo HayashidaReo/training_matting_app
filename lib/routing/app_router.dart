@@ -8,6 +8,9 @@ import 'package:matching_app/feature/auth/view/password_remainder_page.dart';
 import 'package:matching_app/feature/navigation/view/bottom_navigation_page.dart';
 import 'package:matching_app/feature/talk/view/talk_list_page.dart';
 import 'package:matching_app/feature/tweet/view/tweet_list_page.dart';
+import 'package:matching_app/feature/user/view/edit_email_page.dart';
+import 'package:matching_app/feature/user/view/edit_my_icon_page.dart';
+import 'package:matching_app/feature/user/view/edit_my_profile_page.dart';
 import 'package:matching_app/feature/user/view/my_page.dart';
 import 'package:matching_app/feature/user/view/user_list_page.dart';
 import 'package:matching_app/routing/go_router_refresh_stream.dart';
@@ -100,6 +103,32 @@ GoRouter appRouter(ref) {
             pageBuilder: (context, state) {
               return const NoTransitionPage(child: MyPage());
             },
+            routes: [
+              GoRoute(
+                parentNavigatorKey: rootNavigatorKey,
+                path: AppRoute.editEmail.path,
+                name: AppRoute.editEmail.name,
+                pageBuilder: (context, state) {
+                  return const NoTransitionPage(child: EditEmailPage());
+                },
+              ),
+              GoRoute(
+                parentNavigatorKey: rootNavigatorKey,
+                path: AppRoute.editMyIcon.path,
+                name: AppRoute.editMyIcon.name,
+                pageBuilder: (context, state) {
+                  return const NoTransitionPage(child: EditMyIconPage());
+                },
+              ),
+              GoRoute(
+                parentNavigatorKey: rootNavigatorKey,
+                path: AppRoute.editMyProfile.path,
+                name: AppRoute.editMyProfile.name,
+                pageBuilder: (context, state) {
+                  return const NoTransitionPage(child: EditMyProfilePage());
+                },
+              ),
+            ],
           ),
         ],
       ),

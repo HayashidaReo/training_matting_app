@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/user/repo/storage_repo.dart';
@@ -12,12 +13,12 @@ class StorageController extends _$StorageController {
     return const AsyncData(null);
   }
 
-  Future<String> uploadImageAndGetUrl({required Uint8List uint8list}) async {
+  Future<String> uploadImageAndGetUrl({required File imageFile}) async {
     state = const AsyncLoading();
     final String imageUrl = await ref
         .read(storageRepoProvider.notifier)
         .uploadImageAndGetUrl(
-          uint8list: uint8list,
+          imageFile: imageFile,
           userId: ref.read(currentUserControllerProvider)!.uid,
         );
     state = const AsyncData(null);

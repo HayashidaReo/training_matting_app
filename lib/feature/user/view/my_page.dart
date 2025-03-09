@@ -78,7 +78,7 @@ class MyPage extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ref
-                  .watch(watchMyAccountControllerProvider)
+                  .watch(watchMyUserDataControllerProvider)
                   .when(
                     data: (UserData? data) {
                       if (data == null) {

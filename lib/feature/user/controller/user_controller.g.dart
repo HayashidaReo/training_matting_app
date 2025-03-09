@@ -6,8 +6,8 @@ part of 'user_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$watchAccountControllerHash() =>
-    r'0ad635189873ba24a8747bd6cc9c0defd7b65372';
+String _$watchUserDataControllerHash() =>
+    r'ff7f24fab42bfc848160f950a41d2a09c41df357';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,23 +30,23 @@ class _SystemHash {
   }
 }
 
-/// See also [watchAccountController].
-@ProviderFor(watchAccountController)
-const watchAccountControllerProvider = WatchAccountControllerFamily();
+/// See also [watchUserDataController].
+@ProviderFor(watchUserDataController)
+const watchUserDataControllerProvider = WatchUserDataControllerFamily();
 
-/// See also [watchAccountController].
-class WatchAccountControllerFamily extends Family<AsyncValue<UserData?>> {
-  /// See also [watchAccountController].
-  const WatchAccountControllerFamily();
+/// See also [watchUserDataController].
+class WatchUserDataControllerFamily extends Family<AsyncValue<UserData?>> {
+  /// See also [watchUserDataController].
+  const WatchUserDataControllerFamily();
 
-  /// See also [watchAccountController].
-  WatchAccountControllerProvider call(String userId) {
-    return WatchAccountControllerProvider(userId);
+  /// See also [watchUserDataController].
+  WatchUserDataControllerProvider call(String userId) {
+    return WatchUserDataControllerProvider(userId);
   }
 
   @override
-  WatchAccountControllerProvider getProviderOverride(
-    covariant WatchAccountControllerProvider provider,
+  WatchUserDataControllerProvider getProviderOverride(
+    covariant WatchUserDataControllerProvider provider,
   ) {
     return call(provider.userId);
   }
@@ -63,30 +63,30 @@ class WatchAccountControllerFamily extends Family<AsyncValue<UserData?>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'watchAccountControllerProvider';
+  String? get name => r'watchUserDataControllerProvider';
 }
 
-/// See also [watchAccountController].
-class WatchAccountControllerProvider
+/// See also [watchUserDataController].
+class WatchUserDataControllerProvider
     extends AutoDisposeStreamProvider<UserData?> {
-  /// See also [watchAccountController].
-  WatchAccountControllerProvider(String userId)
+  /// See also [watchUserDataController].
+  WatchUserDataControllerProvider(String userId)
     : this._internal(
         (ref) =>
-            watchAccountController(ref as WatchAccountControllerRef, userId),
-        from: watchAccountControllerProvider,
-        name: r'watchAccountControllerProvider',
+            watchUserDataController(ref as WatchUserDataControllerRef, userId),
+        from: watchUserDataControllerProvider,
+        name: r'watchUserDataControllerProvider',
         debugGetCreateSourceHash:
             const bool.fromEnvironment('dart.vm.product')
                 ? null
-                : _$watchAccountControllerHash,
-        dependencies: WatchAccountControllerFamily._dependencies,
+                : _$watchUserDataControllerHash,
+        dependencies: WatchUserDataControllerFamily._dependencies,
         allTransitiveDependencies:
-            WatchAccountControllerFamily._allTransitiveDependencies,
+            WatchUserDataControllerFamily._allTransitiveDependencies,
         userId: userId,
       );
 
-  WatchAccountControllerProvider._internal(
+  WatchUserDataControllerProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -100,12 +100,12 @@ class WatchAccountControllerProvider
 
   @override
   Override overrideWith(
-    Stream<UserData?> Function(WatchAccountControllerRef provider) create,
+    Stream<UserData?> Function(WatchUserDataControllerRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: WatchAccountControllerProvider._internal(
-        (ref) => create(ref as WatchAccountControllerRef),
+      override: WatchUserDataControllerProvider._internal(
+        (ref) => create(ref as WatchUserDataControllerRef),
         from: from,
         name: null,
         dependencies: null,
@@ -118,12 +118,12 @@ class WatchAccountControllerProvider
 
   @override
   AutoDisposeStreamProviderElement<UserData?> createElement() {
-    return _WatchAccountControllerProviderElement(this);
+    return _WatchUserDataControllerProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is WatchAccountControllerProvider && other.userId == userId;
+    return other is WatchUserDataControllerProvider && other.userId == userId;
   }
 
   @override
@@ -137,40 +137,40 @@ class WatchAccountControllerProvider
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin WatchAccountControllerRef on AutoDisposeStreamProviderRef<UserData?> {
+mixin WatchUserDataControllerRef on AutoDisposeStreamProviderRef<UserData?> {
   /// The parameter `userId` of this provider.
   String get userId;
 }
 
-class _WatchAccountControllerProviderElement
+class _WatchUserDataControllerProviderElement
     extends AutoDisposeStreamProviderElement<UserData?>
-    with WatchAccountControllerRef {
-  _WatchAccountControllerProviderElement(super.provider);
+    with WatchUserDataControllerRef {
+  _WatchUserDataControllerProviderElement(super.provider);
 
   @override
-  String get userId => (origin as WatchAccountControllerProvider).userId;
+  String get userId => (origin as WatchUserDataControllerProvider).userId;
 }
 
-String _$watchMyAccountControllerHash() =>
-    r'488f315101b2c108a332bb0b7f1e7f8fc9870e9a';
+String _$watchMyUserDataControllerHash() =>
+    r'92695c96f9cc2adf97e39f0874c03fe8d37870c2';
 
-/// See also [watchMyAccountController].
-@ProviderFor(watchMyAccountController)
-final watchMyAccountControllerProvider =
+/// See also [watchMyUserDataController].
+@ProviderFor(watchMyUserDataController)
+final watchMyUserDataControllerProvider =
     AutoDisposeStreamProvider<UserData?>.internal(
-      watchMyAccountController,
-      name: r'watchMyAccountControllerProvider',
+      watchMyUserDataController,
+      name: r'watchMyUserDataControllerProvider',
       debugGetCreateSourceHash:
           const bool.fromEnvironment('dart.vm.product')
               ? null
-              : _$watchMyAccountControllerHash,
+              : _$watchMyUserDataControllerHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef WatchMyAccountControllerRef = AutoDisposeStreamProviderRef<UserData?>;
+typedef WatchMyUserDataControllerRef = AutoDisposeStreamProviderRef<UserData?>;
 String _$watchUsersControllerHash() =>
     r'f101f553303cdd4023fefb1b023c5451740fac3d';
 
@@ -191,7 +191,7 @@ final watchUsersControllerProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef WatchUsersControllerRef = AutoDisposeStreamProviderRef<List<UserData>>;
-String _$userControllerHash() => r'551c5337af8d67d98714b72a1e6365d9bbc71d5d';
+String _$userControllerHash() => r'5676a11814fd604e8682efd5001fc7582734b2db';
 
 /// See also [UserController].
 @ProviderFor(UserController)

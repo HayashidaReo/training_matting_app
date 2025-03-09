@@ -68,13 +68,13 @@ class UserController extends _$UserController {
 }
 
 @riverpod
-Stream<UserData?> watchAccountController(ref, String userId) {
+Stream<UserData?> watchUserDataController(ref, String userId) {
   return ref.watch(userRepoProvider.notifier).watchUser(userId);
 }
 
 // 自分のユーザー情報を監視
 @riverpod
-Stream<UserData?> watchMyAccountController(ref) {
+Stream<UserData?> watchMyUserDataController(ref) {
   return ref
       .watch(userRepoProvider.notifier)
       .watchUser(ref.read(authRepoProvider)!.uid);

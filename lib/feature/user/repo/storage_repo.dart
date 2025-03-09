@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -15,14 +16,13 @@ class StorageRepo extends _$StorageRepo {
 
   // 画像アップロード
   Future<String> uploadImageAndGetUrl({
-    required Uint8List uint8list,
+    required File imageFile,
     required String userId,
   }) async {
-    var metadata = SettableMetadata(contentType: 'image/jpeg');
     final storageRef = await state
         .ref()
         .child('users/$userId')
-        .putData(uint8list, metadata);
+        .putFile(imageFile);
     final downloadUrl = await storageRef.ref.getDownloadURL();
     return downloadUrl;
   }

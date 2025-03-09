@@ -6,8 +6,9 @@ import 'package:matching_app/feature/auth/repo/auth_repo.dart';
 import 'package:matching_app/feature/auth/view/auth_top_navigation_page.dart';
 import 'package:matching_app/feature/auth/view/password_remainder_page.dart';
 import 'package:matching_app/feature/navigation/view/bottom_navigation_page.dart';
+import 'package:matching_app/feature/post/view/add_post_page.dart';
+import 'package:matching_app/feature/post/view/post_list_top_navigation.dart';
 import 'package:matching_app/feature/talk/view/talk_list_page.dart';
-import 'package:matching_app/feature/post/view/all_post_list_page.dart';
 import 'package:matching_app/feature/user/view/edit/edit_email_page.dart';
 import 'package:matching_app/feature/user/view/edit/edit_my_icon_page.dart';
 import 'package:matching_app/feature/user/view/edit/edit_my_profile_page.dart';
@@ -81,8 +82,18 @@ GoRouter appRouter(ref) {
             path: AppRoute.postList.path,
             name: AppRoute.postList.name,
             pageBuilder: (context, state) {
-              return const NoTransitionPage(child: AllPostListPage());
+              return const NoTransitionPage(child: PostListTopNavigationPage());
             },
+            routes: [
+              GoRoute(
+                parentNavigatorKey: rootNavigatorKey,
+                path: AppRoute.addPost.path,
+                name: AppRoute.addPost.name,
+                pageBuilder: (context, state) {
+                  return MaterialPage(child: AddPostPage());
+                },
+              ),
+            ],
           ),
           GoRoute(
             path: AppRoute.userList.path,

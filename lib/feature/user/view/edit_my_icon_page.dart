@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/common_widget/custom_button.dart';
+import 'package:matching_app/common_widget/loading_dialog.dart';
 import 'package:matching_app/common_widget/toast.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
@@ -224,33 +225,21 @@ class EditMyIconPage extends HookConsumerWidget {
                   },
                 ),
             HeightMarginSizedBox.large,
-            ref
-                .watch(storageControllerProvider)
-                .when(
-                  loading: () {
-                    return const CircularProgressIndicator();
-                  },
-                  error: (error, _) {
-                    return const Text('エラーが発生しました。再度お試しください。');
-                  },
-                  data: (data) {
-                    // 保存するボタン
-                    return SizedBox(
-                      width: 250,
-                      child: CustomButton(
-                        onPressed: () async {
-                          await _addIcon(
-                            uploadedImageFile.value,
-                            context,
-                            ref,
-                            isIconDeleted.value,
-                          );
-                        },
-                        text: '保存する',
-                      ),
-                    );
-                  },
-                ),
+
+            SizedBox(
+              width: 250,
+              child: CustomButton(
+                onPressed: () async {
+                  await _addIcon(
+                    uploadedImageFile.value,
+                    context,
+                    ref,
+                    isIconDeleted.value,
+                  );
+                },
+                text: '保存する',
+              ),
+            ),
           ],
         ),
       ),
@@ -263,12 +252,14 @@ class EditMyIconPage extends HookConsumerWidget {
     WidgetRef ref,
     bool isDeleted,
   ) async {
+    showLoadingDialog('保存中...');
     if (isDeleted) {
       _deleteIcon(ref, context);
       return;
     }
     if (imageFile == null) {
       showToast('新しい画像が選択されていません');
+      hideLoadingDialog();
       return;
     }
     final downloadUrl = await ref
@@ -277,6 +268,7 @@ class EditMyIconPage extends HookConsumerWidget {
     if (context.mounted) {
       await _updateImageUrl(ref, context, downloadUrl);
     }
+    hideLoadingDialog();
     showToast('変更完了');
     return;
   }
@@ -285,8 +277,8 @@ class EditMyIconPage extends HookConsumerWidget {
     await _updateImageUrl(ref, context, '');
     //storageの削除
     await ref.read(storageControllerProvider.notifier).deleteImage();
+    hideLoadingDialog();
     showToast('削除が完了しました');
-
     return;
   }
 

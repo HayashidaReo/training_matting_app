@@ -21,6 +21,7 @@ class MyPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text('マイページ'),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),

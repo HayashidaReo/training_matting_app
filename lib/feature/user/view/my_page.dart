@@ -75,29 +75,29 @@ class MyPage extends ConsumerWidget {
       ),
 
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ref
-                .watch(watchMyUserDataControllerProvider)
-                .when(
-                  data: (UserData? data) {
-                    if (data == null) {
-                      return Text(
-                        'ユーザー情報が取得できませんでした。',
-                        style: TextStyle(fontSize: FontSize.large),
-                      );
-                    }
+        child: ref
+            .watch(watchMyUserDataControllerProvider)
+            .when(
+              data: (UserData? userData) {
+                if (userData == null) {
+                  return Text(
+                    'ユーザー情報が取得できませんでした。',
+                    style: TextStyle(fontSize: FontSize.large),
+                  );
+                }
 
-                    return Padding(
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          if (data.iconImageUrl == '')
+                          if (userData.iconImageUrl == '')
                             InkWell(
                               onTap: () {
                                 context.pushNamed(AppRoute.editMyIcon.name);
@@ -114,7 +114,7 @@ class MyPage extends ConsumerWidget {
                               },
                               child: ClipOval(
                                 child: CachedNetworkImage(
-                                  imageUrl: data.iconImageUrl,
+                                  imageUrl: userData.iconImageUrl,
                                   width: 100,
                                   height: 100,
                                   fit: BoxFit.cover,
@@ -160,7 +160,7 @@ class MyPage extends ConsumerWidget {
                                     16,
                                   ),
                                   child: Text(
-                                    data.userName,
+                                    userData.userName,
                                     style: TextStyle(fontSize: FontSize.normal),
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -189,31 +189,82 @@ class MyPage extends ConsumerWidget {
                           ),
                         ],
                       ),
-                    );
-                  },
-                  error: (error, _) {
-                    return Text(
-                      'エラーが発生しました。再度お試しください。',
-                      style: TextStyle(fontSize: FontSize.large),
-                    );
-                  },
-                  loading: () {
-                    return const CircularProgressIndicator();
-                  },
-                ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    context.pushNamed(AppRoute.editMyProfile.name);
-                  },
-                  child: const Text('プロフィール編集'),
-                ),
-              ],
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                '性別:',
+                                style: TextStyle(fontSize: FontSize.small),
+                              ),
+                              Text(
+                                '生年月日:',
+                                style: TextStyle(fontSize: FontSize.small),
+                              ),
+                            ],
+                          ),
+                          WidthMarginSizedBox.normal,
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                userData.gender,
+                                style: TextStyle(fontSize: FontSize.small),
+                              ),
+                              Text(
+                                userData.birthDate.toString(),
+                                style: TextStyle(fontSize: FontSize.small),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    HeightMarginSizedBox.small,
+                    if (userData.profile != '')
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          userData.profile,
+                          style: TextStyle(fontSize: FontSize.normal),
+                          maxLines: 8,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            context.pushNamed(AppRoute.editMyProfile.name);
+                          },
+                          child: const Text('プロフィール情報を入力'),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              },
+              error: (error, _) {
+                return Text(
+                  'エラーが発生しました。再度お試しください。',
+                  style: TextStyle(fontSize: FontSize.large),
+                );
+              },
+              loading: () {
+                return const CircularProgressIndicator();
+              },
             ),
-          ],
-        ),
       ),
     );
   }

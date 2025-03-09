@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
+import 'package:matching_app/feature/component/badge_count_widget.dart';
 import 'package:matching_app/routing/app_router.dart';
 
 class BottomNavigationPage extends HookConsumerWidget {
@@ -39,10 +40,19 @@ class BottomNavigationPage extends HookConsumerWidget {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex.value,
         type: BottomNavigationBarType.fixed,
-        items: const [
+        items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.people), label: 'UserList'),
-          BottomNavigationBarItem(icon: Icon(Icons.message), label: 'TalkList'),
+          BottomNavigationBarItem(
+            icon: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Icon(Icons.message),
+                Positioned(top: -6, right: -8, child: badgeCountWidget(ref)),
+              ],
+            ),
+            label: 'TalkList',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_2_rounded),
             label: 'MyPage',

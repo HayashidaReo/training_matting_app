@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -11,6 +13,7 @@ import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/auth_controller.dart';
+import 'package:matching_app/feature/component/badge_count_widget.dart';
 import 'package:matching_app/feature/component/hamburger_tile.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/data_model/userdata.dart';
@@ -24,11 +27,16 @@ class MyPage extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('マイページ'),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              _signOut(context, ref);
-            },
+          Stack(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.message),
+                onPressed: () {
+                  context.pushNamed(AppRoute.talkList.name);
+                },
+              ),
+              Positioned(top: 4, right: 4, child: badgeCountWidget(ref)),
+            ],
           ),
         ],
       ),

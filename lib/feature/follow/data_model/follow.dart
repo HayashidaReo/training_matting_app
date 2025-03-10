@@ -8,6 +8,7 @@ part 'follow.g.dart';
 @freezed
 class Follow with _$Follow {
   factory Follow({
+    required String followId,
     required String followerUserId,
     required String followingUserId,
     @TimestampConverter() required Timestamp createdAt,

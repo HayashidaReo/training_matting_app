@@ -17,10 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
+
 /// @nodoc
 mixin _$Follow {
 
- String get followerUserId => throw _privateConstructorUsedError; String get followingUserId => throw _privateConstructorUsedError;@TimestampConverter() Timestamp get createdAt => throw _privateConstructorUsedError;@TimestampConverter() Timestamp get updatedAt => throw _privateConstructorUsedError;
+ String get followId => throw _privateConstructorUsedError; String get followerUserId => throw _privateConstructorUsedError; String get followingUserId => throw _privateConstructorUsedError;@TimestampConverter() Timestamp get createdAt => throw _privateConstructorUsedError;@TimestampConverter() Timestamp get updatedAt => throw _privateConstructorUsedError;
 /// Create a copy of Follow
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -33,16 +34,16 @@ $FollowCopyWith<Follow> get copyWith => _$FollowCopyWithImpl<Follow>(this as Fol
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Follow&&(identical(other.followerUserId, followerUserId) || other.followerUserId == followerUserId)&&(identical(other.followingUserId, followingUserId) || other.followingUserId == followingUserId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Follow&&(identical(other.followId, followId) || other.followId == followId)&&(identical(other.followerUserId, followerUserId) || other.followerUserId == followerUserId)&&(identical(other.followingUserId, followingUserId) || other.followingUserId == followingUserId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,followerUserId,followingUserId,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,followId,followerUserId,followingUserId,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'Follow(followerUserId: $followerUserId, followingUserId: $followingUserId, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'Follow(followId: $followId, followerUserId: $followerUserId, followingUserId: $followingUserId, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -53,7 +54,7 @@ abstract mixin class $FollowCopyWith<$Res>  {
   factory $FollowCopyWith(Follow value, $Res Function(Follow) _then) = _$FollowCopyWithImpl;
 @useResult
 $Res call({
- String followerUserId, String followingUserId,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
+ String followId, String followerUserId, String followingUserId,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
 });
 
 
@@ -70,9 +71,10 @@ class _$FollowCopyWithImpl<$Res>
 
 /// Create a copy of Follow
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? followerUserId = null,Object? followingUserId = null,Object? createdAt = null,Object? updatedAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? followId = null,Object? followerUserId = null,Object? followingUserId = null,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_self.copyWith(
-followerUserId: null == followerUserId ? _self.followerUserId : followerUserId // ignore: cast_nullable_to_non_nullable
+followId: null == followId ? _self.followId : followId // ignore: cast_nullable_to_non_nullable
+as String,followerUserId: null == followerUserId ? _self.followerUserId : followerUserId // ignore: cast_nullable_to_non_nullable
 as String,followingUserId: null == followingUserId ? _self.followingUserId : followingUserId // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as Timestamp,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -87,9 +89,10 @@ as Timestamp,
 @JsonSerializable()
 
 class _Follow implements Follow {
-   _Follow({required this.followerUserId, required this.followingUserId, @TimestampConverter() required this.createdAt, @TimestampConverter() required this.updatedAt});
+   _Follow({required this.followId, required this.followerUserId, required this.followingUserId, @TimestampConverter() required this.createdAt, @TimestampConverter() required this.updatedAt});
   factory _Follow.fromJson(Map<String, dynamic> json) => _$FollowFromJson(json);
 
+@override final  String followId;
 @override final  String followerUserId;
 @override final  String followingUserId;
 @override@TimestampConverter() final  Timestamp createdAt;
@@ -108,16 +111,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Follow&&(identical(other.followerUserId, followerUserId) || other.followerUserId == followerUserId)&&(identical(other.followingUserId, followingUserId) || other.followingUserId == followingUserId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Follow&&(identical(other.followId, followId) || other.followId == followId)&&(identical(other.followerUserId, followerUserId) || other.followerUserId == followerUserId)&&(identical(other.followingUserId, followingUserId) || other.followingUserId == followingUserId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,followerUserId,followingUserId,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,followId,followerUserId,followingUserId,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'Follow(followerUserId: $followerUserId, followingUserId: $followingUserId, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'Follow(followId: $followId, followerUserId: $followerUserId, followingUserId: $followingUserId, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -128,7 +131,7 @@ abstract mixin class _$FollowCopyWith<$Res> implements $FollowCopyWith<$Res> {
   factory _$FollowCopyWith(_Follow value, $Res Function(_Follow) _then) = __$FollowCopyWithImpl;
 @override @useResult
 $Res call({
- String followerUserId, String followingUserId,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
+ String followId, String followerUserId, String followingUserId,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
 });
 
 
@@ -145,9 +148,10 @@ class __$FollowCopyWithImpl<$Res>
 
 /// Create a copy of Follow
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? followerUserId = null,Object? followingUserId = null,Object? createdAt = null,Object? updatedAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? followId = null,Object? followerUserId = null,Object? followingUserId = null,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_Follow(
-followerUserId: null == followerUserId ? _self.followerUserId : followerUserId // ignore: cast_nullable_to_non_nullable
+followId: null == followId ? _self.followId : followId // ignore: cast_nullable_to_non_nullable
+as String,followerUserId: null == followerUserId ? _self.followerUserId : followerUserId // ignore: cast_nullable_to_non_nullable
 as String,followingUserId: null == followingUserId ? _self.followingUserId : followingUserId // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as Timestamp,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable

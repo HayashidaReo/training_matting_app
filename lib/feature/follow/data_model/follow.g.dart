@@ -7,6 +7,7 @@ part of 'follow.dart';
 // **************************************************************************
 
 _Follow _$FollowFromJson(Map<String, dynamic> json) => _Follow(
+  followId: json['followId'] as String,
   followerUserId: json['followerUserId'] as String,
   followingUserId: json['followingUserId'] as String,
   createdAt: const TimestampConverter().fromJson(
@@ -18,6 +19,7 @@ _Follow _$FollowFromJson(Map<String, dynamic> json) => _Follow(
 );
 
 Map<String, dynamic> _$FollowToJson(_Follow instance) => <String, dynamic>{
+  'followId': instance.followId,
   'followerUserId': instance.followerUserId,
   'followingUserId': instance.followingUserId,
   'createdAt': const TimestampConverter().toJson(instance.createdAt),

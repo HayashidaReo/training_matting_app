@@ -216,7 +216,7 @@ final watchMyAllBookmarkPostsProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef WatchMyAllBookmarkPostsRef = AutoDisposeStreamProviderRef<List<Post>>;
-String _$postRepoHash() => r'32441bed4944e43b8bcba358a0d6dbc7626f37a2';
+String _$postRepoHash() => r'61a6ff2135be91d9e4e60802e4e543047255aa7b';
 
 /// See also [PostRepo].
 @ProviderFor(PostRepo)

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,246 +10,152 @@ part of 'bookmark.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
-Bookmark _$BookmarkFromJson(Map<String, dynamic> json) {
-  return _Bookmark.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Bookmark {
-  String get userId => throw _privateConstructorUsedError;
-  String get postId => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  Timestamp get createdAt => throw _privateConstructorUsedError;
-  @TimestampConverter()
-  Timestamp get updatedAt => throw _privateConstructorUsedError;
+
+ String get userId => throw _privateConstructorUsedError; String get postId=> throw _privateConstructorUsedError;@TimestampConverter() Timestamp get createdAt=> throw _privateConstructorUsedError;@TimestampConverter() Timestamp get updatedAt=> throw _privateConstructorUsedError;
+/// Create a copy of Bookmark
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$BookmarkCopyWith<Bookmark> get copyWith => _$BookmarkCopyWithImpl<Bookmark>(this as Bookmark, _$identity);
 
   /// Serializes this Bookmark to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson()=> throw _privateConstructorUsedError;
 
-  /// Create a copy of Bookmark
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $BookmarkCopyWith<Bookmark> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Bookmark&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,userId,postId,createdAt,updatedAt);
+
+@override
+String toString() {
+  return 'Bookmark(userId: $userId, postId: $postId, createdAt: $createdAt, updatedAt: $updatedAt)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $BookmarkCopyWith<$Res> {
-  factory $BookmarkCopyWith(Bookmark value, $Res Function(Bookmark) then) =
-      _$BookmarkCopyWithImpl<$Res, Bookmark>;
-  @useResult
-  $Res call({
-    String userId,
-    String postId,
-    @TimestampConverter() Timestamp createdAt,
-    @TimestampConverter() Timestamp updatedAt,
-  });
-}
+abstract mixin class $BookmarkCopyWith<$Res>  {
+  factory $BookmarkCopyWith(Bookmark value, $Res Function(Bookmark) _then) = _$BookmarkCopyWithImpl;
+@useResult
+$Res call({
+ String userId, String postId,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
+});
 
+
+
+
+}
 /// @nodoc
-class _$BookmarkCopyWithImpl<$Res, $Val extends Bookmark>
+class _$BookmarkCopyWithImpl<$Res>
     implements $BookmarkCopyWith<$Res> {
-  _$BookmarkCopyWithImpl(this._value, this._then);
+  _$BookmarkCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Bookmark _self;
+  final $Res Function(Bookmark) _then;
 
-  /// Create a copy of Bookmark
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userId = null,
-    Object? postId = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-  }) {
-    return _then(
-      _value.copyWith(
-            userId:
-                null == userId
-                    ? _value.userId
-                    : userId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            postId:
-                null == postId
-                    ? _value.postId
-                    : postId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as Timestamp,
-            updatedAt:
-                null == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as Timestamp,
-          )
-          as $Val,
-    );
-  }
+/// Create a copy of Bookmark
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? postId = null,Object? createdAt = null,Object? updatedAt = null,}) {
+  return _then(_self.copyWith(
+userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
+as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as Timestamp,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as Timestamp,
+  ));
 }
 
-/// @nodoc
-abstract class _$$BookmarkImplCopyWith<$Res>
-    implements $BookmarkCopyWith<$Res> {
-  factory _$$BookmarkImplCopyWith(
-    _$BookmarkImpl value,
-    $Res Function(_$BookmarkImpl) then,
-  ) = __$$BookmarkImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({
-    String userId,
-    String postId,
-    @TimestampConverter() Timestamp createdAt,
-    @TimestampConverter() Timestamp updatedAt,
-  });
 }
 
-/// @nodoc
-class __$$BookmarkImplCopyWithImpl<$Res>
-    extends _$BookmarkCopyWithImpl<$Res, _$BookmarkImpl>
-    implements _$$BookmarkImplCopyWith<$Res> {
-  __$$BookmarkImplCopyWithImpl(
-    _$BookmarkImpl _value,
-    $Res Function(_$BookmarkImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of Bookmark
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userId = null,
-    Object? postId = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-  }) {
-    return _then(
-      _$BookmarkImpl(
-        userId:
-            null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        postId:
-            null == postId
-                ? _value.postId
-                : postId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as Timestamp,
-        updatedAt:
-            null == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as Timestamp,
-      ),
-    );
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$BookmarkImpl implements _Bookmark {
-  _$BookmarkImpl({
-    required this.userId,
-    required this.postId,
-    @TimestampConverter() required this.createdAt,
-    @TimestampConverter() required this.updatedAt,
-  });
 
-  factory _$BookmarkImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BookmarkImplFromJson(json);
+class _Bookmark implements Bookmark {
+   _Bookmark({required this.userId, required this.postId, @TimestampConverter() required this.createdAt, @TimestampConverter() required this.updatedAt});
+  factory _Bookmark.fromJson(Map<String, dynamic> json) => _$BookmarkFromJson(json);
 
-  @override
-  final String userId;
-  @override
-  final String postId;
-  @override
-  @TimestampConverter()
-  final Timestamp createdAt;
-  @override
-  @TimestampConverter()
-  final Timestamp updatedAt;
+@override final  String userId;
+@override final  String postId;
+@override@TimestampConverter() final  Timestamp createdAt;
+@override@TimestampConverter() final  Timestamp updatedAt;
 
-  @override
-  String toString() {
-    return 'Bookmark(userId: $userId, postId: $postId, createdAt: $createdAt, updatedAt: $updatedAt)';
-  }
+/// Create a copy of Bookmark
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$BookmarkCopyWith<_Bookmark> get copyWith => __$BookmarkCopyWithImpl<_Bookmark>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BookmarkImpl &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.postId, postId) || other.postId == postId) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, userId, postId, createdAt, updatedAt);
-
-  /// Create a copy of Bookmark
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BookmarkImplCopyWith<_$BookmarkImpl> get copyWith =>
-      __$$BookmarkImplCopyWithImpl<_$BookmarkImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$BookmarkImplToJson(this);
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$BookmarkToJson(this, );
 }
 
-abstract class _Bookmark implements Bookmark {
-  factory _Bookmark({
-    required final String userId,
-    required final String postId,
-    @TimestampConverter() required final Timestamp createdAt,
-    @TimestampConverter() required final Timestamp updatedAt,
-  }) = _$BookmarkImpl;
-
-  factory _Bookmark.fromJson(Map<String, dynamic> json) =
-      _$BookmarkImpl.fromJson;
-
-  @override
-  String get userId;
-  @override
-  String get postId;
-  @override
-  @TimestampConverter()
-  Timestamp get createdAt;
-  @override
-  @TimestampConverter()
-  Timestamp get updatedAt;
-
-  /// Create a copy of Bookmark
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BookmarkImplCopyWith<_$BookmarkImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Bookmark&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,userId,postId,createdAt,updatedAt);
+
+@override
+String toString() {
+  return 'Bookmark(userId: $userId, postId: $postId, createdAt: $createdAt, updatedAt: $updatedAt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$BookmarkCopyWith<$Res> implements $BookmarkCopyWith<$Res> {
+  factory _$BookmarkCopyWith(_Bookmark value, $Res Function(_Bookmark) _then) = __$BookmarkCopyWithImpl;
+@override @useResult
+$Res call({
+ String userId, String postId,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
+});
+
+
+
+
+}
+/// @nodoc
+class __$BookmarkCopyWithImpl<$Res>
+    implements _$BookmarkCopyWith<$Res> {
+  __$BookmarkCopyWithImpl(this._self, this._then);
+
+  final _Bookmark _self;
+  final $Res Function(_Bookmark) _then;
+
+/// Create a copy of Bookmark
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? postId = null,Object? createdAt = null,Object? updatedAt = null,}) {
+  return _then(_Bookmark(
+userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
+as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as Timestamp,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as Timestamp,
+  ));
+}
+
+
+}
+
+// dart format on

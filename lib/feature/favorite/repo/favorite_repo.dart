@@ -48,31 +48,3 @@ class FavoriteRepo extends _$FavoriteRepo {
     );
   }
 }
-
-/// 自分がいいねしたfavoritesコレクションを全て取得して監視
-@riverpod
-Stream<List<Favorite>> watchMyAllFavorites(ref) {
-  return FirebaseFirestore.instance
-      .collectionGroup(FirebaseFavoriteDataKey.favoriteCollection)
-      .withConverter<Favorite>(
-        fromFirestore: (snapshot, _) => Favorite.fromJson(snapshot.data()!),
-        toFirestore: (Favorite value, _) => value.toJson(),
-      )
-      .where(
-        FirebaseFavoriteDataKey.userId,
-        isEqualTo: ref.read(currentUserControllerProvider)!.uid,
-      )
-      .orderBy(FirebaseFavoriteDataKey.createdAt, descending: true)
-      .snapshots()
-      .map((QuerySnapshot<Favorite> snapshot) {
-        return snapshot.docs.map((QueryDocumentSnapshot<Favorite> doc) {
-          return doc.data();
-        }).toList();
-      });
-}
-
-/// streamでpostに紐づくfavoritesコレクションを全て取得して監視
-@riverpod
-Stream<List<Favorite>> watchAllFavorites(ref, String postId) {
-  return ref.watch(favoriteRepoProvider(postId).notifier).watchAllFavorites();
-}

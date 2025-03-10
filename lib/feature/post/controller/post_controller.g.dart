@@ -210,7 +210,7 @@ final watchMyAllBookmarkPostsControllerProvider =
 // ignore: unused_element
 typedef WatchMyAllBookmarkPostsControllerRef =
     AutoDisposeStreamProviderRef<List<Post>>;
-String _$postControllerHash() => r'02c69dd47e7173339c79422923e29347ecdc4c35';
+String _$postControllerHash() => r'8ab8144c061c49c184d3cd905d1961663788dd89';
 
 /// See also [PostController].
 @ProviderFor(PostController)

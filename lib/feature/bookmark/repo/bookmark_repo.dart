@@ -48,30 +48,3 @@ class BookmarkRepo extends _$BookmarkRepo {
     );
   }
 }
-
-// 自分がブックマークしたbookmarksコレクションを全て取得
-@riverpod
-Stream<List<Bookmark>> watchMyAllBookmarks(ref) {
-  return FirebaseFirestore.instance
-      .collectionGroup(FirebaseBookmarkDataKey.bookmarkCollection)
-      .withConverter<Bookmark>(
-        fromFirestore: (snapshot, _) => Bookmark.fromJson(snapshot.data()!),
-        toFirestore: (Bookmark value, _) => value.toJson(),
-      )
-      .where(
-        FirebaseBookmarkDataKey.userId,
-        isEqualTo: ref.read(currentUserControllerProvider)!.uid,
-      )
-      .snapshots()
-      .map((QuerySnapshot<Bookmark> snapshot) {
-        return snapshot.docs.map((QueryDocumentSnapshot<Bookmark> doc) {
-          return doc.data();
-        }).toList();
-      });
-}
-
-/// streamでpostに紐づくbookmarksコレクションを全て取得して監視
-@riverpod
-Stream<List<Bookmark>> watchAllBookmarks(ref, String postId) {
-  return ref.watch(bookmarkRepoProvider(postId).notifier).watchAllBookmarks();
-}

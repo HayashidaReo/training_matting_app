@@ -5,6 +5,7 @@ enum AppRoute {
   addPost,
   editPost,
   userList,
+  otherUserProfile,
   talkList,
   myPage,
   editMyProfile,
@@ -28,6 +29,8 @@ extension AppRouteExtention on AppRoute {
         return '/editPost';
       case AppRoute.userList:
         return '/userList';
+      case AppRoute.otherUserProfile:
+        return '/otherUserProfile';
       case AppRoute.talkList:
         return '/talkList';
       case AppRoute.myPage:

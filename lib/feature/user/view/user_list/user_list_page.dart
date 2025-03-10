@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/config/utils/decoration/text_field_decoration.dart';
+import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/feature/follow/controller/follow_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/data_model/userdata.dart';
@@ -114,9 +116,13 @@ class UserListPage extends HookConsumerWidget {
                               ),
                       title: Text(userData.userName),
                       onTap: () async {
-                        ref
-                            .read(followControllerProvider.notifier)
-                            .createFollow(userData.userId);
+                        context.pushNamed(
+                          AppRoute.otherUserProfile.name,
+                          queryParameters: {'userId': userData.userId},
+                        );
+                        // ref
+                        //     .read(followControllerProvider.notifier)
+                        //     .createFollow(userData.userId);
                       },
                     );
                   },

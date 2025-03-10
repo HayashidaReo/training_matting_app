@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:matching_app/common_widget/confirm_dialog.dart';
 import 'package:matching_app/common_widget/custom_button.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
@@ -19,7 +20,7 @@ class OtherUserProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: Text(targetUserId)),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: ref
             .watch(watchUserDataControllerProvider(targetUserId))
@@ -208,19 +209,11 @@ class OtherUserProfilePage extends ConsumerWidget {
                                   child: CustomButton(
                                     text: isFollowing ? 'フォロー中' : 'フォローする',
                                     onPressed: () {
-                                      if (isFollowing) {
-                                        ref
-                                            .read(
-                                              followControllerProvider.notifier,
-                                            )
-                                            .deleteFollow(targetUserId);
-                                      } else {
-                                        ref
-                                            .read(
-                                              followControllerProvider.notifier,
-                                            )
-                                            .createFollow(targetUserId);
-                                      }
+                                      _changeFollowStatus(
+                                        context,
+                                        isFollowing,
+                                        ref,
+                                      );
                                     },
                                     isColorReversed: isFollowing,
                                   ),
@@ -230,7 +223,9 @@ class OtherUserProfilePage extends ConsumerWidget {
                                   height: 40,
                                   child: CustomButton(
                                     text: 'メッセージ',
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      // TODO: メッセージ機能の実装
+                                    },
                                   ),
                                 ),
                               ],
@@ -274,6 +269,28 @@ class OtherUserProfilePage extends ConsumerWidget {
             ),
       ),
     );
+  }
+
+  void _changeFollowStatus(
+    BuildContext context,
+    bool isFollowing,
+    WidgetRef ref,
+  ) {
+    if (isFollowing) {
+      showConfirmDialog(
+        context: context,
+        text: 'フォローを解除しますか？',
+        onPressed: () {
+          Navigator.of(context).pop();
+          ref
+              .read(followControllerProvider.notifier)
+              .deleteFollow(targetUserId);
+        },
+      );
+    } else {
+      ref.read(followControllerProvider.notifier).createFollow(targetUserId);
+    }
+    return;
   }
 }
 

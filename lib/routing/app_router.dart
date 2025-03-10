@@ -113,6 +113,7 @@ GoRouter appRouter(ref) {
             },
             routes: [
               GoRoute(
+                parentNavigatorKey: rootNavigatorKey,
                 path: AppRoute.otherUserProfile.path,
                 name: AppRoute.otherUserProfile.name,
                 pageBuilder: (context, state) {

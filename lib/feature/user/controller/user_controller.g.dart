@@ -193,7 +193,7 @@ final watchAllUsersControllerProvider =
 typedef WatchAllUsersControllerRef =
     AutoDisposeStreamProviderRef<List<UserData>>;
 String _$watchForwardMatchingWithQueryTextUsersControllerHash() =>
-    r'a311fdd70500ed670b4324bbf13a779b11c19515';
+    r'7adc7e4a3a61e5a21be4b229bf3fcec00c0b1c52';
 
 /// See also [watchForwardMatchingWithQueryTextUsersController].
 @ProviderFor(watchForwardMatchingWithQueryTextUsersController)

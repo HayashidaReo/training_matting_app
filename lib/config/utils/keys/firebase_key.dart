@@ -32,6 +32,15 @@ class FirebaseFavoriteDataKey {
   static String updateAt = 'updateAt';
 }
 
+class FirebaseFollowDataKey {
+  //Followコレクション関連
+  static String followCollection = 'follows';
+  static String followerUserId = 'followerUserId';
+  static String followingUserId = 'followingUserId';
+  static String createdAt = 'createdAt';
+  static String updateAt = 'updateAt';
+}
+
 class FirebaseStorageKey {
   //Storage関連
   static String userIconCollection = 'user_icons';

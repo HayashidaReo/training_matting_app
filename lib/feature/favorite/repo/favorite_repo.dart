@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:matching_app/config/firebase/firebase_instance_provider.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
-import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/favorite/model/favorite.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

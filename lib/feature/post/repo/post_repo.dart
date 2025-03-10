@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:matching_app/config/firebase/firebase_instance_provider.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
+import 'package:matching_app/feature/bookmark/controller/bookmark_controller.dart';
+import 'package:matching_app/feature/favorite/controller/favorite_controller.dart';
 import 'package:matching_app/feature/post/data_model/post.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -62,20 +64,16 @@ class PostRepo extends _$PostRepo {
 
   /// postを削除(削除)
   Future<void> deletePost(String deletePostId) async {
-    // // いいねを削除
-    // ref.watch(favoriteRepoProvider(deletePostId).notifier).deleteAllFavorite();
-    // // ブックマークを削除
-    // ref.watch(bookmarkRepoProvider(deletePostId).notifier).deleteAllBookmark();
-    // // 最後にドキュメントを削除
-    // await state.doc(deletePostId).delete();
-    // // todo いいね削除
-    // await ref
-    //     .read(favoriteRepoProvider(deletePostId).notifier)
-    //     .deleteAllFavorite();
-    // // todo ブックマーク削除
-    // await ref
-    //     .read(bookmarkRepoProvider(deletePostId).notifier)
-    //     .deleteAllBookmark();
+    // いいねを削除
+    ref
+        .watch(favoriteControllerProvider.notifier)
+        .deleteAllFavorite(deletePostId);
+    // ブックマークを削除
+    ref
+        .watch(bookmarkControllerProvider.notifier)
+        .deleteAllBookmark(deletePostId);
+    // 最後にドキュメントを削除
+    await state.doc(deletePostId).delete();
   }
 
   // postを編集して更新

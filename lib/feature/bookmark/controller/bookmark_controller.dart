@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/bookmark/model/bookmark.dart';
@@ -16,8 +15,15 @@ class BookmarkController extends _$BookmarkController {
   }
 
   /// ブックマーク追加
-  Future<void> addBookmark(Bookmark addBookmarkData) async {
+  Future<void> addBookmark(String postId) async {
     state = const AsyncLoading();
+    final Timestamp now = Timestamp.now();
+    final Bookmark addBookmarkData = Bookmark(
+      userId: ref.read(currentUserControllerProvider)!.uid,
+      postId: postId,
+      createdAt: now,
+      updatedAt: now,
+    );
     await ref
         .read(bookmarkRepoProvider(addBookmarkData.postId).notifier)
         .addBookmark(addBookmarkData);

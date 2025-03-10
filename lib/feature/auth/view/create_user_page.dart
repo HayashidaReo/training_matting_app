@@ -97,8 +97,6 @@ class CreateUserPage extends HookConsumerWidget {
                 HeightMarginSizedBox.small,
                 UsernameTextFormField(controller: usernameController),
                 HeightMarginSizedBox.small,
-                // TODO: これらを保存する処理を追加
-                // TODO: これらのdata_modelを追加
                 ToggleButtons(
                   isSelected: selectedGenderList.value,
                   onPressed: (int index) {

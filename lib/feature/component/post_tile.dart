@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -10,13 +8,15 @@ import 'package:matching_app/common_widget/toast.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
+import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
+import 'package:matching_app/feature/bookmark/controller/bookmark_controller.dart';
 import 'package:matching_app/feature/bookmark/model/bookmark.dart';
-import 'package:matching_app/feature/bookmark/repo/bookmark_repo.dart';
+import 'package:matching_app/feature/favorite/controller/favorite_controller.dart';
 import 'package:matching_app/feature/favorite/model/favorite.dart';
-import 'package:matching_app/feature/favorite/repo/favorite_repo.dart';
+import 'package:matching_app/feature/post/controller/post_controller.dart';
 import 'package:matching_app/feature/post/data_model/post.dart';
-import 'package:matching_app/feature/post/repo/post_repo.dart';
+import 'package:matching_app/feature/user/controller/storage_controller.dart';
 import 'package:matching_app/feature/user/data_model/userdata.dart';
 
 class PostTile extends HookConsumerWidget {
@@ -181,7 +181,7 @@ class PostTile extends HookConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ref
-                  .watch(watchAllFavoritesProvider(postData.postId))
+                  .watch(watchAllFavoritesControllerProvider(postData.postId))
                   .when(
                     error: (error, _) {
                       return const Text('エラー');
@@ -203,32 +203,7 @@ class PostTile extends HookConsumerWidget {
                                     ? const Icon(Icons.favorite)
                                     : const Icon(Icons.favorite_border),
                             onPressed: () async {
-                              if (isFavorite) {
-                                // いいねを削除
-                                await ref
-                                    .read(
-                                      favoriteRepoProvider(
-                                        postData.postId,
-                                      ).notifier,
-                                    )
-                                    .deleteFavorite(uid);
-                              } else {
-                                // いいねを追加
-                                final Timestamp now = Timestamp.now();
-                                final Favorite addFavoriteData = Favorite(
-                                  userId: uid,
-                                  postId: postData.postId,
-                                  createdAt: now,
-                                  updatedAt: now,
-                                );
-                                await ref
-                                    .watch(
-                                      favoriteRepoProvider(
-                                        postData.postId,
-                                      ).notifier,
-                                    )
-                                    .addFavorite(addFavoriteData);
-                              }
+                              await _addOrDeleteFavorite(isFavorite, ref);
                             },
                           ),
                           Text(
@@ -241,7 +216,9 @@ class PostTile extends HookConsumerWidget {
                   ),
               (isBookmarked == null)
                   ? ref
-                      .watch(watchAllBookmarksProvider(postData.postId))
+                      .watch(
+                        watchAllBookmarksControllerProvider(postData.postId),
+                      )
                       .when(
                         error: (error, _) {
                           return const Text('エラー');
@@ -260,31 +237,7 @@ class PostTile extends HookConsumerWidget {
                                     ? const Icon(Icons.bookmark)
                                     : const Icon(Icons.bookmark_border),
                             onPressed: () async {
-                              if (isBookmarked) {
-                                // ブックマークを削除
-                                ref
-                                    .read(
-                                      bookmarkRepoProvider(
-                                        postData.postId,
-                                      ).notifier,
-                                    )
-                                    .deleteBookmark(uid);
-                              } else {
-                                final Timestamp now = Timestamp.now();
-                                final Bookmark addBookmarkData = Bookmark(
-                                  userId: uid,
-                                  postId: postData.postId,
-                                  createdAt: now,
-                                  updatedAt: now,
-                                );
-                                await ref
-                                    .read(
-                                      bookmarkRepoProvider(
-                                        postData.postId,
-                                      ).notifier,
-                                    )
-                                    .addBookmark(addBookmarkData);
-                              }
+                              await _addOrDeleteBookmark(isBookmarked, ref);
                             },
                           );
                         },
@@ -295,27 +248,7 @@ class PostTile extends HookConsumerWidget {
                             ? const Icon(Icons.bookmark)
                             : const Icon(Icons.bookmark_border),
                     onPressed: () async {
-                      if (isBookmarked!) {
-                        // ブックマークを削除
-                        ref
-                            .read(
-                              bookmarkRepoProvider(postData.postId).notifier,
-                            )
-                            .deleteBookmark(uid);
-                      } else {
-                        final Timestamp now = Timestamp.now();
-                        final Bookmark addBookmarkData = Bookmark(
-                          userId: uid,
-                          postId: postData.postId,
-                          createdAt: now,
-                          updatedAt: now,
-                        );
-                        await ref
-                            .read(
-                              bookmarkRepoProvider(postData.postId).notifier,
-                            )
-                            .addBookmark(addBookmarkData);
-                      }
+                      await _addOrDeleteBookmark(isBookmarked!, ref);
                     },
                   ),
             ],
@@ -325,14 +258,48 @@ class PostTile extends HookConsumerWidget {
     );
   }
 
+  Future<void> _addOrDeleteFavorite(bool isFavorite, WidgetRef ref) async {
+    if (isFavorite) {
+      // いいねを削除
+      await ref
+          .read(favoriteControllerProvider.notifier)
+          .deleteFavorite(postData.postId, uid);
+    } else {
+      // いいねを追加
+      await ref
+          .watch(favoriteControllerProvider.notifier)
+          .addFavorite(postData.postId);
+    }
+    return;
+  }
+
+  Future<void> _addOrDeleteBookmark(bool isBookmarked, WidgetRef ref) async {
+    if (isBookmarked) {
+      // ブックマークを削除
+      ref
+          .read(bookmarkControllerProvider.notifier)
+          .deleteBookmark(postData.postId, uid);
+    } else {
+      // ブックマークを追加
+      await ref
+          .read(bookmarkControllerProvider.notifier)
+          .addBookmark(postData.postId);
+    }
+    return;
+  }
+
   Future<void> _deletePost(WidgetRef ref) async {
     // 画像を削除
-    // TODO: 画像を削除する処理をcontrollerで
     if (postData.imageUrl.isNotEmpty) {
-      await FirebaseStorage.instance.refFromURL(postData.imageUrl).delete();
+      ref
+          .read(storageControllerProvider.notifier)
+          .deleteImage(
+            folderName: FirebaseStorageKey.postImageCollection,
+            docId: postData.postId,
+          );
     }
     // 削除
-    ref.watch(postRepoProvider.notifier).deletePost(postData.postId);
+    ref.watch(postControllerProvider.notifier).deletePost(postData.postId);
     showToast('削除しました');
     return;
   }

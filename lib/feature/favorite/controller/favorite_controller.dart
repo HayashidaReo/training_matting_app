@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/favorite/model/favorite.dart';
@@ -16,8 +15,15 @@ class FavoriteController extends _$FavoriteController {
   }
 
   /// いいね追加
-  Future<void> addFavorite(Favorite addFavoriteData) async {
+  Future<void> addFavorite(String postId) async {
     state = const AsyncLoading();
+    final Timestamp now = Timestamp.now();
+    final Favorite addFavoriteData = Favorite(
+      userId: ref.read(currentUserControllerProvider)!.uid,
+      postId: postId,
+      createdAt: now,
+      updatedAt: now,
+    );
     await ref
         .read(favoriteRepoProvider(addFavoriteData.postId).notifier)
         .addFavorite(addFavoriteData);
@@ -25,18 +31,18 @@ class FavoriteController extends _$FavoriteController {
   }
 
   /// いいね解除
-  Future<void> deleteFavorite(String userId) async {
+  Future<void> deleteFavorite(String postId, String userId) async {
     state = const AsyncLoading();
     await ref
-        .read(favoriteRepoProvider(userId).notifier)
+        .read(favoriteRepoProvider(postId).notifier)
         .deleteFavorite(userId);
     state = const AsyncData(null);
   }
 
   /// postに紐づくfavoriteコレクション全体を削除
-  Future<void> deleteAllFavorite() async {
+  Future<void> deleteAllFavorite(String postId) async {
     state = const AsyncLoading();
-    await ref.read(favoriteRepoProvider('').notifier).deleteAllFavorite();
+    await ref.read(favoriteRepoProvider(postId).notifier).deleteAllFavorite();
     state = const AsyncData(null);
   }
 

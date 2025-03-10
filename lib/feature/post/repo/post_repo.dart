@@ -78,10 +78,10 @@ class PostRepo extends _$PostRepo {
     //     .deleteAllBookmark();
   }
 
-  // // postを編集して更新
-  // Future<void> updatePost(Post updatePostData) async {
-  //   await state.doc(updatePostData.postId).update(updatePostData.toJson());
-  // }
+  // postを編集して更新
+  Future<void> updatePost(Post updatePostData) async {
+    await state.doc(updatePostData.postId).update(updatePostData.toJson());
+  }
 }
 
 /// steamで全ての投稿を取得して監視

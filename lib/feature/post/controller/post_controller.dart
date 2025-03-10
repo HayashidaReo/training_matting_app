@@ -29,12 +29,16 @@ class PostController extends _$PostController {
     state = const AsyncData(null);
   }
 
-  // Future<void> updatePost(Post postData, String body) async {
-  //   state = const AsyncLoading();
-  //   Post editPostData = postData.copyWith(body: body);
-  //   await ref.read(postRepoProvider.notifier).updatePost(editPostData);
-  //   state = const AsyncData(null);
-  // }
+  Future<void> updatePost(Post postData, String body, String imageUrl) async {
+    state = const AsyncLoading();
+    Post editPostData = postData.copyWith(
+      body: body,
+      imageUrl: imageUrl,
+      updatedAt: Timestamp.now(),
+    );
+    await ref.read(postRepoProvider.notifier).updatePost(editPostData);
+    state = const AsyncData(null);
+  }
 
   Future<void> deletePost(String postId) async {
     state = const AsyncLoading();

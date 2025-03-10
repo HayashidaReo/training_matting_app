@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/decoration/text_field_decoration.dart';
 
 class EmailTextFormField extends StatelessWidget {

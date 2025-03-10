@@ -3,7 +3,6 @@ import 'package:matching_app/feature/auth/controller/current_user_controller.dar
 import 'package:matching_app/feature/follow/data_model/follow.dart';
 import 'package:matching_app/feature/follow/repo/follow_repo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:uuid/uuid.dart';
 
 part 'follow_controller.g.dart';
 

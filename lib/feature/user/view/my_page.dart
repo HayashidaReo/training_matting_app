@@ -233,7 +233,6 @@ class MyPage extends ConsumerWidget {
                                           data: (
                                             List<Follow> followingUserList,
                                           ) {
-                                            print('フォロワー変更');
                                             return FollowCountPanel(
                                               followCount:
                                                   followingUserList.length,
@@ -264,7 +263,6 @@ class MyPage extends ConsumerWidget {
                                           data: (
                                             List<Follow> followingUserList,
                                           ) {
-                                            print('相互変更');
                                             return FollowCountPanel(
                                               followCount:
                                                   followingUserList.length,

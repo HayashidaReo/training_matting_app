@@ -11,9 +11,9 @@ import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/component/follow_count_panel.dart';
 import 'package:matching_app/feature/follow/controller/follow_controller.dart';
+import 'package:matching_app/feature/follow/data_model/follow.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/data_model/userdata.dart';
-import 'package:matching_app/feature/user/view/my_page.dart';
 
 class OtherUserProfilePage extends ConsumerWidget {
   const OtherUserProfilePage({super.key, required this.targetUserId});
@@ -125,18 +125,84 @@ class OtherUserProfilePage extends ConsumerWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    FollowCountPanel(
-                                      followCount: 10,
-                                      typeName: 'フォロー',
-                                    ),
-                                    FollowCountPanel(
-                                      followCount: 10,
-                                      typeName: 'フォロワー',
-                                    ),
-                                    FollowCountPanel(
-                                      followCount: 10,
-                                      typeName: '相互フォロー',
-                                    ),
+                                    ref
+                                        .watch(
+                                          watchAllMyFollowingUserListControllerProvider(
+                                            targetUserId,
+                                          ),
+                                        )
+                                        .when(
+                                          data: (
+                                            List<Follow> followingUserList,
+                                          ) {
+                                            return FollowCountPanel(
+                                              followCount:
+                                                  followingUserList.length,
+                                              typeName: 'フォロー',
+                                            );
+                                          },
+                                          error: (error, _) {
+                                            return FollowCountPanel(
+                                              followCount: 0,
+                                              typeName: 'フォロー',
+                                            );
+                                          },
+                                          loading: () {
+                                            return const CircularProgressIndicator();
+                                          },
+                                        ),
+                                    ref
+                                        .watch(
+                                          watchAllFollowMeUserListControllerProvider(
+                                            targetUserId,
+                                          ),
+                                        )
+                                        .when(
+                                          data: (
+                                            List<Follow> followingUserList,
+                                          ) {
+                                            return FollowCountPanel(
+                                              followCount:
+                                                  followingUserList.length,
+                                              typeName: 'フォロワー',
+                                            );
+                                          },
+                                          error: (error, _) {
+                                            return FollowCountPanel(
+                                              followCount: 0,
+                                              typeName: 'フォロワー',
+                                            );
+                                          },
+                                          loading: () {
+                                            return const CircularProgressIndicator();
+                                          },
+                                        ),
+                                    ref
+                                        .watch(
+                                          watchAllMutualFollowUserListControllerProvider(
+                                            targetUserId,
+                                          ),
+                                        )
+                                        .when(
+                                          data: (
+                                            List<Follow> followingUserList,
+                                          ) {
+                                            return FollowCountPanel(
+                                              followCount:
+                                                  followingUserList.length,
+                                              typeName: '相互フォロー',
+                                            );
+                                          },
+                                          error: (error, _) {
+                                            return FollowCountPanel(
+                                              followCount: 0,
+                                              typeName: '相互フォロー',
+                                            );
+                                          },
+                                          loading: () {
+                                            return const CircularProgressIndicator();
+                                          },
+                                        ),
                                   ],
                                 ),
                               ],

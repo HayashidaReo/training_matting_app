@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:matching_app/config/firebase/firebase_instance_provider.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
-import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
-import 'package:matching_app/feature/follow/controller/follow_controller.dart';
 import 'package:matching_app/feature/follow/data_model/follow.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -86,6 +84,7 @@ class FollowRepo extends _$FollowRepo {
 
   /// 相互フォローしているFollowを全て取得
   Stream<List<Follow>> watchAllMutualFollowUserList(String myUserId) {
+    // TODO: 現状だと、userListからuser1がuser2のプロフィールを見ているときに、user2がフォローを外すなどの操作をすると、user1の画面には相互フォローだけ反映されない。
     // 自分をフォローしている全てのフォロー情報を取得
     return state
         .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)

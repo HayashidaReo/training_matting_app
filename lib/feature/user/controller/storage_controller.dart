@@ -13,12 +13,16 @@ class StorageController extends _$StorageController {
     return const AsyncData(null);
   }
 
-  Future<String> uploadImageAndGetUrl({required File imageFile}) async {
+  Future<String> uploadImageAndGetUrl({
+    required String folderName,
+    required File imageFile,
+  }) async {
     state = const AsyncLoading();
     final String imageUrl = await ref
         .read(storageRepoProvider.notifier)
         .uploadImageAndGetUrl(
           imageFile: imageFile,
+          folderName: folderName,
           userId: ref.read(currentUserControllerProvider)!.uid,
         );
     state = const AsyncData(null);

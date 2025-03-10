@@ -264,7 +264,7 @@ class EditMyIconPage extends HookConsumerWidget {
     }
     final downloadUrl = await ref
         .read(storageControllerProvider.notifier)
-        .uploadImageAndGetUrl(imageFile: imageFile);
+        .uploadImageAndGetUrl(folderName: 'users', imageFile: imageFile);
     if (context.mounted) {
       await _updateImageUrl(ref, context, downloadUrl);
     }

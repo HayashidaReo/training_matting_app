@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:matching_app/config/firebase/firebase_instance_provider.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
+import 'package:matching_app/feature/follow/controller/follow_controller.dart';
 import 'package:matching_app/feature/follow/data_model/follow.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -54,7 +55,7 @@ class FollowRepo extends _$FollowRepo {
         .map((snapshot) => snapshot.docs.isNotEmpty);
   }
 
-  /// 自分がfollowしているユーザーを全て取得(follow)
+  /// 自分がfollowしているユーザーとのFollowを全て取得(follow)
   Stream<List<Follow>> watchAllMyFollowingUserList() {
     return state
         .where(
@@ -65,7 +66,7 @@ class FollowRepo extends _$FollowRepo {
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
-  /// 自分をfollowしているユーザーを全て取得(follower)
+  /// 自分をfollowしているユーザーとのFollowを全て取得(follower)
   Stream<List<Follow>> watchAllFollowMeUserList() {
     return state
         .where(
@@ -76,7 +77,7 @@ class FollowRepo extends _$FollowRepo {
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
-  /// 自分はフォローしていないが、相手から一方的にフォローされているユーザーを全て取得
+  /// 自分はフォローしていないが、相手から一方的にフォローされているユーザーとのFollowを全て取得
   Stream<List<Follow>> watchAllOnlyIncomingFollowUserList() {
     return state
         .where(
@@ -91,18 +92,37 @@ class FollowRepo extends _$FollowRepo {
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
-  /// 相互フォローしているユーザーを全て取得
+  /// 相互フォローしているFollowを全て取得
   Stream<List<Follow>> watchAllMutualFollowUserList() {
+    final myUserId = ref.read(currentUserControllerProvider)!.uid;
+
+    // 自分がフォローしている全てのフォロー情報を取得
     return state
-        .where(
-          FirebaseFollowDataKey.followingUserId,
-          isEqualTo: ref.read(currentUserControllerProvider)!.uid,
-        )
-        .where(
-          FirebaseFollowDataKey.followerUserId,
-          isEqualTo: ref.read(currentUserControllerProvider)!.uid,
-        )
+        .where(FirebaseFollowDataKey.followingUserId, isEqualTo: myUserId)
         .snapshots()
-        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
+        .asyncMap((snapshot) async {
+          final follows = snapshot.docs.map((doc) => doc.data()).toList();
+          final List<Follow> mutualFollows = [];
+
+          // それぞれのフォロー関係について、相手が自分をフォローしているか確認
+          for (final follow in follows) {
+            final targetUserId = follow.followerUserId;
+            final reverseQuery =
+                await state
+                    .where(
+                      FirebaseFollowDataKey.followingUserId,
+                      isEqualTo: targetUserId,
+                    )
+                    .where(
+                      FirebaseFollowDataKey.followerUserId,
+                      isEqualTo: myUserId,
+                    )
+                    .get();
+            if (reverseQuery.docs.isNotEmpty) {
+              mutualFollows.add(follow);
+            }
+          }
+          return mutualFollows;
+        });
   }
 }

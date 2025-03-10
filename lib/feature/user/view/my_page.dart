@@ -12,7 +12,10 @@ import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/auth_controller.dart';
 import 'package:matching_app/feature/component/badge_count_widget.dart';
+import 'package:matching_app/feature/component/follow_count_panel.dart';
 import 'package:matching_app/feature/component/hamburger_tile.dart';
+import 'package:matching_app/feature/follow/controller/follow_controller.dart';
+import 'package:matching_app/feature/follow/data_model/follow.dart';
 import 'package:matching_app/feature/navigation/controller/bottom_navigation_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/data_model/userdata.dart';
@@ -185,18 +188,78 @@ class MyPage extends ConsumerWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    FollowCountPanel(
-                                      followCount: 10,
-                                      typeName: 'フォロー',
-                                    ),
-                                    FollowCountPanel(
-                                      followCount: 10,
-                                      typeName: 'フォロワー',
-                                    ),
-                                    FollowCountPanel(
-                                      followCount: 10,
-                                      typeName: '相互フォロー',
-                                    ),
+                                    ref
+                                        .watch(
+                                          watchAllMyFollowingUserListControllerProvider,
+                                        )
+                                        .when(
+                                          data: (
+                                            List<Follow> followingUserList,
+                                          ) {
+                                            return FollowCountPanel(
+                                              followCount:
+                                                  followingUserList.length,
+                                              typeName: 'フォロー',
+                                            );
+                                          },
+                                          error: (error, _) {
+                                            return FollowCountPanel(
+                                              followCount: 0,
+                                              typeName: 'フォロー',
+                                            );
+                                          },
+                                          loading: () {
+                                            return const CircularProgressIndicator();
+                                          },
+                                        ),
+                                    ref
+                                        .watch(
+                                          watchAllFollowMeUserListControllerProvider,
+                                        )
+                                        .when(
+                                          data: (
+                                            List<Follow> followingUserList,
+                                          ) {
+                                            return FollowCountPanel(
+                                              followCount:
+                                                  followingUserList.length,
+                                              typeName: 'フォロワー',
+                                            );
+                                          },
+                                          error: (error, _) {
+                                            return FollowCountPanel(
+                                              followCount: 0,
+                                              typeName: 'フォロワー',
+                                            );
+                                          },
+                                          loading: () {
+                                            return const CircularProgressIndicator();
+                                          },
+                                        ),
+                                    ref
+                                        .watch(
+                                          watchAllMutualFollowUserListControllerProvider,
+                                        )
+                                        .when(
+                                          data: (
+                                            List<Follow> followingUserList,
+                                          ) {
+                                            return FollowCountPanel(
+                                              followCount:
+                                                  followingUserList.length,
+                                              typeName: '相互フォロー',
+                                            );
+                                          },
+                                          error: (error, _) {
+                                            return FollowCountPanel(
+                                              followCount: 0,
+                                              typeName: '相互フォロー',
+                                            );
+                                          },
+                                          loading: () {
+                                            return const CircularProgressIndicator();
+                                          },
+                                        ),
                                   ],
                                 ),
                               ],
@@ -318,34 +381,5 @@ class MyPage extends ConsumerWidget {
       },
     );
     return;
-  }
-}
-
-class FollowCountPanel extends StatelessWidget {
-  const FollowCountPanel({
-    super.key,
-    required this.followCount,
-    required this.typeName,
-  });
-
-  final int followCount;
-  final String typeName;
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        context.pushNamed(AppRoute.followList.name);
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            followCount.toString(),
-            style: TextStyle(fontSize: FontSize.normal),
-          ),
-          Text(typeName, style: TextStyle(fontSize: FontSize.small)),
-        ],
-      ),
-    );
   }
 }

@@ -8,9 +8,11 @@ import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
+import 'package:matching_app/feature/component/follow_count_panel.dart';
 import 'package:matching_app/feature/follow/controller/follow_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/data_model/userdata.dart';
+import 'package:matching_app/feature/user/view/my_page.dart';
 
 class OtherUserProfilePage extends ConsumerWidget {
   const OtherUserProfilePage({super.key, required this.targetUserId});
@@ -291,34 +293,5 @@ class OtherUserProfilePage extends ConsumerWidget {
       ref.read(followControllerProvider.notifier).createFollow(targetUserId);
     }
     return;
-  }
-}
-
-class FollowCountPanel extends StatelessWidget {
-  const FollowCountPanel({
-    super.key,
-    required this.followCount,
-    required this.typeName,
-  });
-
-  final int followCount;
-  final String typeName;
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        context.pushNamed(AppRoute.followList.name);
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            followCount.toString(),
-            style: TextStyle(fontSize: FontSize.normal),
-          ),
-          Text(typeName, style: TextStyle(fontSize: FontSize.small)),
-        ],
-      ),
-    );
   }
 }

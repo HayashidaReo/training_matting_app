@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/decoration/text_field_decoration.dart';
 
 class UsernameTextFormField extends StatelessWidget {
   const UsernameTextFormField({super.key, required this.controller});
@@ -29,19 +30,7 @@ class UsernameTextFormField extends StatelessWidget {
       keyboardType: TextInputType.name,
       autocorrect: false,
       enableSuggestions: false,
-      decoration: InputDecoration(
-        labelText: '名前',
-        labelStyle: TextStyle(color: defaultColors.textFiledLabelColor),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: defaultColors.textFiledBorderColor),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: defaultColors.textFiledBorderColor),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: defaultColors.textFiledBorderColor),
-        ),
-      ),
+      decoration: textFieldDecoration('名前'),
     );
   }
 }

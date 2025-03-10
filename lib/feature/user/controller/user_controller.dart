@@ -92,3 +92,17 @@ Stream<UserData?> watchMyUserDataController(ref) {
 Stream<List<UserData>> watchAllUsersController(ref) {
   return ref.watch(userRepoProvider.notifier).watchAllUsers();
 }
+
+@riverpod
+// streamで指定した文字列と前方一致のuserのuserListを取得
+Stream<List<UserData>> watchForwardMatchingWithQueryTextUsersController(
+  ref,
+  String queryText,
+) {
+  if (queryText.isEmpty) {
+    return ref.watch(userRepoProvider.notifier).watchAllUsers();
+  }
+  return ref
+      .watch(userRepoProvider.notifier)
+      .watchForwardMatchingWithQueryTextUsers(queryText);
+}

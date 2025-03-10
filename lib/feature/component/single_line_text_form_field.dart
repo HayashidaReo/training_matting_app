@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/decoration/text_field_decoration.dart';
 
 class SingleLineTextFormField extends StatelessWidget {
   const SingleLineTextFormField({
@@ -23,19 +24,7 @@ class SingleLineTextFormField extends StatelessWidget {
       },
       autocorrect: false,
       enableSuggestions: false,
-      decoration: InputDecoration(
-        labelText: label,
-        labelStyle: TextStyle(color: defaultColors.textFiledLabelColor),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: defaultColors.textFiledBorderColor),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: defaultColors.textFiledBorderColor),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: defaultColors.textFiledBorderColor),
-        ),
-      ),
+      decoration: textFieldDecoration(label),
     );
   }
 }

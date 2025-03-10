@@ -65,4 +65,20 @@ class UserRepo extends _$UserRepo {
           }).toList();
         });
   }
+
+  // streamで指定した文字列と前方一致のuserのuserListを取得
+  Stream<List<UserData>> watchForwardMatchingWithQueryTextUsers(
+    String queryText,
+  ) {
+    return state
+        .orderBy(FirebaseUserDataKey.createdAt, descending: true)
+        .where(FirebaseUserDataKey.userName, isGreaterThanOrEqualTo: queryText)
+        .where(FirebaseUserDataKey.userName, isLessThan: '$queryText\uf8ff')
+        .snapshots()
+        .map((QuerySnapshot<UserData> snapshot) {
+          return snapshot.docs.map((QueryDocumentSnapshot<UserData> doc) {
+            return doc.data();
+          }).toList();
+        });
+  }
 }

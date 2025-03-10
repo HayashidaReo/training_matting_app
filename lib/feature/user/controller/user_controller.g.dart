@@ -192,6 +192,154 @@ final watchAllUsersControllerProvider =
 // ignore: unused_element
 typedef WatchAllUsersControllerRef =
     AutoDisposeStreamProviderRef<List<UserData>>;
+String _$watchForwardMatchingWithQueryTextUsersControllerHash() =>
+    r'a311fdd70500ed670b4324bbf13a779b11c19515';
+
+/// See also [watchForwardMatchingWithQueryTextUsersController].
+@ProviderFor(watchForwardMatchingWithQueryTextUsersController)
+const watchForwardMatchingWithQueryTextUsersControllerProvider =
+    WatchForwardMatchingWithQueryTextUsersControllerFamily();
+
+/// See also [watchForwardMatchingWithQueryTextUsersController].
+class WatchForwardMatchingWithQueryTextUsersControllerFamily
+    extends Family<AsyncValue<List<UserData>>> {
+  /// See also [watchForwardMatchingWithQueryTextUsersController].
+  const WatchForwardMatchingWithQueryTextUsersControllerFamily();
+
+  /// See also [watchForwardMatchingWithQueryTextUsersController].
+  WatchForwardMatchingWithQueryTextUsersControllerProvider call(
+    String queryText,
+  ) {
+    return WatchForwardMatchingWithQueryTextUsersControllerProvider(queryText);
+  }
+
+  @override
+  WatchForwardMatchingWithQueryTextUsersControllerProvider getProviderOverride(
+    covariant WatchForwardMatchingWithQueryTextUsersControllerProvider provider,
+  ) {
+    return call(provider.queryText);
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name =>
+      r'watchForwardMatchingWithQueryTextUsersControllerProvider';
+}
+
+/// See also [watchForwardMatchingWithQueryTextUsersController].
+class WatchForwardMatchingWithQueryTextUsersControllerProvider
+    extends AutoDisposeStreamProvider<List<UserData>> {
+  /// See also [watchForwardMatchingWithQueryTextUsersController].
+  WatchForwardMatchingWithQueryTextUsersControllerProvider(String queryText)
+    : this._internal(
+        (ref) => watchForwardMatchingWithQueryTextUsersController(
+          ref as WatchForwardMatchingWithQueryTextUsersControllerRef,
+          queryText,
+        ),
+        from: watchForwardMatchingWithQueryTextUsersControllerProvider,
+        name: r'watchForwardMatchingWithQueryTextUsersControllerProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$watchForwardMatchingWithQueryTextUsersControllerHash,
+        dependencies:
+            WatchForwardMatchingWithQueryTextUsersControllerFamily
+                ._dependencies,
+        allTransitiveDependencies:
+            WatchForwardMatchingWithQueryTextUsersControllerFamily
+                ._allTransitiveDependencies,
+        queryText: queryText,
+      );
+
+  WatchForwardMatchingWithQueryTextUsersControllerProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.queryText,
+  }) : super.internal();
+
+  final String queryText;
+
+  @override
+  Override overrideWith(
+    Stream<List<UserData>> Function(
+      WatchForwardMatchingWithQueryTextUsersControllerRef provider,
+    )
+    create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override:
+          WatchForwardMatchingWithQueryTextUsersControllerProvider._internal(
+            (ref) => create(
+              ref as WatchForwardMatchingWithQueryTextUsersControllerRef,
+            ),
+            from: from,
+            name: null,
+            dependencies: null,
+            allTransitiveDependencies: null,
+            debugGetCreateSourceHash: null,
+            queryText: queryText,
+          ),
+    );
+  }
+
+  @override
+  AutoDisposeStreamProviderElement<List<UserData>> createElement() {
+    return _WatchForwardMatchingWithQueryTextUsersControllerProviderElement(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is WatchForwardMatchingWithQueryTextUsersControllerProvider &&
+        other.queryText == queryText;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, queryText.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin WatchForwardMatchingWithQueryTextUsersControllerRef
+    on AutoDisposeStreamProviderRef<List<UserData>> {
+  /// The parameter `queryText` of this provider.
+  String get queryText;
+}
+
+class _WatchForwardMatchingWithQueryTextUsersControllerProviderElement
+    extends AutoDisposeStreamProviderElement<List<UserData>>
+    with WatchForwardMatchingWithQueryTextUsersControllerRef {
+  _WatchForwardMatchingWithQueryTextUsersControllerProviderElement(
+    super.provider,
+  );
+
+  @override
+  String get queryText =>
+      (origin as WatchForwardMatchingWithQueryTextUsersControllerProvider)
+          .queryText;
+}
+
 String _$userControllerHash() => r'22855f078a3f2a602c308e124eefbe9de2f5c334';
 
 /// See also [UserController].

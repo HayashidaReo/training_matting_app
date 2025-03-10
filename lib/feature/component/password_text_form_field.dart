@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/decoration/text_field_decoration.dart';
 
 class PasswordTextFormField extends StatelessWidget {
   const PasswordTextFormField({
@@ -29,21 +30,7 @@ class PasswordTextFormField extends StatelessWidget {
         }
         return null;
       },
-      decoration: InputDecoration(
-        labelText: 'Password',
-        labelStyle: TextStyle(color: defaultColors.textFiledLabelColor),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: defaultColors.textFiledBorderColor),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: defaultColors.textFiledBorderColor),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: defaultColors.textFiledBorderColor),
-        ),
-
-        suffixIcon: suffixIcon,
-      ),
+      decoration: textFieldDecoration('password'),
       obscureText: visible,
     );
   }

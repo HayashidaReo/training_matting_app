@@ -8,6 +8,7 @@ import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
+import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/component/follow_count_panel.dart';
 import 'package:matching_app/feature/follow/controller/follow_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
@@ -188,6 +189,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                     ref
                         .watch(
                           WatchWhetherIFollowTargetUserControllerProvider(
+                            ref.read(currentUserControllerProvider)!.uid,
                             targetUserId,
                           ),
                         )

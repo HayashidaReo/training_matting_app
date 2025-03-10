@@ -41,45 +41,65 @@ class FollowController extends _$FollowController {
 
 @riverpod
 /// 自分が対象ユーザーをフォローしているかをチェックする
-Stream<bool> watchWhetherIFollowTargetUserController(ref, String targetUserId) {
+Stream<bool> watchWhetherIFollowTargetUserController(
+  ref,
+  String myUserId,
+  String targetUserId,
+) {
   return ref
       .watch(followRepoProvider.notifier)
-      .watchWhetherIFollowTargetUser(targetUserId);
+      .watchWhetherIFollowTargetUser(myUserId, targetUserId);
 }
 
 @riverpod
 /// 対象ユーザーが自分をフォローしているかをチェックする
 Stream<bool> watchWhetherTargetUserFollowMeController(
   ref,
+  String myUserId,
   String targetUserId,
 ) {
   return ref
       .watch(followRepoProvider.notifier)
-      .watchWhetherTargetUserFollowMe(targetUserId);
+      .watchWhetherTargetUserFollowMe(myUserId, targetUserId);
 }
 
 @riverpod
 /// 自分がfollowしているユーザーを全て取得(follow)
-Stream<List<Follow>> watchAllMyFollowingUserListController(ref) {
-  return ref.watch(followRepoProvider.notifier).watchAllMyFollowingUserList();
+Stream<List<Follow>> watchAllMyFollowingUserListController(
+  ref,
+  String myUserId,
+) {
+  return ref
+      .watch(followRepoProvider.notifier)
+      .watchAllMyFollowingUserList(myUserId);
 }
 
 @riverpod
 /// 自分をfollowしているユーザーを全て取得(follower)
-Stream<List<Follow>> watchAllFollowMeUserListController(ref) {
-  return ref.watch(followRepoProvider.notifier).watchAllFollowMeUserList();
+Stream<List<Follow>> watchAllFollowMeUserListController(ref, String myUserId) {
+  return ref
+      .watch(followRepoProvider.notifier)
+      .watchAllFollowMeUserList(myUserId);
 }
 
 @riverpod
 /// 自分はフォローしていないが、相手から一方的にフォローされているユーザーを全て取得
-Stream<List<Follow>> watchAllOnlyIncomingFollowUserListController(ref) {
+Stream<List<Follow>> watchAllOnlyIncomingFollowUserListController(
+  ref,
+  String myUserId,
+) {
   return ref
       .watch(followRepoProvider.notifier)
-      .watchAllOnlyIncomingFollowUserList();
+      .watchAllOnlyIncomingFollowUserList(myUserId);
 }
 
 @riverpod
 /// 相互フォローしているユーザーを全て取得
-Stream<List<Follow>> watchAllMutualFollowUserListController(ref) {
-  return ref.watch(followRepoProvider.notifier).watchAllMutualFollowUserList();
+Stream<List<Follow>> watchAllMutualFollowUserListController(
+  ref,
+  String myUserId,
+) {
+  return ref
+      .watch(followRepoProvider.notifier)
+      .watchAllMutualFollowUserList(myUserId);
 }

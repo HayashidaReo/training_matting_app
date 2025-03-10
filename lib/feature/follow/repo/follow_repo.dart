@@ -31,90 +31,80 @@ class FollowRepo extends _$FollowRepo {
     await state.doc(followId).delete();
   }
 
-  /// 自分が対象ユーザーをフォローしているかをチェックする
-  Stream<bool> watchWhetherIFollowTargetUser(String targetUserId) {
+  /// 自分(myUser)が対象ユーザー(targetUser)をフォローしているかをチェックする
+  Stream<bool> watchWhetherIFollowTargetUser(
+    String myUserId,
+    String targetUserId,
+  ) {
     return state
         .where(FirebaseFollowDataKey.followerUserId, isEqualTo: targetUserId)
-        .where(
-          FirebaseFollowDataKey.followingUserId,
-          isEqualTo: ref.read(currentUserControllerProvider)!.uid,
-        )
+        .where(FirebaseFollowDataKey.followingUserId, isEqualTo: myUserId)
         .snapshots()
         .map((snapshot) => snapshot.docs.isNotEmpty);
   }
 
-  /// 対象ユーザーが自分をフォローしているかをチェックする
-  Stream<bool> watchWhetherTargetUserFollowMe(String targetUserId) {
+  /// 対象ユーザー(targetUser)が自分(myUser)をフォローしているかをチェックする
+  Stream<bool> watchWhetherTargetUserFollowMe(
+    String myUserId,
+    String targetUserId,
+  ) {
     return state
-        .where(
-          FirebaseFollowDataKey.followerUserId,
-          isEqualTo: ref.read(currentUserControllerProvider)!.uid,
-        )
+        .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
         .where(FirebaseFollowDataKey.followingUserId, isEqualTo: targetUserId)
         .snapshots()
         .map((snapshot) => snapshot.docs.isNotEmpty);
   }
 
-  /// 自分がfollowしているユーザーとのFollowを全て取得(follow)
-  Stream<List<Follow>> watchAllMyFollowingUserList() {
+  /// 自分(myUser)がfollowしているユーザーとのFollowを全て取得(follow)
+  Stream<List<Follow>> watchAllMyFollowingUserList(String myUserId) {
     return state
-        .where(
-          FirebaseFollowDataKey.followingUserId,
-          isEqualTo: ref.read(currentUserControllerProvider)!.uid,
-        )
+        .where(FirebaseFollowDataKey.followingUserId, isEqualTo: myUserId)
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
-  /// 自分をfollowしているユーザーとのFollowを全て取得(follower)
-  Stream<List<Follow>> watchAllFollowMeUserList() {
+  /// 自分(myUser)をfollowしているユーザーとのFollowを全て取得(follower)
+  Stream<List<Follow>> watchAllFollowMeUserList(String myUserId) {
     return state
-        .where(
-          FirebaseFollowDataKey.followerUserId,
-          isEqualTo: ref.read(currentUserControllerProvider)!.uid,
-        )
+        .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
-  /// 自分はフォローしていないが、相手から一方的にフォローされているユーザーとのFollowを全て取得
-  Stream<List<Follow>> watchAllOnlyIncomingFollowUserList() {
+  /// 自分(myUser)はフォローしていないが、相手(targetUser)から一方的にフォローされているユーザーとのFollowを全て取得
+  Stream<List<Follow>> watchAllOnlyIncomingFollowUserList(
+    String myUserId,
+    String targetUserId,
+  ) {
+    //TODO: ロジックが不完全なので修正する
     return state
-        .where(
-          FirebaseFollowDataKey.followingUserId,
-          isNotEqualTo: ref.read(currentUserControllerProvider)!.uid,
-        )
-        .where(
-          FirebaseFollowDataKey.followerUserId,
-          isEqualTo: ref.read(currentUserControllerProvider)!.uid,
-        )
+        .where(FirebaseFollowDataKey.followingUserId, isNotEqualTo: myUserId)
+        .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
   /// 相互フォローしているFollowを全て取得
-  Stream<List<Follow>> watchAllMutualFollowUserList() {
-    final myUserId = ref.read(currentUserControllerProvider)!.uid;
-
-    // 自分がフォローしている全てのフォロー情報を取得
+  Stream<List<Follow>> watchAllMutualFollowUserList(String myUserId) {
+    // 自分をフォローしている全てのフォロー情報を取得
     return state
-        .where(FirebaseFollowDataKey.followingUserId, isEqualTo: myUserId)
+        .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
         .snapshots()
         .asyncMap((snapshot) async {
           final follows = snapshot.docs.map((doc) => doc.data()).toList();
           final List<Follow> mutualFollows = [];
 
-          // それぞれのフォロー関係について、相手が自分をフォローしているか確認
+          // それぞれのフォロー関係について、自分が相手をフォローしているか確認
           for (final follow in follows) {
-            final targetUserId = follow.followerUserId;
+            final targetUserId = follow.followingUserId;
             final reverseQuery =
                 await state
                     .where(
-                      FirebaseFollowDataKey.followingUserId,
+                      FirebaseFollowDataKey.followerUserId,
                       isEqualTo: targetUserId,
                     )
                     .where(
-                      FirebaseFollowDataKey.followerUserId,
+                      FirebaseFollowDataKey.followingUserId,
                       isEqualTo: myUserId,
                     )
                     .get();

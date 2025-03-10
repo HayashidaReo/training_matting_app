@@ -11,6 +11,7 @@ import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/auth_controller.dart';
+import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/component/badge_count_widget.dart';
 import 'package:matching_app/feature/component/follow_count_panel.dart';
 import 'package:matching_app/feature/component/hamburger_tile.dart';
@@ -190,7 +191,13 @@ class MyPage extends ConsumerWidget {
                                   children: [
                                     ref
                                         .watch(
-                                          watchAllMyFollowingUserListControllerProvider,
+                                          watchAllMyFollowingUserListControllerProvider(
+                                            ref
+                                                .read(
+                                                  currentUserControllerProvider,
+                                                )!
+                                                .uid,
+                                          ),
                                         )
                                         .when(
                                           data: (
@@ -214,12 +221,19 @@ class MyPage extends ConsumerWidget {
                                         ),
                                     ref
                                         .watch(
-                                          watchAllFollowMeUserListControllerProvider,
+                                          watchAllFollowMeUserListControllerProvider(
+                                            ref
+                                                .read(
+                                                  currentUserControllerProvider,
+                                                )!
+                                                .uid,
+                                          ),
                                         )
                                         .when(
                                           data: (
                                             List<Follow> followingUserList,
                                           ) {
+                                            print('フォロワー変更');
                                             return FollowCountPanel(
                                               followCount:
                                                   followingUserList.length,
@@ -238,12 +252,19 @@ class MyPage extends ConsumerWidget {
                                         ),
                                     ref
                                         .watch(
-                                          watchAllMutualFollowUserListControllerProvider,
+                                          watchAllMutualFollowUserListControllerProvider(
+                                            ref
+                                                .read(
+                                                  currentUserControllerProvider,
+                                                )!
+                                                .uid,
+                                          ),
                                         )
                                         .when(
                                           data: (
                                             List<Follow> followingUserList,
                                           ) {
+                                            print('相互変更');
                                             return FollowCountPanel(
                                               followCount:
                                                   followingUserList.length,

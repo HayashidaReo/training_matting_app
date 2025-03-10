@@ -6,7 +6,7 @@ part of 'follow_repo.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$followRepoHash() => r'105b14450eea85c5197336e8d202c3d04903234d';
+String _$followRepoHash() => r'bcd0df49001ed79230fb09686230d232b9358e9c';
 
 /// See also [FollowRepo].
 @ProviderFor(FollowRepo)

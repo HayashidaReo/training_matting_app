@@ -411,7 +411,7 @@ final watchAllMutualFollowUserListControllerProvider =
 // ignore: unused_element
 typedef WatchAllMutualFollowUserListControllerRef =
     AutoDisposeStreamProviderRef<List<Follow>>;
-String _$followControllerHash() => r'67d00d2f3c4aa3a2737a3bf537602ba3898bb26d';
+String _$followControllerHash() => r'2da9cccb5395ebd1365ebb2c9350c0166ecce3ce';
 
 /// See also [FollowController].
 @ProviderFor(FollowController)

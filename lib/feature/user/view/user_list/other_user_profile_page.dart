@@ -2,30 +2,27 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:matching_app/common_widget/close_only_dialog.dart';
-import 'package:matching_app/common_widget/confirm_dialog.dart';
-import 'package:matching_app/common_widget/toast.dart';
-import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/common_widget/custom_button.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
-import 'package:matching_app/feature/auth/controller/auth_controller.dart';
+import 'package:matching_app/feature/follow/controller/follow_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/data_model/userdata.dart';
 
 class OtherUserProfilePage extends ConsumerWidget {
-  const OtherUserProfilePage({super.key, required this.userId});
+  const OtherUserProfilePage({super.key, required this.targetUserId});
 
-  final String userId;
+  final String targetUserId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: Text(userId)),
+      appBar: AppBar(title: Text(targetUserId)),
       body: SingleChildScrollView(
         child: ref
-            .watch(watchMyUserDataControllerProvider)
+            .watch(watchUserDataControllerProvider(targetUserId))
             .when(
               data: (UserData? userData) {
                 if (userData == null) {
@@ -185,6 +182,62 @@ class OtherUserProfilePage extends ConsumerWidget {
                       ),
                     ),
                     HeightMarginSizedBox.small,
+                    ref
+                        .watch(
+                          WatchWhetherIFollowTargetUserControllerProvider(
+                            targetUserId,
+                          ),
+                        )
+                        .when(
+                          error: (error, _) {
+                            return Text(
+                              'エラーが発生しました。再度お試しください。',
+                              style: TextStyle(fontSize: FontSize.large),
+                            );
+                          },
+                          loading: () {
+                            return const CircularProgressIndicator();
+                          },
+                          data: (bool isFollowing) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                SizedBox(
+                                  width: 150,
+                                  height: 40,
+                                  child: CustomButton(
+                                    text: isFollowing ? 'フォロー中' : 'フォローする',
+                                    onPressed: () {
+                                      if (isFollowing) {
+                                        ref
+                                            .read(
+                                              followControllerProvider.notifier,
+                                            )
+                                            .deleteFollow(targetUserId);
+                                      } else {
+                                        ref
+                                            .read(
+                                              followControllerProvider.notifier,
+                                            )
+                                            .createFollow(targetUserId);
+                                      }
+                                    },
+                                    isColorReversed: isFollowing,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 150,
+                                  height: 40,
+                                  child: CustomButton(
+                                    text: 'メッセージ',
+                                    onPressed: () {},
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                    HeightMarginSizedBox.normal,
                     if (userData.profile != '')
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -221,42 +274,6 @@ class OtherUserProfilePage extends ConsumerWidget {
             ),
       ),
     );
-  }
-
-  void _resetPassword(BuildContext context, WidgetRef ref) {
-    showConfirmDialog(
-      context: context,
-      text: 'パスワード再設定メールを送信しますか？',
-      onPressed: () async {
-        final String result =
-            await ref
-                .read(authControllerProvider.notifier)
-                .sendPasswordResetEmail();
-        showToast('パスワード再設定メールを送信しました');
-        if (result == 'success') {
-          if (context.mounted) {
-            context.pop();
-          }
-        } else {
-          if (context.mounted) {
-            showCloseOnlyDialog(context, result, 'エラー');
-          }
-        }
-      },
-    );
-    return;
-  }
-
-  void _signOut(BuildContext context, WidgetRef ref) {
-    showConfirmDialog(
-      context: context,
-      text: 'ログアウトしますか？',
-      onPressed: () async {
-        await ref.read(authControllerProvider.notifier).signOut();
-        showToast('ログアウトしました');
-      },
-    );
-    return;
   }
 }
 

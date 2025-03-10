@@ -118,7 +118,7 @@ GoRouter appRouter(ref) {
                 pageBuilder: (context, state) {
                   final userId = state.uri.queryParameters['userId'] as String;
                   return MaterialPage(
-                    child: OtherUserProfilePage(userId: userId),
+                    child: OtherUserProfilePage(targetUserId: userId),
                   );
                 },
               ),

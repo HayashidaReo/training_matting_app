@@ -32,7 +32,9 @@ class FollowController extends _$FollowController {
   }
 
   /// follow解除
-  Future<void> deleteFollow(String followId) async {
+  Future<void> deleteFollow(String targetUserId) async {
+    final String myUid = ref.read(currentUserControllerProvider)!.uid;
+    final String followId = '${myUid}_$targetUserId';
     await ref.read(followRepoProvider.notifier).deleteFollow(followId);
   }
 }

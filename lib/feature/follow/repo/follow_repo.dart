@@ -33,11 +33,11 @@ class FollowRepo extends _$FollowRepo {
   /// 自分が対象ユーザーをフォローしているかをチェックする
   Stream<bool> watchWhetherIFollowTargetUser(String targetUserId) {
     return state
+        .where(FirebaseFollowDataKey.followerUserId, isEqualTo: targetUserId)
         .where(
-          FirebaseFollowDataKey.followerUserId,
+          FirebaseFollowDataKey.followingUserId,
           isEqualTo: ref.read(currentUserControllerProvider)!.uid,
         )
-        .where(FirebaseFollowDataKey.followingUserId, isEqualTo: targetUserId)
         .snapshots()
         .map((snapshot) => snapshot.docs.isNotEmpty);
   }
@@ -45,11 +45,11 @@ class FollowRepo extends _$FollowRepo {
   /// 対象ユーザーが自分をフォローしているかをチェックする
   Stream<bool> watchWhetherTargetUserFollowMe(String targetUserId) {
     return state
-        .where(FirebaseFollowDataKey.followerUserId, isEqualTo: targetUserId)
         .where(
-          FirebaseFollowDataKey.followingUserId,
+          FirebaseFollowDataKey.followerUserId,
           isEqualTo: ref.read(currentUserControllerProvider)!.uid,
         )
+        .where(FirebaseFollowDataKey.followingUserId, isEqualTo: targetUserId)
         .snapshots()
         .map((snapshot) => snapshot.docs.isNotEmpty);
   }

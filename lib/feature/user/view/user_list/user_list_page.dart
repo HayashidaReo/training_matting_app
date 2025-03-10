@@ -120,9 +120,6 @@ class UserListPage extends HookConsumerWidget {
                           AppRoute.otherUserProfile.name,
                           queryParameters: {'userId': userData.userId},
                         );
-                        // ref
-                        //     .read(followControllerProvider.notifier)
-                        //     .createFollow(userData.userId);
                       },
                     );
                   },

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:matching_app/config/firebase/firebase_instance_provider.dart';
@@ -29,9 +28,12 @@ class StorageRepo extends _$StorageRepo {
   }
 
   // 画像削除
-  Future<void> deleteImage({required String userId}) async {
+  Future<void> deleteImage({
+    required String folderName,
+    required String docId,
+  }) async {
     try {
-      await state.ref('users/$userId').delete();
+      await state.ref('$folderName/$docId').delete();
     } catch (e) {
       return;
     }

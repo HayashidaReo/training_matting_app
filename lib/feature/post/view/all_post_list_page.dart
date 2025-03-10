@@ -53,7 +53,7 @@ class AllPostListPage extends ConsumerWidget {
                           },
                           data: (UserData? postUserData) {
                             return PostTile(
-                              post: postData,
+                              postData: postData,
                               postUser: postUserData!,
                               isMe: isMe,
                             );

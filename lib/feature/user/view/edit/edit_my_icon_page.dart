@@ -282,7 +282,12 @@ class EditMyIconPage extends HookConsumerWidget {
   Future<void> _deleteIcon(WidgetRef ref, BuildContext context) async {
     await _updateImageUrl(ref, context, '');
     //storageの削除
-    await ref.read(storageControllerProvider.notifier).deleteImage();
+    await ref
+        .read(storageControllerProvider.notifier)
+        .deleteImage(
+          folderName: FirebaseStorageKey.userIconCollection,
+          docId: ref.read(currentUserControllerProvider)!.uid,
+        );
     hideLoadingDialog();
     showToast('削除が完了しました');
     return;

@@ -3,6 +3,7 @@ enum AppRoute {
   passwordRemainder,
   postList,
   addPost,
+  editPost,
   userList,
   talkList,
   myPage,
@@ -23,6 +24,8 @@ extension AppRouteExtention on AppRoute {
         return '/postList';
       case AppRoute.addPost:
         return '/addPost';
+      case AppRoute.editPost:
+        return '/editPost';
       case AppRoute.userList:
         return '/userList';
       case AppRoute.talkList:

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/user/repo/storage_repo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -30,11 +29,14 @@ class StorageController extends _$StorageController {
     return imageUrl;
   }
 
-  Future<void> deleteImage() async {
+  Future<void> deleteImage({
+    required String folderName,
+    required String docId,
+  }) async {
     state = const AsyncLoading();
     await ref
         .read(storageRepoProvider.notifier)
-        .deleteImage(userId: ref.read(currentUserControllerProvider)!.uid);
+        .deleteImage(folderName: folderName, docId: docId);
     state = const AsyncData(null);
   }
 }

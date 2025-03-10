@@ -44,11 +44,36 @@ class PostController extends _$PostController {
     state = const AsyncData(null);
   }
 
-  Future<void> updatePost(Post postData, String body, String imageUrl) async {
+  Future<void> updatePost(
+    Post postData,
+    String body,
+    File? selectedImage,
+    String imageUrl,
+  ) async {
     state = const AsyncLoading();
+    String downloadUrl = '';
+    if (selectedImage != null) {
+      downloadUrl = await ref
+          .read(storageControllerProvider.notifier)
+          .uploadImageAndGetUrl(
+            folderName: FirebaseStorageKey.postImageCollection,
+            imageFile: selectedImage,
+            docId: postData.postId,
+          );
+    } else if (imageUrl.isNotEmpty) {
+      downloadUrl = imageUrl;
+    } else {
+      downloadUrl = '';
+      await ref
+          .read(storageControllerProvider.notifier)
+          .deleteImage(
+            folderName: FirebaseStorageKey.postImageCollection,
+            docId: postData.postId,
+          );
+    }
     Post editPostData = postData.copyWith(
       body: body,
-      imageUrl: imageUrl,
+      imageUrl: downloadUrl,
       updatedAt: Timestamp.now(),
     );
     await ref.read(postRepoProvider.notifier).updatePost(editPostData);

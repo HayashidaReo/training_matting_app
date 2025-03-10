@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/common_widget/confirm_dialog.dart';
 import 'package:matching_app/common_widget/toast.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 import 'package:matching_app/feature/post/data_model/post.dart';
@@ -16,13 +17,13 @@ import 'package:matching_app/feature/user/data_model/userdata.dart';
 class PostTile extends HookConsumerWidget {
   PostTile({
     super.key,
-    required this.post,
+    required this.postData,
     required this.postUser,
     required this.isMe,
     this.isBookmarked,
   });
 
-  final Post post;
+  final Post postData;
   final UserData postUser;
   final bool isMe;
   final bool? isBookmarked;
@@ -78,27 +79,46 @@ class PostTile extends HookConsumerWidget {
 
             trailing:
                 (isMe)
-                    ? IconButton(
+                    // ? IconButton(
+                    //   icon: const Icon(Icons.more_vert),
+                    //   onPressed: () async {
+                    //     showConfirmDialog(
+                    //       context: context,
+                    //       text: '本当に削除しますか？\nこの操作は取り消せません。',
+                    //       onPressed: () async {
+                    //         context.pop();
+                    //         await _deletePost(ref);
+                    //       },
+                    //     );
+                    //   },
+                    // )
+                    ? PopupMenuButton(
                       icon: const Icon(Icons.more_vert),
-                      onPressed: () async {
-                        showConfirmDialog(
-                          context: context,
-                          text: '本当に削除しますか？\nこの操作は取り消せません。',
-                          onPressed: () async {
-                            context.pop();
-                            // 画像を削除
-                            if (post.imageUrl.isNotEmpty) {
-                              await FirebaseStorage.instance
-                                  .refFromURL(post.imageUrl)
-                                  .delete();
-                            }
-                            // 削除
-                            ref
-                                .watch(postRepoProvider.notifier)
-                                .deletePost(post.postId);
-                            showToast('削除しました');
-                          },
-                        );
+                      onSelected: (value) async {
+                        if (value == 'edit') {
+                          context.goNamed(
+                            AppRoute.editPost.name,
+                            queryParameters: {'postId': postData.postId},
+                          );
+                        } else if (value == 'delete') {
+                          showConfirmDialog(
+                            context: context,
+                            text: '本当に削除しますか？\nこの操作は取り消せません。',
+                            onPressed: () async {
+                              context.pop();
+                              _deletePost(ref);
+                            },
+                          );
+                        }
+                      },
+                      itemBuilder: (context) {
+                        return [
+                          const PopupMenuItem(value: 'edit', child: Text('編集')),
+                          const PopupMenuItem(
+                            value: 'delete',
+                            child: Text('削除'),
+                          ),
+                        ];
                       },
                     )
                     : SizedBox.shrink(),
@@ -107,7 +127,7 @@ class PostTile extends HookConsumerWidget {
               style: const TextStyle(fontSize: 16),
             ),
             subtitle: Text(
-              post.createdAt.toDate().toString().substring(0, 16),
+              postData.createdAt.toDate().toString().substring(0, 16),
               style: TextStyle(
                 fontSize: 11,
                 color: defaultColors.postTileTextColor,
@@ -125,9 +145,9 @@ class PostTile extends HookConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  if (post.imageUrl.isNotEmpty)
+                  if (postData.imageUrl.isNotEmpty)
                     CachedNetworkImage(
-                      imageUrl: post.imageUrl,
+                      imageUrl: postData.imageUrl,
                       width: 80,
                       height: 80,
                       fit: BoxFit.cover,
@@ -154,10 +174,10 @@ class PostTile extends HookConsumerWidget {
                         );
                       },
                     ),
-                  if (post.imageUrl.isNotEmpty) WidthMarginSizedBox.small,
+                  if (postData.imageUrl.isNotEmpty) WidthMarginSizedBox.small,
                   Flexible(
                     child: Text(
-                      post.body,
+                      postData.body,
                       style: TextStyle(fontSize: FontSize.small),
                     ),
                   ),
@@ -307,5 +327,16 @@ class PostTile extends HookConsumerWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _deletePost(WidgetRef ref) async {
+    // 画像を削除
+    if (postData.imageUrl.isNotEmpty) {
+      await FirebaseStorage.instance.refFromURL(postData.imageUrl).delete();
+    }
+    // 削除
+    ref.watch(postRepoProvider.notifier).deletePost(postData.postId);
+    showToast('削除しました');
+    return;
   }
 }

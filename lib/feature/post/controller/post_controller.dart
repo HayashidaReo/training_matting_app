@@ -87,21 +87,25 @@ class PostController extends _$PostController {
   }
 }
 
+/// steamで全ての投稿を取得して監視
 @riverpod
 Stream<List<Post>> watchAllPostsController(ref) {
   return ref.watch(postRepoProvider.notifier).watchAllPosts();
 }
 
+/// steamで自分の投稿を全て取得して監視
 @riverpod
 Stream<List<Post>> watchMyAllPostsController(ref) {
   return ref.watch(postRepoProvider.notifier).watchMyAllPosts();
 }
 
+/// steamでpostIdからドキュメントを取得して監視
 @riverpod
 Stream<Post?> watchPostController(ref, String postId) {
   return ref.watch(postRepoProvider.notifier).watchPost(postId);
 }
 
+/// steamで自分がブックマークしたpostsコレクションを全て取得して監視
 @riverpod
 Stream<List<Post>> watchMyAllBookmarkPostsController(ref) {
   return ref.watch(postRepoProvider.notifier).watchMyAllBookmarkPosts();

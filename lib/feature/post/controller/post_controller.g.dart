@@ -9,7 +9,9 @@ part of 'post_controller.dart';
 String _$watchAllPostsControllerHash() =>
     r'c5a3e480f542734877927269c232667fa4554788';
 
-/// See also [watchAllPostsController].
+/// steamで全ての投稿を取得して監視
+///
+/// Copied from [watchAllPostsController].
 @ProviderFor(watchAllPostsController)
 final watchAllPostsControllerProvider =
     AutoDisposeStreamProvider<List<Post>>.internal(
@@ -29,7 +31,9 @@ typedef WatchAllPostsControllerRef = AutoDisposeStreamProviderRef<List<Post>>;
 String _$watchMyAllPostsControllerHash() =>
     r'b10c716c7ef25fc954bea94a0f3a53c64acfcfd1';
 
-/// See also [watchMyAllPostsController].
+/// steamで自分の投稿を全て取得して監視
+///
+/// Copied from [watchMyAllPostsController].
 @ProviderFor(watchMyAllPostsController)
 final watchMyAllPostsControllerProvider =
     AutoDisposeStreamProvider<List<Post>>.internal(
@@ -70,16 +74,24 @@ class _SystemHash {
   }
 }
 
-/// See also [watchPostController].
+/// steamでpostIdからドキュメントを取得して監視
+///
+/// Copied from [watchPostController].
 @ProviderFor(watchPostController)
 const watchPostControllerProvider = WatchPostControllerFamily();
 
-/// See also [watchPostController].
+/// steamでpostIdからドキュメントを取得して監視
+///
+/// Copied from [watchPostController].
 class WatchPostControllerFamily extends Family<AsyncValue<Post?>> {
-  /// See also [watchPostController].
+  /// steamでpostIdからドキュメントを取得して監視
+  ///
+  /// Copied from [watchPostController].
   const WatchPostControllerFamily();
 
-  /// See also [watchPostController].
+  /// steamでpostIdからドキュメントを取得して監視
+  ///
+  /// Copied from [watchPostController].
   WatchPostControllerProvider call(String postId) {
     return WatchPostControllerProvider(postId);
   }
@@ -106,9 +118,13 @@ class WatchPostControllerFamily extends Family<AsyncValue<Post?>> {
   String? get name => r'watchPostControllerProvider';
 }
 
-/// See also [watchPostController].
+/// steamでpostIdからドキュメントを取得して監視
+///
+/// Copied from [watchPostController].
 class WatchPostControllerProvider extends AutoDisposeStreamProvider<Post?> {
-  /// See also [watchPostController].
+  /// steamでpostIdからドキュメントを取得して監視
+  ///
+  /// Copied from [watchPostController].
   WatchPostControllerProvider(String postId)
     : this._internal(
         (ref) => watchPostController(ref as WatchPostControllerRef, postId),
@@ -192,7 +208,9 @@ class _WatchPostControllerProviderElement
 String _$watchMyAllBookmarkPostsControllerHash() =>
     r'a4824d2a3f387f19db7d042fe90c4e5df174037f';
 
-/// See also [watchMyAllBookmarkPostsController].
+/// steamで自分がブックマークしたpostsコレクションを全て取得して監視
+///
+/// Copied from [watchMyAllBookmarkPostsController].
 @ProviderFor(watchMyAllBookmarkPostsController)
 final watchMyAllBookmarkPostsControllerProvider =
     AutoDisposeStreamProvider<List<Post>>.internal(

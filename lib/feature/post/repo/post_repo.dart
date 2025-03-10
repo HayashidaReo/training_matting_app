@@ -81,27 +81,3 @@ class PostRepo extends _$PostRepo {
     await state.doc(updatePostData.postId).update(updatePostData.toJson());
   }
 }
-
-/// steamで全ての投稿を取得して監視
-@riverpod
-Stream<List<Post>> watchAllPosts(ref) {
-  return ref.watch(postRepoProvider.notifier).watchAllPosts();
-}
-
-/// steamで自分の投稿を全て取得して監視
-@riverpod
-Stream<List<Post>> watchMyAllPosts(ref) {
-  return ref.watch(postRepoProvider.notifier).watchMyAllPosts();
-}
-
-/// steamでpostIdからドキュメントを取得して監視
-@riverpod
-Stream<Post> watchPost(ref, String postId) {
-  return ref.watch(postRepoProvider.notifier).watchPost(postId);
-}
-
-/// steamで自分がブックマークしたpostsコレクションを全て取得して監視
-@riverpod
-Stream<List<Post>> watchMyAllBookmarkPosts(ref) {
-  return ref.watch(postRepoProvider.notifier).watchMyAllBookmarkPosts();
-}

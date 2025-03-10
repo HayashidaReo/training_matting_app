@@ -191,7 +191,7 @@ class _WatchAllBookmarksControllerProviderElement
 }
 
 String _$bookmarkControllerHash() =>
-    r'cb7d1415985fa6c73ed63019a1c0f0099ca5f0e6';
+    r'03be79144bc00ff06b456f97ac175e17adfc2a98';
 
 /// See also [BookmarkController].
 @ProviderFor(BookmarkController)

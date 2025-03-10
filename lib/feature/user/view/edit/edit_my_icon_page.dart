@@ -182,17 +182,19 @@ class EditMyIconPage extends HookConsumerWidget {
                                   isIconDeleted.value = false;
                                 }
                               },
-                              child: Image.asset(
-                                'assets/images/default_user_icon.png',
-                                width: 250,
-                                height: 250,
-                                fit: BoxFit.cover,
+                              child: ClipOval(
+                                child: Image.asset(
+                                  'assets/images/default_user_icon.png',
+                                  width: 200,
+                                  height: 200,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             // 追加ボタン
                             Positioned(
-                              bottom: 25,
-                              right: 25,
+                              bottom: 0,
+                              right: 0,
                               child: InkWell(
                                 onTap: () async {
                                   final uploadResult =

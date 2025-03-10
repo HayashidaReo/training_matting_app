@@ -112,11 +112,13 @@ class MyPage extends ConsumerWidget {
                               onTap: () {
                                 context.pushNamed(AppRoute.editMyIcon.name);
                               },
-                              child: Image.asset(
-                                'assets/images/default_user_icon.png',
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.cover,
+                              child: ClipOval(
+                                child: Image.asset(
+                                  'assets/images/default_user_icon.png',
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             )
                           else
@@ -146,12 +148,12 @@ class MyPage extends ConsumerWidget {
                                     );
                                   },
                                   errorWidget: (context, url, error) {
-                                    return SizedBox(
-                                      width: 100,
-                                      height: 100,
+                                    return ClipOval(
                                       child: Image.asset(
                                         'assets/images/default_user_icon.png',
                                         fit: BoxFit.cover,
+                                        width: 100,
+                                        height: 100,
                                       ),
                                     );
                                   },

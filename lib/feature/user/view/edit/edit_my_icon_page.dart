@@ -182,15 +182,17 @@ class EditMyIconPage extends HookConsumerWidget {
                                   isIconDeleted.value = false;
                                 }
                               },
-                              child: const Icon(
-                                Icons.account_circle,
-                                size: 200,
+                              child: Image.asset(
+                                'assets/images/default_user_icon.png',
+                                width: 250,
+                                height: 250,
+                                fit: BoxFit.cover,
                               ),
                             ),
                             // 追加ボタン
                             Positioned(
-                              bottom: 12,
-                              right: 12,
+                              bottom: 25,
+                              right: 25,
                               child: InkWell(
                                 onTap: () async {
                                   final uploadResult =

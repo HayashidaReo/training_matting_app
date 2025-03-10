@@ -76,8 +76,8 @@ class PostTile extends HookConsumerWidget {
                     : ClipOval(
                       child: Image.asset(
                         'assets/images/default_user_icon.png',
-                        width: 44,
-                        height: 44,
+                        width: 50,
+                        height: 50,
                         fit: BoxFit.cover,
                       ),
                     ),

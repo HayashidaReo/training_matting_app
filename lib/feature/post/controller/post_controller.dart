@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/post/data_model/post.dart';
 import 'package:matching_app/feature/post/repo/post_repo.dart';
+import 'package:matching_app/feature/user/controller/storage_controller.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
@@ -14,12 +18,23 @@ class PostController extends _$PostController {
     return const AsyncData(null);
   }
 
-  Future<void> addPost(String body, String imageUrl) async {
+  Future<void> addPost(String body, File? selectedImage) async {
     state = const AsyncLoading();
+    String downloadUrl = '';
+    String postId = const Uuid().v4();
+    if (selectedImage != null) {
+      downloadUrl = await ref
+          .read(storageControllerProvider.notifier)
+          .uploadImageAndGetUrl(
+            folderName: FirebaseStorageKey.postImageCollection,
+            imageFile: selectedImage,
+            docId: postId,
+          );
+    }
     Post newPostData = Post(
-      postId: const Uuid().v4(),
+      postId: postId,
       body: body,
-      imageUrl: imageUrl,
+      imageUrl: downloadUrl,
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
       userId: ref.read(currentUserControllerProvider)!.uid,

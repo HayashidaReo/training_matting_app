@@ -13,3 +13,9 @@ class FirebasePostDataKey {
   static String createdAt = 'createdAt';
   static String userName = 'userName';
 }
+
+class FirebaseStorageKey {
+  //Userコレクション関連
+  static String userIconCollection = 'user_icons';
+  static String postImageCollection = 'post_images';
+}

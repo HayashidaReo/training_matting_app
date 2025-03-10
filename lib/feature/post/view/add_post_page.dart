@@ -1,20 +1,22 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matching_app/common_widget/custom_button.dart';
+import 'package:matching_app/common_widget/loading_dialog.dart';
+import 'package:matching_app/common_widget/toast.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/component/breakable_text_form_field.dart';
 import 'package:matching_app/feature/component/un_focus.dart';
+import 'package:matching_app/feature/post/controller/post_controller.dart';
 import 'package:matching_app/function/get_image_from_gallery.dart';
 
 class AddPostPage extends HookConsumerWidget {
-  const AddPostPage({super.key});
+  const AddPostPage({super.key, this.postId});
 
+  final String? postId;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -103,13 +105,23 @@ class AddPostPage extends HookConsumerWidget {
                   CustomButton(
                     text: 'postする',
                     onPressed: () async {
-                      // await _addPost(
-                      //   formKey,
-                      //   ref,
-                      //   selectedImage,
-                      //   bodyController,
-                      //   context,
-                      // );
+                      if (!formKey.currentState!.validate()) {
+                        return;
+                      }
+                      showLoadingDialog('保存中...');
+                      try {
+                        await ref
+                            .read(postControllerProvider.notifier)
+                            .addPost(bodyController.text, selectedImage.value);
+                        showToast('postしました');
+                        if (context.mounted) {
+                          context.pop();
+                        }
+                      } catch (e) {
+                        showToast('エラーが発生しました');
+                      } finally {
+                        hideLoadingDialog();
+                      }
                     },
                   ),
                 ],
@@ -120,51 +132,4 @@ class AddPostPage extends HookConsumerWidget {
       ),
     );
   }
-
-  // TODO: ポスト保存処理を作る
-  //   Future<void> _addPost(
-  //     GlobalKey<FormState> formKey,
-  //     WidgetRef ref,
-  //     ValueNotifier<File?> selectedImage,
-  //     TextEditingController bodyController,
-  //     BuildContext context,
-  //   ) async {
-  //     final Timestamp now = Timestamp.now();
-  //     if (!formKey.currentState!.validate()) {
-  //       return;
-  //     }
-  //     showLoadingDialog('保存中...');
-
-  //     // postIdを生成
-  //     final String postId = ref.read(postRepoProvider).doc().id;
-
-  //     String imageUrl = '';
-  //     // 画像の保存
-  //     if (selectedImage.value != null) {
-  //       imageUrl = await ref
-  //           .read(storageRepoProvider.notifier)
-  //           .uploadImageAndGetUrl(
-  //             collectionName: FirebaseStorageKey.postImageCollection,
-  //             imageFile: selectedImage.value!,
-  //             userId: ref.read(authRepoProvider)!.uid,
-  //           );
-  //     }
-
-  //     // 文章の保存
-  //     final Post addPostData = Post(
-  //       body: bodyController.text,
-  //       userId: FirebaseAuth.instance.currentUser!.uid,
-  //       postId: postId,
-  //       imageUrl: imageUrl,
-  //       createdAt: now,
-  //       updatedAt: now,
-  //     );
-  //     await ref.read(postRepoProvider.notifier).addPost(addPostData);
-  //     hideLoadingDialog();
-  //     showToast('postしました');
-  //     if (context.mounted) {
-  //       context.pop();
-  //     }
-  //     return;
-  //   }
 }

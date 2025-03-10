@@ -18,11 +18,11 @@ class StorageRepo extends _$StorageRepo {
   Future<String> uploadImageAndGetUrl({
     required File imageFile,
     required String folderName,
-    required String userId,
+    required String docId,
   }) async {
     final storageRef = await state
         .ref()
-        .child('$folderName/$userId')
+        .child('$folderName/$docId')
         .putFile(imageFile);
     final downloadUrl = await storageRef.ref.getDownloadURL();
     return downloadUrl;

@@ -7,7 +7,9 @@ import 'package:matching_app/common_widget/custom_button.dart';
 import 'package:matching_app/common_widget/loading_dialog.dart';
 import 'package:matching_app/common_widget/toast.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
+import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/user/controller/storage_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/data_model/userdata.dart';
@@ -264,7 +266,11 @@ class EditMyIconPage extends HookConsumerWidget {
     }
     final downloadUrl = await ref
         .read(storageControllerProvider.notifier)
-        .uploadImageAndGetUrl(folderName: 'users', imageFile: imageFile);
+        .uploadImageAndGetUrl(
+          folderName: FirebaseStorageKey.userIconCollection,
+          imageFile: imageFile,
+          docId: ref.read(currentUserControllerProvider)!.uid,
+        );
     if (context.mounted) {
       await _updateImageUrl(ref, context, downloadUrl);
     }

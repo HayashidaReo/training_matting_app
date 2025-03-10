@@ -4,7 +4,7 @@ import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/feature/post/controller/post_list_top_navigation_controller.dart';
 import 'package:matching_app/feature/post/view/all_post_list_page.dart';
 import 'package:matching_app/feature/post/view/bookmarked_post_list_page.dart';
-import 'package:matching_app/feature/user/view/follow_list_page.dart';
+import 'package:matching_app/feature/post/view/my_post_list_page.dart';
 
 class PostListTopNavigationPage extends ConsumerWidget {
   const PostListTopNavigationPage({super.key});
@@ -38,7 +38,7 @@ class PostListTopNavigationPage extends ConsumerWidget {
                 children: [
                   AllPostListPage(),
                   BookmarkedPostListPage(),
-                  FollowListPage(),
+                  MyPostListPage(),
                 ],
               ),
             ),

@@ -331,6 +331,7 @@ class PostTile extends HookConsumerWidget {
 
   Future<void> _deletePost(WidgetRef ref) async {
     // 画像を削除
+    // TODO: 画像を削除する処理をcontrollerで
     if (postData.imageUrl.isNotEmpty) {
       await FirebaseStorage.instance.refFromURL(postData.imageUrl).delete();
     }

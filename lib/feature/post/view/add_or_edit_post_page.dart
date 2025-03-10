@@ -222,7 +222,7 @@ class AddOrEditPostForm extends HookWidget {
                   ),
                   HeightMarginSizedBox.normal,
                   CustomButton(
-                    text: 'postする',
+                    text: isEditMode ? '更新する' : 'postする',
                     onPressed: () async {
                       if (isEditMode) {
                         await _editPost(
@@ -299,7 +299,7 @@ class AddOrEditPostForm extends HookWidget {
     if (!formKey.currentState!.validate()) {
       return;
     }
-    showLoadingDialog('保存中...');
+    showLoadingDialog('更新中...');
 
     try {
       await ref
@@ -310,7 +310,7 @@ class AddOrEditPostForm extends HookWidget {
             selectedImage.value,
             imageUrl,
           );
-      showToast('postしました');
+      showToast('更新しました');
       if (context.mounted) {
         context.pop();
       }

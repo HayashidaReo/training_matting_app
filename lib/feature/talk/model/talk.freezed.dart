@@ -20,7 +20,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Talk {
 
- String get talkRoomId => throw _privateConstructorUsedError; List<String> get userIds => throw _privateConstructorUsedError; List<TalkHistory> get talkHistory => throw _privateConstructorUsedError;@TimestampConverter() Timestamp get createdAt => throw _privateConstructorUsedError;@TimestampConverter() Timestamp get updatedAt => throw _privateConstructorUsedError;
+ String get talkRoomId=> throw _privateConstructorUsedError; List<String> get userIds=> throw _privateConstructorUsedError; Map<String, TalkHistory> get talkHistory=> throw _privateConstructorUsedError;@TimestampConverter() Timestamp get createdAt=> throw _privateConstructorUsedError;@TimestampConverter() Timestamp get updatedAt=> throw _privateConstructorUsedError;
 /// Create a copy of Talk
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,7 +28,7 @@ mixin _$Talk {
 $TalkCopyWith<Talk> get copyWith => _$TalkCopyWithImpl<Talk>(this as Talk, _$identity);
 
   /// Serializes this Talk to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson()=> throw _privateConstructorUsedError;
 
 
 @override
@@ -53,7 +53,7 @@ abstract mixin class $TalkCopyWith<$Res>  {
   factory $TalkCopyWith(Talk value, $Res Function(Talk) _then) = _$TalkCopyWithImpl;
 @useResult
 $Res call({
- String talkRoomId, List<String> userIds, List<TalkHistory> talkHistory,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
+ String talkRoomId, List<String> userIds, Map<String, TalkHistory> talkHistory,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
 });
 
 
@@ -75,7 +75,7 @@ class _$TalkCopyWithImpl<$Res>
 talkRoomId: null == talkRoomId ? _self.talkRoomId : talkRoomId // ignore: cast_nullable_to_non_nullable
 as String,userIds: null == userIds ? _self.userIds : userIds // ignore: cast_nullable_to_non_nullable
 as List<String>,talkHistory: null == talkHistory ? _self.talkHistory : talkHistory // ignore: cast_nullable_to_non_nullable
-as List<TalkHistory>,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as Map<String, TalkHistory>,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as Timestamp,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as Timestamp,
   ));
@@ -88,7 +88,7 @@ as Timestamp,
 @JsonSerializable()
 
 class _Talk implements Talk {
-   _Talk({required this.talkRoomId, required final  List<String> userIds, required final  List<TalkHistory> talkHistory, @TimestampConverter() required this.createdAt, @TimestampConverter() required this.updatedAt}): _userIds = userIds,_talkHistory = talkHistory;
+   _Talk({required this.talkRoomId, required final  List<String> userIds, required final  Map<String, TalkHistory> talkHistory, @TimestampConverter() required this.createdAt, @TimestampConverter() required this.updatedAt}): _userIds = userIds,_talkHistory = talkHistory;
   factory _Talk.fromJson(Map<String, dynamic> json) => _$TalkFromJson(json);
 
 @override final  String talkRoomId;
@@ -99,11 +99,11 @@ class _Talk implements Talk {
   return EqualUnmodifiableListView(_userIds);
 }
 
- final  List<TalkHistory> _talkHistory;
-@override List<TalkHistory> get talkHistory {
-  if (_talkHistory is EqualUnmodifiableListView) return _talkHistory;
+ final  Map<String, TalkHistory> _talkHistory;
+@override Map<String, TalkHistory> get talkHistory {
+  if (_talkHistory is EqualUnmodifiableMapView) return _talkHistory;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_talkHistory);
+  return EqualUnmodifiableMapView(_talkHistory);
 }
 
 @override@TimestampConverter() final  Timestamp createdAt;
@@ -142,7 +142,7 @@ abstract mixin class _$TalkCopyWith<$Res> implements $TalkCopyWith<$Res> {
   factory _$TalkCopyWith(_Talk value, $Res Function(_Talk) _then) = __$TalkCopyWithImpl;
 @override @useResult
 $Res call({
- String talkRoomId, List<String> userIds, List<TalkHistory> talkHistory,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
+ String talkRoomId, List<String> userIds, Map<String, TalkHistory> talkHistory,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
 });
 
 
@@ -164,7 +164,7 @@ class __$TalkCopyWithImpl<$Res>
 talkRoomId: null == talkRoomId ? _self.talkRoomId : talkRoomId // ignore: cast_nullable_to_non_nullable
 as String,userIds: null == userIds ? _self._userIds : userIds // ignore: cast_nullable_to_non_nullable
 as List<String>,talkHistory: null == talkHistory ? _self._talkHistory : talkHistory // ignore: cast_nullable_to_non_nullable
-as List<TalkHistory>,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as Map<String, TalkHistory>,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as Timestamp,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as Timestamp,
   ));

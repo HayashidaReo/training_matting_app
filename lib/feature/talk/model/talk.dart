@@ -11,7 +11,7 @@ class Talk with _$Talk {
   factory Talk({
     required String talkRoomId,
     required List<String> userIds,
-    required List<TalkHistory> talkHistory,
+    required Map<String, TalkHistory> talkHistory,
     @TimestampConverter() required Timestamp createdAt,
     @TimestampConverter() required Timestamp updatedAt,
   }) = _Talk;

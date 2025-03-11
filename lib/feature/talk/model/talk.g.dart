@@ -9,10 +9,9 @@ part of 'talk.dart';
 _Talk _$TalkFromJson(Map<String, dynamic> json) => _Talk(
   talkRoomId: json['talkRoomId'] as String,
   userIds: (json['userIds'] as List<dynamic>).map((e) => e as String).toList(),
-  talkHistory:
-      (json['talkHistory'] as List<dynamic>)
-          .map((e) => TalkHistory.fromJson(e as Map<String, dynamic>))
-          .toList(),
+  talkHistory: (json['talkHistory'] as Map<String, dynamic>).map(
+    (k, e) => MapEntry(k, TalkHistory.fromJson(e as Map<String, dynamic>)),
+  ),
   createdAt: const TimestampConverter().fromJson(
     json['createdAt'] as Timestamp,
   ),

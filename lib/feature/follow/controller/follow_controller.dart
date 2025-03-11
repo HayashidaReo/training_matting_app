@@ -38,7 +38,7 @@ class FollowController extends _$FollowController {
   }
 
   /// 自分が対象ユーザーをフォローしているかをチェックする
-  Future<bool> getWhetherIFollowTargetUser(
+  Future<bool> getWhetherTargetUserFollowMe(
     String myUserId,
     String targetUserId,
   ) {

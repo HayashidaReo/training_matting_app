@@ -396,18 +396,34 @@ class OtherUserProfilePage extends ConsumerWidget {
       showConfirmDialog(
         context: context,
         text: 'フォローを解除しますか？',
-        onPressed: () {
+        onPressed: () async {
           Navigator.of(context).pop();
           ref
               .read(followControllerProvider.notifier)
               .deleteFollow(targetUserId);
+
+          final bool isFollowedNow = await ref
+              .read(followControllerProvider.notifier)
+              .getWhetherTargetUserFollowMe(
+                ref.read(currentUserControllerProvider)!.uid,
+                targetUserId,
+              );
+          if (isFollowedNow) {
+            // 相互フォローが終わった時
+            ref
+                .read(talkControllerProvider.notifier)
+                .deleteTalkRoom(
+                  ref.read(currentUserControllerProvider)!.uid,
+                  targetUserId,
+                );
+          }
         },
       );
     } else {
       ref.read(followControllerProvider.notifier).createFollow(targetUserId);
       final bool isMutualFollowNow = await ref
           .read(followControllerProvider.notifier)
-          .getWhetherIFollowTargetUser(
+          .getWhetherTargetUserFollowMe(
             ref.read(currentUserControllerProvider)!.uid,
             targetUserId,
           );

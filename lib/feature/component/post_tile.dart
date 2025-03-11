@@ -12,6 +12,7 @@ import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 import 'package:matching_app/feature/bookmark/controller/bookmark_controller.dart';
 import 'package:matching_app/feature/bookmark/model/bookmark.dart';
+import 'package:matching_app/feature/component/icon_image.dart';
 import 'package:matching_app/feature/favorite/controller/favorite_controller.dart';
 import 'package:matching_app/feature/favorite/model/favorite.dart';
 import 'package:matching_app/feature/post/controller/post_controller.dart';
@@ -43,45 +44,7 @@ class PostTile extends HookConsumerWidget {
       child: Column(
         children: [
           ListTile(
-            leading:
-                (postUser.iconImageUrl != '')
-                    ? CachedNetworkImage(
-                      imageUrl: postUser.iconImageUrl,
-                      imageBuilder:
-                          (context, imageProvider) => ClipOval(
-                            child: Image(
-                              image: imageProvider,
-                              width: 44,
-                              height: 44,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) => SizedBox(
-                            width: 44,
-                            height: 44,
-                            child: Center(
-                              child: CircularProgressIndicator(
-                                value: downloadProgress.progress,
-                              ),
-                            ),
-                          ),
-                      errorWidget:
-                          (context, url, error) => SizedBox(
-                            width: 44,
-                            height: 44,
-                            child: Icon(Icons.image_not_supported_rounded),
-                          ),
-                    )
-                    : ClipOval(
-                      child: Image.asset(
-                        'assets/images/default_user_icon.png',
-                        width: 50,
-                        height: 50,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-
+            leading: IconImage(iconImageUrl: postUser.iconImageUrl, size: 44),
             trailing:
                 (isMe)
                     ? PopupMenuButton(

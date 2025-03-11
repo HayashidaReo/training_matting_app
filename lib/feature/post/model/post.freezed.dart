@@ -28,8 +28,7 @@ mixin _$Post {
 $PostCopyWith<Post> get copyWith => _$PostCopyWithImpl<Post>(this as Post, _$identity);
 
   /// Serializes this Post to a JSON map.
-    Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
 
 @override

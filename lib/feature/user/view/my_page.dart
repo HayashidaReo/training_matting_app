@@ -15,6 +15,7 @@ import 'package:matching_app/feature/auth/controller/current_user_controller.dar
 import 'package:matching_app/feature/component/badge_count_widget.dart';
 import 'package:matching_app/feature/component/follow_count_panel.dart';
 import 'package:matching_app/feature/component/hamburger_tile.dart';
+import 'package:matching_app/feature/component/recommend_follow_card.dart';
 import 'package:matching_app/feature/follow/controller/follow_controller.dart';
 import 'package:matching_app/feature/follow/data_model/follow.dart';
 import 'package:matching_app/feature/navigation/controller/bottom_navigation_controller.dart';
@@ -399,7 +400,6 @@ class MyPage extends ConsumerWidget {
                         )
                         .when(
                           data: (List<Follow> onlyIncomingFollowList) {
-                            print(onlyIncomingFollowList);
                             return Column(
                               children: [
                                 HeightMarginSizedBox.small,
@@ -429,114 +429,8 @@ class MyPage extends ConsumerWidget {
                                                   ),
                                                 );
                                               }
-                                              return SizedBox(
-                                                width: 170,
-                                                child: Card(
-                                                  elevation: 3,
-                                                  margin: const EdgeInsets.all(
-                                                    8.0,
-                                                  ),
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          12,
-                                                        ),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.fromLTRB(
-                                                          8,
-                                                          16,
-                                                          8,
-                                                          8,
-                                                        ),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: <Widget>[
-                                                        if (userData
-                                                                .iconImageUrl ==
-                                                            '')
-                                                          InkWell(
-                                                            onTap: () {
-                                                              context.pushNamed(
-                                                                AppRoute
-                                                                    .editMyIcon
-                                                                    .name,
-                                                              );
-                                                            },
-                                                            child: ClipOval(
-                                                              child: Image.asset(
-                                                                'assets/images/default_user_icon.png',
-                                                                width: 100,
-                                                                height: 100,
-                                                                fit:
-                                                                    BoxFit
-                                                                        .cover,
-                                                              ),
-                                                            ),
-                                                          )
-                                                        else
-                                                          ClipOval(
-                                                            child: CachedNetworkImage(
-                                                              imageUrl:
-                                                                  userData
-                                                                      .iconImageUrl,
-                                                              width: 100,
-                                                              height: 100,
-                                                              fit: BoxFit.cover,
-                                                              progressIndicatorBuilder: (
-                                                                context,
-                                                                url,
-                                                                downloadProgress,
-                                                              ) {
-                                                                return SizedBox(
-                                                                  width: 100,
-                                                                  height: 100,
-                                                                  child: Center(
-                                                                    child: CircularProgressIndicator(
-                                                                      value:
-                                                                          downloadProgress
-                                                                              .progress,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                              errorWidget: (
-                                                                context,
-                                                                url,
-                                                                error,
-                                                              ) {
-                                                                return ClipOval(
-                                                                  child: Image.asset(
-                                                                    'assets/images/default_user_icon.png',
-                                                                    fit:
-                                                                        BoxFit
-                                                                            .cover,
-                                                                    width: 100,
-                                                                    height: 100,
-                                                                  ),
-                                                                );
-                                                              },
-                                                            ),
-                                                          ),
-                                                        HeightMarginSizedBox
-                                                            .small,
-                                                        Text(
-                                                          userData.userName,
-                                                          style: TextStyle(
-                                                            fontSize:
-                                                                FontSize.small,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
+                                              return RecommendFollowCard(
+                                                userData: userData,
                                               );
                                             },
                                             error: (error, _) {

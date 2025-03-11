@@ -48,3 +48,37 @@ user2UserId: targetUserId
 isFollow1To2: true
 isFollow2To1: false
 
+
+# talk構造
+talksのDB設計
+
+key: talkRoomId
+talkRoomId: userId1_userId2
+userIds: [userId1, userId2]
+createdAt
+updatedAt
+talkHistory/ talkId{
+talkId: 自動生成
+timeStamp: 
+talker: userId
+message: 
+imageUrl:
+},
+
+roomの作成方法
+相互フォローをトリガーに自動作成。
+
+roomの削除方法
+相互フォロー解除をトリガーに自動削除。
+
+roomの特定方法
+話したい相手と自分のIdを用意して、userIdsに２つとも含まれているroomを探す
+
+トークの送信方法
+talkHistoryに自動生成のkeyを作成してmapで保存
+
+トークの表示方法
+listTileで表示させて、
+・timeStampでソート
+・talker = myUserIdなら右側、違うなら左側にメッセージを配置する
+・もしimageUrl != '' ならメッセージを表示した後に画像も表示する

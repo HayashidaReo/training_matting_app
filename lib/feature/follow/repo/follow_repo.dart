@@ -57,6 +57,7 @@ class FollowRepo extends _$FollowRepo {
   Stream<List<Follow>> watchAllMyFollowingUserList(String myUserId) {
     return state
         .where(FirebaseFollowDataKey.followingUserId, isEqualTo: myUserId)
+        // .orderBy(FirebaseFollowDataKey.updateAt, descending: true)
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
@@ -65,6 +66,7 @@ class FollowRepo extends _$FollowRepo {
   Stream<List<Follow>> watchAllFollowMeUserList(String myUserId) {
     return state
         .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
+        // .orderBy(FirebaseFollowDataKey.updateAt, descending: true)
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
@@ -73,7 +75,9 @@ class FollowRepo extends _$FollowRepo {
   Stream<List<Follow>> watchAllOnlyIncomingFollowUserList(String myUserId) {
     // 自分をフォローしている全てのフォロー情報を取得
     return state
+        // フォローされている人が自分
         .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
+        // .orderBy(FirebaseFollowDataKey.updateAt, descending: true)
         .snapshots()
         .asyncMap((snapshot) async {
           final follows = snapshot.docs.map((doc) => doc.data()).toList();
@@ -92,10 +96,10 @@ class FollowRepo extends _$FollowRepo {
                     .where(
                       // フォローしている人が自分でない
                       FirebaseFollowDataKey.followingUserId,
-                      isNotEqualTo: myUserId,
+                      isEqualTo: myUserId,
                     )
                     .get();
-            if (reverseQuery.docs.isNotEmpty) {
+            if (reverseQuery.docs.isEmpty) {
               mutualFollows.add(follow);
             }
           }
@@ -109,6 +113,7 @@ class FollowRepo extends _$FollowRepo {
     // 自分をフォローしている全てのフォロー情報を取得
     return state
         .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
+        // .orderBy(FirebaseFollowDataKey.updateAt, descending: true)
         .snapshots()
         .asyncMap((snapshot) async {
           final follows = snapshot.docs.map((doc) => doc.data()).toList();

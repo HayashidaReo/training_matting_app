@@ -399,6 +399,7 @@ class MyPage extends ConsumerWidget {
                         )
                         .when(
                           data: (List<Follow> onlyIncomingFollowList) {
+                            print(onlyIncomingFollowList);
                             return Column(
                               children: [
                                 HeightMarginSizedBox.small,
@@ -415,7 +416,7 @@ class MyPage extends ConsumerWidget {
                                       return ref
                                           .watch(
                                             watchUserDataControllerProvider(
-                                              followData.followerUserId,
+                                              followData.followingUserId,
                                             ),
                                           )
                                           .when(

@@ -395,7 +395,7 @@ class OtherUserProfilePage extends ConsumerWidget {
     if (isFollowing) {
       showConfirmDialog(
         context: context,
-        text: 'フォローを解除しますか？',
+        text: 'フォローを解除しますか？\n解除するとメッセージ機能が使用できなくなり、履歴も削除されます。',
         onPressed: () async {
           Navigator.of(context).pop();
           ref

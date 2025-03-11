@@ -36,6 +36,16 @@ class FollowController extends _$FollowController {
     final String followId = '${myUid}_$targetUserId';
     await ref.read(followRepoProvider.notifier).deleteFollow(followId);
   }
+
+  /// 自分が対象ユーザーをフォローしているかをチェックする
+  Future<bool> getWhetherIFollowTargetUser(
+    String myUserId,
+    String targetUserId,
+  ) {
+    return ref
+        .read(followRepoProvider.notifier)
+        .getWhetherTargetUserFollowMe(myUserId, targetUserId);
+  }
 }
 
 @riverpod

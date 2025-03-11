@@ -23,4 +23,9 @@ class TalkRepo extends _$TalkRepo {
   Future<void> createTalkRoom(Talk addTalkData) async {
     await state.doc(addTalkData.talkRoomId).set(addTalkData);
   }
+
+  /// TalkRoomを削除
+  Future<void> deleteTalkRoom(String talkRoomId) async {
+    await state.doc(talkRoomId).delete();
+  }
 }

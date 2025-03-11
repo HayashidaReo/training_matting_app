@@ -13,6 +13,7 @@ import 'package:matching_app/feature/auth/controller/current_user_controller.dar
 import 'package:matching_app/feature/component/follow_count_panel.dart';
 import 'package:matching_app/feature/follow/controller/follow_controller.dart';
 import 'package:matching_app/feature/follow/model/follow.dart';
+import 'package:matching_app/feature/talk/controller/talk_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/model/userdata.dart';
 
@@ -224,7 +225,6 @@ class OtherUserProfilePage extends ConsumerWidget {
                         ],
                       ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                       child: Row(
@@ -391,7 +391,7 @@ class OtherUserProfilePage extends ConsumerWidget {
     BuildContext context,
     bool isFollowing,
     WidgetRef ref,
-  ) {
+  ) async {
     if (isFollowing) {
       showConfirmDialog(
         context: context,
@@ -405,7 +405,23 @@ class OtherUserProfilePage extends ConsumerWidget {
       );
     } else {
       ref.read(followControllerProvider.notifier).createFollow(targetUserId);
+      final bool isMutualFollowNow = await ref
+          .read(followControllerProvider.notifier)
+          .getWhetherIFollowTargetUser(
+            ref.read(currentUserControllerProvider)!.uid,
+            targetUserId,
+          );
+      if (isMutualFollowNow) {
+        // 相互フォローになったとき
+        ref
+            .read(talkControllerProvider.notifier)
+            .createTalkRoom(
+              ref.read(currentUserControllerProvider)!.uid,
+              targetUserId,
+            );
+      }
+
+      return;
     }
-    return;
   }
 }

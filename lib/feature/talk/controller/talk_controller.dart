@@ -13,12 +13,16 @@ class TalkController extends _$TalkController {
   }
 
   /// トークルームを作成
-  Future<void> createTalkRoom(String myUserId, String targetUserid) async {
+  Future<void> createTalkRoom(String myUserId, String targetUserId) async {
     state = const AsyncLoading();
     final Timestamp now = Timestamp.now();
+    final List<String> userIds = [myUserId, targetUserId];
+    userIds.sort();
+    final talkRoomId = '${userIds[0]}_${userIds[1]}';
+
     Talk addTalkData = Talk(
-      talkRoomId: '${myUserId}_$targetUserid',
-      userIds: [myUserId, targetUserid],
+      talkRoomId: talkRoomId,
+      userIds: userIds,
       talkHistory: {},
       createdAt: now,
       updatedAt: now,
@@ -26,5 +30,13 @@ class TalkController extends _$TalkController {
 
     await ref.read(talkRepoProvider.notifier).createTalkRoom(addTalkData);
     state = const AsyncData(null);
+  }
+
+  /// TalkRoomを削除
+  Future<void> deleteTalkRoom(String myUserId, String targetUserId) async {
+    final List<String> userIds = [myUserId, targetUserId];
+    userIds.sort(); // アルファベット順にソート
+    final talkRoomId = '${userIds[0]}_${userIds[1]}';
+    ref.read(talkRepoProvider.notifier).deleteTalkRoom(talkRoomId);
   }
 }

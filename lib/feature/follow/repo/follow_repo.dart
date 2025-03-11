@@ -42,6 +42,18 @@ class FollowRepo extends _$FollowRepo {
   }
 
   /// 対象ユーザー(targetUser)が自分(myUser)をフォローしているかをチェックする
+  Future<bool> getWhetherTargetUserFollowMe(
+    String myUserId,
+    String targetUserId,
+  ) async {
+    return state
+        .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
+        .where(FirebaseFollowDataKey.followingUserId, isEqualTo: targetUserId)
+        .get()
+        .then((snapshot) => snapshot.docs.isNotEmpty);
+  }
+
+  /// 対象ユーザー(targetUser)が自分(myUser)をフォローしているかをチェックする
   Stream<bool> watchWhetherTargetUserFollowMe(
     String myUserId,
     String targetUserId,

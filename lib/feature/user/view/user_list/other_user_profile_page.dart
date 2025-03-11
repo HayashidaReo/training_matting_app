@@ -446,6 +446,13 @@ class OtherUserProfilePage extends ConsumerWidget {
               ref.read(currentUserControllerProvider)!.uid,
               targetUserId,
             );
+        if (context.mounted) {
+          showCloseOnlyDialog(
+            context,
+            '🎊マッチング成立🎊',
+            'おめでとうございます！\nマッチングしました！早速メッセージを送りましょう！',
+          );
+        }
       }
 
       return;

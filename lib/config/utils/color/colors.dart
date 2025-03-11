@@ -6,6 +6,7 @@ class DefaultColors {
   final Color accentColor = Colors.pinkAccent;
 
   final Color blueTextColor = Colors.blue;
+  final Color unavailableFrontGreyColor = Colors.grey;
 
   final Color mainBackColor = Colors.white;
   final Color mainTextColor = Colors.pink;

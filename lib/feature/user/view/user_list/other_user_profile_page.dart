@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,6 +10,7 @@ import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/component/follow_count_panel.dart';
+import 'package:matching_app/feature/component/icon_image.dart';
 import 'package:matching_app/feature/follow/controller/follow_controller.dart';
 import 'package:matching_app/feature/follow/model/follow.dart';
 import 'package:matching_app/feature/talk/controller/talk_controller.dart';
@@ -49,59 +49,10 @@ class OtherUserProfilePage extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          if (userData.iconImageUrl == '')
-                            InkWell(
-                              onTap: () {
-                                context.pushNamed(AppRoute.editMyIcon.name);
-                              },
-                              child: ClipOval(
-                                child: Image.asset(
-                                  'assets/images/default_user_icon.png',
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            )
-                          else
-                            InkWell(
-                              onTap: () {
-                                context.pushNamed(AppRoute.editMyIcon.name);
-                              },
-                              child: ClipOval(
-                                child: CachedNetworkImage(
-                                  imageUrl: userData.iconImageUrl,
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                  progressIndicatorBuilder: (
-                                    context,
-                                    url,
-                                    downloadProgress,
-                                  ) {
-                                    return SizedBox(
-                                      width: 100,
-                                      height: 100,
-                                      child: Center(
-                                        child: CircularProgressIndicator(
-                                          value: downloadProgress.progress,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  errorWidget: (context, url, error) {
-                                    return ClipOval(
-                                      child: Image.asset(
-                                        'assets/images/default_user_icon.png',
-                                        fit: BoxFit.cover,
-                                        width: 100,
-                                        height: 100,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
+                          IconImage(
+                            iconImageUrl: userData.iconImageUrl,
+                            size: 100,
+                          ),
                           WidthMarginSizedBox.normal,
                           Expanded(
                             child: Column(

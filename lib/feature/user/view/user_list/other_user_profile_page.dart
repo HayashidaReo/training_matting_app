@@ -141,6 +141,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                                   followingUserList.length,
                                               typeName: 'フォロー',
                                               tabIndex: 0,
+                                              targetUserId: targetUserId,
                                             );
                                           },
                                           error: (error, _) {
@@ -148,6 +149,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                               followCount: 0,
                                               typeName: 'フォロー',
                                               tabIndex: 0,
+                                              targetUserId: targetUserId,
                                             );
                                           },
                                           loading: () {
@@ -169,6 +171,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                                   followingUserList.length,
                                               typeName: 'フォロワー',
                                               tabIndex: 1,
+                                              targetUserId: targetUserId,
                                             );
                                           },
                                           error: (error, _) {
@@ -176,6 +179,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                               followCount: 0,
                                               typeName: 'フォロワー',
                                               tabIndex: 1,
+                                              targetUserId: targetUserId,
                                             );
                                           },
                                           loading: () {
@@ -197,6 +201,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                                   followingUserList.length,
                                               typeName: '相互フォロー',
                                               tabIndex: 2,
+                                              targetUserId: targetUserId,
                                             );
                                           },
                                           error: (error, _) {
@@ -204,6 +209,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                               followCount: 0,
                                               typeName: '相互フォロー',
                                               tabIndex: 2,
+                                              targetUserId: targetUserId,
                                             );
                                           },
                                           loading: () {

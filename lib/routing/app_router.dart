@@ -144,7 +144,13 @@ GoRouter appRouter(ref) {
                 path: AppRoute.followList.path,
                 name: AppRoute.followList.name,
                 pageBuilder: (context, state) {
-                  return MaterialPage(child: FollowListTopNavigationPage());
+                  final targetUserId =
+                      state.uri.queryParameters['targetUserId'] as String;
+                  return MaterialPage(
+                    child: FollowListTopNavigationPage(
+                      targetUserId: targetUserId,
+                    ),
+                  );
                 },
               ),
               GoRoute(

@@ -1,21 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/component/user_list_tile.dart';
 import 'package:matching_app/feature/follow/controller/follow_controller.dart';
 import 'package:matching_app/feature/follow/data_model/follow.dart';
-import 'package:matching_app/feature/user/controller/follow_list_top_navigation_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 
 class FollowerListPage extends ConsumerWidget {
-  const FollowerListPage({super.key});
+  const FollowerListPage({super.key, required this.targetUserId});
 
+  final String targetUserId;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String targetUserId = ref.read(currentUserControllerProvider)!.uid;
-    final int selectedTabIndex = ref.watch(
-      followListTopNavigationControllerProvider,
-    );
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),

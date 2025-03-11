@@ -208,6 +208,12 @@ class MyPage extends ConsumerWidget {
                                                   followingUserList.length,
                                               typeName: 'フォロー',
                                               tabIndex: 0,
+                                              targetUserId:
+                                                  ref
+                                                      .read(
+                                                        currentUserControllerProvider,
+                                                      )!
+                                                      .uid,
                                             );
                                           },
                                           error: (error, _) {
@@ -215,6 +221,12 @@ class MyPage extends ConsumerWidget {
                                               followCount: 0,
                                               typeName: 'フォロー',
                                               tabIndex: 0,
+                                              targetUserId:
+                                                  ref
+                                                      .read(
+                                                        currentUserControllerProvider,
+                                                      )!
+                                                      .uid,
                                             );
                                           },
                                           loading: () {
@@ -240,6 +252,12 @@ class MyPage extends ConsumerWidget {
                                                   followingUserList.length,
                                               typeName: 'フォロワー',
                                               tabIndex: 1,
+                                              targetUserId:
+                                                  ref
+                                                      .read(
+                                                        currentUserControllerProvider,
+                                                      )!
+                                                      .uid,
                                             );
                                           },
                                           error: (error, _) {
@@ -247,6 +265,12 @@ class MyPage extends ConsumerWidget {
                                               followCount: 0,
                                               typeName: 'フォロワー',
                                               tabIndex: 1,
+                                              targetUserId:
+                                                  ref
+                                                      .read(
+                                                        currentUserControllerProvider,
+                                                      )!
+                                                      .uid,
                                             );
                                           },
                                           loading: () {
@@ -272,6 +296,12 @@ class MyPage extends ConsumerWidget {
                                                   followingUserList.length,
                                               typeName: '相互フォロー',
                                               tabIndex: 2,
+                                              targetUserId:
+                                                  ref
+                                                      .read(
+                                                        currentUserControllerProvider,
+                                                      )!
+                                                      .uid,
                                             );
                                           },
                                           error: (error, _) {
@@ -279,6 +309,12 @@ class MyPage extends ConsumerWidget {
                                               followCount: 0,
                                               typeName: '相互フォロー',
                                               tabIndex: 2,
+                                              targetUserId:
+                                                  ref
+                                                      .read(
+                                                        currentUserControllerProvider,
+                                                      )!
+                                                      .uid,
                                             );
                                           },
                                           loading: () {

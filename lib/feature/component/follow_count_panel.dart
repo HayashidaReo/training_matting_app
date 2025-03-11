@@ -11,11 +11,13 @@ class FollowCountPanel extends ConsumerWidget {
     required this.followCount,
     required this.typeName,
     required this.tabIndex,
+    required this.targetUserId,
   });
 
   final int followCount;
   final String typeName;
   final int tabIndex;
+  final String targetUserId;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
@@ -23,7 +25,10 @@ class FollowCountPanel extends ConsumerWidget {
         ref
             .read(followListTopNavigationControllerProvider.notifier)
             .updateIndex(tabIndex);
-        context.pushNamed(AppRoute.followList.name);
+        context.pushNamed(
+          AppRoute.followList.name,
+          queryParameters: {'targetUserId': targetUserId},
+        );
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -7,8 +7,9 @@ import 'package:matching_app/feature/follow/view/follower_list_page.dart';
 import 'package:matching_app/feature/follow/view/mutual_follow_list_page.dart';
 
 class FollowListTopNavigationPage extends ConsumerWidget {
-  const FollowListTopNavigationPage({super.key});
+  const FollowListTopNavigationPage({super.key, required this.targetUserId});
 
+  final String targetUserId;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return DefaultTabController(
@@ -36,9 +37,9 @@ class FollowListTopNavigationPage extends ConsumerWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  FollowListPage(),
-                  FollowerListPage(),
-                  MutualFollowListPage(),
+                  FollowListPage(targetUserId: targetUserId),
+                  FollowerListPage(targetUserId: targetUserId),
+                  MutualFollowListPage(targetUserId: targetUserId),
                 ],
               ),
             ),

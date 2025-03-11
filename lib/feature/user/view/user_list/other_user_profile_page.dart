@@ -312,20 +312,19 @@ class OtherUserProfilePage extends ConsumerWidget {
                                         return const CircularProgressIndicator();
                                       },
                                       data: (bool isFollowed) {
-                                        // TODO: ここでも自分がフォローして相互になってもメッセージのテキストが変わらない。
-                                        // TODO: なので、サブコレクションに変更しましょう！
-                                        print(isFollowed);
                                         return SizedBox(
                                           width: 150,
                                           height: 40,
                                           child: CustomButton(
                                             text:
-                                                (isFollowed && isFollowed)
+                                                (isFollowing && isFollowed)
                                                     ? 'メッセージ'
                                                     : '使えない',
                                             onPressed: () {
                                               // TODO: メッセージ機能の実装
                                             },
+                                            isColorReversed:
+                                                !(isFollowing && isFollowed),
                                           ),
                                         );
                                       },

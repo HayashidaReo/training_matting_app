@@ -15,7 +15,7 @@ class FirebasePostDataKey {
 }
 
 class FirebaseBookmarkDataKey {
-  //Postコレクション関連
+  //Bookmarkコレクション関連
   static String bookmarkCollection = 'bookmarks';
   static String postId = 'postId';
   static String userId = 'userId';
@@ -24,7 +24,7 @@ class FirebaseBookmarkDataKey {
 }
 
 class FirebaseFavoriteDataKey {
-  //Postコレクション関連
+  //Favoriteコレクション関連
   static String favoriteCollection = 'favorites';
   static String postId = 'postId';
   static String userId = 'userId';
@@ -37,6 +37,26 @@ class FirebaseFollowDataKey {
   static String followCollection = 'follows';
   static String followerUserId = 'followerUserId';
   static String followingUserId = 'followingUserId';
+  static String createdAt = 'createdAt';
+  static String updateAt = 'updateAt';
+}
+
+class FirebaseTalkDataKey {
+  //Talkコレクション関連
+  static String talkCollection = 'talks';
+  static String talkRoomId = 'talkRoomId';
+  static String userIds = 'userIds';
+  static String talkHistory = 'talkHistory';
+  static String createdAt = 'createdAt';
+  static String updateAt = 'updateAt';
+}
+
+class FirebaseTalkHistoryDataKey {
+  //TalkHistoryコレクション関連
+  static String talkId = 'talkId';
+  static String talkerUserId = 'talkerUserId';
+  static String message = 'message';
+  static String imageUrl = 'imageUrl';
   static String createdAt = 'createdAt';
   static String updateAt = 'updateAt';
 }

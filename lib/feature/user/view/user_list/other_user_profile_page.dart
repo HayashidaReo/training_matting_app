@@ -332,11 +332,22 @@ class OtherUserProfilePage extends ConsumerWidget {
                                             text: 'メッセージ',
 
                                             onPressed: () {
-                                              showCloseOnlyDialog(
-                                                context,
-                                                '使用できません',
-                                                'メッセージ機能は相互フォローの場合のみ使用できます。',
-                                              );
+                                              if (isFollowing && isFollowed) {
+                                                context.pushNamed(
+                                                  AppRoute.talkRoom.name,
+                                                  queryParameters: {
+                                                    'targetUserId':
+                                                        targetUserId,
+                                                  },
+                                                );
+                                                return;
+                                              } else {
+                                                showCloseOnlyDialog(
+                                                  context,
+                                                  '使用できません',
+                                                  'メッセージ機能は相互フォローの場合のみ使用できます。',
+                                                );
+                                              }
                                             },
                                             isColorReversed:
                                                 !(isFollowing && isFollowed),

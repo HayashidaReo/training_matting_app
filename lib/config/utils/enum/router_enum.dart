@@ -7,6 +7,7 @@ enum AppRoute {
   userList,
   otherUserProfile,
   talkList,
+  talkRoom,
   myPage,
   editMyProfile,
   editMyIcon,
@@ -33,6 +34,8 @@ extension AppRouteExtention on AppRoute {
         return '/otherUserProfile';
       case AppRoute.talkList:
         return '/talkList';
+      case AppRoute.talkRoom:
+        return '/talkRoom';
       case AppRoute.myPage:
         return '/myPage';
       case AppRoute.editMyIcon:

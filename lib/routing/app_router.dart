@@ -9,6 +9,7 @@ import 'package:matching_app/feature/navigation/view/bottom_navigation_page.dart
 import 'package:matching_app/feature/post/view/add_or_edit_post_page.dart';
 import 'package:matching_app/feature/post/view/post_list_top_navigation.dart';
 import 'package:matching_app/feature/talk/view/talk_list_page.dart';
+import 'package:matching_app/feature/talk/view/talk_room_page.dart';
 import 'package:matching_app/feature/user/view/edit/edit_email_page.dart';
 import 'package:matching_app/feature/user/view/edit/edit_my_icon_page.dart';
 import 'package:matching_app/feature/user/view/edit/edit_my_profile_page.dart';
@@ -131,7 +132,22 @@ GoRouter appRouter(ref) {
             pageBuilder: (context, state) {
               return const NoTransitionPage(child: TalkListPage());
             },
+            routes: [
+              GoRoute(
+                parentNavigatorKey: rootNavigatorKey,
+                path: AppRoute.talkRoom.path,
+                name: AppRoute.talkRoom.name,
+                pageBuilder: (context, state) {
+                  final targetUserId =
+                      state.uri.queryParameters['targetUserId'] as String;
+                  return MaterialPage(
+                    child: TalkRoomPage(targetUserId: targetUserId),
+                  );
+                },
+              ),
+            ],
           ),
+
           GoRoute(
             path: AppRoute.myPage.path,
             name: AppRoute.myPage.name,

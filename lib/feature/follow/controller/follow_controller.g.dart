@@ -950,7 +950,7 @@ class _WatchAllMutualFollowUserListControllerProviderElement
       (origin as WatchAllMutualFollowUserListControllerProvider).myUserId;
 }
 
-String _$followControllerHash() => r'ba472f0759e9b57f9fe07c95220449d5e16b3a22';
+String _$followControllerHash() => r'85bd9554462b2d41f9b2a65a3c2c861c86f199a3';
 
 /// See also [FollowController].
 @ProviderFor(FollowController)

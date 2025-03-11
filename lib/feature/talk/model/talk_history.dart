@@ -10,6 +10,7 @@ class TalkHistory with _$TalkHistory {
   factory TalkHistory({
     required String talkId,
     required String talkerUserId,
+    required String isOpened,
     required String message,
     required String imageUrl,
     @TimestampConverter() required Timestamp createdAt,

@@ -6,7 +6,7 @@ part of 'talk_repo.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$talkRepoHash() => r'1f11fdf3ee2a40a42b4e63e9f385c71e3c939721';
+String _$talkRepoHash() => r'4b301bd3ed5e23ce278b57e4600db38753aec400';
 
 /// See also [TalkRepo].
 @ProviderFor(TalkRepo)

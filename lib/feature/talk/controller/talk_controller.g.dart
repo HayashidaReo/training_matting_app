@@ -6,7 +6,7 @@ part of 'talk_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$talkControllerHash() => r'd2c70883397320c93f72ed1f64ee0ed12314a522';
+String _$talkControllerHash() => r'57069f95f059bb0ce85645cc4c71c4e19f4e165b';
 
 /// See also [TalkController].
 @ProviderFor(TalkController)

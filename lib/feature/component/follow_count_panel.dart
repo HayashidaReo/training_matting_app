@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
+import 'package:matching_app/feature/user/controller/follow_list_top_navigation_controller.dart';
 
-class FollowCountPanel extends StatelessWidget {
+class FollowCountPanel extends ConsumerWidget {
   const FollowCountPanel({
     super.key,
     required this.followCount,
     required this.typeName,
+    required this.tabIndex,
   });
 
   final int followCount;
   final String typeName;
+  final int tabIndex;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {
+        ref
+            .read(followListTopNavigationControllerProvider.notifier)
+            .updateIndex(tabIndex);
         context.pushNamed(AppRoute.followList.name);
       },
       child: Column(

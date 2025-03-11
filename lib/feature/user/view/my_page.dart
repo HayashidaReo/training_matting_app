@@ -207,12 +207,14 @@ class MyPage extends ConsumerWidget {
                                               followCount:
                                                   followingUserList.length,
                                               typeName: 'フォロー',
+                                              tabIndex: 0,
                                             );
                                           },
                                           error: (error, _) {
                                             return FollowCountPanel(
                                               followCount: 0,
                                               typeName: 'フォロー',
+                                              tabIndex: 0,
                                             );
                                           },
                                           loading: () {
@@ -237,12 +239,14 @@ class MyPage extends ConsumerWidget {
                                               followCount:
                                                   followingUserList.length,
                                               typeName: 'フォロワー',
+                                              tabIndex: 1,
                                             );
                                           },
                                           error: (error, _) {
                                             return FollowCountPanel(
                                               followCount: 0,
                                               typeName: 'フォロワー',
+                                              tabIndex: 1,
                                             );
                                           },
                                           loading: () {
@@ -267,12 +271,14 @@ class MyPage extends ConsumerWidget {
                                               followCount:
                                                   followingUserList.length,
                                               typeName: '相互フォロー',
+                                              tabIndex: 2,
                                             );
                                           },
                                           error: (error, _) {
                                             return FollowCountPanel(
                                               followCount: 0,
                                               typeName: '相互フォロー',
+                                              tabIndex: 2,
                                             );
                                           },
                                           loading: () {

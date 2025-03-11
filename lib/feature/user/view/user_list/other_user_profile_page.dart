@@ -288,16 +288,48 @@ class OtherUserProfilePage extends ConsumerWidget {
                                     isColorReversed: isFollowing,
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 150,
-                                  height: 40,
-                                  child: CustomButton(
-                                    text: 'メッセージ',
-                                    onPressed: () {
-                                      // TODO: メッセージ機能の実装
-                                    },
-                                  ),
-                                ),
+                                ref
+                                    .watch(
+                                      watchWhetherTargetUserFollowMeControllerProvider(
+                                        ref
+                                            .read(
+                                              currentUserControllerProvider,
+                                            )!
+                                            .uid,
+                                        targetUserId,
+                                      ),
+                                    )
+                                    .when(
+                                      error: (error, _) {
+                                        return Text(
+                                          'エラーが発生しました。再度お試しください。',
+                                          style: TextStyle(
+                                            fontSize: FontSize.large,
+                                          ),
+                                        );
+                                      },
+                                      loading: () {
+                                        return const CircularProgressIndicator();
+                                      },
+                                      data: (bool isFollowed) {
+                                        // TODO: ここでも自分がフォローして相互になってもメッセージのテキストが変わらない。
+                                        // TODO: なので、サブコレクションに変更しましょう！
+                                        print(isFollowed);
+                                        return SizedBox(
+                                          width: 150,
+                                          height: 40,
+                                          child: CustomButton(
+                                            text:
+                                                (isFollowed && isFollowed)
+                                                    ? 'メッセージ'
+                                                    : '使えない',
+                                            onPressed: () {
+                                              // TODO: メッセージ機能の実装
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    ),
                               ],
                             );
                           },

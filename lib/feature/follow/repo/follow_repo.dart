@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:matching_app/config/firebase/firebase_instance_provider.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
-import 'package:matching_app/feature/follow/data_model/follow.dart';
+import 'package:matching_app/feature/follow/model/follow.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'follow_repo.g.dart';

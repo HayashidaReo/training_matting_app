@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
-import 'package:matching_app/feature/post/data_model/post.dart';
+import 'package:matching_app/feature/post/model/post.dart';
 import 'package:matching_app/feature/post/repo/post_repo.dart';
 import 'package:matching_app/feature/user/controller/storage_controller.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

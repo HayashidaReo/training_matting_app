@@ -15,9 +15,9 @@ import 'package:matching_app/feature/bookmark/model/bookmark.dart';
 import 'package:matching_app/feature/favorite/controller/favorite_controller.dart';
 import 'package:matching_app/feature/favorite/model/favorite.dart';
 import 'package:matching_app/feature/post/controller/post_controller.dart';
-import 'package:matching_app/feature/post/data_model/post.dart';
+import 'package:matching_app/feature/post/model/post.dart';
 import 'package:matching_app/feature/user/controller/storage_controller.dart';
-import 'package:matching_app/feature/user/data_model/userdata.dart';
+import 'package:matching_app/feature/user/model/userdata.dart';
 
 class PostTile extends HookConsumerWidget {
   PostTile({

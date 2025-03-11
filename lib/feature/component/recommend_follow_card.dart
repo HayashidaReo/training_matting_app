@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
-import 'package:matching_app/feature/user/data_model/userdata.dart';
+import 'package:matching_app/feature/user/model/userdata.dart';
 
 class RecommendFollowCard extends StatelessWidget {
   const RecommendFollowCard({super.key, required this.userData});

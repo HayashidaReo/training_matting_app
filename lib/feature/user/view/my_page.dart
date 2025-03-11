@@ -17,10 +17,10 @@ import 'package:matching_app/feature/component/follow_count_panel.dart';
 import 'package:matching_app/feature/component/hamburger_tile.dart';
 import 'package:matching_app/feature/component/recommend_follow_card.dart';
 import 'package:matching_app/feature/follow/controller/follow_controller.dart';
-import 'package:matching_app/feature/follow/data_model/follow.dart';
+import 'package:matching_app/feature/follow/model/follow.dart';
 import 'package:matching_app/feature/navigation/controller/bottom_navigation_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
-import 'package:matching_app/feature/user/data_model/userdata.dart';
+import 'package:matching_app/feature/user/model/userdata.dart';
 
 class MyPage extends ConsumerWidget {
   const MyPage({super.key});

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:matching_app/config/firebase/firebase_instance_provider.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
-import 'package:matching_app/feature/user/data_model/userdata.dart';
+import 'package:matching_app/feature/user/model/userdata.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_repo.g.dart';

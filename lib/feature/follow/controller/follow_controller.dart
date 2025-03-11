@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
-import 'package:matching_app/feature/follow/data_model/follow.dart';
+import 'package:matching_app/feature/follow/model/follow.dart';
 import 'package:matching_app/feature/follow/repo/follow_repo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

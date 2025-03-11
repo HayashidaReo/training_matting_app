@@ -12,9 +12,9 @@ import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/component/follow_count_panel.dart';
 import 'package:matching_app/feature/follow/controller/follow_controller.dart';
-import 'package:matching_app/feature/follow/data_model/follow.dart';
+import 'package:matching_app/feature/follow/model/follow.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
-import 'package:matching_app/feature/user/data_model/userdata.dart';
+import 'package:matching_app/feature/user/model/userdata.dart';
 
 class OtherUserProfilePage extends ConsumerWidget {
   const OtherUserProfilePage({super.key, required this.targetUserId});

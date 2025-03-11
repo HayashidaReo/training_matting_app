@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:matching_app/feature/component/user_list_tile.dart';
 import 'package:matching_app/feature/follow/controller/follow_controller.dart';
-import 'package:matching_app/feature/follow/data_model/follow.dart';
+import 'package:matching_app/feature/follow/model/follow.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 
 class FollowListPage extends ConsumerWidget {

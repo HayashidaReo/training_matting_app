@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/auth/repo/auth_repo.dart';
-import 'package:matching_app/feature/user/data_model/userdata.dart';
+import 'package:matching_app/feature/user/model/userdata.dart';
 import 'package:matching_app/feature/user/repo/user_repo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

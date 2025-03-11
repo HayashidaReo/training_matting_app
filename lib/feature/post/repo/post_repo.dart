@@ -4,7 +4,7 @@ import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/bookmark/controller/bookmark_controller.dart';
 import 'package:matching_app/feature/favorite/controller/favorite_controller.dart';
-import 'package:matching_app/feature/post/data_model/post.dart';
+import 'package:matching_app/feature/post/model/post.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'post_repo.g.dart';

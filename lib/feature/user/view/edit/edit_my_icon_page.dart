@@ -12,7 +12,7 @@ import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/user/controller/storage_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
-import 'package:matching_app/feature/user/data_model/userdata.dart';
+import 'package:matching_app/feature/user/model/userdata.dart';
 import 'package:matching_app/function/get_image_from_gallery.dart';
 
 class EditMyIconPage extends HookConsumerWidget {

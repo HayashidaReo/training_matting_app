@@ -8,9 +8,9 @@ import 'package:matching_app/feature/bookmark/controller/bookmark_controller.dar
 import 'package:matching_app/feature/bookmark/model/bookmark.dart';
 import 'package:matching_app/feature/component/post_tile.dart';
 import 'package:matching_app/feature/post/controller/post_controller.dart';
-import 'package:matching_app/feature/post/data_model/post.dart';
+import 'package:matching_app/feature/post/model/post.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
-import 'package:matching_app/feature/user/data_model/userdata.dart';
+import 'package:matching_app/feature/user/model/userdata.dart';
 
 class BookmarkedPostListPage extends ConsumerWidget {
   const BookmarkedPostListPage({super.key});

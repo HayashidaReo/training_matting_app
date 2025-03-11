@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:matching_app/common_widget/close_only_dialog.dart';
 import 'package:matching_app/common_widget/confirm_dialog.dart';
 import 'package:matching_app/common_widget/custom_button.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
@@ -316,12 +317,14 @@ class OtherUserProfilePage extends ConsumerWidget {
                                           width: 150,
                                           height: 40,
                                           child: CustomButton(
-                                            text:
-                                                (isFollowing && isFollowed)
-                                                    ? 'メッセージ'
-                                                    : '使えない',
+                                            text: 'メッセージ',
+
                                             onPressed: () {
-                                              // TODO: メッセージ機能の実装
+                                              showCloseOnlyDialog(
+                                                context,
+                                                '使用できません',
+                                                'メッセージ機能は相互フォローの場合のみ使用できます。',
+                                              );
                                             },
                                             isColorReversed:
                                                 !(isFollowing && isFollowed),

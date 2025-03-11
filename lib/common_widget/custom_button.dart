@@ -10,7 +10,7 @@ class CustomButton extends StatelessWidget {
   });
 
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final bool isColorReversed;
 
   @override

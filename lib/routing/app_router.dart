@@ -13,7 +13,7 @@ import 'package:matching_app/feature/user/view/edit/edit_email_page.dart';
 import 'package:matching_app/feature/user/view/edit/edit_my_icon_page.dart';
 import 'package:matching_app/feature/user/view/edit/edit_my_profile_page.dart';
 import 'package:matching_app/feature/user/view/my_page.dart';
-import 'package:matching_app/feature/user/view/follow_list_top_navigation_page.dart';
+import 'package:matching_app/feature/follow/view/follow_list_top_navigation_page.dart';
 import 'package:matching_app/feature/user/view/user_list/other_user_profile_page.dart';
 import 'package:matching_app/feature/user/view/user_list/user_list_page.dart';
 import 'package:matching_app/routing/go_router_refresh_stream.dart';

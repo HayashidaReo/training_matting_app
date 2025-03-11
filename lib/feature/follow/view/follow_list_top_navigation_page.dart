@@ -2,7 +2,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/feature/user/controller/follow_list_top_navigation_controller.dart';
-import 'package:matching_app/feature/user/view/follow_list_page.dart';
+import 'package:matching_app/feature/follow/view/follow_list_page.dart';
+import 'package:matching_app/feature/follow/view/follower_list_page.dart';
+import 'package:matching_app/feature/follow/view/mutual_follow_list_page.dart';
 
 class FollowListTopNavigationPage extends ConsumerWidget {
   const FollowListTopNavigationPage({super.key});
@@ -35,8 +37,8 @@ class FollowListTopNavigationPage extends ConsumerWidget {
               child: TabBarView(
                 children: [
                   FollowListPage(),
-                  FollowListPage(),
-                  FollowListPage(),
+                  FollowerListPage(),
+                  MutualFollowListPage(),
                 ],
               ),
             ),

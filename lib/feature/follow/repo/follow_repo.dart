@@ -70,16 +70,37 @@ class FollowRepo extends _$FollowRepo {
   }
 
   /// 自分(myUser)はフォローしていないが、相手(targetUser)から一方的にフォローされているユーザーとのFollowを全て取得
-  Stream<List<Follow>> watchAllOnlyIncomingFollowUserList(
-    String myUserId,
-    String targetUserId,
-  ) {
-    //TODO: ロジックが不完全なので修正する
+  Stream<List<Follow>> watchAllOnlyIncomingFollowUserList(String myUserId) {
+    // 自分をフォローしている全てのフォロー情報を取得
     return state
-        .where(FirebaseFollowDataKey.followingUserId, isNotEqualTo: myUserId)
         .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
         .snapshots()
-        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
+        .asyncMap((snapshot) async {
+          final follows = snapshot.docs.map((doc) => doc.data()).toList();
+          final List<Follow> mutualFollows = [];
+
+          // それぞれのフォロー関係について、自分が相手をフォローしていないか確認
+          for (final follow in follows) {
+            final targetUserId = follow.followingUserId;
+            final reverseQuery =
+                await state
+                    .where(
+                      // 相手の情報が一致している
+                      FirebaseFollowDataKey.followerUserId,
+                      isEqualTo: targetUserId,
+                    )
+                    .where(
+                      // フォローしている人が自分でない
+                      FirebaseFollowDataKey.followingUserId,
+                      isNotEqualTo: myUserId,
+                    )
+                    .get();
+            if (reverseQuery.docs.isNotEmpty) {
+              mutualFollows.add(follow);
+            }
+          }
+          return mutualFollows;
+        });
   }
 
   /// 相互フォローしているFollowを全て取得

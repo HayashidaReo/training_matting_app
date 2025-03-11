@@ -6,7 +6,7 @@ myUserId
 isFollowing
 isFollowed
 createdAt
-apdatedAt
+updatedAt
 
 フォローした時：
 1. 自分のfollows/targetUserIdのisFollowing = true にする

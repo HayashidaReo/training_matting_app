@@ -391,6 +391,205 @@ class MyPage extends ConsumerWidget {
                         ),
                       ],
                     ),
+                    ref
+                        .watch(
+                          watchAllOnlyIncomingFollowUserListControllerProvider(
+                            ref.read(currentUserControllerProvider)!.uid,
+                          ),
+                        )
+                        .when(
+                          data: (List<Follow> onlyIncomingFollowList) {
+                            return Column(
+                              children: [
+                                HeightMarginSizedBox.small,
+                                Text('新たな出会いを見つけませんか？'),
+                                HeightMarginSizedBox.small,
+                                SizedBox(
+                                  height: 190,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: onlyIncomingFollowList.length,
+                                    itemBuilder: (context, index) {
+                                      final Follow followData =
+                                          onlyIncomingFollowList[index];
+                                      return ref
+                                          .watch(
+                                            watchUserDataControllerProvider(
+                                              followData.followerUserId,
+                                            ),
+                                          )
+                                          .when(
+                                            data: (UserData? userData) {
+                                              if (userData == null) {
+                                                return Text(
+                                                  'ユーザー情報が取得できませんでした。',
+                                                  style: TextStyle(
+                                                    fontSize: FontSize.large,
+                                                  ),
+                                                );
+                                              }
+                                              return SizedBox(
+                                                width: 170,
+                                                child: Card(
+                                                  elevation: 3,
+                                                  margin: const EdgeInsets.all(
+                                                    8.0,
+                                                  ),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          12,
+                                                        ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.fromLTRB(
+                                                          8,
+                                                          16,
+                                                          8,
+                                                          8,
+                                                        ),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: <Widget>[
+                                                        if (userData
+                                                                .iconImageUrl ==
+                                                            '')
+                                                          InkWell(
+                                                            onTap: () {
+                                                              context.pushNamed(
+                                                                AppRoute
+                                                                    .editMyIcon
+                                                                    .name,
+                                                              );
+                                                            },
+                                                            child: ClipOval(
+                                                              child: Image.asset(
+                                                                'assets/images/default_user_icon.png',
+                                                                width: 100,
+                                                                height: 100,
+                                                                fit:
+                                                                    BoxFit
+                                                                        .cover,
+                                                              ),
+                                                            ),
+                                                          )
+                                                        else
+                                                          ClipOval(
+                                                            child: CachedNetworkImage(
+                                                              imageUrl:
+                                                                  userData
+                                                                      .iconImageUrl,
+                                                              width: 100,
+                                                              height: 100,
+                                                              fit: BoxFit.cover,
+                                                              progressIndicatorBuilder: (
+                                                                context,
+                                                                url,
+                                                                downloadProgress,
+                                                              ) {
+                                                                return SizedBox(
+                                                                  width: 100,
+                                                                  height: 100,
+                                                                  child: Center(
+                                                                    child: CircularProgressIndicator(
+                                                                      value:
+                                                                          downloadProgress
+                                                                              .progress,
+                                                                    ),
+                                                                  ),
+                                                                );
+                                                              },
+                                                              errorWidget: (
+                                                                context,
+                                                                url,
+                                                                error,
+                                                              ) {
+                                                                return ClipOval(
+                                                                  child: Image.asset(
+                                                                    'assets/images/default_user_icon.png',
+                                                                    fit:
+                                                                        BoxFit
+                                                                            .cover,
+                                                                    width: 100,
+                                                                    height: 100,
+                                                                  ),
+                                                                );
+                                                              },
+                                                            ),
+                                                          ),
+                                                        HeightMarginSizedBox
+                                                            .small,
+                                                        Text(
+                                                          userData.userName,
+                                                          style: TextStyle(
+                                                            fontSize:
+                                                                FontSize.small,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            error: (error, _) {
+                                              return Text(
+                                                'エラーが発生しました。再度お試しください。',
+                                                style: TextStyle(
+                                                  fontSize: FontSize.large,
+                                                ),
+                                              );
+                                            },
+                                            loading: () {
+                                              return const CircularProgressIndicator();
+                                            },
+                                          );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                          error: (error, _) {
+                            return Text(
+                              'エラーが発生しました。再度お試しください。',
+                              style: TextStyle(fontSize: FontSize.large),
+                            );
+                          },
+                          loading: () {
+                            return const CircularProgressIndicator();
+                          },
+                        ),
+
+                    // SizedBox(
+                    //   height: 200, // 高さを指定
+                    //   child: ListView.builder(
+                    //     scrollDirection: Axis.horizontal,
+                    //     itemCount: 5,
+                    //     itemBuilder: (context, index) {
+                    //       return SizedBox(
+                    //         width: 170,
+                    //         child: Card(
+                    //           elevation: 3,
+                    //           margin: const EdgeInsets.all(8.0),
+                    //           shape: RoundedRectangleBorder(
+                    //             borderRadius: BorderRadius.circular(12),
+                    //           ),
+                    //           child: Padding(
+                    //             padding: const EdgeInsets.all(16.0), // 内側の余白を指定
+                    //             child: Text('これはCardウィジェットの例です。'),
+                    //           ),
+                    //         ),
+                    //       );
+                    //     },
+                    //   ),
+                    // ),
                   ],
                 );
               },

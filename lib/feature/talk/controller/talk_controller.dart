@@ -23,7 +23,6 @@ class TalkController extends _$TalkController {
     Talk addTalkData = Talk(
       talkRoomId: talkRoomId,
       userIds: userIds,
-      talkHistory: {},
       createdAt: now,
       updatedAt: now,
     );

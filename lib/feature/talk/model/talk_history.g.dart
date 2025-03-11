@@ -9,7 +9,7 @@ part of 'talk_history.dart';
 _TalkHistory _$TalkHistoryFromJson(Map<String, dynamic> json) => _TalkHistory(
   talkId: json['talkId'] as String,
   talkerUserId: json['talkerUserId'] as String,
-  isOpened: json['isOpened'] as String,
+  isOpened: json['isOpened'] as bool,
   message: json['message'] as String,
   imageUrl: json['imageUrl'] as String,
   createdAt: const TimestampConverter().fromJson(

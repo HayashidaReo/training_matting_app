@@ -9,9 +9,6 @@ part of 'talk.dart';
 _Talk _$TalkFromJson(Map<String, dynamic> json) => _Talk(
   talkRoomId: json['talkRoomId'] as String,
   userIds: (json['userIds'] as List<dynamic>).map((e) => e as String).toList(),
-  talkHistory: (json['talkHistory'] as Map<String, dynamic>).map(
-    (k, e) => MapEntry(k, TalkHistory.fromJson(e as Map<String, dynamic>)),
-  ),
   createdAt: const TimestampConverter().fromJson(
     json['createdAt'] as Timestamp,
   ),
@@ -23,7 +20,6 @@ _Talk _$TalkFromJson(Map<String, dynamic> json) => _Talk(
 Map<String, dynamic> _$TalkToJson(_Talk instance) => <String, dynamic>{
   'talkRoomId': instance.talkRoomId,
   'userIds': instance.userIds,
-  'talkHistory': instance.talkHistory,
   'createdAt': const TimestampConverter().toJson(instance.createdAt),
   'updatedAt': const TimestampConverter().toJson(instance.updatedAt),
 };

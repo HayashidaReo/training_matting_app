@@ -46,13 +46,13 @@ class FirebaseTalkDataKey {
   static String talkCollection = 'talks';
   static String talkRoomId = 'talkRoomId';
   static String userIds = 'userIds';
-  static String talkHistory = 'talkHistory';
   static String createdAt = 'createdAt';
   static String updateAt = 'updateAt';
 }
 
 class FirebaseTalkHistoryDataKey {
   //TalkHistoryコレクション関連
+  static String talkHistoryCollection = 'talk_history';
   static String talkId = 'talkId';
   static String talkerUserId = 'talkerUserId';
   static String message = 'message';

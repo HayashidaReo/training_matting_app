@@ -20,7 +20,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TalkHistory {
 
- String get talkId=> throw _privateConstructorUsedError; String get talkerUserId=> throw _privateConstructorUsedError; String get isOpened=> throw _privateConstructorUsedError; String get message=> throw _privateConstructorUsedError; String get imageUrl=> throw _privateConstructorUsedError;@TimestampConverter() Timestamp get createdAt=> throw _privateConstructorUsedError;@TimestampConverter() Timestamp get updatedAt=> throw _privateConstructorUsedError;
+ String get talkId => throw _privateConstructorUsedError; String get talkerUserId => throw _privateConstructorUsedError; bool get isOpened => throw _privateConstructorUsedError; String get message => throw _privateConstructorUsedError; String get imageUrl => throw _privateConstructorUsedError;@TimestampConverter() Timestamp get createdAt => throw _privateConstructorUsedError;@TimestampConverter() Timestamp get updatedAt => throw _privateConstructorUsedError;
 /// Create a copy of TalkHistory
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,7 +28,7 @@ mixin _$TalkHistory {
 $TalkHistoryCopyWith<TalkHistory> get copyWith => _$TalkHistoryCopyWithImpl<TalkHistory>(this as TalkHistory, _$identity);
 
   /// Serializes this TalkHistory to a JSON map.
-  Map<String, dynamic> toJson()=> throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
 
 @override
@@ -53,7 +53,7 @@ abstract mixin class $TalkHistoryCopyWith<$Res>  {
   factory $TalkHistoryCopyWith(TalkHistory value, $Res Function(TalkHistory) _then) = _$TalkHistoryCopyWithImpl;
 @useResult
 $Res call({
- String talkId, String talkerUserId, String isOpened, String message, String imageUrl,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
+ String talkId, String talkerUserId, bool isOpened, String message, String imageUrl,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
 });
 
 
@@ -75,7 +75,7 @@ class _$TalkHistoryCopyWithImpl<$Res>
 talkId: null == talkId ? _self.talkId : talkId // ignore: cast_nullable_to_non_nullable
 as String,talkerUserId: null == talkerUserId ? _self.talkerUserId : talkerUserId // ignore: cast_nullable_to_non_nullable
 as String,isOpened: null == isOpened ? _self.isOpened : isOpened // ignore: cast_nullable_to_non_nullable
-as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as bool,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as Timestamp,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -95,7 +95,7 @@ class _TalkHistory implements TalkHistory {
 
 @override final  String talkId;
 @override final  String talkerUserId;
-@override final  String isOpened;
+@override final  bool isOpened;
 @override final  String message;
 @override final  String imageUrl;
 @override@TimestampConverter() final  Timestamp createdAt;
@@ -134,7 +134,7 @@ abstract mixin class _$TalkHistoryCopyWith<$Res> implements $TalkHistoryCopyWith
   factory _$TalkHistoryCopyWith(_TalkHistory value, $Res Function(_TalkHistory) _then) = __$TalkHistoryCopyWithImpl;
 @override @useResult
 $Res call({
- String talkId, String talkerUserId, String isOpened, String message, String imageUrl,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
+ String talkId, String talkerUserId, bool isOpened, String message, String imageUrl,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
 });
 
 
@@ -156,7 +156,7 @@ class __$TalkHistoryCopyWithImpl<$Res>
 talkId: null == talkId ? _self.talkId : talkId // ignore: cast_nullable_to_non_nullable
 as String,talkerUserId: null == talkerUserId ? _self.talkerUserId : talkerUserId // ignore: cast_nullable_to_non_nullable
 as String,isOpened: null == isOpened ? _self.isOpened : isOpened // ignore: cast_nullable_to_non_nullable
-as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as bool,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as Timestamp,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable

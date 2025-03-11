@@ -27,5 +27,6 @@ class TalkRepo extends _$TalkRepo {
   /// TalkRoomを削除
   Future<void> deleteTalkRoom(String talkRoomId) async {
     await state.doc(talkRoomId).delete();
+    //TODO: サブコレクションも削除する
   }
 }

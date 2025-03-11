@@ -403,7 +403,8 @@ class MyPage extends ConsumerWidget {
                             return Column(
                               children: [
                                 HeightMarginSizedBox.small,
-                                Text('新たな出会いを見つけませんか？'),
+                                if (onlyIncomingFollowList.isNotEmpty)
+                                  Text('新たな出会いを見つけませんか？'),
                                 HeightMarginSizedBox.small,
                                 SizedBox(
                                   height: 190,
@@ -461,30 +462,6 @@ class MyPage extends ConsumerWidget {
                             return const CircularProgressIndicator();
                           },
                         ),
-
-                    // SizedBox(
-                    //   height: 200, // 高さを指定
-                    //   child: ListView.builder(
-                    //     scrollDirection: Axis.horizontal,
-                    //     itemCount: 5,
-                    //     itemBuilder: (context, index) {
-                    //       return SizedBox(
-                    //         width: 170,
-                    //         child: Card(
-                    //           elevation: 3,
-                    //           margin: const EdgeInsets.all(8.0),
-                    //           shape: RoundedRectangleBorder(
-                    //             borderRadius: BorderRadius.circular(12),
-                    //           ),
-                    //           child: Padding(
-                    //             padding: const EdgeInsets.all(16.0), // 内側の余白を指定
-                    //             child: Text('これはCardウィジェットの例です。'),
-                    //           ),
-                    //         ),
-                    //       );
-                    //     },
-                    //   ),
-                    // ),
                   ],
                 );
               },

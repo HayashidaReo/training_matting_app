@@ -4,13 +4,16 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/component/icon_image.dart';
 import 'package:matching_app/feature/component/talk_message_text_field.dart';
 import 'package:matching_app/feature/component/un_focus.dart';
 import 'package:matching_app/feature/talk/controller/talk_history_controller.dart';
+import 'package:matching_app/feature/user/controller/storage_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/function/get_image_from_gallery.dart';
+import 'package:uuid/uuid.dart';
 
 class TalkRoomPage extends HookConsumerWidget {
   const TalkRoomPage({super.key, required this.targetUserId});
@@ -208,12 +211,7 @@ class TalkRoomPage extends HookConsumerWidget {
                                       IconButton(
                                         onPressed: () async {
                                           // 画像を選択
-                                          final uploadResult =
-                                              await getImageFromGallery();
-                                          if (uploadResult != null) {
-                                            uploadedImageFile.value =
-                                                uploadResult;
-                                          }
+                                          await _getImage(uploadedImageFile);
                                         },
                                         icon: Icon(Icons.photo, size: 24),
                                       ),
@@ -230,31 +228,26 @@ class TalkRoomPage extends HookConsumerWidget {
                                       ),
                                       IconButton(
                                         onPressed: () {
-                                          if (messageTextController.text
-                                              .trim()
-                                              .isEmpty) {
-                                            return;
-                                          }
-                                          ref
-                                              .read(
-                                                talkHistoryControllerProvider
-                                                    .notifier,
-                                              )
-                                              .addTalkHistory(
-                                                message:
-                                                    messageTextController.text,
-                                                imageUrl: '',
-                                                talkRoomId: talkRoomId,
-                                              );
-                                          messageTextController.clear();
+                                          // 送信
+                                          _sendMassage(
+                                            messageTextController:
+                                                messageTextController,
+                                            uploadedImageFile:
+                                                uploadedImageFile,
+                                            ref: ref,
+                                            talkRoomId: talkRoomId,
+                                            context: context,
+                                          );
                                         },
                                         icon: Icon(
                                           Icons.send,
                                           size: 24,
                                           color:
                                               (messageTextController
-                                                      .text
-                                                      .isEmpty)
+                                                          .text
+                                                          .isEmpty &&
+                                                      uploadedImageFile.value ==
+                                                          null)
                                                   ? defaultColors
                                                       .unavailableFrontGreyColor
                                                   : defaultColors.blueTextColor,
@@ -273,5 +266,48 @@ class TalkRoomPage extends HookConsumerWidget {
             );
           },
         );
+  }
+
+  Future<void> _getImage(ValueNotifier<File?> uploadedImageFile) async {
+    final uploadResult = await getImageFromGallery();
+    if (uploadResult != null) {
+      uploadedImageFile.value = uploadResult;
+    }
+    return;
+  }
+
+  void _sendMassage({
+    required TextEditingController messageTextController,
+    required ValueNotifier<File?> uploadedImageFile,
+    required WidgetRef ref,
+    required String talkRoomId,
+    required BuildContext context,
+  }) async {
+    if (messageTextController.text.trim().isEmpty &&
+        uploadedImageFile.value == null) {
+      return;
+    }
+    String imageUrl = '';
+    String talkId = const Uuid().v4();
+    if (uploadedImageFile.value != null) {
+      imageUrl = await ref
+          .read(storageControllerProvider.notifier)
+          .uploadImageAndGetUrl(
+            folderName: '${FirebaseStorageKey.talkImageCollection}/$talkRoomId',
+            imageFile: uploadedImageFile.value!,
+            docId: talkId,
+          );
+    }
+    ref
+        .read(talkHistoryControllerProvider.notifier)
+        .addTalkHistory(
+          message: messageTextController.text,
+          imageUrl: imageUrl,
+          talkRoomId: talkRoomId,
+          talkId: talkId,
+        );
+    messageTextController.clear();
+    uploadedImageFile.value = null;
+    return;
   }
 }

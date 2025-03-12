@@ -3,7 +3,6 @@ import 'package:matching_app/feature/auth/controller/current_user_controller.dar
 import 'package:matching_app/feature/talk/model/talk_history.dart';
 import 'package:matching_app/feature/talk/repo/talk_history_repo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:uuid/uuid.dart';
 
 part 'talk_history_controller.g.dart';
 
@@ -19,8 +18,8 @@ class TalkHistoryController extends _$TalkHistoryController {
     required String message,
     required String imageUrl,
     required String talkRoomId,
+    required String talkId,
   }) async {
-    String talkId = const Uuid().v4();
     final Timestamp now = Timestamp.now();
     TalkHistory addTalkHistoryData = TalkHistory(
       talkId: talkId,

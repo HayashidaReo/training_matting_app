@@ -65,4 +65,5 @@ class FirebaseStorageKey {
   //Storage関連
   static String userIconCollection = 'user_icons';
   static String postImageCollection = 'post_images';
+  static String talkImageCollection = 'talk_images';
 }

@@ -7,7 +7,6 @@ import 'package:matching_app/common_widget/custom_button.dart';
 import 'package:matching_app/common_widget/loading_dialog.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
-import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/auth_controller.dart';
 import 'package:matching_app/feature/component/email_text_form_field.dart';

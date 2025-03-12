@@ -121,7 +121,6 @@ class FollowRepo extends _$FollowRepo {
 
   /// 相互フォローしているFollowを全て取得
   Stream<List<Follow>> watchAllMutualFollowUserList(String myUserId) {
-    // TODO: 現状だと、userListからuser1がuser2のプロフィールを見ているときに、user2がフォローを外すなどの操作をすると、user1の画面には相互フォローだけ反映されない。
     // 自分をフォローしている全てのフォロー情報を取得
     return state
         .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)

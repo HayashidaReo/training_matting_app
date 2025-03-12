@@ -58,6 +58,12 @@ class TalkListPage extends ConsumerWidget {
                             leading: IconImage(
                               iconImageUrl: targetUserData.iconImageUrl,
                               size: 60,
+                              onTap: () {
+                                context.pushNamed(
+                                  AppRoute.otherUserProfile.name,
+                                  queryParameters: {'userId': targetUserId},
+                                );
+                              },
                             ),
                             trailing: Text(
                               formatTalkTimestamp(talkData.updatedAt),

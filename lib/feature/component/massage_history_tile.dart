@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:vibration/vibration.dart';
 import 'package:matching_app/common_widget/confirm_dialog.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
@@ -24,7 +26,16 @@ class InterlocutorMassageHistoryTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          IconImage(iconImageUrl: targetUserData.iconImageUrl, size: 36),
+          IconImage(
+            iconImageUrl: targetUserData.iconImageUrl,
+            size: 36,
+            onTap: () {
+              context.pushNamed(
+                AppRoute.otherUserProfile.name,
+                queryParameters: {'userId': targetUserData.userId},
+              );
+            },
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

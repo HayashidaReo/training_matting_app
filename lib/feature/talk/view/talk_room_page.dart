@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:matching_app/feature/component/talk_message_text_field.dart';
 import 'package:matching_app/feature/component/un_focus.dart';
 import 'package:matching_app/feature/talk/controller/talk_history_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
+import 'package:matching_app/function/get_image_from_gallery.dart';
 
 class TalkRoomPage extends HookConsumerWidget {
   const TalkRoomPage({super.key, required this.targetUserId});
@@ -15,6 +18,7 @@ class TalkRoomPage extends HookConsumerWidget {
   final String targetUserId;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final ValueNotifier<File?> uploadedImageFile = useState(null);
     final List<String> userIds = [
       ref.read(currentUserControllerProvider)!.uid,
       targetUserId,
@@ -152,54 +156,111 @@ class TalkRoomPage extends HookConsumerWidget {
                                 ),
                               ),
                             ),
+
                             Container(
                               color: Colors.black12,
                               width: double.infinity,
-                              child: Row(
+                              padding: const EdgeInsets.all(6.0),
+                              child: Column(
                                 children: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.photo, size: 24),
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 4.0,
+                                  uploadedImageFile.value != null
+                                      ? Stack(
+                                        children: [
+                                          Image.file(
+                                            uploadedImageFile.value!,
+                                            width: 150,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          Positioned(
+                                            right: 0,
+                                            top: 0,
+                                            child: Container(
+                                              height: 30,
+                                              width: 30,
+                                              decoration: BoxDecoration(
+                                                color: defaultColors
+                                                    .textBlackColor
+                                                    .withAlpha(150),
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Center(
+                                                child: IconButton(
+                                                  onPressed: () {
+                                                    uploadedImageFile.value =
+                                                        null;
+                                                  },
+                                                  icon: Icon(
+                                                    Icons.close_rounded,
+                                                    color:
+                                                        defaultColors
+                                                            .mainButtonTextWhiteColor,
+                                                    size: 14,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                      : Container(),
+                                  Row(
+                                    children: [
+                                      IconButton(
+                                        onPressed: () async {
+                                          // 画像を選択
+                                          final uploadResult =
+                                              await getImageFromGallery();
+                                          if (uploadResult != null) {
+                                            uploadedImageFile.value =
+                                                uploadResult;
+                                          }
+                                        },
+                                        icon: Icon(Icons.photo, size: 24),
                                       ),
-                                      child: TalkMessageTextField(
-                                        controller: messageTextController,
-                                        label: 'メッセージを入力',
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 4.0,
+                                          ),
+                                          child: TalkMessageTextField(
+                                            controller: messageTextController,
+                                            label: 'メッセージを入力',
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      if (messageTextController.text
-                                          .trim()
-                                          .isEmpty) {
-                                        return;
-                                      }
-                                      ref
-                                          .read(
-                                            talkHistoryControllerProvider
-                                                .notifier,
-                                          )
-                                          .addTalkHistory(
-                                            message: messageTextController.text,
-                                            imageUrl: '',
-                                            talkRoomId: talkRoomId,
-                                          );
-                                      messageTextController.clear();
-                                    },
-                                    icon: Icon(
-                                      Icons.send,
-                                      size: 24,
-                                      color:
-                                          (messageTextController.text.isEmpty)
-                                              ? defaultColors
-                                                  .unavailableFrontGreyColor
-                                              : defaultColors.blueTextColor,
-                                    ),
+                                      IconButton(
+                                        onPressed: () {
+                                          if (messageTextController.text
+                                              .trim()
+                                              .isEmpty) {
+                                            return;
+                                          }
+                                          ref
+                                              .read(
+                                                talkHistoryControllerProvider
+                                                    .notifier,
+                                              )
+                                              .addTalkHistory(
+                                                message:
+                                                    messageTextController.text,
+                                                imageUrl: '',
+                                                talkRoomId: talkRoomId,
+                                              );
+                                          messageTextController.clear();
+                                        },
+                                        icon: Icon(
+                                          Icons.send,
+                                          size: 24,
+                                          color:
+                                              (messageTextController
+                                                      .text
+                                                      .isEmpty)
+                                                  ? defaultColors
+                                                      .unavailableFrontGreyColor
+                                                  : defaultColors.blueTextColor,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),

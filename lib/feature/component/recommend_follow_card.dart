@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
@@ -34,17 +35,17 @@ class RecommendFollowCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                IconImage(
-                  iconImageUrl: userData.iconImageUrl,
-                  size: 100,
-                  onTap: () {
-                    context.pushNamed(AppRoute.editMyIcon.name);
-                  },
-                ),
+                IconImage(iconImageUrl: userData.iconImageUrl, size: 100),
                 HeightMarginSizedBox.small,
                 Text(
                   userData.userName,
-                  style: TextStyle(fontSize: FontSize.small),
+                  style: TextStyle(
+                    fontSize: FontSize.small,
+                    color:
+                        (userData.gender == '男性')
+                            ? defaultColors.femaleColor
+                            : defaultColors.maleColor,
+                  ),
                 ),
               ],
             ),

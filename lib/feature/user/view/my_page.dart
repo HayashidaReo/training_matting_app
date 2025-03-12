@@ -155,7 +155,13 @@ class MyPage extends ConsumerWidget {
                                   ),
                                   child: Text(
                                     userData.userName,
-                                    style: TextStyle(fontSize: FontSize.normal),
+                                    style: TextStyle(
+                                      fontSize: FontSize.normal,
+                                      color:
+                                          (userData.gender == '男性')
+                                              ? defaultColors.femaleColor
+                                              : defaultColors.maleColor,
+                                    ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),

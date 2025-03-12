@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/talk/model/talk_history.dart';
 import 'package:matching_app/feature/talk/repo/talk_history_repo.dart';
+import 'package:matching_app/feature/user/controller/storage_controller.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'talk_history_controller.g.dart';
@@ -45,6 +47,15 @@ class TalkHistoryController extends _$TalkHistoryController {
       imageUrl: '',
       updatedAt: Timestamp.now(),
     );
+    // 画像の削除
+    if (talkHistoryData.imageUrl.isNotEmpty) {
+      await ref
+          .read(storageControllerProvider.notifier)
+          .deleteImage(
+            folderName: '${FirebaseStorageKey.talkImageCollection}/$talkRoomId',
+            docId: talkHistoryData.talkId,
+          );
+    }
     await ref
         .read(talkHistoryRepoProvider(talkRoomId).notifier)
         .updateTalkHistory(updateTalkHistoryData);

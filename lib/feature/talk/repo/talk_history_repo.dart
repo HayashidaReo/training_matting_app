@@ -30,7 +30,7 @@ class TalkHistoryRepo extends _$TalkHistoryRepo {
   /// streamでtalkRoomIdに紐づくtalk_historyコレクションを全て取得
   Stream<List<TalkHistory>> watchAllTalkHistory() {
     return state
-        .orderBy(FirebaseTalkHistoryDataKey.createdAt, descending: false)
+        .orderBy(FirebaseTalkHistoryDataKey.createdAt, descending: true)
         .snapshots()
         .map(
           (QuerySnapshot<TalkHistory> snapshot) =>

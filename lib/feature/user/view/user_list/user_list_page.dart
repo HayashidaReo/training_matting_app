@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/config/utils/decoration/text_field_decoration.dart';
+import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/component/user_list_tile.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
@@ -19,52 +20,61 @@ class UserListPage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Row(
+        toolbarHeight: 70,
+        title: Column(
           children: [
-            Expanded(
-              child: Stack(
-                children: [
-                  TextField(
-                    controller: searchTextController,
-                    decoration: textFieldDecoration('ユーザー検索'),
-                    onChanged: (text) {
-                      searchText.value = text;
-                    },
+            HeightMarginSizedBox.small,
+            Row(
+              children: [
+                Expanded(
+                  child: Stack(
+                    children: [
+                      TextField(
+                        controller: searchTextController,
+                        decoration: textFieldDecoration('ユーザー検索'),
+                        onChanged: (text) {
+                          searchText.value = text;
+                        },
+                      ),
+                      Positioned(
+                        right: 5,
+                        top: 10,
+                        bottom: 10,
+                        child: IconButton(
+                          icon: const Icon(Icons.search),
+                          iconSize: 24,
+                          onPressed: () {
+                            FocusScope.of(context).unfocus();
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                  Positioned(
-                    right: 5,
-                    top: 10,
-                    bottom: 10,
-                    child: IconButton(
-                      icon: const Icon(Icons.search),
-                      iconSize: 24,
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            PopupMenuButton(
-              icon: const Icon(Icons.sort_outlined),
-              onSelected: (value) async {
-                if (value == 'opposite') {
-                  ref
-                      .read(userListStatusControllerProvider.notifier)
-                      .updateIndex(0);
-                } else if (value == 'all') {
-                  ref
-                      .read(userListStatusControllerProvider.notifier)
-                      .updateIndex(1);
-                }
-              },
-              itemBuilder: (context) {
-                return [
-                  const PopupMenuItem(value: 'opposite', child: Text('異性のみ')),
-                  const PopupMenuItem(value: 'all', child: Text('全てのユーザー')),
-                ];
-              },
+                ),
+                PopupMenuButton(
+                  icon: const Icon(Icons.sort_outlined),
+                  onSelected: (value) async {
+                    if (value == 'opposite') {
+                      ref
+                          .read(userListStatusControllerProvider.notifier)
+                          .updateIndex(0);
+                    } else if (value == 'all') {
+                      ref
+                          .read(userListStatusControllerProvider.notifier)
+                          .updateIndex(1);
+                    }
+                  },
+                  itemBuilder: (context) {
+                    return [
+                      const PopupMenuItem(
+                        value: 'opposite',
+                        child: Text('異性のみ'),
+                      ),
+                      const PopupMenuItem(value: 'all', child: Text('全てのユーザー')),
+                    ];
+                  },
+                ),
+              ],
             ),
           ],
         ),

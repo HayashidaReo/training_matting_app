@@ -47,6 +47,8 @@ class DefaultColors {
 
   final Color postTileTextColor = Colors.black87;
   final Color postTileBackColor = Colors.white;
+  final Color postFavoriteColor = Colors.pink;
+  final Color postBookmarkColor = Colors.blueAccent;
 
   final Color talkRoomMyTextBackColor = Color.fromARGB(255, 255, 74, 161);
   final Color talkRoomInterlocutorTextBackColor = Color.fromARGB(

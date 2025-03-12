@@ -162,7 +162,10 @@ class PostTile extends HookConsumerWidget {
                           IconButton(
                             icon:
                                 (isFavorite)
-                                    ? const Icon(Icons.favorite)
+                                    ? Icon(
+                                      Icons.favorite,
+                                      color: defaultColors.postFavoriteColor,
+                                    )
                                     : const Icon(Icons.favorite_border),
                             onPressed: () async {
                               await _addOrDeleteFavorite(isFavorite, ref);
@@ -196,7 +199,10 @@ class PostTile extends HookConsumerWidget {
                           return IconButton(
                             icon:
                                 (isBookmarked)
-                                    ? const Icon(Icons.bookmark)
+                                    ? Icon(
+                                      Icons.bookmark,
+                                      color: defaultColors.postBookmarkColor,
+                                    )
                                     : const Icon(Icons.bookmark_border),
                             onPressed: () async {
                               await _addOrDeleteBookmark(isBookmarked, ref);

@@ -6,15 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
-import 'package:matching_app/feature/component/auto_scaled_image.dart';
-import 'package:matching_app/feature/component/icon_image.dart';
+import 'package:matching_app/feature/component/massage_history_tile.dart';
 import 'package:matching_app/feature/component/talk_message_text_field.dart';
 import 'package:matching_app/feature/component/un_focus.dart';
 import 'package:matching_app/feature/talk/controller/talk_history_controller.dart';
 import 'package:matching_app/feature/talk/model/talk_history.dart';
 import 'package:matching_app/feature/user/controller/storage_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
-import 'package:matching_app/feature/user/model/userdata.dart';
 import 'package:matching_app/function/get_image_from_gallery.dart';
 import 'package:uuid/uuid.dart';
 
@@ -25,6 +23,7 @@ class TalkRoomPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ValueNotifier<File?> uploadedImageFile = useState(null);
+
     final List<String> userIds = [
       ref.read(currentUserControllerProvider)!.uid,
       targetUserId,
@@ -35,7 +34,6 @@ class TalkRoomPage extends HookConsumerWidget {
     final TextEditingController messageTextController =
         useTextEditingController();
     useValueListenable(messageTextController); // 入力状態に応じて画面表示を変えるため
-
     return ref
         .watch(watchUserDataControllerProvider(targetUserId))
         .when(
@@ -71,6 +69,7 @@ class TalkRoomPage extends HookConsumerWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ListView.builder(
+                                  reverse: true,
                                   itemCount: talkHistoryDataList.length,
                                   itemBuilder: (context, index) {
                                     final TalkHistory talkHistoryData =
@@ -180,8 +179,8 @@ class TalkRoomPage extends HookConsumerWidget {
                                           Icons.send,
                                           size: 24,
                                           color:
-                                              (messageTextController
-                                                          .text
+                                              (messageTextController.text
+                                                          .trim()
                                                           .isEmpty &&
                                                       uploadedImageFile.value ==
                                                           null)
@@ -246,115 +245,5 @@ class TalkRoomPage extends HookConsumerWidget {
     messageTextController.clear();
     uploadedImageFile.value = null;
     return;
-  }
-}
-
-class InterlocutorMassageHistoryTile extends StatelessWidget {
-  const InterlocutorMassageHistoryTile({
-    super.key,
-    required this.talkHistoryData,
-    required this.targetUserData,
-  });
-
-  final TalkHistory talkHistoryData;
-  final UserData targetUserData;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          IconImage(iconImageUrl: targetUserData.iconImageUrl, size: 36),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              (talkHistoryData.imageUrl.isNotEmpty)
-                  ? Padding(
-                    padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 0.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12.0),
-                      child: AutoScaledImage(
-                        imageUrl: talkHistoryData.imageUrl,
-                        targetMinSide: 170,
-                        fit: BoxFit.contain,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  )
-                  : SizedBox.shrink(),
-              (talkHistoryData.message.isNotEmpty)
-                  ? Container(
-                    constraints: const BoxConstraints(maxWidth: 300),
-                    padding: const EdgeInsets.all(6.0),
-                    margin: const EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                      color: defaultColors.unavailableFrontGreyColor,
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    child: Text(
-                      talkHistoryData.message,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  )
-                  : SizedBox.shrink(),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class MyMassageHistoryTile extends StatelessWidget {
-  const MyMassageHistoryTile({super.key, required this.talkHistoryData});
-
-  final TalkHistory talkHistoryData;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              (talkHistoryData.imageUrl.isNotEmpty)
-                  ? Padding(
-                    padding: const EdgeInsets.fromLTRB(0.0, 8.0, 8.0, 0.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12.0),
-                      child: AutoScaledImage(
-                        imageUrl: talkHistoryData.imageUrl,
-                        targetMinSide: 170,
-                        fit: BoxFit.contain,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  )
-                  : SizedBox.shrink(),
-              (talkHistoryData.message.isNotEmpty)
-                  ? Container(
-                    constraints: const BoxConstraints(maxWidth: 300),
-                    padding: const EdgeInsets.all(6.0),
-                    margin: const EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                      color: defaultColors.blueTextColor,
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-
-                    child: Text(
-                      talkHistoryData.message,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  )
-                  : SizedBox.shrink(),
-            ],
-          ),
-        ],
-      ),
-    );
   }
 }

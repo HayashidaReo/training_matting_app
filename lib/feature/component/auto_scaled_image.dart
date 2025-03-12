@@ -48,13 +48,15 @@ class AutoScaledImage extends HookWidget {
     ]);
     final snapshot = useFuture(imageSizeFuture);
 
-    if (snapshot.hasError) {
-      return const Icon(Icons.error);
-    }
+    // 画像サイズがまだ取得できていない場合は、枠だけ表示
     if (!snapshot.hasData) {
-      return SizedBox(
+      return Container(
         width: targetMinSide,
         height: targetMinSide,
+        decoration: BoxDecoration(
+          borderRadius: borderRadius,
+          color: Colors.grey[300], // ローディング時の背景色
+        ),
         child: const Center(child: CircularProgressIndicator()),
       );
     }
@@ -75,9 +77,13 @@ class AutoScaledImage extends HookWidget {
       height: displayHeight,
       fit: fit,
       progressIndicatorBuilder:
-          (context, url, downloadProgress) => SizedBox(
+          (context, url, downloadProgress) => Container(
             width: displayWidth,
             height: displayHeight,
+            decoration: BoxDecoration(
+              borderRadius: borderRadius,
+              color: Colors.grey[300], // ローディング時の背景色
+            ),
             child: Center(
               child: CircularProgressIndicator(
                 value: downloadProgress.progress,
@@ -85,9 +91,13 @@ class AutoScaledImage extends HookWidget {
             ),
           ),
       errorWidget:
-          (context, url, error) => SizedBox(
+          (context, url, error) => Container(
             width: displayWidth,
             height: displayHeight,
+            decoration: BoxDecoration(
+              borderRadius: borderRadius,
+              color: Colors.grey[400], // エラー時の背景色
+            ),
             child: const Icon(Icons.image_not_supported_rounded),
           ),
     );

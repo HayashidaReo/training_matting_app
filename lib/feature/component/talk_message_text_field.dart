@@ -16,6 +16,7 @@ class TalkMessageTextField extends StatelessWidget {
     return TextField(
       minLines: 1,
       maxLines: 9,
+      keyboardType: TextInputType.multiline,
       controller: controller,
       decoration: textFieldDecoration(label),
     );

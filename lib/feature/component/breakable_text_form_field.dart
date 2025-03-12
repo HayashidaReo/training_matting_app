@@ -19,6 +19,7 @@ class BreakableTextFormField extends StatelessWidget {
       maxLength: maxLength,
       maxLines: 7,
       controller: controller,
+      keyboardType: TextInputType.multiline,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return '入力してください';

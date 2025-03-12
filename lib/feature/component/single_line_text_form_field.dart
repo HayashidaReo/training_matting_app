@@ -15,6 +15,7 @@ class SingleLineTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      keyboardType: TextInputType.text,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return '入力してください';

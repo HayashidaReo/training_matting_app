@@ -45,3 +45,6 @@ class DefaultColors {
 }
 
 final defaultColors = DefaultColors();
+
+
+// TODO: パネルとか背景とかの色を設定する

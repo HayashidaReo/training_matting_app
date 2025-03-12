@@ -5,7 +5,6 @@ import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/feature/component/badge_count_widget.dart';
 import 'package:matching_app/feature/navigation/controller/bottom_navigation_controller.dart';
 import 'package:matching_app/feature/talk/controller/talk_history_controller.dart';
-import 'package:matching_app/feature/talk/repo/talk_history_repo.dart';
 
 class BottomNavigationPage extends ConsumerWidget {
   const BottomNavigationPage({super.key, required this.child});

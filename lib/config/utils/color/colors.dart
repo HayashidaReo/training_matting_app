@@ -48,6 +48,9 @@ class DefaultColors {
   final Color hamburgerMenuBackColor = Colors.white;
   final Color hamburgerMenuTextColor = Colors.black87;
 
+  final Color massageBadgeTextColor = Colors.white;
+  final Color massageBadgeBackColor = Colors.red;
+
   final Color postTileTextColor = Colors.black87;
   final Color postTileBackColor = Colors.white;
   final Color postFavoriteColor = Colors.pink;
@@ -61,6 +64,18 @@ class DefaultColors {
     112,
   );
   final Color talkRoomTextColor = Colors.white;
+  final Color talkRoomLoadingImageBackColor = const Color.fromARGB(
+    255,
+    228,
+    228,
+    228,
+  );
+  final Color talkRoomErrorImageBackColor = const Color.fromARGB(
+    255,
+    186,
+    186,
+    186,
+  );
 }
 
 final defaultColors = DefaultColors();

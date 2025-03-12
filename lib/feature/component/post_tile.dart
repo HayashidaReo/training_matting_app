@@ -80,7 +80,13 @@ class PostTile extends HookConsumerWidget {
                     : SizedBox.shrink(),
             title: Text(
               postUser.userName,
-              style: const TextStyle(fontSize: 16),
+              style: TextStyle(
+                fontSize: 16,
+                color:
+                    (postUser.gender == '男性')
+                        ? defaultColors.femaleColor
+                        : defaultColors.maleColor,
+              ),
             ),
             subtitle: Text(
               postData.createdAt.toDate().toString().substring(0, 16),

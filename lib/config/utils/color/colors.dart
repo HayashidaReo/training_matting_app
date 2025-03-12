@@ -5,6 +5,9 @@ class DefaultColors {
   final Color secondaryColor = Colors.white;
   final Color accentColor = Colors.pinkAccent;
 
+  final Color maleColor = Colors.pink;
+  final Color femaleColor = Colors.blue;
+
   final Color blueTextColor = Colors.blue;
   final Color unavailableFrontGreyColor = Colors.grey;
   final Color talkRoomGreyColor = const Color.fromARGB(255, 223, 223, 223);

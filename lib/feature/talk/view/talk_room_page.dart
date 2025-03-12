@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:matching_app/common_widget/loading_dialog.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
@@ -105,10 +106,15 @@ class TalkRoomPage extends HookConsumerWidget {
                                   uploadedImageFile.value != null
                                       ? Stack(
                                         children: [
-                                          Image.file(
-                                            uploadedImageFile.value!,
-                                            width: 150,
-                                            fit: BoxFit.cover,
+                                          ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                              12.0,
+                                            ),
+                                            child: Image.file(
+                                              uploadedImageFile.value!,
+                                              width: 150,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                           Positioned(
                                             right: 0,
@@ -223,6 +229,7 @@ class TalkRoomPage extends HookConsumerWidget {
         uploadedImageFile.value == null) {
       return;
     }
+    showLoadingDialog('送信中...');
     String imageUrl = '';
     String talkId = const Uuid().v4();
     if (uploadedImageFile.value != null) {
@@ -244,6 +251,7 @@ class TalkRoomPage extends HookConsumerWidget {
         );
     messageTextController.clear();
     uploadedImageFile.value = null;
+    hideLoadingDialog();
     return;
   }
 }

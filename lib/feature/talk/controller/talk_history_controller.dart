@@ -37,6 +37,20 @@ class TalkHistoryController extends _$TalkHistoryController {
         .addTalkHistory(addTalkHistoryData);
   }
 
+  /// 既読をつける
+  Future<void> openTalkHistory({
+    required TalkHistory talkHistoryData,
+    required String talkRoomId,
+  }) async {
+    final updateTalkHistoryData = talkHistoryData.copyWith(
+      isOpened: true,
+      updatedAt: Timestamp.now(),
+    );
+    await ref
+        .read(talkHistoryRepoProvider(talkRoomId).notifier)
+        .updateTalkHistory(updateTalkHistoryData);
+  }
+
   /// トーク履歴を削除(送信取り消し)
   Future<void> deleteTalkHistory({
     required TalkHistory talkHistoryData,

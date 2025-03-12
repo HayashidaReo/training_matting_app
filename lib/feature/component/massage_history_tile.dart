@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:matching_app/feature/talk/controller/talk_history_controller.dart';
 import 'package:vibration/vibration.dart';
 import 'package:matching_app/common_widget/confirm_dialog.dart';
 import 'package:matching_app/config/utils/color/colors.dart';

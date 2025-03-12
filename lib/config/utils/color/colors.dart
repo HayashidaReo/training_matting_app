@@ -7,6 +7,7 @@ class DefaultColors {
 
   final Color blueTextColor = Colors.blue;
   final Color unavailableFrontGreyColor = Colors.grey;
+  final Color talkRoomGreyColor = const Color.fromARGB(255, 223, 223, 223);
 
   final Color mainBackColor = Colors.white;
   final Color mainTextColor = Colors.pink;

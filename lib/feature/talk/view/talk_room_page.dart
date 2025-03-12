@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:matching_app/common_widget/loading_dialog.dart';
@@ -77,7 +78,40 @@ class TalkRoomPage extends HookConsumerWidget {
                                         talkHistoryDataList[index];
                                     return Row(
                                       children: [
-                                        (talkHistoryData.talkerUserId ==
+                                        (talkHistoryData.message.isEmpty &&
+                                                talkHistoryData
+                                                    .imageUrl
+                                                    .isEmpty)
+                                            ? Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(
+                                                  6.0,
+                                                ),
+                                                child: Center(
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          6.0,
+                                                        ),
+                                                    child: Container(
+                                                      color:
+                                                          defaultColors
+                                                              .talkRoomGreyColor,
+                                                      padding:
+                                                          const EdgeInsets.symmetric(
+                                                            horizontal: 6,
+                                                            vertical: 2,
+                                                          ),
+
+                                                      child: Text(
+                                                        '送信が取り消されました',
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                            : (talkHistoryData.talkerUserId ==
                                                 ref
                                                     .read(
                                                       currentUserControllerProvider,
@@ -86,8 +120,8 @@ class TalkRoomPage extends HookConsumerWidget {
                                             ? MyMassageHistoryTile(
                                               talkHistoryData: talkHistoryData,
                                               talkRoomId: talkRoomId,
-                                              onPressed: () {
-                                                ref
+                                              onPressed: () async {
+                                                await ref
                                                     .read(
                                                       talkHistoryControllerProvider
                                                           .notifier,
@@ -97,6 +131,9 @@ class TalkRoomPage extends HookConsumerWidget {
                                                           talkHistoryData,
                                                       talkRoomId: talkRoomId,
                                                     );
+                                                if (context.mounted) {
+                                                  context.pop();
+                                                }
                                               },
                                             )
                                             : InterlocutorMassageHistoryTile(
@@ -111,7 +148,7 @@ class TalkRoomPage extends HookConsumerWidget {
                             ),
 
                             Container(
-                              color: Colors.black12,
+                              color: defaultColors.talkRoomGreyColor,
                               width: double.infinity,
                               padding: const EdgeInsets.all(6.0),
                               child: Column(

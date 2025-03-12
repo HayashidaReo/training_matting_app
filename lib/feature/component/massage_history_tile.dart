@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
+import 'package:matching_app/config/utils/fontStyle/font_size.dart';
+import 'package:matching_app/function/format_talk_timestamp.dart';
 import 'package:vibration/vibration.dart';
 import 'package:matching_app/common_widget/confirm_dialog.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
@@ -24,7 +26,6 @@ class InterlocutorMassageHistoryTile extends StatelessWidget {
     return Expanded(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           IconImage(
             iconImageUrl: targetUserData.iconImageUrl,
@@ -40,32 +41,56 @@ class InterlocutorMassageHistoryTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               (talkHistoryData.imageUrl.isNotEmpty)
-                  ? Padding(
-                    padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 0.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12.0),
-                      child: AutoScaledImage(
-                        imageUrl: talkHistoryData.imageUrl,
-                        targetMinSide: 170,
-                        fit: BoxFit.contain,
-                        borderRadius: BorderRadius.circular(12),
+                  ? Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 0.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12.0),
+                          child: AutoScaledImage(
+                            imageUrl: talkHistoryData.imageUrl,
+                            targetMinSide: 170,
+                            fit: BoxFit.contain,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          formatTalkTimestamp(talkHistoryData.createdAt),
+                          style: TextStyle(fontSize: FontSize.extraSmall),
+                        ),
+                      ),
+                    ],
                   )
                   : SizedBox.shrink(),
               (talkHistoryData.message.isNotEmpty)
-                  ? Container(
-                    constraints: const BoxConstraints(maxWidth: 300),
-                    padding: const EdgeInsets.all(6.0),
-                    margin: const EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                      color: defaultColors.unavailableFrontGreyColor,
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    child: Text(
-                      talkHistoryData.message,
-                      style: TextStyle(color: Colors.white),
-                    ),
+                  ? Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        constraints: const BoxConstraints(maxWidth: 300),
+                        padding: const EdgeInsets.all(6.0),
+                        margin: const EdgeInsets.all(6.0),
+                        decoration: BoxDecoration(
+                          color: defaultColors.unavailableFrontGreyColor,
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        child: Text(
+                          talkHistoryData.message,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          formatTalkTimestamp(talkHistoryData.createdAt),
+                          style: TextStyle(fontSize: FontSize.extraSmall),
+                        ),
+                      ),
+                    ],
                   )
                   : SizedBox.shrink(),
             ],
@@ -114,33 +139,61 @@ class MyMassageHistoryTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 (talkHistoryData.imageUrl.isNotEmpty)
-                    ? Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 8.0, 8.0, 0.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12.0),
-                        child: AutoScaledImage(
-                          imageUrl: talkHistoryData.imageUrl,
-                          targetMinSide: 170,
-                          fit: BoxFit.contain,
-                          borderRadius: BorderRadius.circular(12),
+                    ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            formatTalkTimestamp(talkHistoryData.createdAt),
+                            style: TextStyle(fontSize: FontSize.extraSmall),
+                          ),
                         ),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(
+                            0.0,
+                            8.0,
+                            8.0,
+                            0.0,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0),
+                            child: AutoScaledImage(
+                              imageUrl: talkHistoryData.imageUrl,
+                              targetMinSide: 170,
+                              fit: BoxFit.contain,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
+                      ],
                     )
                     : SizedBox.shrink(),
                 (talkHistoryData.message.isNotEmpty)
-                    ? Container(
-                      constraints: const BoxConstraints(maxWidth: 300),
-                      padding: const EdgeInsets.all(6.0),
-                      margin: const EdgeInsets.all(6.0),
-                      decoration: BoxDecoration(
-                        color: defaultColors.blueTextColor,
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-
-                      child: Text(
-                        talkHistoryData.message,
-                        style: TextStyle(color: Colors.white),
-                      ),
+                    ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text(
+                            formatTalkTimestamp(talkHistoryData.createdAt),
+                            style: TextStyle(fontSize: FontSize.extraSmall),
+                          ),
+                        ),
+                        Container(
+                          constraints: const BoxConstraints(maxWidth: 300),
+                          padding: const EdgeInsets.all(6.0),
+                          margin: const EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            color: defaultColors.blueTextColor,
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: Text(
+                            talkHistoryData.message,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
                     )
                     : SizedBox.shrink(),
               ],

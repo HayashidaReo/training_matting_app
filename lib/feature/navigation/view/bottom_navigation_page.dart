@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/feature/component/badge_count_widget.dart';
 import 'package:matching_app/feature/navigation/controller/bottom_navigation_controller.dart';
@@ -16,6 +17,9 @@ class BottomNavigationPage extends ConsumerWidget {
       body: child,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: ref.watch(bottomNavigationControllerProvider),
+        backgroundColor: defaultColors.navigationBackColor,
+        selectedItemColor: defaultColors.navigationSelectedTextColor,
+        unselectedItemColor: defaultColors.navigationUnSelectedTextColor,
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),

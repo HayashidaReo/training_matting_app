@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -38,9 +40,8 @@ class PostTile extends HookConsumerWidget {
   @override
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
-      color: defaultColors.postTileBackColor,
       child: Column(
         children: [
           ListTile(
@@ -92,8 +93,6 @@ class PostTile extends HookConsumerWidget {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: Container(
-              color: defaultColors.postTileBackColor,
-
               padding: const EdgeInsets.all(20),
               child: Row(
                 mainAxisSize: MainAxisSize.max,

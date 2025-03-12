@@ -78,7 +78,7 @@ class TalkListPage extends ConsumerWidget {
                                 ),
                                 ref
                                     .watch(
-                                      watchNotOpenedTalkHistoryControllerProvider(
+                                      watchNotOpenedTalkHistoryCountControllerProvider(
                                         talkData.talkRoomId,
                                       ),
                                     )
@@ -89,16 +89,13 @@ class TalkListPage extends ConsumerWidget {
                                       loading: () {
                                         return const SizedBox.shrink();
                                       },
-                                      data: (
-                                        List<TalkHistory>
-                                        notOpenedTalkHistoryList,
-                                      ) {
-                                        if (notOpenedTalkHistoryList.isEmpty) {
+                                      data: (int notOpenedCount) {
+                                        if (notOpenedCount == 0) {
                                           return const SizedBox(height: 8);
                                         } else {
                                           return badgeCountWidget(
                                             ref,
-                                            notOpenedTalkHistoryList.length,
+                                            notOpenedCount,
                                           );
                                         }
                                       },

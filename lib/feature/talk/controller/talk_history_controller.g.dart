@@ -176,24 +176,24 @@ class _WatchAllTalkHistoryControllerProviderElement
 String _$watchLatestTalkHistoryControllerHash() =>
     r'24d7bc2bd5e3bece70df7788a992ac9a8e8a7a88';
 
-///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+/// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
 ///
 /// Copied from [watchLatestTalkHistoryController].
 @ProviderFor(watchLatestTalkHistoryController)
 const watchLatestTalkHistoryControllerProvider =
     WatchLatestTalkHistoryControllerFamily();
 
-///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+/// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
 ///
 /// Copied from [watchLatestTalkHistoryController].
 class WatchLatestTalkHistoryControllerFamily
     extends Family<AsyncValue<TalkHistory?>> {
-  ///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+  /// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
   ///
   /// Copied from [watchLatestTalkHistoryController].
   const WatchLatestTalkHistoryControllerFamily();
 
-  ///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+  /// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
   ///
   /// Copied from [watchLatestTalkHistoryController].
   WatchLatestTalkHistoryControllerProvider call(String talkRoomId) {
@@ -222,12 +222,12 @@ class WatchLatestTalkHistoryControllerFamily
   String? get name => r'watchLatestTalkHistoryControllerProvider';
 }
 
-///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+/// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
 ///
 /// Copied from [watchLatestTalkHistoryController].
 class WatchLatestTalkHistoryControllerProvider
     extends AutoDisposeStreamProvider<TalkHistory?> {
-  ///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+  /// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
   ///
   /// Copied from [watchLatestTalkHistoryController].
   WatchLatestTalkHistoryControllerProvider(String talkRoomId)
@@ -317,36 +317,36 @@ class _WatchLatestTalkHistoryControllerProviderElement
       (origin as WatchLatestTalkHistoryControllerProvider).talkRoomId;
 }
 
-String _$watchNotOpenedTalkHistoryControllerHash() =>
-    r'3d671113e4316f5eb85712fc62d721a8a11aeb7d';
+String _$watchNotOpenedTalkHistoryCountControllerHash() =>
+    r'92cc2a02effcaea2cd13fd45b4ec6a9c4e6b36fd';
 
-///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+/// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
 ///
-/// Copied from [watchNotOpenedTalkHistoryController].
-@ProviderFor(watchNotOpenedTalkHistoryController)
-const watchNotOpenedTalkHistoryControllerProvider =
-    WatchNotOpenedTalkHistoryControllerFamily();
+/// Copied from [watchNotOpenedTalkHistoryCountController].
+@ProviderFor(watchNotOpenedTalkHistoryCountController)
+const watchNotOpenedTalkHistoryCountControllerProvider =
+    WatchNotOpenedTalkHistoryCountControllerFamily();
 
-///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+/// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
 ///
-/// Copied from [watchNotOpenedTalkHistoryController].
-class WatchNotOpenedTalkHistoryControllerFamily
-    extends Family<AsyncValue<List<TalkHistory>>> {
-  ///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+/// Copied from [watchNotOpenedTalkHistoryCountController].
+class WatchNotOpenedTalkHistoryCountControllerFamily
+    extends Family<AsyncValue<int>> {
+  /// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
   ///
-  /// Copied from [watchNotOpenedTalkHistoryController].
-  const WatchNotOpenedTalkHistoryControllerFamily();
+  /// Copied from [watchNotOpenedTalkHistoryCountController].
+  const WatchNotOpenedTalkHistoryCountControllerFamily();
 
-  ///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+  /// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
   ///
-  /// Copied from [watchNotOpenedTalkHistoryController].
-  WatchNotOpenedTalkHistoryControllerProvider call(String talkRoomId) {
-    return WatchNotOpenedTalkHistoryControllerProvider(talkRoomId);
+  /// Copied from [watchNotOpenedTalkHistoryCountController].
+  WatchNotOpenedTalkHistoryCountControllerProvider call(String talkRoomId) {
+    return WatchNotOpenedTalkHistoryCountControllerProvider(talkRoomId);
   }
 
   @override
-  WatchNotOpenedTalkHistoryControllerProvider getProviderOverride(
-    covariant WatchNotOpenedTalkHistoryControllerProvider provider,
+  WatchNotOpenedTalkHistoryCountControllerProvider getProviderOverride(
+    covariant WatchNotOpenedTalkHistoryCountControllerProvider provider,
   ) {
     return call(provider.talkRoomId);
   }
@@ -363,37 +363,38 @@ class WatchNotOpenedTalkHistoryControllerFamily
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'watchNotOpenedTalkHistoryControllerProvider';
+  String? get name => r'watchNotOpenedTalkHistoryCountControllerProvider';
 }
 
-///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+/// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
 ///
-/// Copied from [watchNotOpenedTalkHistoryController].
-class WatchNotOpenedTalkHistoryControllerProvider
-    extends AutoDisposeStreamProvider<List<TalkHistory>> {
-  ///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+/// Copied from [watchNotOpenedTalkHistoryCountController].
+class WatchNotOpenedTalkHistoryCountControllerProvider
+    extends AutoDisposeStreamProvider<int> {
+  /// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
   ///
-  /// Copied from [watchNotOpenedTalkHistoryController].
-  WatchNotOpenedTalkHistoryControllerProvider(String talkRoomId)
+  /// Copied from [watchNotOpenedTalkHistoryCountController].
+  WatchNotOpenedTalkHistoryCountControllerProvider(String talkRoomId)
     : this._internal(
-        (ref) => watchNotOpenedTalkHistoryController(
-          ref as WatchNotOpenedTalkHistoryControllerRef,
+        (ref) => watchNotOpenedTalkHistoryCountController(
+          ref as WatchNotOpenedTalkHistoryCountControllerRef,
           talkRoomId,
         ),
-        from: watchNotOpenedTalkHistoryControllerProvider,
-        name: r'watchNotOpenedTalkHistoryControllerProvider',
+        from: watchNotOpenedTalkHistoryCountControllerProvider,
+        name: r'watchNotOpenedTalkHistoryCountControllerProvider',
         debugGetCreateSourceHash:
             const bool.fromEnvironment('dart.vm.product')
                 ? null
-                : _$watchNotOpenedTalkHistoryControllerHash,
-        dependencies: WatchNotOpenedTalkHistoryControllerFamily._dependencies,
+                : _$watchNotOpenedTalkHistoryCountControllerHash,
+        dependencies:
+            WatchNotOpenedTalkHistoryCountControllerFamily._dependencies,
         allTransitiveDependencies:
-            WatchNotOpenedTalkHistoryControllerFamily
+            WatchNotOpenedTalkHistoryCountControllerFamily
                 ._allTransitiveDependencies,
         talkRoomId: talkRoomId,
       );
 
-  WatchNotOpenedTalkHistoryControllerProvider._internal(
+  WatchNotOpenedTalkHistoryCountControllerProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -407,15 +408,13 @@ class WatchNotOpenedTalkHistoryControllerProvider
 
   @override
   Override overrideWith(
-    Stream<List<TalkHistory>> Function(
-      WatchNotOpenedTalkHistoryControllerRef provider,
-    )
+    Stream<int> Function(WatchNotOpenedTalkHistoryCountControllerRef provider)
     create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: WatchNotOpenedTalkHistoryControllerProvider._internal(
-        (ref) => create(ref as WatchNotOpenedTalkHistoryControllerRef),
+      override: WatchNotOpenedTalkHistoryCountControllerProvider._internal(
+        (ref) => create(ref as WatchNotOpenedTalkHistoryCountControllerRef),
         from: from,
         name: null,
         dependencies: null,
@@ -427,13 +426,13 @@ class WatchNotOpenedTalkHistoryControllerProvider
   }
 
   @override
-  AutoDisposeStreamProviderElement<List<TalkHistory>> createElement() {
-    return _WatchNotOpenedTalkHistoryControllerProviderElement(this);
+  AutoDisposeStreamProviderElement<int> createElement() {
+    return _WatchNotOpenedTalkHistoryCountControllerProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is WatchNotOpenedTalkHistoryControllerProvider &&
+    return other is WatchNotOpenedTalkHistoryCountControllerProvider &&
         other.talkRoomId == talkRoomId;
   }
 
@@ -448,20 +447,20 @@ class WatchNotOpenedTalkHistoryControllerProvider
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin WatchNotOpenedTalkHistoryControllerRef
-    on AutoDisposeStreamProviderRef<List<TalkHistory>> {
+mixin WatchNotOpenedTalkHistoryCountControllerRef
+    on AutoDisposeStreamProviderRef<int> {
   /// The parameter `talkRoomId` of this provider.
   String get talkRoomId;
 }
 
-class _WatchNotOpenedTalkHistoryControllerProviderElement
-    extends AutoDisposeStreamProviderElement<List<TalkHistory>>
-    with WatchNotOpenedTalkHistoryControllerRef {
-  _WatchNotOpenedTalkHistoryControllerProviderElement(super.provider);
+class _WatchNotOpenedTalkHistoryCountControllerProviderElement
+    extends AutoDisposeStreamProviderElement<int>
+    with WatchNotOpenedTalkHistoryCountControllerRef {
+  _WatchNotOpenedTalkHistoryCountControllerProviderElement(super.provider);
 
   @override
   String get talkRoomId =>
-      (origin as WatchNotOpenedTalkHistoryControllerProvider).talkRoomId;
+      (origin as WatchNotOpenedTalkHistoryCountControllerProvider).talkRoomId;
 }
 
 String _$talkHistoryControllerHash() =>

@@ -48,6 +48,13 @@ class TalkController extends _$TalkController {
 }
 
 @riverpod
+/// トークルーム一覧を取得
 Stream<List<Talk>> watchAllTalkRoomListController(ref) {
   return ref.watch(talkRepoProvider.notifier).watchAllTalkRoomList();
 }
+
+// @riverpod
+// /// 全ての未読件数を取得して監視
+// Stream<int> watchAllNotOpenedTalkHistoryCountController(ref) {
+
+// }

@@ -22,12 +22,14 @@ class TalkHistoryController extends _$TalkHistoryController {
     required String imageUrl,
     required String talkRoomId,
     required String talkId,
+    required String targetUserId,
   }) async {
     final Timestamp now = Timestamp.now();
     TalkHistory addTalkHistoryData = TalkHistory(
       talkId: talkId,
       talkRoomId: talkRoomId,
       talkerUserId: ref.read(currentUserControllerProvider)!.uid,
+      userIds: [ref.read(currentUserControllerProvider)!.uid, targetUserId],
       message: message,
       createdAt: now,
       updatedAt: now,
@@ -98,7 +100,7 @@ Stream<List<TalkHistory>> watchAllTalkHistoryController(
       .watchAllTalkHistory();
 }
 
-///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+/// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
 @riverpod
 Stream<TalkHistory?> watchLatestTalkHistoryController(ref, String talkRoomId) {
   return ref
@@ -107,12 +109,9 @@ Stream<TalkHistory?> watchLatestTalkHistoryController(ref, String talkRoomId) {
 }
 
 @riverpod
-///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
-Stream<List<TalkHistory>> watchNotOpenedTalkHistoryController(
-  ref,
-  String talkRoomId,
-) {
+/// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+Stream<int> watchNotOpenedTalkHistoryCountController(ref, String talkRoomId) {
   return ref
       .watch(talkHistoryRepoProvider(talkRoomId).notifier)
-      .watchNotOpenedTalkHistory();
+      .watchNotOpenedTalkHistoryCount();
 }

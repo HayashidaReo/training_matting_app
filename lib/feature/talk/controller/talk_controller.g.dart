@@ -9,7 +9,9 @@ part of 'talk_controller.dart';
 String _$watchAllTalkRoomListControllerHash() =>
     r'9bc0f31345b12df21c1f950ce71b88f94cf16a18';
 
-/// See also [watchAllTalkRoomListController].
+/// トークルーム一覧を取得
+///
+/// Copied from [watchAllTalkRoomListController].
 @ProviderFor(watchAllTalkRoomListController)
 final watchAllTalkRoomListControllerProvider =
     AutoDisposeStreamProvider<List<Talk>>.internal(

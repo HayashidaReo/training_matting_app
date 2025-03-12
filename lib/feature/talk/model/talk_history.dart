@@ -11,6 +11,7 @@ class TalkHistory with _$TalkHistory {
     required String talkId,
     required String talkRoomId,
     required String talkerUserId,
+    required List<String> userIds,
     required bool isOpened,
     required String message,
     required String imageUrl,

@@ -309,6 +309,7 @@ class TalkRoomPage extends HookConsumerWidget {
           imageUrl: imageUrl,
           talkRoomId: talkRoomId,
           talkId: talkId,
+          targetUserId: targetUserId,
         );
     messageTextController.clear();
     uploadedImageFile.value = null;

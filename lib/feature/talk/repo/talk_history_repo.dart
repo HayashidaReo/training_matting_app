@@ -79,7 +79,7 @@ class TalkHistoryRepo extends _$TalkHistoryRepo {
   }
 
   ///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
-  Stream<List<TalkHistory>> watchNotOpenedTalkHistory() {
+  Stream<int> watchNotOpenedTalkHistoryCount() {
     return state
         .where(FirebaseTalkHistoryDataKey.isOpened, isEqualTo: false)
         .where(
@@ -89,7 +89,7 @@ class TalkHistoryRepo extends _$TalkHistoryRepo {
         .snapshots()
         .map(
           (QuerySnapshot<TalkHistory> snapshot) =>
-              snapshot.docs.map((doc) => doc.data()).toList(),
+              snapshot.docs.map((doc) => doc.data()).toList().length,
         );
   }
 }

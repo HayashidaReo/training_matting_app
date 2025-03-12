@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/config/utils/decoration/text_field_decoration.dart';
 import 'package:matching_app/feature/component/user_list_tile.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
+import 'package:matching_app/feature/user/controller/user_list_status_controller.dart';
 import 'package:matching_app/feature/user/model/userdata.dart';
 
 class UserListPage extends HookConsumerWidget {
@@ -17,26 +18,52 @@ class UserListPage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Stack(
+        title: Row(
           children: [
-            TextField(
-              controller: searchTextController,
-              decoration: textFieldDecoration('ユーザー検索'),
-              onChanged: (text) {
-                searchText.value = text;
-              },
-            ),
-            Positioned(
-              right: 5,
-              top: 10,
-              bottom: 10,
-              child: IconButton(
-                icon: const Icon(Icons.search),
-                iconSize: 24,
-                onPressed: () {
-                  FocusScope.of(context).unfocus();
-                },
+            Expanded(
+              child: Stack(
+                children: [
+                  TextField(
+                    controller: searchTextController,
+                    decoration: textFieldDecoration('ユーザー検索'),
+                    onChanged: (text) {
+                      searchText.value = text;
+                    },
+                  ),
+                  Positioned(
+                    right: 5,
+                    top: 10,
+                    bottom: 10,
+                    child: IconButton(
+                      icon: const Icon(Icons.search),
+                      iconSize: 24,
+                      onPressed: () {
+                        FocusScope.of(context).unfocus();
+                      },
+                    ),
+                  ),
+                ],
               ),
+            ),
+            PopupMenuButton(
+              icon: const Icon(Icons.sort_outlined),
+              onSelected: (value) async {
+                if (value == 'opposite') {
+                  ref
+                      .read(userListStatusControllerProvider.notifier)
+                      .updateIndex(0);
+                } else if (value == 'all') {
+                  ref
+                      .read(userListStatusControllerProvider.notifier)
+                      .updateIndex(1);
+                }
+              },
+              itemBuilder: (context) {
+                return [
+                  const PopupMenuItem(value: 'opposite', child: Text('異性のみ')),
+                  const PopupMenuItem(value: 'all', child: Text('全てのユーザー')),
+                ];
+              },
             ),
           ],
         ),
@@ -44,11 +71,7 @@ class UserListPage extends HookConsumerWidget {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ref
-            .watch(
-              watchForwardMatchingWithQueryTextUsersControllerProvider(
-                searchText.value,
-              ),
-            )
+            .watch(watchMyUserDataControllerProvider)
             .when(
               error: (error, _) {
                 return const Center(child: Text('エラーが発生しました'));
@@ -56,17 +79,40 @@ class UserListPage extends HookConsumerWidget {
               loading: () {
                 return const Center(child: CircularProgressIndicator());
               },
-              data: (List<UserData> userDataList) {
-                return ListView.separated(
-                  itemCount: userDataList.length,
-                  separatorBuilder: (context, index) {
-                    return Divider();
-                  },
-                  itemBuilder: (context, index) {
-                    final UserData userData = userDataList[index];
-                    return UserListTile(userData: userData);
-                  },
-                );
+              data: (UserData? myUserData) {
+                if (myUserData == null) {
+                  return const Center(child: Text('ユーザー情報が取得できませんでした'));
+                }
+                return ref
+                    .watch(
+                      watchForwardMatchingWithQueryTextUsersControllerProvider(
+                        searchText.value,
+
+                        (ref.watch(userListStatusControllerProvider) == 0)
+                            ? myUserData.gender
+                            : null,
+                      ),
+                    )
+                    .when(
+                      error: (error, _) {
+                        return const Center(child: Text('エラーが発生しました'));
+                      },
+                      loading: () {
+                        return const Center(child: CircularProgressIndicator());
+                      },
+                      data: (List<UserData> userDataList) {
+                        return ListView.separated(
+                          itemCount: userDataList.length,
+                          separatorBuilder: (context, index) {
+                            return Divider();
+                          },
+                          itemBuilder: (context, index) {
+                            final UserData userData = userDataList[index];
+                            return UserListTile(userData: userData);
+                          },
+                        );
+                      },
+                    );
               },
             ),
       ),

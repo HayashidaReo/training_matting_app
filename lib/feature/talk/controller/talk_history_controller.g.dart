@@ -466,7 +466,7 @@ class _WatchNotOpenedTalkHistoryCountControllerProviderElement
 String _$watchAllNotOpenedTalkHistoryCountControllerHash() =>
     r'119adbb88f8d0b7371ad85e68d77595971a12e50';
 
-/// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+/// 全ての未読件数を取得して監視
 ///
 /// Copied from [watchAllNotOpenedTalkHistoryCountController].
 @ProviderFor(watchAllNotOpenedTalkHistoryCountController)

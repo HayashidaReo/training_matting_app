@@ -193,7 +193,7 @@ final watchAllUsersControllerProvider =
 typedef WatchAllUsersControllerRef =
     AutoDisposeStreamProviderRef<List<UserData>>;
 String _$watchForwardMatchingWithQueryTextUsersControllerHash() =>
-    r'7adc7e4a3a61e5a21be4b229bf3fcec00c0b1c52';
+    r'f503f98b341e5d57b92deeaf271fc8ce9f7bfd5d';
 
 /// See also [watchForwardMatchingWithQueryTextUsersController].
 @ProviderFor(watchForwardMatchingWithQueryTextUsersController)
@@ -209,15 +209,19 @@ class WatchForwardMatchingWithQueryTextUsersControllerFamily
   /// See also [watchForwardMatchingWithQueryTextUsersController].
   WatchForwardMatchingWithQueryTextUsersControllerProvider call(
     String queryText,
+    String? myGender,
   ) {
-    return WatchForwardMatchingWithQueryTextUsersControllerProvider(queryText);
+    return WatchForwardMatchingWithQueryTextUsersControllerProvider(
+      queryText,
+      myGender,
+    );
   }
 
   @override
   WatchForwardMatchingWithQueryTextUsersControllerProvider getProviderOverride(
     covariant WatchForwardMatchingWithQueryTextUsersControllerProvider provider,
   ) {
-    return call(provider.queryText);
+    return call(provider.queryText, provider.myGender);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -240,11 +244,14 @@ class WatchForwardMatchingWithQueryTextUsersControllerFamily
 class WatchForwardMatchingWithQueryTextUsersControllerProvider
     extends AutoDisposeStreamProvider<List<UserData>> {
   /// See also [watchForwardMatchingWithQueryTextUsersController].
-  WatchForwardMatchingWithQueryTextUsersControllerProvider(String queryText)
-    : this._internal(
+  WatchForwardMatchingWithQueryTextUsersControllerProvider(
+    String queryText,
+    String? myGender,
+  ) : this._internal(
         (ref) => watchForwardMatchingWithQueryTextUsersController(
           ref as WatchForwardMatchingWithQueryTextUsersControllerRef,
           queryText,
+          myGender,
         ),
         from: watchForwardMatchingWithQueryTextUsersControllerProvider,
         name: r'watchForwardMatchingWithQueryTextUsersControllerProvider',
@@ -259,6 +266,7 @@ class WatchForwardMatchingWithQueryTextUsersControllerProvider
             WatchForwardMatchingWithQueryTextUsersControllerFamily
                 ._allTransitiveDependencies,
         queryText: queryText,
+        myGender: myGender,
       );
 
   WatchForwardMatchingWithQueryTextUsersControllerProvider._internal(
@@ -269,9 +277,11 @@ class WatchForwardMatchingWithQueryTextUsersControllerProvider
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.queryText,
+    required this.myGender,
   }) : super.internal();
 
   final String queryText;
+  final String? myGender;
 
   @override
   Override overrideWith(
@@ -293,6 +303,7 @@ class WatchForwardMatchingWithQueryTextUsersControllerProvider
             allTransitiveDependencies: null,
             debugGetCreateSourceHash: null,
             queryText: queryText,
+            myGender: myGender,
           ),
     );
   }
@@ -307,13 +318,15 @@ class WatchForwardMatchingWithQueryTextUsersControllerProvider
   @override
   bool operator ==(Object other) {
     return other is WatchForwardMatchingWithQueryTextUsersControllerProvider &&
-        other.queryText == queryText;
+        other.queryText == queryText &&
+        other.myGender == myGender;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, queryText.hashCode);
+    hash = _SystemHash.combine(hash, myGender.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -325,6 +338,9 @@ mixin WatchForwardMatchingWithQueryTextUsersControllerRef
     on AutoDisposeStreamProviderRef<List<UserData>> {
   /// The parameter `queryText` of this provider.
   String get queryText;
+
+  /// The parameter `myGender` of this provider.
+  String? get myGender;
 }
 
 class _WatchForwardMatchingWithQueryTextUsersControllerProviderElement
@@ -338,6 +354,10 @@ class _WatchForwardMatchingWithQueryTextUsersControllerProviderElement
   String get queryText =>
       (origin as WatchForwardMatchingWithQueryTextUsersControllerProvider)
           .queryText;
+  @override
+  String? get myGender =>
+      (origin as WatchForwardMatchingWithQueryTextUsersControllerProvider)
+          .myGender;
 }
 
 String _$userControllerHash() => r'22855f078a3f2a602c308e124eefbe9de2f5c334';

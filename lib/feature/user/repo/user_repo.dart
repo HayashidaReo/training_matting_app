@@ -66,6 +66,19 @@ class UserRepo extends _$UserRepo {
         });
   }
 
+  // streamで性別を指定してuserListを取得
+  Stream<List<UserData>> watchOppositeGenderUsers(String myGender) {
+    return state
+        .where(FirebaseUserDataKey.gender, isNotEqualTo: myGender)
+        .orderBy(FirebaseUserDataKey.createdAt, descending: true)
+        .snapshots()
+        .map((QuerySnapshot<UserData> snapshot) {
+          return snapshot.docs.map((QueryDocumentSnapshot<UserData> doc) {
+            return doc.data();
+          }).toList();
+        });
+  }
+
   // streamで指定した文字列と前方一致のuserのuserListを取得
   Stream<List<UserData>> watchForwardMatchingWithQueryTextUsers(
     String queryText,
@@ -73,6 +86,24 @@ class UserRepo extends _$UserRepo {
     return state
         .orderBy(FirebaseUserDataKey.createdAt, descending: true)
         .where(FirebaseUserDataKey.userName, isGreaterThanOrEqualTo: queryText)
+        .where(FirebaseUserDataKey.userName, isLessThan: '$queryText\uf8ff')
+        .snapshots()
+        .map((QuerySnapshot<UserData> snapshot) {
+          return snapshot.docs.map((QueryDocumentSnapshot<UserData> doc) {
+            return doc.data();
+          }).toList();
+        });
+  }
+
+  // streamで指定した性別で指定した文字列と前方一致のuserのuserListを取得
+  Stream<List<UserData>> watchForwardMatchingWithQueryTextAndGenderUsers(
+    String queryText,
+    String myGender,
+  ) {
+    return state
+        .orderBy(FirebaseUserDataKey.createdAt, descending: true)
+        .where(FirebaseUserDataKey.userName, isGreaterThanOrEqualTo: queryText)
+        .where(FirebaseUserDataKey.gender, isNotEqualTo: myGender)
         .where(FirebaseUserDataKey.userName, isLessThan: '$queryText\uf8ff')
         .snapshots()
         .map((QuerySnapshot<UserData> snapshot) {

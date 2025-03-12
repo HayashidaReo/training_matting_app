@@ -98,11 +98,25 @@ Stream<List<UserData>> watchAllUsersController(ref) {
 Stream<List<UserData>> watchForwardMatchingWithQueryTextUsersController(
   ref,
   String queryText,
+  String? myGender,
 ) {
   if (queryText.isEmpty) {
-    return ref.watch(userRepoProvider.notifier).watchAllUsers();
+    if (myGender != null) {
+      return ref
+          .watch(userRepoProvider.notifier)
+          .watchOppositeGenderUsers(myGender);
+    } else {
+      return ref.watch(userRepoProvider.notifier).watchAllUsers();
+    }
+  } else {
+    if (myGender != null) {
+      return ref
+          .watch(userRepoProvider.notifier)
+          .watchForwardMatchingWithQueryTextAndGenderUsers(queryText, myGender);
+    } else {
+      return ref
+          .watch(userRepoProvider.notifier)
+          .watchForwardMatchingWithQueryTextUsers(queryText);
+    }
   }
-  return ref
-      .watch(userRepoProvider.notifier)
-      .watchForwardMatchingWithQueryTextUsers(queryText);
 }

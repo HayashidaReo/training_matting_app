@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:matching_app/config/firebase/firebase_instance_provider.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
+import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/talk/model/talk_history.dart';
 import 'package:matching_app/feature/user/controller/storage_controller.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -74,6 +75,21 @@ class TalkHistoryRepo extends _$TalkHistoryRepo {
         .map(
           (QuerySnapshot<TalkHistory> snapshot) =>
               snapshot.docs.isNotEmpty ? snapshot.docs.first.data() : null,
+        );
+  }
+
+  ///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+  Stream<List<TalkHistory>> watchNotOpenedTalkHistory() {
+    return state
+        .where(FirebaseTalkHistoryDataKey.isOpened, isEqualTo: false)
+        .where(
+          FirebaseTalkHistoryDataKey.talkerUserId,
+          isNotEqualTo: ref.read(currentUserControllerProvider)!.uid,
+        )
+        .snapshots()
+        .map(
+          (QuerySnapshot<TalkHistory> snapshot) =>
+              snapshot.docs.map((doc) => doc.data()).toList(),
         );
   }
 }

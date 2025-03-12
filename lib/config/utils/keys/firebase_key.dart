@@ -57,6 +57,7 @@ class FirebaseTalkHistoryDataKey {
   static String talkerUserId = 'talkerUserId';
   static String message = 'message';
   static String imageUrl = 'imageUrl';
+  static String isOpened = 'isOpened';
   static String createdAt = 'createdAt';
   static String updatedAt = 'updatedAt';
 }

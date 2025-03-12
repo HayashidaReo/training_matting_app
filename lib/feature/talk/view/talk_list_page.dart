@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
+import 'package:matching_app/feature/component/badge_count_widget.dart';
 import 'package:matching_app/feature/component/icon_image.dart';
 import 'package:matching_app/feature/talk/controller/talk_controller.dart';
 import 'package:matching_app/feature/talk/controller/talk_history_controller.dart';
@@ -65,9 +66,44 @@ class TalkListPage extends ConsumerWidget {
                                 );
                               },
                             ),
-                            trailing: Text(
-                              formatTalkTimestamp(talkData.updatedAt),
-                              style: TextStyle(fontSize: FontSize.extraSmall),
+                            trailing: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  formatTalkTimestamp(talkData.updatedAt),
+                                  style: TextStyle(
+                                    fontSize: FontSize.extraSmall,
+                                  ),
+                                ),
+                                ref
+                                    .watch(
+                                      watchNotOpenedTalkHistoryControllerProvider(
+                                        talkData.talkRoomId,
+                                      ),
+                                    )
+                                    .when(
+                                      error: (error, _) {
+                                        return const Text('エラーが発生しました');
+                                      },
+                                      loading: () {
+                                        return const SizedBox.shrink();
+                                      },
+                                      data: (
+                                        List<TalkHistory>
+                                        notOpenedTalkHistoryList,
+                                      ) {
+                                        if (notOpenedTalkHistoryList.isEmpty) {
+                                          return const SizedBox(height: 8);
+                                        } else {
+                                          return badgeCountWidget(
+                                            ref,
+                                            notOpenedTalkHistoryList.length,
+                                          );
+                                        }
+                                      },
+                                    ),
+                              ],
                             ),
                             title: Text(
                               targetUserData.userName,

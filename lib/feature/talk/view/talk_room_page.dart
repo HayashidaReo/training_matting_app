@@ -60,7 +60,7 @@ class TalkRoomPage extends HookConsumerWidget {
                     loading: () {
                       return Center(child: CircularProgressIndicator());
                     },
-                    data: (talkHistoryDataList) {
+                    data: (List<TalkHistory> talkHistoryDataList) {
                       return UnFocus(
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -76,6 +76,18 @@ class TalkRoomPage extends HookConsumerWidget {
                                   itemBuilder: (context, index) {
                                     final TalkHistory talkHistoryData =
                                         talkHistoryDataList[index];
+                                    if (!talkHistoryData.isOpened &&
+                                        talkHistoryData.talkerUserId ==
+                                            targetUserId) {
+                                      ref
+                                          .read(
+                                            talkHistoryControllerProvider
+                                                .notifier,
+                                          )
+                                          .openTalkHistory(
+                                            talkHistoryData: talkHistoryData,
+                                          );
+                                    }
                                     return Row(
                                       children: [
                                         (talkHistoryData.message.isEmpty &&

@@ -24,7 +24,7 @@ class BottomNavigationPage extends ConsumerWidget {
               clipBehavior: Clip.none,
               children: [
                 Icon(Icons.message),
-                Positioned(top: -6, right: -8, child: badgeCountWidget(ref)),
+                Positioned(top: -6, right: -8, child: badgeCountWidget(ref, 2)),
               ],
             ),
             label: 'TalkList',

@@ -105,3 +105,14 @@ Stream<TalkHistory?> watchLatestTalkHistoryController(ref, String talkRoomId) {
       .watch(talkHistoryRepoProvider(talkRoomId).notifier)
       .watchLatestTalkHistory();
 }
+
+@riverpod
+///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+Stream<List<TalkHistory>> watchNotOpenedTalkHistoryController(
+  ref,
+  String talkRoomId,
+) {
+  return ref
+      .watch(talkHistoryRepoProvider(talkRoomId).notifier)
+      .watchNotOpenedTalkHistory();
+}

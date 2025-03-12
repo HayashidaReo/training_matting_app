@@ -42,7 +42,7 @@ class MyPage extends ConsumerWidget {
                   context.goNamed(AppRoute.talkList.name);
                 },
               ),
-              Positioned(top: 4, right: 4, child: badgeCountWidget(ref)),
+              Positioned(top: 4, right: 4, child: badgeCountWidget(ref, 2)),
             ],
           ),
         ],

@@ -129,7 +129,6 @@ class TalkRoomPage extends HookConsumerWidget {
                                                     .deleteTalkHistory(
                                                       talkHistoryData:
                                                           talkHistoryData,
-                                                      talkRoomId: talkRoomId,
                                                     );
                                                 if (context.mounted) {
                                                   context.pop();

@@ -8,6 +8,7 @@ part of 'talk_history.dart';
 
 _TalkHistory _$TalkHistoryFromJson(Map<String, dynamic> json) => _TalkHistory(
   talkId: json['talkId'] as String,
+  talkRoomId: json['talkRoomId'] as String,
   talkerUserId: json['talkerUserId'] as String,
   isOpened: json['isOpened'] as bool,
   message: json['message'] as String,
@@ -23,6 +24,7 @@ _TalkHistory _$TalkHistoryFromJson(Map<String, dynamic> json) => _TalkHistory(
 Map<String, dynamic> _$TalkHistoryToJson(_TalkHistory instance) =>
     <String, dynamic>{
       'talkId': instance.talkId,
+      'talkRoomId': instance.talkRoomId,
       'talkerUserId': instance.talkerUserId,
       'isOpened': instance.isOpened,
       'message': instance.message,

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:matching_app/config/firebase/firebase_instance_provider.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
+import 'package:matching_app/feature/talk/controller/talk_history_controller.dart';
 import 'package:matching_app/feature/talk/model/talk.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -27,6 +28,8 @@ class TalkRepo extends _$TalkRepo {
   /// TalkRoomを削除
   Future<void> deleteTalkRoom(String talkRoomId) async {
     await state.doc(talkRoomId).delete();
-    //TODO: サブコレクションも削除する
+    ref
+        .read(talkHistoryControllerProvider.notifier)
+        .deleteAllTalkHistory(talkRoomId: talkRoomId);
   }
 }

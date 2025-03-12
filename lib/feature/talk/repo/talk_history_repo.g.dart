@@ -6,7 +6,7 @@ part of 'talk_history_repo.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$talkHistoryRepoHash() => r'319ec9e421691e8b9236401156a4e314cfed2d67';
+String _$talkHistoryRepoHash() => r'fb0579a68f5d2054a8080dc5a33d7659bb2d2072';
 
 /// Copied from Dart SDK
 class _SystemHash {

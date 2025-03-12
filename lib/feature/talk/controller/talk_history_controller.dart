@@ -25,6 +25,7 @@ class TalkHistoryController extends _$TalkHistoryController {
     final Timestamp now = Timestamp.now();
     TalkHistory addTalkHistoryData = TalkHistory(
       talkId: talkId,
+      talkRoomId: talkRoomId,
       talkerUserId: ref.read(currentUserControllerProvider)!.uid,
       message: message,
       createdAt: now,
@@ -38,24 +39,20 @@ class TalkHistoryController extends _$TalkHistoryController {
   }
 
   /// 既読をつける
-  Future<void> openTalkHistory({
-    required TalkHistory talkHistoryData,
-    required String talkRoomId,
-  }) async {
+  Future<void> openTalkHistory({required TalkHistory talkHistoryData}) async {
     final updateTalkHistoryData = talkHistoryData.copyWith(
       isOpened: true,
       updatedAt: Timestamp.now(),
     );
     await ref
-        .read(talkHistoryRepoProvider(talkRoomId).notifier)
+        .read(
+          talkHistoryRepoProvider(updateTalkHistoryData.talkRoomId).notifier,
+        )
         .updateTalkHistory(updateTalkHistoryData);
   }
 
   /// トーク履歴を削除(送信取り消し)
-  Future<void> deleteTalkHistory({
-    required TalkHistory talkHistoryData,
-    required String talkRoomId,
-  }) async {
+  Future<void> deleteTalkHistory({required TalkHistory talkHistoryData}) async {
     final updateTalkHistoryData = talkHistoryData.copyWith(
       message: '',
       imageUrl: '',
@@ -66,13 +63,23 @@ class TalkHistoryController extends _$TalkHistoryController {
       await ref
           .read(storageControllerProvider.notifier)
           .deleteImage(
-            folderName: '${FirebaseStorageKey.talkImageCollection}/$talkRoomId',
+            folderName:
+                '${FirebaseStorageKey.talkImageCollection}/${updateTalkHistoryData.talkRoomId}',
             docId: talkHistoryData.talkId,
           );
     }
     await ref
-        .read(talkHistoryRepoProvider(talkRoomId).notifier)
+        .read(
+          talkHistoryRepoProvider(updateTalkHistoryData.talkRoomId).notifier,
+        )
         .updateTalkHistory(updateTalkHistoryData);
+  }
+
+  /// talkRoomIdに紐づくtalk_historyコレクション全体を削除
+  Future<void> deleteAllTalkHistory({required String talkRoomId}) async {
+    ref
+        .read(talkHistoryRepoProvider(talkRoomId).notifier)
+        .deleteAllTalkHistory();
   }
 }
 

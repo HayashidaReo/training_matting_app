@@ -174,7 +174,7 @@ class _WatchAllTalkHistoryControllerProviderElement
 }
 
 String _$talkHistoryControllerHash() =>
-    r'02556721182a3bfa328951c4540fef0b82e42c96';
+    r'4a7bde722fed2234cd812478365be6e9b3cf4268';
 
 /// See also [TalkHistoryController].
 @ProviderFor(TalkHistoryController)

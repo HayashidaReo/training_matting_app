@@ -9,6 +9,7 @@ part 'talk_history.g.dart';
 class TalkHistory with _$TalkHistory {
   factory TalkHistory({
     required String talkId,
+    required String talkRoomId,
     required String talkerUserId,
     required bool isOpened,
     required String message,

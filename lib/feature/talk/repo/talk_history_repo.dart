@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:matching_app/config/firebase/firebase_instance_provider.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/talk/model/talk_history.dart';
+import 'package:matching_app/feature/user/controller/storage_controller.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'talk_history_repo.g.dart';
@@ -32,6 +33,25 @@ class TalkHistoryRepo extends _$TalkHistoryRepo {
     await state
         .doc(updateTalkHistoryData.talkId)
         .update(updateTalkHistoryData.toJson());
+  }
+
+  /// talkRoomIdに紐づくtalk_historyコレクション全体を削除
+  Future<void> deleteAllTalkHistory() async {
+    final QuerySnapshot<TalkHistory> snapshot = await state.get();
+    for (final QueryDocumentSnapshot<TalkHistory> doc in snapshot.docs) {
+      await doc.reference.delete();
+      final TalkHistory talkHistoryData = doc.data();
+      // 画像の削除
+      if (talkHistoryData.imageUrl.isNotEmpty) {
+        await ref
+            .read(storageControllerProvider.notifier)
+            .deleteImage(
+              folderName:
+                  '${FirebaseStorageKey.talkImageCollection}/$talkRoomId',
+              docId: talkHistoryData.talkId,
+            );
+      }
+    }
   }
 
   /// streamでtalkRoomIdに紐づくtalk_historyコレクションを全て取得

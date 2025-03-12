@@ -38,6 +38,13 @@ class TalkController extends _$TalkController {
     final talkRoomId = '${userIds[0]}_${userIds[1]}';
     ref.read(talkRepoProvider.notifier).deleteTalkRoom(talkRoomId);
   }
+
+  /// TalkRoomのupdateAtを更新
+  Future<void> updateUpdateAtOfTalkRoom(String talkRoomId) async {
+    await ref
+        .read(talkRepoProvider.notifier)
+        .updateUpdateAtOfTalkRoom(talkRoomId);
+  }
 }
 
 @riverpod

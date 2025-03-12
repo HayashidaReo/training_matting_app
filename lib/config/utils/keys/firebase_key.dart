@@ -11,7 +11,7 @@ class FirebasePostDataKey {
   static String postCollection = 'posts';
   static String userId = 'userId';
   static String createdAt = 'createdAt';
-  static String updateAt = 'updateAt';
+  static String updatedAt = 'updatedAt';
 }
 
 class FirebaseBookmarkDataKey {
@@ -20,7 +20,7 @@ class FirebaseBookmarkDataKey {
   static String postId = 'postId';
   static String userId = 'userId';
   static String createdAt = 'createdAt';
-  static String updateAt = 'updateAt';
+  static String updatedAt = 'updatedAt';
 }
 
 class FirebaseFavoriteDataKey {
@@ -29,7 +29,7 @@ class FirebaseFavoriteDataKey {
   static String postId = 'postId';
   static String userId = 'userId';
   static String createdAt = 'createdAt';
-  static String updateAt = 'updateAt';
+  static String updatedAt = 'updatedAt';
 }
 
 class FirebaseFollowDataKey {
@@ -38,7 +38,7 @@ class FirebaseFollowDataKey {
   static String followerUserId = 'followerUserId';
   static String followingUserId = 'followingUserId';
   static String createdAt = 'createdAt';
-  static String updateAt = 'updateAt';
+  static String updatedAt = 'updatedAt';
 }
 
 class FirebaseTalkDataKey {
@@ -47,7 +47,7 @@ class FirebaseTalkDataKey {
   static String talkRoomId = 'talkRoomId';
   static String userIds = 'userIds';
   static String createdAt = 'createdAt';
-  static String updateAt = 'updateAt';
+  static String updatedAt = 'updatedAt';
 }
 
 class FirebaseTalkHistoryDataKey {
@@ -58,7 +58,7 @@ class FirebaseTalkHistoryDataKey {
   static String message = 'message';
   static String imageUrl = 'imageUrl';
   static String createdAt = 'createdAt';
-  static String updateAt = 'updateAt';
+  static String updatedAt = 'updatedAt';
 }
 
 class FirebaseStorageKey {

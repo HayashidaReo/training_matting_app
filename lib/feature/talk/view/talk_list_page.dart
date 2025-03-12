@@ -5,6 +5,8 @@ import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/talk/controller/talk_controller.dart';
 import 'package:matching_app/feature/talk/model/talk.dart';
+import 'package:matching_app/feature/user/controller/user_controller.dart';
+import 'package:matching_app/feature/user/model/userdata.dart';
 
 class TalkListPage extends ConsumerWidget {
   const TalkListPage({super.key});
@@ -31,15 +33,30 @@ class TalkListPage extends ConsumerWidget {
                     (element) =>
                         element != ref.read(currentUserControllerProvider)!.uid,
                   );
-                  return ListTile(
-                    title: Text('Talk ${talkData.talkRoomId}'),
-                    onTap: () {
-                      context.pushNamed(
-                        AppRoute.talkRoom.name,
-                        queryParameters: {'targetUserId': targetUserId},
+                  return ref
+                      .watch(watchUserDataControllerProvider(targetUserId))
+                      .when(
+                        error: (error, _) {
+                          return Center(child: Text('エラーが発生しました'));
+                        },
+                        loading: () {
+                          return Center(child: CircularProgressIndicator());
+                        },
+                        data: (UserData? targetUserData) {
+                          if (targetUserData == null) {
+                            return const Text('ユーザーが見つかりません');
+                          }
+                          return ListTile(
+                            title: Text('${targetUserData.userName}'),
+                            onTap: () {
+                              context.pushNamed(
+                                AppRoute.talkRoom.name,
+                                queryParameters: {'targetUserId': targetUserId},
+                              );
+                            },
+                          );
+                        },
                       );
-                    },
-                  );
                 },
               );
             },

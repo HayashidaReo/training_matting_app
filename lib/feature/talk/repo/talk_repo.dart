@@ -34,6 +34,13 @@ class TalkRepo extends _$TalkRepo {
         .deleteAllTalkHistory(talkRoomId: talkRoomId);
   }
 
+  /// TalkRoomのupdateAtを更新
+  Future<void> updateUpdateAtOfTalkRoom(String talkRoomId) async {
+    await state.doc(talkRoomId).update({
+      FirebaseTalkDataKey.updatedAt: Timestamp.now(),
+    });
+  }
+
   /// トークルーム一覧を取得
   Stream<List<Talk>> watchAllTalkRoomList() {
     return state
@@ -41,7 +48,7 @@ class TalkRepo extends _$TalkRepo {
           FirebaseTalkDataKey.userIds,
           arrayContains: ref.read(currentUserControllerProvider)!.uid,
         )
-        .orderBy(FirebaseUserDataKey.createdAt, descending: true)
+        .orderBy(FirebaseTalkDataKey.updatedAt, descending: true)
         .snapshots()
         .map((QuerySnapshot<Talk> snapshot) {
           return snapshot.docs.map((QueryDocumentSnapshot<Talk> doc) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/config/utils/decoration/text_field_decoration.dart';
+import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/component/user_list_tile.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/controller/user_list_status_controller.dart';
@@ -101,13 +102,27 @@ class UserListPage extends HookConsumerWidget {
                         return const Center(child: CircularProgressIndicator());
                       },
                       data: (List<UserData> userDataList) {
+                        // whereではフィルターを１つしかかけれないので、ここでフィルターをかける
+                        final List<UserData> filteredUserDataList =
+                            userDataList
+                                .where(
+                                  (user) =>
+                                      user.userId !=
+                                      ref
+                                          .read(currentUserControllerProvider)!
+                                          .uid,
+                                )
+                                .toList();
+
                         return ListView.separated(
-                          itemCount: userDataList.length,
+                          itemCount: filteredUserDataList.length,
                           separatorBuilder: (context, index) {
                             return Divider();
                           },
                           itemBuilder: (context, index) {
-                            final UserData userData = userDataList[index];
+                            final UserData userData =
+                                filteredUserDataList[index];
+
                             return UserListTile(userData: userData);
                           },
                         );

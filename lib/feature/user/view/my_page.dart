@@ -372,7 +372,6 @@ class MyPage extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    // TODO: フォローを解除したりとか、フォローしてもおすすめのカードが消えたりしない
                     ref
                         .watch(
                           watchAllOnlyIncomingFollowUserListControllerProvider(

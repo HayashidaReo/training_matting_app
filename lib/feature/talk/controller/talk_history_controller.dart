@@ -34,6 +34,21 @@ class TalkHistoryController extends _$TalkHistoryController {
         .read(talkHistoryRepoProvider(talkRoomId).notifier)
         .addTalkHistory(addTalkHistoryData);
   }
+
+  /// トーク履歴を削除(送信取り消し)
+  Future<void> deleteTalkHistory({
+    required TalkHistory talkHistoryData,
+    required String talkRoomId,
+  }) async {
+    final updateTalkHistoryData = talkHistoryData.copyWith(
+      message: '',
+      imageUrl: '',
+      updatedAt: Timestamp.now(),
+    );
+    await ref
+        .read(talkHistoryRepoProvider(talkRoomId).notifier)
+        .updateTalkHistory(updateTalkHistoryData);
+  }
 }
 
 /// streamでpostに紐づくfavoritesコレクションを全て取得して監視

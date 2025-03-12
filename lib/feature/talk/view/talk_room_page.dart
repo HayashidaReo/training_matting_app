@@ -85,6 +85,19 @@ class TalkRoomPage extends HookConsumerWidget {
                                                     .uid)
                                             ? MyMassageHistoryTile(
                                               talkHistoryData: talkHistoryData,
+                                              talkRoomId: talkRoomId,
+                                              onPressed: () {
+                                                ref
+                                                    .read(
+                                                      talkHistoryControllerProvider
+                                                          .notifier,
+                                                    )
+                                                    .deleteTalkHistory(
+                                                      talkHistoryData:
+                                                          talkHistoryData,
+                                                      talkRoomId: talkRoomId,
+                                                    );
+                                              },
                                             )
                                             : InterlocutorMassageHistoryTile(
                                               talkHistoryData: talkHistoryData,

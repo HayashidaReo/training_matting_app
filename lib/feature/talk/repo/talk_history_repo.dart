@@ -27,6 +27,13 @@ class TalkHistoryRepo extends _$TalkHistoryRepo {
     await state.doc(addTalkHistoryData.talkId).set(addTalkHistoryData);
   }
 
+  /// トーク履歴を更新
+  Future<void> updateTalkHistory(TalkHistory updateTalkHistoryData) async {
+    await state
+        .doc(updateTalkHistoryData.talkId)
+        .update(updateTalkHistoryData.toJson());
+  }
+
   /// streamでtalkRoomIdに紐づくtalk_historyコレクションを全て取得
   Stream<List<TalkHistory>> watchAllTalkHistory() {
     return state

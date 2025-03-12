@@ -33,6 +33,15 @@ class DefaultColors {
 
   final Color postTileTextColor = Colors.black87;
   final Color postTileBackColor = Colors.white;
+
+  final Color talkRoomMyTextBackColor = Color.fromARGB(255, 255, 74, 161);
+  final Color talkRoomInterlocutorTextBackColor = Color.fromARGB(
+    255,
+    112,
+    112,
+    112,
+  );
+  final Color talkRoomTextColor = Colors.white;
 }
 
 final defaultColors = DefaultColors();

@@ -75,12 +75,15 @@ class InterlocutorMassageHistoryTile extends StatelessWidget {
                         padding: const EdgeInsets.all(6.0),
                         margin: const EdgeInsets.all(6.0),
                         decoration: BoxDecoration(
-                          color: defaultColors.unavailableFrontGreyColor,
+                          color:
+                              defaultColors.talkRoomInterlocutorTextBackColor,
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         child: Text(
                           talkHistoryData.message,
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color: defaultColors.talkRoomTextColor,
+                          ),
                         ),
                       ),
                       Padding(
@@ -185,12 +188,14 @@ class MyMassageHistoryTile extends StatelessWidget {
                           padding: const EdgeInsets.all(6.0),
                           margin: const EdgeInsets.all(6.0),
                           decoration: BoxDecoration(
-                            color: defaultColors.blueTextColor,
+                            color: defaultColors.talkRoomMyTextBackColor,
                             borderRadius: BorderRadius.circular(12.0),
                           ),
                           child: Text(
                             talkHistoryData.message,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: defaultColors.talkRoomTextColor,
+                            ),
                           ),
                         ),
                       ],

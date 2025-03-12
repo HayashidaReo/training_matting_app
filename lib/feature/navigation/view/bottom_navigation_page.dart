@@ -41,6 +41,9 @@ class BottomNavigationPage extends ConsumerWidget {
                           return const CircularProgressIndicator();
                         },
                         data: (int count) {
+                          if (count == 0) {
+                            return const SizedBox.shrink();
+                          }
                           return badgeCountWidget(ref, count);
                         },
                       ),

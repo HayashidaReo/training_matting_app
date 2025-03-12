@@ -19,6 +19,7 @@ import 'package:matching_app/feature/component/recommend_follow_card.dart';
 import 'package:matching_app/feature/follow/controller/follow_controller.dart';
 import 'package:matching_app/feature/follow/model/follow.dart';
 import 'package:matching_app/feature/navigation/controller/bottom_navigation_controller.dart';
+import 'package:matching_app/feature/talk/controller/talk_history_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/model/userdata.dart';
 
@@ -42,7 +43,26 @@ class MyPage extends ConsumerWidget {
                   context.goNamed(AppRoute.talkList.name);
                 },
               ),
-              Positioned(top: 4, right: 4, child: badgeCountWidget(ref, 2)),
+              Positioned(
+                top: 4,
+                right: 4,
+                child: ref
+                    .watch(watchAllNotOpenedTalkHistoryCountControllerProvider)
+                    .when(
+                      error: (error, stackTrace) {
+                        return const Text('?');
+                      },
+                      loading: () {
+                        return const CircularProgressIndicator();
+                      },
+                      data: (int count) {
+                        if (count == 0) {
+                          return const SizedBox.shrink();
+                        }
+                        return badgeCountWidget(ref, count);
+                      },
+                    ),
+              ),
             ],
           ),
         ],

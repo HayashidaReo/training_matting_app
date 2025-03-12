@@ -45,7 +45,16 @@ class PostTile extends HookConsumerWidget {
       child: Column(
         children: [
           ListTile(
-            leading: IconImage(iconImageUrl: postUser.iconImageUrl, size: 44),
+            leading: IconImage(
+              iconImageUrl: postUser.iconImageUrl,
+              size: 44,
+              onTap: () async {
+                context.pushNamed(
+                  AppRoute.otherUserProfile.name,
+                  queryParameters: {'userId': postUser.userId},
+                );
+              },
+            ),
             trailing:
                 (isMe)
                     ? PopupMenuButton(
@@ -81,7 +90,7 @@ class PostTile extends HookConsumerWidget {
             title: Text(
               postUser.userName,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: FontSize.normal,
                 color:
                     (postUser.gender == '男性')
                         ? defaultColors.femaleColor
@@ -91,7 +100,7 @@ class PostTile extends HookConsumerWidget {
             subtitle: Text(
               postData.createdAt.toDate().toString().substring(0, 16),
               style: TextStyle(
-                fontSize: 11,
+                fontSize: FontSize.small,
                 color: defaultColors.postTileTextColor,
               ),
             ),

@@ -36,9 +36,6 @@ class CreateUserPage extends HookConsumerWidget {
         useTextEditingController();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('新規登録画面', style: TextStyle(fontSize: FontSize.extraLarge)),
-      ),
       body: Form(
         key: formKey,
         child: SingleChildScrollView(

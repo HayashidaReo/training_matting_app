@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:matching_app/config/utils/fontStyle/font_size.dart';
+import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/routing/app_router.dart';
 
 void showLoadingDialog(String message) {
@@ -16,10 +18,10 @@ void showLoadingDialog(String message) {
             mainAxisSize: MainAxisSize.min,
             children: [
               const CircularProgressIndicator(),
-              const SizedBox(height: 20),
+              HeightMarginSizedBox.normal,
               Text(
                 message,
-                style: const TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: FontSize.normal),
                 textAlign: TextAlign.center,
               ),
             ],

@@ -27,9 +27,6 @@ class SigninPage extends HookConsumerWidget {
     final passwordVisible = useState<bool>(false);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('ログイン画面', style: TextStyle(fontSize: FontSize.extraLarge)),
-      ),
       body: Form(
         key: formKey,
         child: SingleChildScrollView(

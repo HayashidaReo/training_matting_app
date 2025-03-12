@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matching_app/common_widget/custom_button.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 
@@ -31,7 +32,7 @@ class ConfirmDialog extends StatelessWidget {
         '確認',
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: 20,
+          fontSize: FontSize.large,
           fontWeight: FontWeight.bold,
           color: defaultColors.dialogTitleColor,
         ),
@@ -43,7 +44,7 @@ class ConfirmDialog extends StatelessWidget {
             text,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: FontSize.normal,
               color: defaultColors.dialogBodyTextColor,
             ),
           ),

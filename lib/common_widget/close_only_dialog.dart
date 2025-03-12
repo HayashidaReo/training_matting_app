@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 
 void showCloseOnlyDialog(BuildContext context, title, text) {
@@ -25,7 +26,7 @@ class CloseOnlyDialog extends StatelessWidget {
         title,
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: 20,
+          fontSize: FontSize.large,
           fontWeight: FontWeight.bold,
           color: defaultColors.dialogTitleColor,
         ),
@@ -37,7 +38,7 @@ class CloseOnlyDialog extends StatelessWidget {
             text,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: FontSize.normal,
               color: defaultColors.dialogBodyTextColor,
             ),
           ),

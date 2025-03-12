@@ -1,6 +1,8 @@
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/feature/auth/view/create_user_page.dart';
 import 'package:matching_app/feature/auth/view/signin_page.dart';
 
@@ -18,13 +20,33 @@ class AuthTopNavigationPage extends HookConsumerWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: defaultColors.navigationBackColor,
           title: TabBar(
+            indicatorColor: defaultColors.primaryColor,
+            labelColor: defaultColors.navigationSelectedTextColor,
+            unselectedLabelColor: defaultColors.navigationUnSelectedTextColor,
             onTap: (index) {
               selectedIndex.value = index;
             },
             tabs: [
-              Text('新規登録', style: TextStyle(fontSize: 14)),
-              Text('ログイン', style: TextStyle(fontSize: 14)),
+              SizedBox(
+                height: 24,
+                child: Center(
+                  child: Text(
+                    '新規登録',
+                    style: TextStyle(fontSize: FontSize.normal),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 24,
+                child: Center(
+                  child: Text(
+                    'ログイン',
+                    style: TextStyle(fontSize: FontSize.normal),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

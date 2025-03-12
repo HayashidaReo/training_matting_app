@@ -97,3 +97,11 @@ Stream<List<TalkHistory>> watchAllTalkHistoryController(
       .watch(talkHistoryRepoProvider(talkRoomId).notifier)
       .watchAllTalkHistory();
 }
+
+///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+@riverpod
+Stream<TalkHistory?> watchLatestTalkHistoryController(ref, String talkRoomId) {
+  return ref
+      .watch(talkHistoryRepoProvider(talkRoomId).notifier)
+      .watchLatestTalkHistory();
+}

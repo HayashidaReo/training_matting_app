@@ -64,4 +64,16 @@ class TalkHistoryRepo extends _$TalkHistoryRepo {
               snapshot.docs.map((doc) => doc.data()).toList(),
         );
   }
+
+  ///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+  Stream<TalkHistory?> watchLatestTalkHistory() {
+    return state
+        .orderBy(FirebaseTalkHistoryDataKey.createdAt, descending: true)
+        .limit(1)
+        .snapshots()
+        .map(
+          (QuerySnapshot<TalkHistory> snapshot) =>
+              snapshot.docs.isNotEmpty ? snapshot.docs.first.data() : null,
+        );
+  }
 }

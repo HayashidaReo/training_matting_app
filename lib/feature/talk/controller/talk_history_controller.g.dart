@@ -173,8 +173,152 @@ class _WatchAllTalkHistoryControllerProviderElement
       (origin as WatchAllTalkHistoryControllerProvider).talkRoomId;
 }
 
+String _$watchLatestTalkHistoryControllerHash() =>
+    r'24d7bc2bd5e3bece70df7788a992ac9a8e8a7a88';
+
+///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+///
+/// Copied from [watchLatestTalkHistoryController].
+@ProviderFor(watchLatestTalkHistoryController)
+const watchLatestTalkHistoryControllerProvider =
+    WatchLatestTalkHistoryControllerFamily();
+
+///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+///
+/// Copied from [watchLatestTalkHistoryController].
+class WatchLatestTalkHistoryControllerFamily
+    extends Family<AsyncValue<TalkHistory?>> {
+  ///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+  ///
+  /// Copied from [watchLatestTalkHistoryController].
+  const WatchLatestTalkHistoryControllerFamily();
+
+  ///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+  ///
+  /// Copied from [watchLatestTalkHistoryController].
+  WatchLatestTalkHistoryControllerProvider call(String talkRoomId) {
+    return WatchLatestTalkHistoryControllerProvider(talkRoomId);
+  }
+
+  @override
+  WatchLatestTalkHistoryControllerProvider getProviderOverride(
+    covariant WatchLatestTalkHistoryControllerProvider provider,
+  ) {
+    return call(provider.talkRoomId);
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'watchLatestTalkHistoryControllerProvider';
+}
+
+///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+///
+/// Copied from [watchLatestTalkHistoryController].
+class WatchLatestTalkHistoryControllerProvider
+    extends AutoDisposeStreamProvider<TalkHistory?> {
+  ///  streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+  ///
+  /// Copied from [watchLatestTalkHistoryController].
+  WatchLatestTalkHistoryControllerProvider(String talkRoomId)
+    : this._internal(
+        (ref) => watchLatestTalkHistoryController(
+          ref as WatchLatestTalkHistoryControllerRef,
+          talkRoomId,
+        ),
+        from: watchLatestTalkHistoryControllerProvider,
+        name: r'watchLatestTalkHistoryControllerProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$watchLatestTalkHistoryControllerHash,
+        dependencies: WatchLatestTalkHistoryControllerFamily._dependencies,
+        allTransitiveDependencies:
+            WatchLatestTalkHistoryControllerFamily._allTransitiveDependencies,
+        talkRoomId: talkRoomId,
+      );
+
+  WatchLatestTalkHistoryControllerProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.talkRoomId,
+  }) : super.internal();
+
+  final String talkRoomId;
+
+  @override
+  Override overrideWith(
+    Stream<TalkHistory?> Function(WatchLatestTalkHistoryControllerRef provider)
+    create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: WatchLatestTalkHistoryControllerProvider._internal(
+        (ref) => create(ref as WatchLatestTalkHistoryControllerRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        talkRoomId: talkRoomId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeStreamProviderElement<TalkHistory?> createElement() {
+    return _WatchLatestTalkHistoryControllerProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is WatchLatestTalkHistoryControllerProvider &&
+        other.talkRoomId == talkRoomId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, talkRoomId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin WatchLatestTalkHistoryControllerRef
+    on AutoDisposeStreamProviderRef<TalkHistory?> {
+  /// The parameter `talkRoomId` of this provider.
+  String get talkRoomId;
+}
+
+class _WatchLatestTalkHistoryControllerProviderElement
+    extends AutoDisposeStreamProviderElement<TalkHistory?>
+    with WatchLatestTalkHistoryControllerRef {
+  _WatchLatestTalkHistoryControllerProviderElement(super.provider);
+
+  @override
+  String get talkRoomId =>
+      (origin as WatchLatestTalkHistoryControllerProvider).talkRoomId;
+}
+
 String _$talkHistoryControllerHash() =>
-    r'817057d4678faecef0f84c0ddd6bff1f91c61c2f';
+    r'924304e5ff480aa06347ca1c03837434cf56e3c9';
 
 /// See also [TalkHistoryController].
 @ProviderFor(TalkHistoryController)

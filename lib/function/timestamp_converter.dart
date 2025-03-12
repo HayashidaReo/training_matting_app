@@ -15,9 +15,9 @@ class TimestampConverter implements JsonConverter<Timestamp, Timestamp> {
 }
 
 String fromDateToString(DateTime date) {
-  return DateFormat('yyyy-MM-dd').format(date);
+  return DateFormat('yyyy/MM/dd').format(date);
 }
 
 DateTime fromStringToDate(String dateString) {
-  return DateFormat('yyyy-MM-dd').parse(dateString);
+  return DateFormat('yyyy/MM/dd').parse(dateString);
 }

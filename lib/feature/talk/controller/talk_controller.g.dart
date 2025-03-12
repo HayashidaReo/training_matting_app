@@ -7,7 +7,7 @@ part of 'talk_controller.dart';
 // **************************************************************************
 
 String _$watchAllTalkRoomListControllerHash() =>
-    r'57c0225fa641afafef26346e3563594b428db76e';
+    r'9bc0f31345b12df21c1f950ce71b88f94cf16a18';
 
 /// See also [watchAllTalkRoomListController].
 @ProviderFor(watchAllTalkRoomListController)
@@ -27,7 +27,7 @@ final watchAllTalkRoomListControllerProvider =
 // ignore: unused_element
 typedef WatchAllTalkRoomListControllerRef =
     AutoDisposeStreamProviderRef<List<Talk>>;
-String _$talkControllerHash() => r'6b3ab87a2393d1f112d4dce0bd78d3ae612d0f5e';
+String _$talkControllerHash() => r'32c02cd8aa394e568f25d44e940aa19aee25a101';
 
 /// See also [TalkController].
 @ProviderFor(TalkController)

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:matching_app/config/firebase/firebase_instance_provider.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
+import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/talk/controller/talk_history_controller.dart';
 import 'package:matching_app/feature/talk/model/talk.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -31,5 +32,21 @@ class TalkRepo extends _$TalkRepo {
     ref
         .read(talkHistoryControllerProvider.notifier)
         .deleteAllTalkHistory(talkRoomId: talkRoomId);
+  }
+
+  /// トークルーム一覧を取得
+  Stream<List<Talk>> watchAllTalkRoomList() {
+    return state
+        .where(
+          FirebaseTalkDataKey.userIds,
+          arrayContains: ref.read(currentUserControllerProvider)!.uid,
+        )
+        .orderBy(FirebaseUserDataKey.createdAt, descending: true)
+        .snapshots()
+        .map((QuerySnapshot<Talk> snapshot) {
+          return snapshot.docs.map((QueryDocumentSnapshot<Talk> doc) {
+            return doc.data();
+          }).toList();
+        });
   }
 }

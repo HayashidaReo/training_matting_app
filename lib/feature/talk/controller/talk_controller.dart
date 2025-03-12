@@ -39,3 +39,8 @@ class TalkController extends _$TalkController {
     ref.read(talkRepoProvider.notifier).deleteTalkRoom(talkRoomId);
   }
 }
+
+@riverpod
+Stream<List<Talk>> watchAllTalkRoomListController(ref) {
+  return ref.watch(talkRepoProvider.notifier).watchAllTalkRoomList();
+}

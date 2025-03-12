@@ -27,8 +27,11 @@ class MyPostListPage extends ConsumerWidget {
             },
             data: (List<Post> postListData) {
               return SingleChildScrollView(
-                child: ListView.builder(
+                child: ListView.separated(
                   physics: NeverScrollableScrollPhysics(),
+                  separatorBuilder: (context, index) {
+                    return const Divider();
+                  },
                   shrinkWrap: true,
                   cacheExtent:
                       1000.0 *

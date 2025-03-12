@@ -29,8 +29,11 @@ class BookmarkedPostListPage extends ConsumerWidget {
           data: (List<Bookmark> bookmarkList) {
             return Scaffold(
               body: SingleChildScrollView(
-                child: ListView.builder(
+                child: ListView.separated(
                   physics: NeverScrollableScrollPhysics(),
+                  separatorBuilder: (context, index) {
+                    return const Divider();
+                  },
                   shrinkWrap: true,
                   cacheExtent:
                       1000.0 *

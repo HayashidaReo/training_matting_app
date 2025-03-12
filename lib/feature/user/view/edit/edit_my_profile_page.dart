@@ -27,22 +27,15 @@ class EditMyProfilePage extends HookConsumerWidget {
         child: ref
             .watch(watchMyUserDataControllerProvider)
             .when(
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error:
-                  (error, stackTrace) => Center(
-                    child: Text(
-                      'エラーが発生しました',
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  ),
+              loading: () {
+                return const Center(child: CircularProgressIndicator());
+              },
+              error: (error, _) {
+                return Center(child: Text('エラーが発生しました'));
+              },
               data: (myUserData) {
                 if (myUserData == null) {
-                  return const Center(
-                    child: Text(
-                      'ユーザーデータが取得できませんでした',
-                      style: TextStyle(color: Colors.red),
-                    ),
-                  );
+                  return const Center(child: Text('ユーザーデータが取得できませんでした'));
                 }
                 userNameController.text = myUserData.userName;
                 profileController.text = myUserData.profile;

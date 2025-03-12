@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:matching_app/config/utils/color/colors.dart';
 
 /// 画像の小さい方の辺がtargetMinSideになるように自動スケーリングするウィジェット
 class AutoScaledImage extends HookWidget {
@@ -55,7 +56,7 @@ class AutoScaledImage extends HookWidget {
         height: targetMinSide,
         decoration: BoxDecoration(
           borderRadius: borderRadius,
-          color: Colors.grey[300], // ローディング時の背景色
+          color: defaultColors.talkRoomLoadingImageBackColor, // ローディング時の背景色
         ),
         child: const Center(child: CircularProgressIndicator()),
       );
@@ -82,7 +83,7 @@ class AutoScaledImage extends HookWidget {
             height: displayHeight,
             decoration: BoxDecoration(
               borderRadius: borderRadius,
-              color: Colors.grey[300], // ローディング時の背景色
+              color: defaultColors.talkRoomLoadingImageBackColor, // ローディング時の背景色
             ),
             child: Center(
               child: CircularProgressIndicator(
@@ -96,7 +97,7 @@ class AutoScaledImage extends HookWidget {
             height: displayHeight,
             decoration: BoxDecoration(
               borderRadius: borderRadius,
-              color: Colors.grey[400], // エラー時の背景色
+              color: defaultColors.talkRoomErrorImageBackColor, // エラー時の背景色
             ),
             child: const Icon(Icons.image_not_supported_rounded),
           ),

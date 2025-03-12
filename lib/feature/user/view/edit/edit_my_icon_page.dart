@@ -87,7 +87,7 @@ class EditMyIconPage extends HookConsumerWidget {
                                 child: Icon(
                                   Icons.delete,
                                   size: 40,
-                                  color: Colors.white,
+                                  color: defaultColors.secondaryColor,
                                 ),
                               ),
                             ),
@@ -162,7 +162,7 @@ class EditMyIconPage extends HookConsumerWidget {
                                   child: Icon(
                                     Icons.delete,
                                     size: 40,
-                                    color: Colors.white,
+                                    color: defaultColors.secondaryColor,
                                   ),
                                 ),
                               ),
@@ -213,7 +213,7 @@ class EditMyIconPage extends HookConsumerWidget {
                                   child: Icon(
                                     Icons.add_outlined,
                                     size: 40,
-                                    color: Colors.white,
+                                    color: defaultColors.secondaryColor,
                                   ),
                                 ),
                               ),

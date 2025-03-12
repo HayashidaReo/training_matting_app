@@ -4,6 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/feature/component/badge_count_widget.dart';
 import 'package:matching_app/feature/navigation/controller/bottom_navigation_controller.dart';
+import 'package:matching_app/feature/talk/controller/talk_history_controller.dart';
+import 'package:matching_app/feature/talk/repo/talk_history_repo.dart';
 
 class BottomNavigationPage extends ConsumerWidget {
   const BottomNavigationPage({super.key, required this.child});
@@ -24,7 +26,25 @@ class BottomNavigationPage extends ConsumerWidget {
               clipBehavior: Clip.none,
               children: [
                 Icon(Icons.message),
-                Positioned(top: -6, right: -8, child: badgeCountWidget(ref, 2)),
+                Positioned(
+                  top: -6,
+                  right: -8,
+                  child: ref
+                      .watch(
+                        watchAllNotOpenedTalkHistoryCountControllerProvider,
+                      )
+                      .when(
+                        error: (error, stackTrace) {
+                          return const Text('?');
+                        },
+                        loading: () {
+                          return const CircularProgressIndicator();
+                        },
+                        data: (int count) {
+                          return badgeCountWidget(ref, count);
+                        },
+                      ),
+                ),
               ],
             ),
             label: 'TalkList',

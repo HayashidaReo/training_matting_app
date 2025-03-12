@@ -463,8 +463,31 @@ class _WatchNotOpenedTalkHistoryCountControllerProviderElement
       (origin as WatchNotOpenedTalkHistoryCountControllerProvider).talkRoomId;
 }
 
+String _$watchAllNotOpenedTalkHistoryCountControllerHash() =>
+    r'119adbb88f8d0b7371ad85e68d77595971a12e50';
+
+/// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得
+///
+/// Copied from [watchAllNotOpenedTalkHistoryCountController].
+@ProviderFor(watchAllNotOpenedTalkHistoryCountController)
+final watchAllNotOpenedTalkHistoryCountControllerProvider =
+    AutoDisposeStreamProvider<int>.internal(
+      watchAllNotOpenedTalkHistoryCountController,
+      name: r'watchAllNotOpenedTalkHistoryCountControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$watchAllNotOpenedTalkHistoryCountControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef WatchAllNotOpenedTalkHistoryCountControllerRef =
+    AutoDisposeStreamProviderRef<int>;
 String _$talkHistoryControllerHash() =>
-    r'924304e5ff480aa06347ca1c03837434cf56e3c9';
+    r'6e7e68212db04a7d856b73c9e9006dbb891e64cb';
 
 /// See also [TalkHistoryController].
 @ProviderFor(TalkHistoryController)

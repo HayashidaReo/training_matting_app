@@ -3,6 +3,7 @@ import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/talk/controller/talk_controller.dart';
 import 'package:matching_app/feature/talk/model/talk_history.dart';
+import 'package:matching_app/feature/talk/repo/talk_history_group_repo.dart';
 import 'package:matching_app/feature/talk/repo/talk_history_repo.dart';
 import 'package:matching_app/feature/user/controller/storage_controller.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -114,4 +115,12 @@ Stream<int> watchNotOpenedTalkHistoryCountController(ref, String talkRoomId) {
   return ref
       .watch(talkHistoryRepoProvider(talkRoomId).notifier)
       .watchNotOpenedTalkHistoryCount();
+}
+
+@riverpod
+/// 全ての未読件数を取得して監視
+Stream<int> watchAllNotOpenedTalkHistoryCountController(ref) {
+  return ref
+      .watch(talkHistoryGroupRepoProvider.notifier)
+      .watchAllNotOpenedTalkHistoryCount();
 }

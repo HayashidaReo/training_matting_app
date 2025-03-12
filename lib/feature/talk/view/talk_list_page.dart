@@ -91,7 +91,7 @@ class TalkListPage extends ConsumerWidget {
                                       },
                                       data: (int notOpenedCount) {
                                         if (notOpenedCount == 0) {
-                                          return const SizedBox(height: 8);
+                                          return const SizedBox(height: 21);
                                         } else {
                                           return badgeCountWidget(
                                             ref,

@@ -6,11 +6,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:matching_app/common_widget/loading_dialog.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/component/massage_history_tile.dart';
 import 'package:matching_app/feature/component/talk_message_text_field.dart';
 import 'package:matching_app/feature/component/un_focus.dart';
+import 'package:matching_app/feature/talk/controller/talk_controller.dart';
 import 'package:matching_app/feature/talk/controller/talk_history_controller.dart';
 import 'package:matching_app/feature/talk/model/talk_history.dart';
 import 'package:matching_app/feature/user/controller/storage_controller.dart';
@@ -52,7 +54,7 @@ class TalkRoomPage extends HookConsumerWidget {
             return Scaffold(
               appBar: AppBar(title: Text(targetUserData.userName)),
               body: ref
-                  .watch(watchAllTalkHistoryControllerProvider(talkRoomId))
+                  .watch(watchExistTalkRoomControllerProvider(talkRoomId))
                   .when(
                     error: (error, _) {
                       return Center(child: Text('エラーが発生しました'));
@@ -60,211 +62,256 @@ class TalkRoomPage extends HookConsumerWidget {
                     loading: () {
                       return Center(child: CircularProgressIndicator());
                     },
-                    data: (List<TalkHistory> talkHistoryDataList) {
-                      print('talkHistoryDataList: $talkHistoryDataList');
-                      return UnFocus(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ListView.builder(
-                                  reverse: true,
-                                  itemCount: talkHistoryDataList.length,
-                                  itemBuilder: (context, index) {
-                                    final TalkHistory talkHistoryData =
-                                        talkHistoryDataList[index];
-                                    if (!talkHistoryData.isOpened &&
-                                        talkHistoryData.talkerUserId ==
-                                            targetUserId) {
-                                      ref
-                                          .read(
-                                            talkHistoryControllerProvider
-                                                .notifier,
-                                          )
-                                          .openTalkHistory(
-                                            talkHistoryData: talkHistoryData,
-                                          );
-                                    }
-                                    return Row(
-                                      children: [
-                                        (talkHistoryData.message.isEmpty &&
-                                                talkHistoryData
-                                                    .imageUrl
-                                                    .isEmpty)
-                                            ? Expanded(
-                                              child: Padding(
-                                                padding: const EdgeInsets.all(
-                                                  6.0,
-                                                ),
-                                                child: Center(
-                                                  child: ClipRRect(
+                    data: (bool isExistTalkRoom) {
+                      if (!isExistTalkRoom) {
+                        return Center(
+                          child: Text(
+                            '相互フォローではなくなったため\nトークルームが存在しません',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: defaultColors.mainTextColor,
+                              fontSize: FontSize.normal,
+                            ),
+                          ),
+                        );
+                      }
+                      return ref
+                          .watch(
+                            watchAllTalkHistoryControllerProvider(talkRoomId),
+                          )
+                          .when(
+                            error: (error, _) {
+                              return Center(child: Text('エラーが発生しました'));
+                            },
+                            loading: () {
+                              return Center(child: CircularProgressIndicator());
+                            },
+                            data: (List<TalkHistory> talkHistoryDataList) {
+                              return UnFocus(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ListView.builder(
+                                          reverse: true,
+                                          itemCount: talkHistoryDataList.length,
+                                          itemBuilder: (context, index) {
+                                            final TalkHistory talkHistoryData =
+                                                talkHistoryDataList[index];
+                                            if (!talkHistoryData.isOpened &&
+                                                talkHistoryData.talkerUserId ==
+                                                    targetUserId) {
+                                              ref
+                                                  .read(
+                                                    talkHistoryControllerProvider
+                                                        .notifier,
+                                                  )
+                                                  .openTalkHistory(
+                                                    talkHistoryData:
+                                                        talkHistoryData,
+                                                  );
+                                            }
+                                            return Row(
+                                              children: [
+                                                (talkHistoryData
+                                                            .message
+                                                            .isEmpty &&
+                                                        talkHistoryData
+                                                            .imageUrl
+                                                            .isEmpty)
+                                                    ? Expanded(
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets.all(
+                                                              6.0,
+                                                            ),
+                                                        child: Center(
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                  6.0,
+                                                                ),
+                                                            child: Container(
+                                                              color:
+                                                                  defaultColors
+                                                                      .talkRoomGreyColor,
+                                                              padding:
+                                                                  const EdgeInsets.symmetric(
+                                                                    horizontal:
+                                                                        6,
+                                                                    vertical: 2,
+                                                                  ),
+
+                                                              child: Text(
+                                                                '送信が取り消されました',
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                    : (talkHistoryData
+                                                            .talkerUserId ==
+                                                        ref
+                                                            .read(
+                                                              currentUserControllerProvider,
+                                                            )!
+                                                            .uid)
+                                                    ? MyMassageHistoryTile(
+                                                      talkHistoryData:
+                                                          talkHistoryData,
+                                                      talkRoomId: talkRoomId,
+                                                      onPressed: () async {
+                                                        await ref
+                                                            .read(
+                                                              talkHistoryControllerProvider
+                                                                  .notifier,
+                                                            )
+                                                            .deleteTalkHistory(
+                                                              talkHistoryData:
+                                                                  talkHistoryData,
+                                                            );
+                                                        if (context.mounted) {
+                                                          context.pop();
+                                                        }
+                                                      },
+                                                    )
+                                                    : InterlocutorMassageHistoryTile(
+                                                      talkHistoryData:
+                                                          talkHistoryData,
+                                                      targetUserData:
+                                                          targetUserData,
+                                                    ),
+                                              ],
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+
+                                    Container(
+                                      color: defaultColors.talkRoomGreyColor,
+                                      width: double.infinity,
+                                      padding: const EdgeInsets.all(6.0),
+                                      child: Column(
+                                        children: [
+                                          uploadedImageFile.value != null
+                                              ? Stack(
+                                                children: [
+                                                  ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                          6.0,
+                                                          12.0,
                                                         ),
+                                                    child: Image.file(
+                                                      uploadedImageFile.value!,
+                                                      width: 150,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                  Positioned(
+                                                    right: 0,
+                                                    top: 0,
                                                     child: Container(
-                                                      color:
-                                                          defaultColors
-                                                              .talkRoomGreyColor,
-                                                      padding:
-                                                          const EdgeInsets.symmetric(
-                                                            horizontal: 6,
-                                                            vertical: 2,
+                                                      height: 30,
+                                                      width: 30,
+                                                      decoration: BoxDecoration(
+                                                        color: defaultColors
+                                                            .textBlackColor
+                                                            .withAlpha(150),
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      child: Center(
+                                                        child: IconButton(
+                                                          onPressed: () {
+                                                            uploadedImageFile
+                                                                .value = null;
+                                                          },
+                                                          icon: Icon(
+                                                            Icons.close_rounded,
+                                                            color:
+                                                                defaultColors
+                                                                    .mainButtonTextWhiteColor,
+                                                            size: 14,
                                                           ),
-
-                                                      child: Text(
-                                                        '送信が取り消されました',
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
+                                                ],
+                                              )
+                                              : Container(),
+                                          Row(
+                                            children: [
+                                              IconButton(
+                                                onPressed: () async {
+                                                  // 画像を選択
+                                                  await _getImage(
+                                                    uploadedImageFile,
+                                                  );
+                                                },
+                                                icon: Icon(
+                                                  Icons.photo,
+                                                  size: 24,
                                                 ),
                                               ),
-                                            )
-                                            : (talkHistoryData.talkerUserId ==
-                                                ref
-                                                    .read(
-                                                      currentUserControllerProvider,
-                                                    )!
-                                                    .uid)
-                                            ? MyMassageHistoryTile(
-                                              talkHistoryData: talkHistoryData,
-                                              talkRoomId: talkRoomId,
-                                              onPressed: () async {
-                                                await ref
-                                                    .read(
-                                                      talkHistoryControllerProvider
-                                                          .notifier,
-                                                    )
-                                                    .deleteTalkHistory(
-                                                      talkHistoryData:
-                                                          talkHistoryData,
-                                                    );
-                                                if (context.mounted) {
-                                                  context.pop();
-                                                }
-                                              },
-                                            )
-                                            : InterlocutorMassageHistoryTile(
-                                              talkHistoryData: talkHistoryData,
-                                              targetUserData: targetUserData,
-                                            ),
-                                      ],
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-
-                            Container(
-                              color: defaultColors.talkRoomGreyColor,
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(6.0),
-                              child: Column(
-                                children: [
-                                  uploadedImageFile.value != null
-                                      ? Stack(
-                                        children: [
-                                          ClipRRect(
-                                            borderRadius: BorderRadius.circular(
-                                              12.0,
-                                            ),
-                                            child: Image.file(
-                                              uploadedImageFile.value!,
-                                              width: 150,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          Positioned(
-                                            right: 0,
-                                            top: 0,
-                                            child: Container(
-                                              height: 30,
-                                              width: 30,
-                                              decoration: BoxDecoration(
-                                                color: defaultColors
-                                                    .textBlackColor
-                                                    .withAlpha(150),
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: Center(
-                                                child: IconButton(
-                                                  onPressed: () {
-                                                    uploadedImageFile.value =
-                                                        null;
-                                                  },
-                                                  icon: Icon(
-                                                    Icons.close_rounded,
-                                                    color:
-                                                        defaultColors
-                                                            .mainButtonTextWhiteColor,
-                                                    size: 14,
+                                              Expanded(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                        vertical: 4.0,
+                                                      ),
+                                                  child: TalkMessageTextField(
+                                                    controller:
+                                                        messageTextController,
+                                                    label: 'メッセージを入力',
                                                   ),
                                                 ),
                                               ),
-                                            ),
+                                              IconButton(
+                                                onPressed: () {
+                                                  // 送信
+                                                  _sendMassage(
+                                                    messageTextController:
+                                                        messageTextController,
+                                                    uploadedImageFile:
+                                                        uploadedImageFile,
+                                                    ref: ref,
+                                                    talkRoomId: talkRoomId,
+                                                    context: context,
+                                                  );
+                                                },
+                                                icon: Icon(
+                                                  Icons.send,
+                                                  size: 24,
+                                                  color:
+                                                      (messageTextController
+                                                                  .text
+                                                                  .trim()
+                                                                  .isEmpty &&
+                                                              uploadedImageFile
+                                                                      .value ==
+                                                                  null)
+                                                          ? defaultColors
+                                                              .unavailableFrontGreyColor
+                                                          : defaultColors
+                                                              .blueTextColor,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
-                                      )
-                                      : Container(),
-                                  Row(
-                                    children: [
-                                      IconButton(
-                                        onPressed: () async {
-                                          // 画像を選択
-                                          await _getImage(uploadedImageFile);
-                                        },
-                                        icon: Icon(Icons.photo, size: 24),
                                       ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: 4.0,
-                                          ),
-                                          child: TalkMessageTextField(
-                                            controller: messageTextController,
-                                            label: 'メッセージを入力',
-                                          ),
-                                        ),
-                                      ),
-                                      IconButton(
-                                        onPressed: () {
-                                          // 送信
-                                          _sendMassage(
-                                            messageTextController:
-                                                messageTextController,
-                                            uploadedImageFile:
-                                                uploadedImageFile,
-                                            ref: ref,
-                                            talkRoomId: talkRoomId,
-                                            context: context,
-                                          );
-                                        },
-                                        icon: Icon(
-                                          Icons.send,
-                                          size: 24,
-                                          color:
-                                              (messageTextController.text
-                                                          .trim()
-                                                          .isEmpty &&
-                                                      uploadedImageFile.value ==
-                                                          null)
-                                                  ? defaultColors
-                                                      .unavailableFrontGreyColor
-                                                  : defaultColors.blueTextColor,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
                     },
                   ),
             );

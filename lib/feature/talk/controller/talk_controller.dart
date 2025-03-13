@@ -53,8 +53,8 @@ Stream<List<Talk>> watchAllTalkRoomListController(ref) {
   return ref.watch(talkRepoProvider.notifier).watchAllTalkRoomList();
 }
 
-// @riverpod
-// /// 全ての未読件数を取得して監視
-// Stream<int> watchAllNotOpenedTalkHistoryCountController(ref) {
-
-// }
+@riverpod
+/// 指定したトークルームの部屋があるかどうかを監視する
+Stream<bool> watchExistTalkRoomController(ref, String talkRoomId) {
+  return ref.watch(talkRepoProvider.notifier).watchExistTalkRoom(talkRoomId);
+}

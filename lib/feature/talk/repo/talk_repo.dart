@@ -56,4 +56,11 @@ class TalkRepo extends _$TalkRepo {
           }).toList();
         });
   }
+
+  /// 指定したトークルームの部屋があるかどうかを監視する
+  Stream<bool> watchExistTalkRoom(String talkRoomId) {
+    return state.doc(talkRoomId).snapshots().map((DocumentSnapshot<Talk> doc) {
+      return doc.exists;
+    });
+  }
 }

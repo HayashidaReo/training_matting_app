@@ -49,6 +49,7 @@ class PostController extends _$PostController {
     String body,
     File? selectedImage,
     String imageUrl,
+    bool isDeleted,
   ) async {
     state = const AsyncLoading();
     String downloadUrl = '';
@@ -62,8 +63,7 @@ class PostController extends _$PostController {
           );
     } else if (imageUrl.isNotEmpty) {
       downloadUrl = imageUrl;
-    } else {
-      downloadUrl = '';
+    } else if (isDeleted) {
       await ref
           .read(storageControllerProvider.notifier)
           .deleteImage(

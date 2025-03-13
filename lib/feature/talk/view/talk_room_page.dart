@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:matching_app/common_widget/loading_dialog.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/enum/image_quality_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
@@ -327,7 +328,7 @@ class TalkRoomPage extends HookConsumerWidget {
   }
 
   Future<void> _getImage(ValueNotifier<File?> uploadedImageFile) async {
-    final uploadResult = await getImageFromGallery();
+    final uploadResult = await getImageFromGallery(ImageQuality.talk.quality);
     if (uploadResult != null) {
       uploadedImageFile.value = uploadResult;
     }

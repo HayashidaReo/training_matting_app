@@ -32,14 +32,21 @@ class ExpandableText extends HookWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              text,
-              style: style,
-              maxLines: isExpanded.value ? null : maxLines,
-              overflow:
-                  isExpanded.value
-                      ? TextOverflow.visible
-                      : TextOverflow.ellipsis,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Flexible(
+                  child: Text(
+                    text,
+                    style: style,
+                    maxLines: isExpanded.value ? null : maxLines,
+                    overflow:
+                        isExpanded.value
+                            ? TextOverflow.visible
+                            : TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
             ),
             if (!isExpanded.value && computedOverflow)
               TextButton(

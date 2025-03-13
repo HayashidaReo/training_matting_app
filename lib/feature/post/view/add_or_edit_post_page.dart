@@ -7,6 +7,7 @@ import 'package:matching_app/common_widget/custom_button.dart';
 import 'package:matching_app/common_widget/loading_dialog.dart';
 import 'package:matching_app/common_widget/toast.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/enum/image_quality_enum.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/component/auto_scaled_file_image.dart';
 import 'package:matching_app/feature/component/auto_scaled_network_image.dart';
@@ -26,7 +27,71 @@ class AddOrEditPostPage extends HookConsumerWidget {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final TextEditingController bodyController = useTextEditingController();
     final ValueNotifier<File?> selectedImage = useState<File?>(null);
+    final ValueNotifier<bool> isImageDeleted = useState(false);
 
+    if (isEditMode) {
+      return ref
+          .watch(watchPostControllerProvider(postId!))
+          .when(
+            error: (error, _) {
+              return Text('エラーが発生しました');
+            },
+            loading: () {
+              return const Center(child: CircularProgressIndicator());
+            },
+            data: (postData) {
+              if (postData == null) {
+                return Text('データが存在しません');
+              }
+              bodyController.text = postData.body;
+
+              return AddOrEditPostForm(
+                formKey: formKey,
+                bodyController: bodyController,
+                isImageDeleted: isImageDeleted,
+                selectedImage: selectedImage,
+                isEditMode: isEditMode,
+                ref: ref,
+                postData: postData,
+              );
+            },
+          );
+    } else {
+      return AddOrEditPostForm(
+        formKey: formKey,
+        bodyController: bodyController,
+        isImageDeleted: isImageDeleted,
+        selectedImage: selectedImage,
+        isEditMode: isEditMode,
+        ref: ref,
+      );
+    }
+  }
+}
+
+class AddOrEditPostForm extends HookWidget {
+  const AddOrEditPostForm({
+    super.key,
+    required this.formKey,
+    required this.bodyController,
+    required this.isImageDeleted,
+    required this.selectedImage,
+    required this.isEditMode,
+    required this.ref,
+    this.postData,
+  });
+
+  final GlobalKey<FormState> formKey;
+  final TextEditingController bodyController;
+  final ValueNotifier<bool?> isImageDeleted;
+  final ValueNotifier<File?> selectedImage;
+  final bool isEditMode;
+  final WidgetRef ref;
+  final Post? postData;
+
+  @override
+  Widget build(BuildContext context) {
+    final imageUrl = useState<String>(postData?.imageUrl ?? '');
     Widget imageWidget;
     if (selectedImage.value != null) {
       imageWidget = Stack(
@@ -37,6 +102,9 @@ class AddOrEditPostPage extends HookConsumerWidget {
             top: 0,
             child: GestureDetector(
               onTap: () {
+                if (imageUrl.value != '') {
+                  isImageDeleted.value = true;
+                }
                 selectedImage.value = null;
               },
               child: Container(
@@ -62,69 +130,6 @@ class AddOrEditPostPage extends HookConsumerWidget {
       );
     }
 
-    if (isEditMode) {
-      return ref
-          .watch(watchPostControllerProvider(postId!))
-          .when(
-            error: (error, _) {
-              return Text('エラーが発生しました');
-            },
-            loading: () {
-              return const Center(child: CircularProgressIndicator());
-            },
-            data: (postData) {
-              if (postData == null) {
-                return Text('データが存在しません');
-              }
-              bodyController.text = postData.body;
-
-              return AddOrEditPostForm(
-                formKey: formKey,
-                bodyController: bodyController,
-                imageWidget: imageWidget,
-                selectedImage: selectedImage,
-                isEditMode: isEditMode,
-                ref: ref,
-                postData: postData,
-              );
-            },
-          );
-    } else {
-      return AddOrEditPostForm(
-        formKey: formKey,
-        bodyController: bodyController,
-        imageWidget: imageWidget,
-        selectedImage: selectedImage,
-        isEditMode: isEditMode,
-        ref: ref,
-      );
-    }
-  }
-}
-
-class AddOrEditPostForm extends HookWidget {
-  const AddOrEditPostForm({
-    super.key,
-    required this.formKey,
-    required this.bodyController,
-    required this.imageWidget,
-    required this.selectedImage,
-    required this.isEditMode,
-    required this.ref,
-    this.postData,
-  });
-
-  final GlobalKey<FormState> formKey;
-  final TextEditingController bodyController;
-  final Widget? imageWidget;
-  final ValueNotifier<File?> selectedImage;
-  final bool isEditMode;
-  final WidgetRef ref;
-  final Post? postData;
-
-  @override
-  Widget build(BuildContext context) {
-    final imageUrl = useState<String>(postData?.imageUrl ?? '');
     return UnFocus(
       child: Scaffold(
         appBar: AppBar(title: Text(isEditMode ? 'ポスト編集' : 'ポスト投稿')),
@@ -169,6 +174,9 @@ class AddOrEditPostForm extends HookWidget {
                                   top: 0,
                                   child: GestureDetector(
                                     onTap: () {
+                                      if (imageUrl.value != '') {
+                                        isImageDeleted.value = true;
+                                      }
                                       selectedImage.value = null;
                                       imageUrl.value = '';
                                     },
@@ -202,6 +210,7 @@ class AddOrEditPostForm extends HookWidget {
                           context,
                           postData!,
                           imageUrl.value,
+                          isImageDeleted.value!,
                         );
                       } else {
                         await _addPost(
@@ -225,7 +234,10 @@ class AddOrEditPostForm extends HookWidget {
 
   Future<void> _showImagePicker(ValueNotifier<File?> selectedImage) async {
     if (selectedImage.value != null) return;
-    selectedImage.value = await getImageFromGallery();
+    selectedImage.value = await getImageFromGallery(ImageQuality.post.quality);
+
+    isImageDeleted.value = false;
+
     return;
   }
 
@@ -264,6 +276,7 @@ class AddOrEditPostForm extends HookWidget {
     BuildContext context,
     Post postData,
     String imageUrl,
+    bool isDeleted,
   ) async {
     if (!formKey.currentState!.validate()) {
       return;
@@ -278,6 +291,7 @@ class AddOrEditPostForm extends HookWidget {
             bodyController.text,
             selectedImage.value,
             imageUrl,
+            isDeleted,
           );
       showToast('更新しました');
       if (context.mounted) {

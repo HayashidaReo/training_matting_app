@@ -7,6 +7,7 @@ import 'package:matching_app/common_widget/custom_button.dart';
 import 'package:matching_app/common_widget/loading_dialog.dart';
 import 'package:matching_app/common_widget/toast.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/enum/image_quality_enum.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
@@ -46,7 +47,9 @@ class EditMyIconPage extends HookConsumerWidget {
                         children: [
                           InkWell(
                             onTap: () async {
-                              final uploadResult = await getImageFromGallery();
+                              final uploadResult = await getImageFromGallery(
+                                ImageQuality.icon.quality,
+                              );
                               if (uploadResult != null) {
                                 uploadedImageFile.value = uploadResult;
                               }
@@ -105,8 +108,9 @@ class EditMyIconPage extends HookConsumerWidget {
                           children: [
                             InkWell(
                               onTap: () async {
-                                final uploadResult =
-                                    await getImageFromGallery();
+                                final uploadResult = await getImageFromGallery(
+                                  ImageQuality.icon.quality,
+                                );
                                 if (uploadResult != null) {
                                   uploadedImageFile.value = uploadResult;
                                   isIconDeleted.value = false;
@@ -177,8 +181,9 @@ class EditMyIconPage extends HookConsumerWidget {
                           children: [
                             InkWell(
                               onTap: () async {
-                                final uploadResult =
-                                    await getImageFromGallery();
+                                final uploadResult = await getImageFromGallery(
+                                  ImageQuality.icon.quality,
+                                );
                                 if (uploadResult != null) {
                                   uploadedImageFile.value = uploadResult;
                                   isIconDeleted.value = false;
@@ -200,7 +205,9 @@ class EditMyIconPage extends HookConsumerWidget {
                               child: InkWell(
                                 onTap: () async {
                                   final uploadResult =
-                                      await getImageFromGallery();
+                                      await getImageFromGallery(
+                                        ImageQuality.icon.quality,
+                                      );
                                   if (uploadResult != null) {
                                     uploadedImageFile.value = uploadResult;
                                   }

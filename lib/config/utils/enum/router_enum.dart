@@ -2,6 +2,7 @@ enum AppRoute {
   authTopNavigation,
   passwordRemainder,
   postList,
+  enlargedPostImage,
   addPost,
   editPost,
   userList,
@@ -24,6 +25,8 @@ extension AppRouteExtention on AppRoute {
         return '/passwordRemainder';
       case AppRoute.postList:
         return '/postList';
+      case AppRoute.enlargedPostImage:
+        return '/enlargedPostImage';
       case AppRoute.addPost:
         return '/addPost';
       case AppRoute.editPost:

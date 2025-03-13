@@ -6,6 +6,7 @@ import 'package:matching_app/feature/auth/view/auth_top_navigation_page.dart';
 import 'package:matching_app/feature/auth/view/password_remainder_page.dart';
 import 'package:matching_app/feature/navigation/view/bottom_navigation_page.dart';
 import 'package:matching_app/feature/post/view/add_or_edit_post_page.dart';
+import 'package:matching_app/feature/post/view/enlarged_image_page.dart';
 import 'package:matching_app/feature/post/view/post_list_top_navigation.dart';
 import 'package:matching_app/feature/talk/view/talk_list_page.dart';
 import 'package:matching_app/feature/talk/view/talk_room_page.dart';
@@ -100,6 +101,18 @@ GoRouter appRouter(ref) {
                 pageBuilder: (context, state) {
                   final postId = state.uri.queryParameters['postId'] as String;
                   return MaterialPage(child: AddOrEditPostPage(postId: postId));
+                },
+              ),
+              GoRoute(
+                parentNavigatorKey: rootNavigatorKey,
+                path: AppRoute.enlargedPostImage.path,
+                name: AppRoute.enlargedPostImage.name,
+                pageBuilder: (context, state) {
+                  final imageUrl =
+                      state.uri.queryParameters['imageUrl'] as String;
+                  return MaterialPage(
+                    child: EnlargedImagePage(imageUrl: imageUrl),
+                  );
                 },
               ),
             ],

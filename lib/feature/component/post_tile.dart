@@ -150,7 +150,15 @@ class PostTile extends HookConsumerWidget {
                 if (postData.imageUrl.isNotEmpty)
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12.0),
-                    child: FullWidthImage(imageUrl: postData.imageUrl),
+                    child: InkWell(
+                      onTap: () {
+                        context.goNamed(
+                          AppRoute.enlargedPostImage.name,
+                          queryParameters: {'imageUrl': postData.imageUrl},
+                        );
+                      },
+                      child: FullWidthImage(imageUrl: postData.imageUrl),
+                    ),
                   ),
               ],
             ),

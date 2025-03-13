@@ -27,10 +27,6 @@ class BreakableTextFormField extends StatelessWidget {
         if (value.trim().isEmpty) {
           return '空白のみは設定できません';
         }
-        final int newLineCount = '\n'.allMatches(value).length;
-        if (newLineCount >= 10) {
-          return '改行は10回以内にしてください';
-        }
         return null;
       },
       decoration: textFieldDecoration(label),

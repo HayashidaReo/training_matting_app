@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/common_widget/confirm_dialog.dart';
@@ -11,6 +12,7 @@ import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/bookmark/controller/bookmark_controller.dart';
 import 'package:matching_app/feature/bookmark/model/bookmark.dart';
+import 'package:matching_app/feature/component/expandable_text.dart';
 import 'package:matching_app/feature/component/full_width_image.dart';
 import 'package:matching_app/feature/component/icon_image.dart';
 import 'package:matching_app/feature/favorite/controller/favorite_controller.dart';
@@ -39,6 +41,7 @@ class PostTile extends HookConsumerWidget {
   @override
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isFullText = useState<bool>(false);
     return SizedBox(
       width: double.infinity,
       child: Column(
@@ -136,11 +139,10 @@ class PostTile extends HookConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Flexible(
-                      child: Text(
-                        postData.body,
-                        style: TextStyle(fontSize: FontSize.small),
-                      ),
+                    ExpandableText(
+                      text: postData.body,
+                      style: TextStyle(fontSize: FontSize.small),
+                      maxLines: 7,
                     ),
                   ],
                 ),

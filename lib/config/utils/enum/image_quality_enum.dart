@@ -7,9 +7,9 @@ extension FollowStatusExtention on ImageQuality {
       case ImageQuality.icon:
         return 20;
       case ImageQuality.post:
-        return 50;
+        return 40;
       case ImageQuality.talk:
-        return 50;
+        return 40;
     }
   }
 }

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/common_widget/confirm_dialog.dart';
@@ -41,7 +40,6 @@ class PostTile extends HookConsumerWidget {
   @override
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isFullText = useState<bool>(false);
     return SizedBox(
       width: double.infinity,
       child: Column(

@@ -11,7 +11,7 @@ class DefaultColors {
 
   final Color blueTextColor = Colors.blue;
   final Color unavailableFrontGreyColor = Colors.grey;
-  final Color talkRoomGreyColor = const Color.fromARGB(255, 223, 223, 223);
+  final Color talkRoomGreyColor = const Color.fromARGB(255, 255, 245, 250);
 
   final Color navigationSelectedTextColor = const Color.fromARGB(
     255,

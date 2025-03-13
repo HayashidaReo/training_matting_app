@@ -121,6 +121,20 @@ class CreateUserPage extends HookConsumerWidget {
                 ),
 
                 HeightMarginSizedBox.normal,
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      '※18歳未満はご利用いただけません',
+                      style: TextStyle(
+                        fontSize: FontSize.small,
+                        color: defaultColors.mainTextColor,
+                      ),
+                    ),
+                  ],
+                ),
+                HeightMarginSizedBox.small,
                 GestureDetector(
                   behavior: HitTestBehavior.opaque, // 透明な部分でもタップを検出
                   onTap: () {
@@ -128,13 +142,13 @@ class CreateUserPage extends HookConsumerWidget {
                       context: context,
                       locale: const Locale('ja'),
                       initialDate: DateTime(
-                        DateTime.now().year - 20,
+                        DateTime.now().year - 18,
                         DateTime.now().month,
                         DateTime.now().day,
                       ),
                       firstDate: DateTime(1900),
                       lastDate: DateTime(
-                        DateTime.now().year - 20,
+                        DateTime.now().year - 18,
                         DateTime.now().month,
                         DateTime.now().day,
                       ),

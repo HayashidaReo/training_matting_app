@@ -3,8 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/config/utils/decoration/text_field_decoration.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
-import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/component/user_list_tile.dart';
+import 'package:matching_app/feature/navigation/controller/popup_menu_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/controller/user_list_status_controller.dart';
 import 'package:matching_app/feature/user/model/userdata.dart';
@@ -41,11 +41,19 @@ class UserListPage extends HookConsumerWidget {
                         top: 10,
                         bottom: 10,
                         child: IconButton(
-                          icon: const Icon(Icons.search),
+                          icon: Icon(
+                            (searchText.value.isEmpty)
+                                ? Icons.search
+                                : Icons.keyboard_backspace,
+                          ),
                           iconSize: 24,
-                          onPressed: () {
-                            FocusScope.of(context).unfocus();
-                          },
+                          onPressed:
+                              (searchText.value.isNotEmpty)
+                                  ? () {
+                                    searchText.value = '';
+                                    searchTextController.clear();
+                                  }
+                                  : null,
                         ),
                       ),
                     ],
@@ -53,6 +61,17 @@ class UserListPage extends HookConsumerWidget {
                 ),
                 PopupMenuButton(
                   icon: const Icon(Icons.sort_outlined),
+                  // メニューを選択しないままbottomNavigationBarをタップするとエラーが発生するため、onOpenedとonCanceledで状態を更新
+                  onOpened: () {
+                    ref
+                        .read(popupMenuControllerProvider.notifier)
+                        .updateState(true);
+                  },
+                  onCanceled: () {
+                    ref
+                        .read(popupMenuControllerProvider.notifier)
+                        .updateState(false);
+                  },
                   onSelected: (value) async {
                     if (value == 'opposite') {
                       ref
@@ -112,18 +131,6 @@ class UserListPage extends HookConsumerWidget {
                         return const Center(child: CircularProgressIndicator());
                       },
                       data: (List<UserData> userDataList) {
-                        // // whereではフィルターを１つしかかけれないので、ここでフィルターをかける
-                        // final List<UserData> filteredUserDataList =
-                        //     userDataList
-                        //         .where(
-                        //           (user) =>
-                        //               user.userId !=
-                        //               ref
-                        //                   .read(currentUserControllerProvider)!
-                        //                   .uid,
-                        //         )
-                        //         .toList();
-
                         return ListView.separated(
                           itemCount: userDataList.length,
                           separatorBuilder: (context, index) {

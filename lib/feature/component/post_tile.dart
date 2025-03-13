@@ -15,6 +15,7 @@ import 'package:matching_app/feature/component/full_width_image.dart';
 import 'package:matching_app/feature/component/icon_image.dart';
 import 'package:matching_app/feature/favorite/controller/favorite_controller.dart';
 import 'package:matching_app/feature/favorite/model/favorite.dart';
+import 'package:matching_app/feature/navigation/controller/popup_menu_controller.dart';
 import 'package:matching_app/feature/post/controller/post_controller.dart';
 import 'package:matching_app/feature/post/model/post.dart';
 import 'package:matching_app/feature/user/controller/storage_controller.dart';
@@ -57,6 +58,17 @@ class PostTile extends HookConsumerWidget {
                 (isMe)
                     ? PopupMenuButton(
                       icon: const Icon(Icons.more_vert),
+                      // メニューを選択しないままbottomNavigationBarをタップするとエラーが発生するため、onOpenedとonCanceledで状態を更新
+                      onOpened: () {
+                        ref
+                            .read(popupMenuControllerProvider.notifier)
+                            .updateState(true);
+                      },
+                      onCanceled: () {
+                        ref
+                            .read(popupMenuControllerProvider.notifier)
+                            .updateState(false);
+                      },
                       onSelected: (value) async {
                         if (value == 'edit') {
                           context.goNamed(

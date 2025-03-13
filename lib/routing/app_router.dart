@@ -30,7 +30,6 @@ GoRouter appRouter(ref) {
   return GoRouter(
     initialLocation: AppRoute.postList.path,
     navigatorKey: rootNavigatorKey,
-
     debugLogDiagnostics: true,
     // FirebaseAuth の認証状態変化を監視
     // 変更を感知すると、通常はページ遷移時にしか実行されない redirect を実行する

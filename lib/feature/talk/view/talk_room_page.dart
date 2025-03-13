@@ -305,7 +305,7 @@ class TalkRoomPage extends HookConsumerWidget {
     ref
         .read(talkHistoryControllerProvider.notifier)
         .addTalkHistory(
-          message: messageTextController.text,
+          message: messageTextController.text.trim(),
           imageUrl: imageUrl,
           talkRoomId: talkRoomId,
           talkId: talkId,

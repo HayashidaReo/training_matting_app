@@ -156,7 +156,9 @@ class AddOrEditPostForm extends HookWidget {
                       await _showImagePicker(selectedImage);
                     },
                     child:
-                        (imageUrl.value != '')
+                        (selectedImage.value != null)
+                            ? imageWidget
+                            : (imageUrl.value != '')
                             ? Stack(
                               children: [
                                 AutoScaledNetworkImage(

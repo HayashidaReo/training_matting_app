@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -9,9 +8,10 @@ import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
-import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
+import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/bookmark/controller/bookmark_controller.dart';
 import 'package:matching_app/feature/bookmark/model/bookmark.dart';
+import 'package:matching_app/feature/component/full_width_image.dart';
 import 'package:matching_app/feature/component/icon_image.dart';
 import 'package:matching_app/feature/favorite/controller/favorite_controller.dart';
 import 'package:matching_app/feature/favorite/model/favorite.dart';
@@ -111,53 +111,31 @@ class PostTile extends HookConsumerWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Container(
-              padding: const EdgeInsets.all(20),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  if (postData.imageUrl.isNotEmpty)
-                    CachedNetworkImage(
-                      imageUrl: postData.imageUrl,
-                      width: 80,
-                      height: 80,
-                      fit: BoxFit.cover,
-                      progressIndicatorBuilder: (
-                        context,
-                        url,
-                        downloadProgress,
-                      ) {
-                        return SizedBox(
-                          width: 80,
-                          height: 80,
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              value: downloadProgress.progress,
-                            ),
-                          ),
-                        );
-                      },
-                      errorWidget: (context, url, error) {
-                        return SizedBox(
-                          width: 80,
-                          height: 80,
-                          child: Icon(Icons.image_not_supported_rounded),
-                        );
-                      },
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        postData.body,
+                        style: TextStyle(fontSize: FontSize.small),
+                      ),
                     ),
-                  if (postData.imageUrl.isNotEmpty) WidthMarginSizedBox.small,
-                  Flexible(
-                    child: Text(
-                      postData.body,
-                      style: TextStyle(fontSize: FontSize.small),
-                    ),
+                  ],
+                ),
+                if (postData.imageUrl.isNotEmpty) HeightMarginSizedBox.small,
+                if (postData.imageUrl.isNotEmpty)
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12.0),
+                    child: FullWidthImage(imageUrl: postData.imageUrl),
                   ),
-                ],
-              ),
+              ],
             ),
           ),
           Row(

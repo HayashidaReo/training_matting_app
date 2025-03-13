@@ -52,7 +52,6 @@ class DefaultColors {
   final Color massageBadgeBackColor = Colors.red;
 
   final Color postTileTextColor = Colors.black87;
-  final Color postTileBackColor = Colors.white;
   final Color postFavoriteColor = Colors.pink;
   final Color postBookmarkColor = Colors.blueAccent;
 
@@ -79,6 +78,3 @@ class DefaultColors {
 }
 
 final defaultColors = DefaultColors();
-
-
-// TODO: パネルとか背景とかの色を設定する

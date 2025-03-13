@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 
 class EnlargedImagePage extends ConsumerWidget {
@@ -40,7 +41,16 @@ class EnlargedImagePage extends ConsumerWidget {
             ),
           ),
         ),
-        Positioned(top: 60, left: 0, child: BackButton()),
+        Positioned(
+          top: 60,
+          left: 0,
+          child: IconButton(
+            icon: Icon(Icons.close),
+            onPressed: () {
+              context.pop();
+            },
+          ),
+        ),
       ],
     );
   }

@@ -110,7 +110,7 @@ GoRouter appRouter(ref) {
                 pageBuilder: (context, state) {
                   final imageUrl =
                       state.uri.queryParameters['imageUrl'] as String;
-                  return MaterialPage(
+                  return NoTransitionPage(
                     child: EnlargedImagePage(imageUrl: imageUrl),
                   );
                 },

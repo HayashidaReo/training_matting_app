@@ -22,6 +22,7 @@ class FullWidthImage extends StatelessWidget {
         return CachedNetworkImage(
           imageUrl: imageUrl,
           width: constraints.maxWidth,
+          height: constraints.maxWidth * 0.7,
           fit: fit,
           progressIndicatorBuilder:
               (context, url, downloadProgress) => Container(

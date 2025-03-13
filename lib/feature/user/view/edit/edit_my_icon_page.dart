@@ -303,7 +303,7 @@ class EditMyIconPage extends HookConsumerWidget {
     String downloadUrl,
   ) async {
     final UserData? myUserData =
-        await ref.read(userControllerProvider.notifier).getUser();
+        await ref.read(userControllerProvider.notifier).getMyUserData();
     if (myUserData == null) {
       if (context.mounted) {
         showToast('ユーザー情報が取得できませんでした');

@@ -63,7 +63,7 @@ class UserController extends _$UserController {
     state = const AsyncData(null);
   }
 
-  Future<UserData?> getUser() async {
+  Future<UserData?> getMyUserData() async {
     state = const AsyncLoading();
     final String userId = ref.read(currentUserControllerProvider)!.uid;
     final UserData? userData = await ref

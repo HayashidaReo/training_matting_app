@@ -195,6 +195,7 @@ class MyPage extends ConsumerWidget {
                                                         currentUserControllerProvider,
                                                       )!
                                                       .uid,
+                                              isMyPage: true,
                                             );
                                           },
                                           error: (error, _) {
@@ -208,6 +209,7 @@ class MyPage extends ConsumerWidget {
                                                         currentUserControllerProvider,
                                                       )!
                                                       .uid,
+                                              isMyPage: true,
                                             );
                                           },
                                           loading: () {
@@ -239,6 +241,7 @@ class MyPage extends ConsumerWidget {
                                                         currentUserControllerProvider,
                                                       )!
                                                       .uid,
+                                              isMyPage: true,
                                             );
                                           },
                                           error: (error, _) {
@@ -252,6 +255,7 @@ class MyPage extends ConsumerWidget {
                                                         currentUserControllerProvider,
                                                       )!
                                                       .uid,
+                                              isMyPage: true,
                                             );
                                           },
                                           loading: () {
@@ -283,6 +287,7 @@ class MyPage extends ConsumerWidget {
                                                         currentUserControllerProvider,
                                                       )!
                                                       .uid,
+                                              isMyPage: true,
                                             );
                                           },
                                           error: (error, _) {
@@ -296,6 +301,7 @@ class MyPage extends ConsumerWidget {
                                                         currentUserControllerProvider,
                                                       )!
                                                       .uid,
+                                              isMyPage: true,
                                             );
                                           },
                                           loading: () {

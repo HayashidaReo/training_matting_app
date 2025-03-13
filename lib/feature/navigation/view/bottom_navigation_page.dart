@@ -22,7 +22,7 @@ class BottomNavigationPage extends ConsumerWidget {
         unselectedItemColor: defaultColors.navigationUnSelectedTextColor,
         type: BottomNavigationBarType.fixed,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: '投稿'),
+          BottomNavigationBarItem(icon: Icon(Icons.create), label: '投稿'),
           BottomNavigationBarItem(icon: Icon(Icons.people), label: 'ユーザー'),
           BottomNavigationBarItem(
             icon: Stack(

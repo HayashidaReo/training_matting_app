@@ -65,6 +65,7 @@ Stream<List<Bookmark>> watchMyAllBookmarksController(ref) {
         FirebaseBookmarkDataKey.userId,
         isEqualTo: ref.read(currentUserControllerProvider)!.uid,
       )
+      .orderBy(FirebaseBookmarkDataKey.createdAt, descending: true)
       .snapshots()
       .map((QuerySnapshot<Bookmark> snapshot) {
         return snapshot.docs.map((QueryDocumentSnapshot<Bookmark> doc) {

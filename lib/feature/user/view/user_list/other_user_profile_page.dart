@@ -328,17 +328,6 @@ class OtherUserProfilePage extends ConsumerWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            context.pushNamed(AppRoute.editMyProfile.name);
-                          },
-                          child: const Text('プロフィール情報を入力'),
-                        ),
-                      ],
-                    ),
                   ],
                 );
               },

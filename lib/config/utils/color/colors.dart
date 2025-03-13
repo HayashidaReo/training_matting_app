@@ -55,6 +55,10 @@ class DefaultColors {
   final Color postFavoriteColor = Colors.pink;
   final Color postBookmarkColor = Colors.blueAccent;
 
+  final Color addPostImageCloseButtonBackColor = Colors.black.withValues(
+    alpha: 0.5,
+  );
+
   final Color talkRoomMyTextBackColor = Color.fromARGB(255, 255, 74, 161);
   final Color talkRoomInterlocutorTextBackColor = Color.fromARGB(
     255,

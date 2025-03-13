@@ -5,13 +5,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 
 /// 画像の小さい方の辺がtargetMinSideになるように自動スケーリングするウィジェット
-class AutoScaledImage extends HookWidget {
+class AutoScaledNetworkImage extends HookWidget {
   final String imageUrl;
   final double targetMinSide; // 小さいほうの辺サイズ
   final BoxFit fit;
   final BorderRadius? borderRadius;
 
-  const AutoScaledImage({
+  const AutoScaledNetworkImage({
     super.key,
     required this.imageUrl,
     this.targetMinSide = 170,

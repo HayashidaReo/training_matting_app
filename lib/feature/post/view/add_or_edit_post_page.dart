@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'dart:io';
@@ -9,6 +8,8 @@ import 'package:matching_app/common_widget/loading_dialog.dart';
 import 'package:matching_app/common_widget/toast.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
+import 'package:matching_app/feature/component/auto_scaled_file_image.dart';
+import 'package:matching_app/feature/component/auto_scaled_network_image.dart';
 import 'package:matching_app/feature/component/breakable_text_form_field.dart';
 import 'package:matching_app/feature/component/un_focus.dart';
 import 'package:matching_app/feature/post/controller/post_controller.dart';
@@ -30,12 +31,7 @@ class AddOrEditPostPage extends HookConsumerWidget {
     if (selectedImage.value != null) {
       imageWidget = Stack(
         children: [
-          Image.file(
-            selectedImage.value!,
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.cover,
-          ),
+          AutoScaledFileImage(imageFile: selectedImage.value!),
           Positioned(
             right: 0,
             top: 0,
@@ -44,8 +40,11 @@ class AddOrEditPostPage extends HookConsumerWidget {
                 selectedImage.value = null;
               },
               child: Container(
-                color: Colors.black.withValues(alpha: 0.5),
-                child: Icon(Icons.close, color: defaultColors.mainTextColor),
+                color: defaultColors.addPostImageCloseButtonBackColor,
+                child: Icon(
+                  Icons.close,
+                  color: defaultColors.mainButtonTextWhiteColor,
+                ),
               ),
             ),
           ),
@@ -156,69 +155,37 @@ class AddOrEditPostForm extends HookWidget {
                     onTap: () async {
                       await _showImagePicker(selectedImage);
                     },
-                    child: Container(
-                      width: 150,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                      ),
-                      child:
-                          (imageUrl.value != '')
-                              ? Stack(
-                                children: [
-                                  CachedNetworkImage(
-                                    imageUrl: imageUrl.value,
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    fit: BoxFit.cover,
-                                    progressIndicatorBuilder: (
-                                      context,
-                                      url,
-                                      downloadProgress,
-                                    ) {
-                                      return SizedBox(
-                                        width: 200,
-                                        height: 200,
-                                        child: Center(
-                                          child: CircularProgressIndicator(
-                                            value: downloadProgress.progress,
-                                          ),
-                                        ),
-                                      );
+                    child:
+                        (imageUrl.value != '')
+                            ? Stack(
+                              children: [
+                                AutoScaledNetworkImage(
+                                  imageUrl: imageUrl.value,
+                                ),
+                                Positioned(
+                                  right: 0,
+                                  top: 0,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      selectedImage.value = null;
+                                      imageUrl.value = '';
                                     },
-                                    errorWidget: (context, url, error) {
-                                      return SizedBox(
-                                        width: 200,
-                                        height: 200,
-                                        child: Icon(
-                                          Icons.image_not_supported_rounded,
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                  Positioned(
-                                    right: 0,
-                                    top: 0,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        selectedImage.value = null;
-                                        imageUrl.value = '';
-                                      },
-                                      child: Container(
-                                        color: Colors.black.withValues(
-                                          alpha: 0.5,
-                                        ),
-                                        child: Icon(
-                                          Icons.close,
-                                          color: defaultColors.mainTextColor,
-                                        ),
+                                    child: Container(
+                                      color:
+                                          defaultColors
+                                              .addPostImageCloseButtonBackColor,
+                                      child: Icon(
+                                        Icons.close,
+                                        color:
+                                            defaultColors
+                                                .mainButtonTextWhiteColor,
                                       ),
                                     ),
                                   ),
-                                ],
-                              )
-                              : imageWidget,
-                    ),
+                                ),
+                              ],
+                            )
+                            : imageWidget,
                   ),
                   HeightMarginSizedBox.normal,
                   CustomButton(

@@ -6,7 +6,7 @@ import 'package:matching_app/function/format_talk_timestamp.dart';
 import 'package:vibration/vibration.dart';
 import 'package:matching_app/common_widget/confirm_dialog.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
-import 'package:matching_app/feature/component/auto_scaled_image.dart';
+import 'package:matching_app/feature/component/auto_scaled_network_image.dart';
 import 'package:matching_app/feature/component/icon_image.dart';
 import 'package:matching_app/feature/talk/model/talk_history.dart';
 import 'package:matching_app/feature/user/model/userdata.dart';
@@ -48,7 +48,7 @@ class InterlocutorMassageHistoryTile extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 0.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(12.0),
-                          child: AutoScaledImage(
+                          child: AutoScaledNetworkImage(
                             imageUrl: talkHistoryData.imageUrl,
                             targetMinSide: 170,
                             fit: BoxFit.contain,
@@ -161,7 +161,7 @@ class MyMassageHistoryTile extends StatelessWidget {
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12.0),
-                            child: AutoScaledImage(
+                            child: AutoScaledNetworkImage(
                               imageUrl: talkHistoryData.imageUrl,
                               targetMinSide: 170,
                               fit: BoxFit.contain,

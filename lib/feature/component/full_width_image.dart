@@ -26,7 +26,7 @@ class FullWidthImage extends StatelessWidget {
           progressIndicatorBuilder:
               (context, url, downloadProgress) => Container(
                 width: constraints.maxWidth,
-                height: constraints.maxWidth * 0.6,
+                height: constraints.maxWidth * 0.7,
                 decoration: BoxDecoration(
                   borderRadius: borderRadius,
                   color: defaultColors.talkRoomLoadingImageBackColor,
@@ -40,7 +40,7 @@ class FullWidthImage extends StatelessWidget {
           errorWidget:
               (context, url, error) => Container(
                 width: constraints.maxWidth,
-                height: constraints.maxWidth * 0.6,
+                height: constraints.maxWidth * 0.7,
                 decoration: BoxDecoration(
                   borderRadius: borderRadius,
                   color: defaultColors.talkRoomErrorImageBackColor,

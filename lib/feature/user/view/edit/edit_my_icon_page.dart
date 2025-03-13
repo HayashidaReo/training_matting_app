@@ -81,7 +81,9 @@ class EditMyIconPage extends HookConsumerWidget {
                               height: 50,
                               child: InkWell(
                                 onTap: () async {
-                                  isIconDeleted.value = true;
+                                  if (myUserData.iconImageUrl != '') {
+                                    isIconDeleted.value = true;
+                                  }
                                   uploadedImageFile.value = null;
                                 },
                                 child: Icon(

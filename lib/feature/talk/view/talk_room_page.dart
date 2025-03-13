@@ -61,6 +61,7 @@ class TalkRoomPage extends HookConsumerWidget {
                       return Center(child: CircularProgressIndicator());
                     },
                     data: (List<TalkHistory> talkHistoryDataList) {
+                      print('talkHistoryDataList: $talkHistoryDataList');
                       return UnFocus(
                         child: Column(
                           mainAxisSize: MainAxisSize.max,

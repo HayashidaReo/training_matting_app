@@ -1,4 +1,5 @@
 import 'package:matching_app/feature/auth/repo/auth_repo.dart';
+import 'package:matching_app/feature/navigation/controller/bottom_navigation_controller.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_controller.g.dart';
@@ -12,6 +13,9 @@ class AuthController extends _$AuthController {
 
   Future<void> signOut() async {
     state = const AsyncLoading();
+    // ボトムナビも初期化する
+    ref.read(bottomNavigationControllerProvider.notifier).updateIndex(0);
+
     await ref.read(authRepoProvider.notifier).signOut();
     state = const AsyncData(null);
   }

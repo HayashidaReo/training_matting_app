@@ -22,8 +22,8 @@ class BottomNavigationPage extends ConsumerWidget {
         unselectedItemColor: defaultColors.navigationUnSelectedTextColor,
         type: BottomNavigationBarType.fixed,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'UserList'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: '投稿'),
+          BottomNavigationBarItem(icon: Icon(Icons.people), label: 'ユーザー'),
           BottomNavigationBarItem(
             icon: Stack(
               clipBehavior: Clip.none,
@@ -53,11 +53,11 @@ class BottomNavigationPage extends ConsumerWidget {
                 ),
               ],
             ),
-            label: 'TalkList',
+            label: 'トーク',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_2_rounded),
-            label: 'MyPage',
+            label: 'マイページ',
           ),
         ],
         onTap: (value) {

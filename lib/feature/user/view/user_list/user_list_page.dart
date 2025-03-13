@@ -112,26 +112,25 @@ class UserListPage extends HookConsumerWidget {
                         return const Center(child: CircularProgressIndicator());
                       },
                       data: (List<UserData> userDataList) {
-                        // whereではフィルターを１つしかかけれないので、ここでフィルターをかける
-                        final List<UserData> filteredUserDataList =
-                            userDataList
-                                .where(
-                                  (user) =>
-                                      user.userId !=
-                                      ref
-                                          .read(currentUserControllerProvider)!
-                                          .uid,
-                                )
-                                .toList();
+                        // // whereではフィルターを１つしかかけれないので、ここでフィルターをかける
+                        // final List<UserData> filteredUserDataList =
+                        //     userDataList
+                        //         .where(
+                        //           (user) =>
+                        //               user.userId !=
+                        //               ref
+                        //                   .read(currentUserControllerProvider)!
+                        //                   .uid,
+                        //         )
+                        //         .toList();
 
                         return ListView.separated(
-                          itemCount: filteredUserDataList.length,
+                          itemCount: userDataList.length,
                           separatorBuilder: (context, index) {
                             return Divider();
                           },
                           itemBuilder: (context, index) {
-                            final UserData userData =
-                                filteredUserDataList[index];
+                            final UserData userData = userDataList[index];
 
                             return UserListTile(userData: userData);
                           },

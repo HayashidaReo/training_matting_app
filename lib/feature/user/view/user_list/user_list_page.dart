@@ -73,6 +73,9 @@ class UserListPage extends HookConsumerWidget {
                         .updateState(false);
                   },
                   onSelected: (value) async {
+                    ref
+                        .read(popupMenuControllerProvider.notifier)
+                        .updateState(false);
                     if (value == 'opposite') {
                       ref
                           .read(userListStatusControllerProvider.notifier)

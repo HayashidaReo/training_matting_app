@@ -70,6 +70,9 @@ class PostTile extends HookConsumerWidget {
                             .updateState(false);
                       },
                       onSelected: (value) async {
+                        ref
+                            .read(popupMenuControllerProvider.notifier)
+                            .updateState(false);
                         if (value == 'edit') {
                           context.goNamed(
                             AppRoute.editPost.name,

@@ -1,4 +1,3 @@
-// private navigators
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';

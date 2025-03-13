@@ -85,14 +85,22 @@ class PostTile extends HookConsumerWidget {
                       },
                     )
                     : SizedBox.shrink(),
-            title: Text(
-              postUser.userName,
-              style: TextStyle(
-                fontSize: FontSize.normal,
-                color:
-                    (postUser.gender == '男性')
-                        ? defaultColors.femaleColor
-                        : defaultColors.maleColor,
+            title: InkWell(
+              onTap: () {
+                context.pushNamed(
+                  AppRoute.otherUserProfile.name,
+                  queryParameters: {'userId': postUser.userId},
+                );
+              },
+              child: Text(
+                postUser.userName,
+                style: TextStyle(
+                  fontSize: FontSize.normal,
+                  color:
+                      (postUser.gender == '男性')
+                          ? defaultColors.femaleColor
+                          : defaultColors.maleColor,
+                ),
               ),
             ),
             subtitle: Text(

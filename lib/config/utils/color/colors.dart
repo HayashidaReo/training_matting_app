@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DefaultColors {
+  final Color appBackColor = Colors.white;
   final Color primaryColor = Colors.pink;
   final Color secondaryColor = Colors.white;
   final Color accentColor = Colors.pinkAccent;

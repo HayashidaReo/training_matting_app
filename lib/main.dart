@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:matching_app/config/firebase/firebase_options.dart';
+import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/routing/app_router.dart';
 
 void main() async {
@@ -21,11 +22,19 @@ class MyApp extends ConsumerWidget {
       supportedLocales: const [
         Locale('ja', 'JP'), // 日本語対応
       ],
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          backgroundColor: defaultColors.appBackColor,
+          surfaceTintColor:
+              defaultColors.appBackColor, // リストなどを下にスクロールした時に出てくる色
+        ),
+        scaffoldBackgroundColor: defaultColors.appBackColor,
+      ),
       locale: const Locale('ja', 'JP'),
       localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate, // 追加
-        GlobalWidgetsLocalizations.delegate, // 追加
-        GlobalCupertinoLocalizations.delegate, // 追加 (iOS向け)
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       ],
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,

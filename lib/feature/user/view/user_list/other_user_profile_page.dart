@@ -201,11 +201,11 @@ class OtherUserProfilePage extends ConsumerWidget {
                             children: <Widget>[
                               Text(
                                 '性別:',
-                                style: TextStyle(fontSize: FontSize.small),
+                                style: TextStyle(fontSize: FontSize.normal),
                               ),
                               Text(
                                 '生年月日:',
-                                style: TextStyle(fontSize: FontSize.small),
+                                style: TextStyle(fontSize: FontSize.normal),
                               ),
                             ],
                           ),
@@ -217,11 +217,11 @@ class OtherUserProfilePage extends ConsumerWidget {
                             children: <Widget>[
                               Text(
                                 userData.gender,
-                                style: TextStyle(fontSize: FontSize.small),
+                                style: TextStyle(fontSize: FontSize.normal),
                               ),
                               Text(
                                 userData.birthDate.toString(),
-                                style: TextStyle(fontSize: FontSize.small),
+                                style: TextStyle(fontSize: FontSize.normal),
                               ),
                             ],
                           ),

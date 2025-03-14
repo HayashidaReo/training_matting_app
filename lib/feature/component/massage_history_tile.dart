@@ -72,7 +72,7 @@ class InterlocutorMassageHistoryTile extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
                           formatTalkTimestamp(talkHistoryData.createdAt),
-                          style: TextStyle(fontSize: FontSize.extraSmall),
+                          style: TextStyle(fontSize: FontSize.small),
                         ),
                       ),
                     ],
@@ -102,7 +102,7 @@ class InterlocutorMassageHistoryTile extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Text(
                           formatTalkTimestamp(talkHistoryData.createdAt),
-                          style: TextStyle(fontSize: FontSize.extraSmall),
+                          style: TextStyle(fontSize: FontSize.small),
                         ),
                       ),
                     ],
@@ -161,7 +161,7 @@ class MyMassageHistoryTile extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(
                             formatTalkTimestamp(talkHistoryData.createdAt),
-                            style: TextStyle(fontSize: FontSize.extraSmall),
+                            style: TextStyle(fontSize: FontSize.small),
                           ),
                         ),
                         SizedBox(
@@ -199,7 +199,7 @@ class MyMassageHistoryTile extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Text(
                             formatTalkTimestamp(talkHistoryData.createdAt),
-                            style: TextStyle(fontSize: FontSize.extraSmall),
+                            style: TextStyle(fontSize: FontSize.small),
                           ),
                         ),
                         Container(

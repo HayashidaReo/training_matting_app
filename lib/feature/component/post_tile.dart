@@ -122,8 +122,8 @@ class PostTile extends HookConsumerWidget {
             subtitle: Text(
               postData.createdAt.toDate().toString().substring(0, 16),
               style: TextStyle(
-                fontSize: FontSize.small,
-                color: defaultColors.postTileTextColor,
+                fontSize: FontSize.normal,
+                color: defaultColors.postCreatedAtTextColor,
               ),
             ),
           ),
@@ -136,7 +136,7 @@ class PostTile extends HookConsumerWidget {
               children: [
                 ExpandableText(
                   text: postData.body,
-                  style: TextStyle(fontSize: FontSize.small),
+                  style: TextStyle(fontSize: FontSize.normal),
                   maxLines: 7,
                 ),
                 if (postData.imageUrl.isNotEmpty) HeightMarginSizedBox.small,
@@ -187,7 +187,7 @@ class PostTile extends HookConsumerWidget {
                           ),
                           Text(
                             favoriteCount.toString(),
-                            style: TextStyle(fontSize: FontSize.small),
+                            style: TextStyle(fontSize: FontSize.normal),
                           ),
                         ],
                       );

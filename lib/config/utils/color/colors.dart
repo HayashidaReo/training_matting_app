@@ -53,6 +53,7 @@ class DefaultColors {
   final Color massageBadgeBackColor = Colors.red;
 
   final Color postTileTextColor = Colors.black87;
+  final Color postCreatedAtTextColor = const Color.fromARGB(228, 65, 65, 65);
   final Color postFavoriteColor = Colors.pink;
   final Color postBookmarkColor = Colors.blueAccent;
 

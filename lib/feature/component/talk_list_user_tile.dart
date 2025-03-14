@@ -44,7 +44,7 @@ class TalkListUserTile extends ConsumerWidget {
         children: [
           Text(
             formatTalkTimestamp(talkData.updatedAt),
-            style: TextStyle(fontSize: FontSize.extraSmall),
+            style: TextStyle(fontSize: FontSize.small),
           ),
           ref
               .watch(
@@ -106,7 +106,7 @@ class TalkListUserTile extends ConsumerWidget {
                 latestTalkHistoryData.message,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: FontSize.small),
+                style: TextStyle(fontSize: FontSize.normal),
               );
             },
           ),

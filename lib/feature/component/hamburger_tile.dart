@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 
 class HamburgerTile extends StatelessWidget {
@@ -22,6 +23,7 @@ class HamburgerTile extends StatelessWidget {
             style: TextStyle(
               color: defaultColors.hamburgerMenuTextColor,
               fontWeight: FontWeight.bold,
+              fontSize: FontSize.normal,
             ),
           ),
           onTap: () {

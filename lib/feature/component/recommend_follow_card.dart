@@ -32,19 +32,24 @@ class RecommendFollowCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
             child: Column(
+              mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 IconImage(iconImageUrl: userData.iconImageUrl, size: 100),
                 HeightMarginSizedBox.small,
-                Text(
-                  userData.userName,
-                  style: TextStyle(
-                    fontSize: FontSize.small,
-                    color:
-                        (userData.gender == '男性')
-                            ? defaultColors.femaleColor
-                            : defaultColors.maleColor,
+                Center(
+                  child: Text(
+                    userData.userName,
+                    maxLines: 2,
+                    style: TextStyle(
+                      fontSize: FontSize.normal,
+                      overflow: TextOverflow.ellipsis,
+                      color:
+                          (userData.gender == '男性')
+                              ? defaultColors.femaleColor
+                              : defaultColors.maleColor,
+                    ),
                   ),
                 ),
               ],

@@ -43,7 +43,7 @@ class FollowCountPanel extends ConsumerWidget {
               followCount.toString(),
               style: TextStyle(fontSize: FontSize.normal),
             ),
-            Text(typeName, style: TextStyle(fontSize: FontSize.small)),
+            Text(typeName, style: TextStyle(fontSize: FontSize.smallNormal)),
           ],
         ),
       );
@@ -111,7 +111,7 @@ class FollowCountPanel extends ConsumerWidget {
                             ),
                             Text(
                               typeName,
-                              style: TextStyle(fontSize: FontSize.small),
+                              style: TextStyle(fontSize: FontSize.smallNormal),
                             ),
                           ],
                         ),

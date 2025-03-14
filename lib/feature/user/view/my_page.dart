@@ -156,7 +156,7 @@ class MyPage extends ConsumerWidget {
                                   child: Text(
                                     userData.userName,
                                     style: TextStyle(
-                                      fontSize: FontSize.normal,
+                                      fontSize: FontSize.medium,
                                       color:
                                           (userData.gender == '男性')
                                               ? defaultColors.femaleColor
@@ -329,11 +329,11 @@ class MyPage extends ConsumerWidget {
                             children: <Widget>[
                               Text(
                                 '性別:',
-                                style: TextStyle(fontSize: FontSize.small),
+                                style: TextStyle(fontSize: FontSize.normal),
                               ),
                               Text(
                                 '生年月日:',
-                                style: TextStyle(fontSize: FontSize.small),
+                                style: TextStyle(fontSize: FontSize.normal),
                               ),
                             ],
                           ),
@@ -345,11 +345,11 @@ class MyPage extends ConsumerWidget {
                             children: <Widget>[
                               Text(
                                 userData.gender,
-                                style: TextStyle(fontSize: FontSize.small),
+                                style: TextStyle(fontSize: FontSize.normal),
                               ),
                               Text(
                                 userData.birthDate.toString(),
-                                style: TextStyle(fontSize: FontSize.small),
+                                style: TextStyle(fontSize: FontSize.normal),
                               ),
                             ],
                           ),
@@ -374,7 +374,10 @@ class MyPage extends ConsumerWidget {
                           onPressed: () {
                             context.pushNamed(AppRoute.editMyProfile.name);
                           },
-                          child: const Text('プロフィール情報を入力'),
+                          child: Text(
+                            'プロフィール情報を入力',
+                            style: TextStyle(fontSize: FontSize.normal),
+                          ),
                         ),
                       ],
                     ),
@@ -390,10 +393,13 @@ class MyPage extends ConsumerWidget {
                               children: [
                                 HeightMarginSizedBox.small,
                                 if (onlyIncomingFollowList.isNotEmpty)
-                                  Text('新たな出会いを見つけませんか？'),
+                                  Text(
+                                    '新たな出会いを見つけませんか？',
+                                    style: TextStyle(fontSize: FontSize.normal),
+                                  ),
                                 HeightMarginSizedBox.small,
                                 SizedBox(
-                                  height: 190,
+                                  height: 210,
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     itemCount: onlyIncomingFollowList.length,

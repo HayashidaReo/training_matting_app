@@ -11,6 +11,7 @@ import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/component/auto_scaled_file_image.dart';
+import 'package:matching_app/feature/component/hide_button_on_image.dart';
 import 'package:matching_app/feature/component/massage_history_tile.dart';
 import 'package:matching_app/feature/component/talk_message_text_field.dart';
 import 'package:matching_app/feature/component/un_focus.dart';
@@ -256,34 +257,12 @@ class TalkRoomPage extends HookConsumerWidget {
                                                           Positioned(
                                                             right: 6,
                                                             top: 6,
-                                                            child: Container(
-                                                              height: 30,
-                                                              width: 30,
-                                                              decoration: BoxDecoration(
-                                                                color:
-                                                                    defaultColors
-                                                                        .onImageIconButtonBackColor,
-                                                                shape:
-                                                                    BoxShape
-                                                                        .circle,
-                                                              ),
-                                                              child: Center(
-                                                                child: IconButton(
-                                                                  onPressed: () {
-                                                                    uploadedImageFile
-                                                                            .value =
-                                                                        null;
-                                                                  },
-                                                                  icon: Icon(
-                                                                    Icons
-                                                                        .close_rounded,
-                                                                    color:
-                                                                        defaultColors
-                                                                            .onImageIconButtonFrontColor,
-                                                                    size: 14,
-                                                                  ),
-                                                                ),
-                                                              ),
+                                                            child: HideButtonOnImage(
+                                                              onPressed: () {
+                                                                uploadedImageFile
+                                                                        .value =
+                                                                    null;
+                                                              },
                                                             ),
                                                           ),
                                                         ],

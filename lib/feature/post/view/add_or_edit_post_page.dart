@@ -9,12 +9,17 @@ import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/enum/image_quality_enum.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
+import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 import 'package:matching_app/feature/component/auto_scaled_file_image.dart';
 import 'package:matching_app/feature/component/auto_scaled_network_image.dart';
 import 'package:matching_app/feature/component/breakable_text_form_field.dart';
+import 'package:matching_app/feature/component/hide_button_on_image.dart';
+import 'package:matching_app/feature/component/post_text_form_field.dart';
+import 'package:matching_app/feature/component/un_focus.dart';
 import 'package:matching_app/feature/post/controller/post_controller.dart';
 import 'package:matching_app/feature/post/model/post.dart';
 import 'package:matching_app/function/get_image_from_gallery.dart';
+import 'package:matching_app/function/hide_keyboard.dart';
 
 class AddOrEditPostPage extends HookConsumerWidget {
   const AddOrEditPostPage({super.key, this.postId});
@@ -134,95 +139,77 @@ class AddOrEditPostForm extends HookWidget {
               }
             },
           ),
+
           Positioned(
-            right: 0,
-            top: 0,
-            child: GestureDetector(
-              onTap: () {
+            right: 6,
+            top: 6,
+            child: HideButtonOnImage(
+              onPressed: () {
                 if (imageUrl.value != '') {
                   isImageDeleted.value = true;
                 }
                 selectedImage.value = null;
               },
-              child: Container(
-                color: defaultColors.addPostImageCloseButtonBackColor,
-                child: Icon(
-                  Icons.close,
-                  color: defaultColors.mainIconButtonTextColor,
-                ),
-              ),
             ),
           ),
         ],
       );
     } else {
-      imageWidget = Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Icon(Icons.image, color: defaultColors.blueTextColor),
-          Text('画像を添付'),
-        ],
-      );
+      imageWidget = SizedBox.shrink();
     }
 
-    return
-    // UnFocus(
-    // child:
-    Scaffold(
-      resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        title: Text(isEditMode ? 'ポスト編集' : 'ポスト投稿'),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              if (isEditMode) {
-                await _editPost(
-                  formKey,
-                  ref,
-                  bodyController,
-                  selectedImage,
-                  context,
-                  postData!,
-                  imageUrl.value,
-                  isImageDeleted.value!,
-                );
-              } else {
-                await _addPost(
-                  formKey,
-                  ref,
-                  bodyController,
-                  selectedImage,
-                  context,
-                );
-              }
-            },
-            icon:
-                (isEditMode)
-                    ? Icon(Icons.save_rounded)
-                    : Icon(Icons.send_rounded),
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Center(
+    return UnFocus(
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(
+          title: Text(isEditMode ? 'ポスト編集' : 'ポスト投稿'),
+          actions: [
+            IconButton(
+              onPressed: () async {
+                if (isEditMode) {
+                  await _editPost(
+                    formKey,
+                    ref,
+                    bodyController,
+                    selectedImage,
+                    context,
+                    postData!,
+                    imageUrl.value,
+                    isImageDeleted.value!,
+                  );
+                } else {
+                  await _addPost(
+                    formKey,
+                    ref,
+                    bodyController,
+                    selectedImage,
+                    context,
+                  );
+                }
+              },
+              icon:
+                  (isEditMode)
+                      ? Icon(Icons.save_rounded)
+                      : Icon(Icons.send_rounded),
+            ),
+          ],
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      HeightMarginSizedBox.large,
                       Form(
                         key: formKey,
                         child: Column(
                           children: [
-                            BreakableTextFormField(
+                            PostTextFormField(
                               controller: bodyController,
                               maxLength: 140,
                               label: 'post内容',
@@ -231,117 +218,99 @@ class AddOrEditPostForm extends HookWidget {
                           ],
                         ),
                       ),
-                      HeightMarginSizedBox.small,
-                      GestureDetector(
-                        onTap: () async {
-                          await _showImagePicker(selectedImage);
-                        },
-                        child:
-                            (selectedImage.value != null)
-                                ? imageWidget
-                                : (imageUrl.value != '')
-                                ? Stack(
-                                  children: [
-                                    AutoScaledNetworkImage(
-                                      imageUrl: imageUrl.value,
-                                      onTap: () {
-                                        if (isEditMode) {
-                                          context.goNamed(
-                                            AppRoute
-                                                .enlargedPostImageFromEdit
-                                                .name,
-                                            queryParameters: {
-                                              'postId': postData!.postId,
-                                              'imageUrl': imageUrl.value,
-                                              'imageFilePath': '',
-                                            },
-                                          );
-                                        } else {
-                                          context.goNamed(
-                                            AppRoute
-                                                .enlargedPostImageFromAdd
-                                                .name,
-                                            queryParameters: {
-                                              'imageUrl': imageUrl.value,
-                                              'imageFilePath': '',
-                                            },
-                                          );
-                                        }
+                      HeightMarginSizedBox.normal,
+                      (selectedImage.value != null)
+                          ? imageWidget
+                          : (imageUrl.value != '')
+                          ? Stack(
+                            children: [
+                              AutoScaledNetworkImage(
+                                imageUrl: imageUrl.value,
+                                onTap: () {
+                                  if (isEditMode) {
+                                    context.goNamed(
+                                      AppRoute.enlargedPostImageFromEdit.name,
+                                      queryParameters: {
+                                        'postId': postData!.postId,
+                                        'imageUrl': imageUrl.value,
+                                        'imageFilePath': '',
                                       },
-                                    ),
-                                    Positioned(
-                                      right: 0,
-                                      top: 0,
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          if (imageUrl.value != '') {
-                                            isImageDeleted.value = true;
-                                          }
-                                          selectedImage.value = null;
-                                          imageUrl.value = '';
-                                        },
-                                        child: Container(
-                                          color:
-                                              defaultColors
-                                                  .addPostImageCloseButtonBackColor,
-                                          child: Icon(
-                                            Icons.close,
-                                            color:
-                                                defaultColors
-                                                    .mainIconButtonTextColor,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                                : imageWidget,
-                      ),
+                                    );
+                                  } else {
+                                    context.goNamed(
+                                      AppRoute.enlargedPostImageFromAdd.name,
+                                      queryParameters: {
+                                        'imageUrl': imageUrl.value,
+                                        'imageFilePath': '',
+                                      },
+                                    );
+                                  }
+                                },
+                              ),
+                              Positioned(
+                                right: 6,
+                                top: 6,
+                                child: HideButtonOnImage(
+                                  onPressed: () {
+                                    if (imageUrl.value != '') {
+                                      isImageDeleted.value = true;
+                                    }
+                                    selectedImage.value = null;
+                                    imageUrl.value = '';
+                                  },
+                                ),
+                              ),
+                            ],
+                          )
+                          : imageWidget,
                     ],
                   ),
                 ),
               ),
             ),
-          ),
-          if (isKeyboardVisible && keyboardDismissed.value == false)
-            // キーボードと重ならないようにするため SafeArea で囲む
-            SafeArea(
-              child: Container(
-                color: Colors.grey.shade200,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8.0,
-                  vertical: 4.0,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.photo),
-                      onPressed: () {
-                        // 画像アップロード処理など
-                      },
-                    ),
-                    Text('${bodyTextLength.value}/140'),
-                    IconButton(
-                      icon: const Icon(Icons.arrow_drop_down_sharp, size: 36),
-                      onPressed: () {
-                        keyboardDismissed.value = true;
-                        final FocusScopeNode currentScope = FocusScope.of(
-                          context,
-                        );
-                        if (!currentScope.hasPrimaryFocus &&
-                            currentScope.hasFocus) {
-                          currentScope.unfocus();
-                        }
-                      },
-                    ),
-                  ],
+            if (isKeyboardVisible && keyboardDismissed.value == false)
+              // キーボードと重ならないようにするため SafeArea で囲む
+              SafeArea(
+                child: Container(
+                  color: Colors.grey.shade200,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8.0,
+                    vertical: 4.0,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.photo),
+                        onPressed: () async {
+                          await _showImagePicker(selectedImage);
+                        },
+                      ),
+                      SizedBox.shrink(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text('${140 - bodyTextLength.value}'),
+                          WidthMarginSizedBox.small,
+                          IconButton(
+                            icon: const Icon(
+                              Icons.arrow_drop_down_sharp,
+                              size: 36,
+                            ),
+                            onPressed: () {
+                              keyboardDismissed.value = true;
+                              hideKeyboard(context);
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
-      // ),
     );
   }
 

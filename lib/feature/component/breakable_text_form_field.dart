@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:matching_app/config/utils/decoration/text_field_decoration.dart';
 
 class BreakableTextFormField extends StatelessWidget {
   const BreakableTextFormField({
@@ -6,15 +7,11 @@ class BreakableTextFormField extends StatelessWidget {
     required this.controller,
     required this.label,
     this.maxLength,
-    this.focusNode,
-    required this.textLength,
   });
 
   final String label;
   final TextEditingController controller;
   final int? maxLength;
-  final FocusNode? focusNode;
-  final ValueNotifier<int> textLength;
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +19,7 @@ class BreakableTextFormField extends StatelessWidget {
       maxLength: maxLength,
       maxLines: 7,
       controller: controller,
-      focusNode: focusNode,
       keyboardType: TextInputType.multiline,
-      onChanged: (value) {
-        textLength.value = value.length;
-      },
       validator: (value) {
         if (value == null || value.isEmpty) {
           return '入力してください';
@@ -36,23 +29,7 @@ class BreakableTextFormField extends StatelessWidget {
         }
         return null;
       },
-      decoration: InputDecoration(
-        // ツイッター投稿画面のようにシンプルなヒントテキストを表示
-        hintText: 'いまどうしてる？',
-        hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
-
-        // カウンター（入力文字数の表示）を非表示にする
-        counterText: '',
-
-        // 枠線を消してフラットな見た目に
-        border: InputBorder.none,
-        focusedBorder: InputBorder.none,
-        enabledBorder: InputBorder.none,
-
-        // テキストと上下左右の余白を調整
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      ),
-      style: const TextStyle(fontSize: 18),
+      decoration: textFieldDecoration(label),
     );
   }
 }

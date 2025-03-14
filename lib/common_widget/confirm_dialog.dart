@@ -28,6 +28,7 @@ class ConfirmDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: defaultColors.appBackColor,
       title: Text(
         '確認',
         textAlign: TextAlign.center,

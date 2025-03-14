@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/routing/app_router.dart';
@@ -9,6 +10,7 @@ void showLoadingDialog(String message) {
     barrierDismissible: false,
     builder: (context) {
       return Dialog(
+        backgroundColor: defaultColors.appBackColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:matching_app/common_widget/custom_button.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
@@ -22,6 +23,7 @@ class CloseOnlyDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: defaultColors.appBackColor,
       title: Text(
         title,
         textAlign: TextAlign.center,
@@ -47,11 +49,11 @@ class CloseOnlyDialog extends StatelessWidget {
       ),
       actions: <Widget>[
         Center(
-          child: ElevatedButton(
+          child: CustomButton(
+            text: '閉じる',
             onPressed: () {
               context.pop();
             },
-            child: Text('閉じる'),
           ),
         ),
       ],

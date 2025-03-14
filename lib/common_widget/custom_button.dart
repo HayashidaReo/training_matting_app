@@ -56,7 +56,7 @@ class CustomButton extends StatelessWidget {
                         !isColorReversed
                             ? defaultColors.mainButtonTextColor
                             : defaultColors.subButtonTextColor,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: (!isColorReversed) ? FontWeight.bold : null,
                     fontSize: FontSize.normal,
                   ),
                 ),

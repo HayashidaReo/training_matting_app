@@ -27,10 +27,10 @@ class DefaultColors {
   final Color dialogBodyTextColor = Colors.black54;
 
   final Color mainButtonTextColor = Colors.white;
-  final Color mainButtonBackColor = Color.fromARGB(255, 40, 39, 39);
-  final Color subButtonTextColor = Colors.black;
+  final Color mainButtonBackColor = const Color.fromARGB(240, 53, 51, 51);
+  final Color subButtonTextColor = Colors.black87;
   final Color subButtonBackColor = Colors.white;
-  final Color buttonBorderColor = Color.fromARGB(255, 40, 39, 39);
+  final Color buttonBorderColor = const Color.fromARGB(240, 53, 51, 51);
   final Color accentButtonTextColor = Colors.white;
   final Color accentButtonBackColor = Colors.blueAccent;
   final Color accentButtonBorderColor = Colors.blueAccent;

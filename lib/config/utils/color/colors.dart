@@ -37,6 +37,8 @@ class DefaultColors {
 
   final Color mainIconButtonTextColor = Colors.white;
   final Color mainIconButtonBackColor = Colors.blueAccent;
+  final Color onImageIconButtonFrontColor = Colors.white;
+  final Color onImageIconButtonBackColor = Colors.black.withValues(alpha: 0.5);
 
   final Color textFiledLabelColor = Colors.grey;
   final Color textFiledFocusedBorderColor = Colors.blueAccent;
@@ -66,13 +68,11 @@ class DefaultColors {
     237,
     237,
   );
-  final Color talkRoomUndoSendBackColor = const Color.fromARGB(
-    255,
-    245,
-    245,
-    245,
-  );
+  final Color talkRoomUndoSendBackColor = Colors.grey.shade100;
   final Color talkRoomUndoSendTextColor = Color.fromARGB(255, 84, 84, 84);
+  final Color talkRoomSendMessageFieldBackColor = Colors.grey.shade200;
+  final Color talkRoomSendMessageFieldBorderColor = Colors.grey.shade50;
+
   final Color talkRoomLoadingImageBackColor = const Color.fromARGB(
     255,
     228,

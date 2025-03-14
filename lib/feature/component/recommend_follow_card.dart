@@ -23,6 +23,7 @@ class RecommendFollowCard extends StatelessWidget {
           );
         },
         child: Card(
+          color: defaultColors.appBackColor,
           elevation: 3,
           margin: const EdgeInsets.all(8.0),
           shape: RoundedRectangleBorder(

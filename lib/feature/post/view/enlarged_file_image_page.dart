@@ -15,20 +15,17 @@ class EnlargedFileImagePage extends ConsumerWidget {
         Container(
           color: defaultColors.appBackColor,
           child: Center(
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              child: Image.file(
-                imageFile,
-                fit: BoxFit.cover,
-                errorBuilder:
-                    (context, error, stackTrace) => Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: defaultColors.talkRoomErrorImageBackColor,
-                      ),
-                      child: const Icon(Icons.image_not_supported_rounded),
+            child: Image.file(
+              imageFile,
+              fit: BoxFit.cover,
+              errorBuilder:
+                  (context, error, stackTrace) => Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      color: defaultColors.talkRoomErrorImageBackColor,
                     ),
-              ),
+                    child: const Icon(Icons.image_not_supported_rounded),
+                  ),
             ),
           ),
         ),

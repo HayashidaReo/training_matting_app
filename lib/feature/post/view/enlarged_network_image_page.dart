@@ -21,7 +21,6 @@ class EnlargedNetworkImagePage extends ConsumerWidget {
               progressIndicatorBuilder:
                   (context, url, downloadProgress) => Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: defaultColors.talkRoomLoadingImageBackColor,
                     ),
                     child: Center(
@@ -33,7 +32,6 @@ class EnlargedNetworkImagePage extends ConsumerWidget {
               errorWidget:
                   (context, url, error) => Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: defaultColors.talkRoomErrorImageBackColor,
                     ),
                     child: const Icon(Icons.image_not_supported_rounded),

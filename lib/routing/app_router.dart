@@ -196,6 +196,29 @@ GoRouter appRouter(ref) {
                     child: TalkRoomPage(targetUserId: targetUserId),
                   );
                 },
+                routes: [
+                  GoRoute(
+                    parentNavigatorKey: rootNavigatorKey,
+                    path: AppRoute.enlargedTalkImage.path,
+                    name: AppRoute.enlargedTalkImage.name,
+                    pageBuilder: (context, state) {
+                      final String imageUrl =
+                          state.uri.queryParameters['imageUrl'] as String;
+                      final String imageFilePath =
+                          state.uri.queryParameters['imageFilePath'] as String;
+                      if (imageFilePath.isNotEmpty) {
+                        return NoTransitionPage(
+                          child: EnlargedFileImagePage(
+                            imageFile: File(imageFilePath),
+                          ),
+                        );
+                      }
+                      return NoTransitionPage(
+                        child: EnlargedNetworkImagePage(imageUrl: imageUrl),
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),

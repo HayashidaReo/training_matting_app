@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:matching_app/common_widget/loading_dialog.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/enum/image_quality_enum.dart';
+import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
+import 'package:matching_app/feature/component/auto_scaled_file_image.dart';
 import 'package:matching_app/feature/component/massage_history_tile.dart';
 import 'package:matching_app/feature/component/talk_message_text_field.dart';
 import 'package:matching_app/feature/component/un_focus.dart';
@@ -200,56 +202,69 @@ class TalkRoomPage extends HookConsumerWidget {
                                       child: Column(
                                         children: [
                                           uploadedImageFile.value != null
-                                              ? Padding(
-                                                padding: const EdgeInsets.all(
-                                                  6.0,
-                                                ),
-                                                child: Stack(
-                                                  children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            12.0,
-                                                          ),
-                                                      child: Image.file(
-                                                        uploadedImageFile
-                                                            .value!,
-                                                        width: 150,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                    Positioned(
-                                                      right: 0,
-                                                      top: 0,
-                                                      child: Container(
-                                                        height: 30,
-                                                        width: 30,
-                                                        decoration: BoxDecoration(
-                                                          color: defaultColors
-                                                              .textBlackColor
-                                                              .withAlpha(150),
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        child: Center(
-                                                          child: IconButton(
-                                                            onPressed: () {
-                                                              uploadedImageFile
-                                                                  .value = null;
+                                              ? SizedBox(
+                                                width: 200,
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(
+                                                    6.0,
+                                                  ),
+                                                  child: Stack(
+                                                    children: [
+                                                      AutoScaledFileImage(
+                                                        imageFile:
+                                                            uploadedImageFile
+                                                                .value!,
+                                                        onTap: () {
+                                                          context.goNamed(
+                                                            AppRoute
+                                                                .enlargedTalkImage
+                                                                .name,
+                                                            queryParameters: {
+                                                              'targetUserId':
+                                                                  targetUserId,
+                                                              'imageFilePath':
+                                                                  uploadedImageFile
+                                                                      .value!
+                                                                      .path,
+                                                              'imageUrl': '',
                                                             },
-                                                            icon: Icon(
-                                                              Icons
-                                                                  .close_rounded,
-                                                              color:
-                                                                  defaultColors
-                                                                      .mainButtonTextWhiteColor,
-                                                              size: 14,
+                                                          );
+                                                        },
+                                                      ),
+                                                      Positioned(
+                                                        right: 0,
+                                                        top: 0,
+                                                        child: Container(
+                                                          height: 30,
+                                                          width: 30,
+                                                          decoration: BoxDecoration(
+                                                            color: defaultColors
+                                                                .textBlackColor
+                                                                .withAlpha(150),
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                          child: Center(
+                                                            child: IconButton(
+                                                              onPressed: () {
+                                                                uploadedImageFile
+                                                                        .value =
+                                                                    null;
+                                                              },
+                                                              icon: Icon(
+                                                                Icons
+                                                                    .close_rounded,
+                                                                color:
+                                                                    defaultColors
+                                                                        .mainButtonTextWhiteColor,
+                                                                size: 14,
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               )
                                               : Container(),

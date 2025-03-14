@@ -44,15 +44,27 @@ class InterlocutorMassageHistoryTile extends StatelessWidget {
                   ? Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 0.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12.0),
+                      SizedBox(
+                        width: 250,
+                        height: 100,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(
+                            8.0,
+                            8.0,
+                            0.0,
+                            0.0,
+                          ),
                           child: AutoScaledNetworkImage(
                             imageUrl: talkHistoryData.imageUrl,
-                            targetMinSide: 170,
-                            fit: BoxFit.contain,
-                            borderRadius: BorderRadius.circular(12),
+                            onTap: () {
+                              context.pushNamed(
+                                AppRoute.enlargedTalkImage.name,
+                                queryParameters: {
+                                  'imageUrl': talkHistoryData.imageUrl,
+                                  'imageFilePath': '',
+                                },
+                              );
+                            },
                           ),
                         ),
                       ),
@@ -71,7 +83,7 @@ class InterlocutorMassageHistoryTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Container(
-                        constraints: const BoxConstraints(maxWidth: 300),
+                        // constraints: const BoxConstraints(maxWidth: 300),
                         padding: const EdgeInsets.all(6.0),
                         margin: const EdgeInsets.all(6.0),
                         decoration: BoxDecoration(
@@ -145,11 +157,16 @@ class MyMassageHistoryTile extends StatelessWidget {
                     ? Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                            formatTalkTimestamp(talkHistoryData.createdAt),
-                            style: TextStyle(fontSize: FontSize.extraSmall),
+                        SizedBox(
+                          width: 250,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0,
+                            ),
+                            child: Text(
+                              formatTalkTimestamp(talkHistoryData.createdAt),
+                              style: TextStyle(fontSize: FontSize.extraSmall),
+                            ),
                           ),
                         ),
                         Padding(
@@ -159,14 +176,17 @@ class MyMassageHistoryTile extends StatelessWidget {
                             8.0,
                             0.0,
                           ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12.0),
-                            child: AutoScaledNetworkImage(
-                              imageUrl: talkHistoryData.imageUrl,
-                              targetMinSide: 170,
-                              fit: BoxFit.contain,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
+                          child: AutoScaledNetworkImage(
+                            imageUrl: talkHistoryData.imageUrl,
+                            onTap: () {
+                              context.pushNamed(
+                                AppRoute.enlargedTalkImage.name,
+                                queryParameters: {
+                                  'imageUrl': talkHistoryData.imageUrl,
+                                  'imageFilePath': '',
+                                },
+                              );
+                            },
                           ),
                         ),
                       ],
@@ -184,7 +204,7 @@ class MyMassageHistoryTile extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          constraints: const BoxConstraints(maxWidth: 300),
+                          // constraints: const BoxConstraints(maxWidth: 300),
                           padding: const EdgeInsets.all(6.0),
                           margin: const EdgeInsets.all(6.0),
                           decoration: BoxDecoration(

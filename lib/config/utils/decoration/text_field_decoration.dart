@@ -10,13 +10,17 @@ InputDecoration textFieldDecoration(String label) {
       fontSize: FontSize.normal,
     ),
     border: OutlineInputBorder(
-      borderSide: BorderSide(color: defaultColors.textFiledBorderColor),
+      borderSide: BorderSide(
+        color: defaultColors.textFiledUnfocusedBorderColor,
+      ),
     ),
     enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: defaultColors.textFiledBorderColor),
+      borderSide: BorderSide(
+        color: defaultColors.textFiledUnfocusedBorderColor,
+      ),
     ),
     focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: defaultColors.textFiledBorderColor),
+      borderSide: BorderSide(color: defaultColors.textFiledFocusedBorderColor),
     ),
   );
 }

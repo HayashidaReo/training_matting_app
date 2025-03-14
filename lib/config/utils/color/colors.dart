@@ -2,34 +2,24 @@ import 'package:flutter/material.dart';
 
 class DefaultColors {
   final Color appBackColor = Colors.white;
-  final Color primaryColor = Colors.pink;
+  final Color navigationBackColor = Colors.white;
+  final Color primaryColor = Colors.blueAccent;
   final Color secondaryColor = Colors.white;
-  final Color accentColor = Colors.pinkAccent;
+  final Color accentColor = Colors.blueAccent;
 
   final Color maleColor = Colors.pink;
-  final Color femaleColor = Colors.blue;
+  final Color femaleColor = Colors.blueAccent;
 
   final Color blueTextColor = Colors.blue;
   final Color unavailableFrontGreyColor = Colors.grey;
   final Color talkRoomGreyColor = const Color.fromARGB(255, 255, 245, 250);
 
-  final Color navigationSelectedTextColor = const Color.fromARGB(
-    255,
-    204,
-    0,
-    92,
-  );
-  final Color navigationUnSelectedTextColor = const Color.fromARGB(
-    255,
-    188,
-    143,
-    163,
-  );
-  final Color navigationBackColor = const Color.fromARGB(255, 255, 237, 254);
+  final Color navigationSelectedTextColor = Colors.black;
+  final Color navigationUnSelectedTextColor = Colors.black54;
 
   final Color mainBackColor = Colors.white;
-  final Color mainTextColor = Colors.pink;
-  final Color textBlackColor = Colors.black;
+  final Color mainTextColor = Colors.black;
+  final Color accentTextColor = Colors.black;
 
   final Color toastTextColor = Colors.white;
   final Color toastBackColor = Color.fromARGB(255, 255, 74, 161);
@@ -37,14 +27,21 @@ class DefaultColors {
   final Color dialogTitleColor = Colors.black87;
   final Color dialogBodyTextColor = Colors.black54;
 
-  final Color mainButtonTextWhiteColor = Colors.white;
-  final Color mainButtonBackPinkColor = Color.fromARGB(255, 247, 138, 191);
-  final Color subButtonTextPinkColor = Color.fromARGB(255, 255, 74, 161);
-  final Color subButtonBackWhiteColor = Colors.white;
-  final Color buttonBorderPinkColor = Color.fromARGB(255, 255, 74, 161);
+  final Color mainButtonTextColor = Colors.white;
+  final Color mainButtonBackColor = Color.fromARGB(255, 40, 39, 39);
+  final Color subButtonTextColor = Colors.black;
+  final Color subButtonBackColor = Colors.white;
+  final Color buttonBorderColor = Color.fromARGB(255, 40, 39, 39);
+  final Color accentButtonTextColor = Colors.white;
+  final Color accentButtonBackColor = Colors.blueAccent;
+  final Color accentButtonBorderColor = Colors.blueAccent;
 
-  final Color textFiledLabelColor = Color.fromARGB(255, 254, 182, 235);
-  final Color textFiledBorderColor = Colors.pink;
+  final Color mainIconButtonTextColor = Colors.white;
+  final Color mainIconButtonBackColor = Colors.blueAccent;
+
+  final Color textFiledLabelColor = Colors.grey;
+  final Color textFiledFocusedBorderColor = Colors.blueAccent;
+  final Color textFiledUnfocusedBorderColor = Colors.grey;
 
   final Color hamburgerMenuBackColor = Colors.white;
   final Color hamburgerMenuTextColor = Colors.black87;

@@ -68,7 +68,7 @@ class CreateUserPage extends HookConsumerWidget {
                     Expanded(
                       child: Divider(
                         thickness: 1,
-                        color: defaultColors.textFiledBorderColor,
+                        color: defaultColors.mainTextColor,
                       ),
                     ),
                     Padding(
@@ -86,7 +86,7 @@ class CreateUserPage extends HookConsumerWidget {
                     Expanded(
                       child: Divider(
                         thickness: 1,
-                        color: defaultColors.textFiledBorderColor,
+                        color: defaultColors.mainTextColor,
                       ),
                     ),
                   ],
@@ -104,11 +104,16 @@ class CreateUserPage extends HookConsumerWidget {
                   },
                   borderRadius: BorderRadius.circular(8), // 角丸デザイン
                   selectedColor:
-                      defaultColors.mainButtonTextWhiteColor, // 選択時のテキストカラー
-                  fillColor: defaultColors.mainButtonBackPinkColor, // 選択時の背景色
-                  color: defaultColors.subButtonTextPinkColor, // 未選択時のテキストカラー
+                      defaultColors.accentButtonTextColor, // 選択時のテキストカラー
+                  fillColor:
+                      (selectedGenderList.value[0])
+                          ? defaultColors.femaleColor
+                          : defaultColors.maleColor, // 選択時の背景色
+                  color: defaultColors.subButtonTextColor, // 未選択時のテキストカラー
                   selectedBorderColor:
-                      defaultColors.buttonBorderPinkColor, // 選択時のボーダー
+                      (selectedGenderList.value[0])
+                          ? defaultColors.femaleColor
+                          : defaultColors.maleColor, // 選択時のボーダー
                   borderWidth: 2,
                   constraints: BoxConstraints(
                     minWidth: 120, // 各ボタンの最小幅

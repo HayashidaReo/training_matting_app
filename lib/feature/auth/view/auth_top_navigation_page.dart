@@ -23,6 +23,7 @@ class AuthTopNavigationPage extends HookConsumerWidget {
           backgroundColor: defaultColors.navigationBackColor,
           title: TabBar(
             indicatorColor: defaultColors.primaryColor,
+            indicatorPadding: const EdgeInsets.symmetric(horizontal: 32.0),
             labelColor: defaultColors.navigationSelectedTextColor,
             unselectedLabelColor: defaultColors.navigationUnSelectedTextColor,
             onTap: (index) {

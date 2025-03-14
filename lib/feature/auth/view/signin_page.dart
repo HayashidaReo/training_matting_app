@@ -84,7 +84,6 @@ class SigninPage extends HookConsumerWidget {
                       context,
                     );
                   },
-                  isColorReversed: true,
                 ),
               ],
             ),

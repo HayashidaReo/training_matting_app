@@ -68,8 +68,8 @@ class MyPostListPage extends ConsumerWidget {
             },
           ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: defaultColors.mainButtonBackPinkColor,
-        foregroundColor: defaultColors.mainButtonTextWhiteColor,
+        backgroundColor: defaultColors.accentButtonBackColor,
+        foregroundColor: defaultColors.accentButtonTextColor,
         onPressed: () {
           context.pushNamed(AppRoute.addPost.name);
         },

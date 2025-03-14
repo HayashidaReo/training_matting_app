@@ -240,7 +240,7 @@ class TalkRoomPage extends HookConsumerWidget {
                                                             width: 30,
                                                             decoration: BoxDecoration(
                                                               color: defaultColors
-                                                                  .textBlackColor
+                                                                  .mainTextColor
                                                                   .withAlpha(
                                                                     150,
                                                                   ),
@@ -260,7 +260,7 @@ class TalkRoomPage extends HookConsumerWidget {
                                                                       .close_rounded,
                                                                   color:
                                                                       defaultColors
-                                                                          .mainButtonTextWhiteColor,
+                                                                          .mainIconButtonTextColor,
                                                                   size: 14,
                                                                 ),
                                                               ),

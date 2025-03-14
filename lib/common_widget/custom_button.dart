@@ -23,13 +23,10 @@ class CustomButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor:
               !isColorReversed
-                  ? defaultColors.mainButtonBackPinkColor
-                  : defaultColors.subButtonBackWhiteColor,
+                  ? defaultColors.mainButtonBackColor
+                  : defaultColors.subButtonBackColor,
           shape: RoundedRectangleBorder(
-            side: BorderSide(
-              color: defaultColors.buttonBorderPinkColor,
-              width: 1,
-            ),
+            side: BorderSide(color: defaultColors.buttonBorderColor, width: 1),
             borderRadius: BorderRadius.circular(30),
           ),
         ),
@@ -41,8 +38,8 @@ class CustomButton extends StatelessWidget {
             style: TextStyle(
               color:
                   !isColorReversed
-                      ? defaultColors.mainButtonTextWhiteColor
-                      : defaultColors.subButtonTextPinkColor,
+                      ? defaultColors.mainButtonTextColor
+                      : defaultColors.subButtonTextColor,
               fontWeight: FontWeight.bold,
               fontSize: FontSize.normal,
             ),

@@ -124,7 +124,7 @@ class AddOrEditPostForm extends HookWidget {
                 color: defaultColors.addPostImageCloseButtonBackColor,
                 child: Icon(
                   Icons.close,
-                  color: defaultColors.mainButtonTextWhiteColor,
+                  color: defaultColors.mainIconButtonTextColor,
                 ),
               ),
             ),
@@ -211,7 +211,7 @@ class AddOrEditPostForm extends HookWidget {
                                         Icons.close,
                                         color:
                                             defaultColors
-                                                .mainButtonTextWhiteColor,
+                                                .mainIconButtonTextColor,
                                       ),
                                     ),
                                   ),

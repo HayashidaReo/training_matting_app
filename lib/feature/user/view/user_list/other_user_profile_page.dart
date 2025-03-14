@@ -274,7 +274,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
                                           SizedBox(
-                                            width: 150,
+                                            width: 170,
                                             height: 40,
                                             child: CustomButton(
                                               text:
@@ -316,7 +316,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                                 },
                                                 data: (bool isFollowed) {
                                                   return SizedBox(
-                                                    width: 150,
+                                                    width: 170,
                                                     height: 40,
                                                     child: CustomButton(
                                                       text: 'メッセージ',

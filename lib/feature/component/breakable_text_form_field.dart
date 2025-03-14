@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:matching_app/config/utils/decoration/text_field_decoration.dart';
 
 class BreakableTextFormField extends StatelessWidget {
   const BreakableTextFormField({
@@ -8,12 +7,14 @@ class BreakableTextFormField extends StatelessWidget {
     required this.label,
     this.maxLength,
     this.focusNode,
+    required this.textLength,
   });
 
   final String label;
   final TextEditingController controller;
   final int? maxLength;
   final FocusNode? focusNode;
+  final ValueNotifier<int> textLength;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,9 @@ class BreakableTextFormField extends StatelessWidget {
       controller: controller,
       focusNode: focusNode,
       keyboardType: TextInputType.multiline,
+      onChanged: (value) {
+        textLength.value = value.length;
+      },
       validator: (value) {
         if (value == null || value.isEmpty) {
           return '入力してください';

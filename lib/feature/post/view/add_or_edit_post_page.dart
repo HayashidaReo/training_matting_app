@@ -96,6 +96,7 @@ class AddOrEditPostForm extends HookWidget {
     final imageUrl = useState<String>(postData?.imageUrl ?? '');
     bool isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
     final keyboardDismissed = useState(false);
+    final bodyTextLength = useState<int>(0);
 
     useEffect(() {
       if (isKeyboardVisible == false) {
@@ -103,7 +104,7 @@ class AddOrEditPostForm extends HookWidget {
         keyboardDismissed.value = false;
       }
       return null;
-    }, [isKeyboardVisible]);
+    }, [isKeyboardVisible, bodyController.text]);
 
     Widget imageWidget;
     if (selectedImage.value != null) {
@@ -122,6 +123,7 @@ class AddOrEditPostForm extends HookWidget {
                   },
                 );
               } else {
+                // TODO： この時だけエラーになる
                 context.goNamed(
                   AppRoute.enlargedPostImageFromAdd.name,
                   queryParameters: {
@@ -224,6 +226,7 @@ class AddOrEditPostForm extends HookWidget {
                               controller: bodyController,
                               maxLength: 140,
                               label: 'post内容',
+                              textLength: bodyTextLength,
                             ),
                           ],
                         ),
@@ -318,7 +321,7 @@ class AddOrEditPostForm extends HookWidget {
                         // 画像アップロード処理など
                       },
                     ),
-                    Text('文字数'),
+                    Text('${bodyTextLength.value}/140'),
                     IconButton(
                       icon: const Icon(Icons.arrow_drop_down_sharp, size: 36),
                       onPressed: () {

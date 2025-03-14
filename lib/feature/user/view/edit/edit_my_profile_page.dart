@@ -20,6 +20,8 @@ class EditMyProfilePage extends HookConsumerWidget {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final TextEditingController userNameController = useTextEditingController();
     final TextEditingController profileController = useTextEditingController();
+    // TODO：実装してね
+    final bodyTextLength = useState<int>(0);
 
     return UnFocus(
       child: Scaffold(
@@ -56,6 +58,7 @@ class EditMyProfilePage extends HookConsumerWidget {
                             controller: profileController,
                             label: '自己紹介',
                             maxLength: 133,
+                            textLength: bodyTextLength,
                           ),
                           HeightMarginSizedBox.normal,
                           CustomButton(

@@ -13,8 +13,6 @@ import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/component/auto_scaled_file_image.dart';
 import 'package:matching_app/feature/component/auto_scaled_network_image.dart';
 import 'package:matching_app/feature/component/breakable_text_form_field.dart';
-import 'package:matching_app/feature/component/auto_scaled_file_image.dart';
-import 'package:matching_app/feature/component/auto_scaled_network_image.dart';
 import 'package:matching_app/feature/component/un_focus.dart';
 import 'package:matching_app/feature/post/controller/post_controller.dart';
 import 'package:matching_app/feature/post/model/post.dart';

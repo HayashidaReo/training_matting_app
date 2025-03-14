@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/decoration/none_border_text_field_decoration.dart';
 
 class TalkMessageTextField extends StatelessWidget {
   const TalkMessageTextField({
@@ -28,7 +29,7 @@ class TalkMessageTextField extends StatelessWidget {
         Center(
           child: Container(
             width: MediaQuery.of(context).size.width * 0.7,
-            height: 1, // 線の太さ
+            height: 1,
             color: defaultColors.talkRoomSendMessageFieldBorderColor,
           ),
         ),
@@ -37,24 +38,12 @@ class TalkMessageTextField extends StatelessWidget {
           maxLines: 9,
           keyboardType: TextInputType.multiline,
           controller: controller,
-          decoration: InputDecoration(
-            hintText: label,
-            prefixIcon: IconButton(
-              onPressed: prefixIconOnPressed,
-              icon: prefixIcon,
-            ),
-            suffixIcon: IconButton(
-              onPressed: suffixIconOnPressed,
-              icon: suffixIcon,
-            ),
-            filled: true,
-            fillColor: defaultColors.talkRoomSendMessageFieldBackColor,
-            // 枠線を消し、角丸にする
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            contentPadding: EdgeInsets.zero, // 上下左右の余白を調整
+          decoration: noneBorderTextFieldDecoration(
+            label: label,
+            prefixIconOnPressed: prefixIconOnPressed,
+            prefixIcon: prefixIcon,
+            suffixIconOnPressed: suffixIconOnPressed,
+            suffixIcon: suffixIcon,
           ),
         ),
       ],

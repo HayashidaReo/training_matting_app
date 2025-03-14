@@ -24,9 +24,10 @@ class PostListTopNavigationPage extends ConsumerWidget {
           children: [
             Container(
               color: defaultColors.navigationBackColor,
-              height: 50,
+              height: 40,
               child: TabBar(
                 indicatorColor: defaultColors.primaryColor,
+                indicatorPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                 labelColor: defaultColors.navigationSelectedTextColor,
                 unselectedLabelColor:
                     defaultColors.navigationUnSelectedTextColor,
@@ -36,31 +37,22 @@ class PostListTopNavigationPage extends ConsumerWidget {
                       .updateIndex(index);
                 },
                 tabs: [
-                  SizedBox(
-                    height: 24,
-                    child: Center(
-                      child: Text(
-                        'ポスト一覧',
-                        style: TextStyle(fontSize: FontSize.smallNormal),
-                      ),
+                  Center(
+                    child: Text(
+                      'ポスト一覧',
+                      style: TextStyle(fontSize: FontSize.smallNormal),
                     ),
                   ),
-                  SizedBox(
-                    height: 24,
-                    child: Center(
-                      child: Text(
-                        'ブックマーク',
-                        style: TextStyle(fontSize: FontSize.smallNormal),
-                      ),
+                  Center(
+                    child: Text(
+                      'ブックマーク',
+                      style: TextStyle(fontSize: FontSize.smallNormal),
                     ),
                   ),
-                  SizedBox(
-                    height: 24,
-                    child: Center(
-                      child: Text(
-                        '自分のポスト',
-                        style: TextStyle(fontSize: FontSize.smallNormal),
-                      ),
+                  Center(
+                    child: Text(
+                      '自分のポスト',
+                      style: TextStyle(fontSize: FontSize.smallNormal),
                     ),
                   ),
                 ],

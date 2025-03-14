@@ -140,7 +140,7 @@ class TalkRoomPage extends HookConsumerWidget {
                                                             child: Container(
                                                               color:
                                                                   defaultColors
-                                                                      .talkRoomGreyColor,
+                                                                      .talkRoomUndoSendBackColor,
                                                               padding:
                                                                   const EdgeInsets.symmetric(
                                                                     horizontal:
@@ -150,6 +150,14 @@ class TalkRoomPage extends HookConsumerWidget {
 
                                                               child: Text(
                                                                 '送信が取り消されました',
+                                                                style: TextStyle(
+                                                                  color:
+                                                                      defaultColors
+                                                                          .talkRoomUndoSendTextColor,
+                                                                  fontSize:
+                                                                      FontSize
+                                                                          .small,
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
@@ -196,7 +204,6 @@ class TalkRoomPage extends HookConsumerWidget {
                                     ),
                                     SafeArea(
                                       child: Container(
-                                        color: defaultColors.talkRoomGreyColor,
                                         width: double.infinity,
                                         padding: const EdgeInsets.all(6.0),
                                         child: Column(

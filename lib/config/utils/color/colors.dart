@@ -12,7 +12,6 @@ class DefaultColors {
 
   final Color blueTextColor = Colors.blue;
   final Color unavailableFrontGreyColor = Colors.grey;
-  final Color talkRoomGreyColor = const Color.fromARGB(255, 255, 245, 250);
 
   final Color navigationSelectedTextColor = Colors.black;
   final Color navigationUnSelectedTextColor = Colors.black54;
@@ -58,14 +57,22 @@ class DefaultColors {
     alpha: 0.5,
   );
 
-  final Color talkRoomMyTextBackColor = Color.fromARGB(255, 255, 74, 161);
-  final Color talkRoomInterlocutorTextBackColor = Color.fromARGB(
+  final Color talkRoomMyTextColor = Colors.white;
+  final Color talkRoomMyTextBackColor = Colors.blue;
+  final Color talkRoomInterlocutorTextColor = Colors.black;
+  final Color talkRoomInterlocutorTextBackColor = const Color.fromARGB(
     255,
-    112,
-    112,
-    112,
+    237,
+    237,
+    237,
   );
-  final Color talkRoomTextColor = Colors.white;
+  final Color talkRoomUndoSendBackColor = const Color.fromARGB(
+    255,
+    245,
+    245,
+    245,
+  );
+  final Color talkRoomUndoSendTextColor = Color.fromARGB(255, 84, 84, 84);
   final Color talkRoomLoadingImageBackColor = const Color.fromARGB(
     255,
     228,

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/feature/user/controller/follow_list_top_navigation_controller.dart';
 import 'package:matching_app/feature/follow/view/follow_list_page.dart';
@@ -22,6 +23,10 @@ class FollowListTopNavigationPage extends ConsumerWidget {
             SizedBox(
               height: 30,
               child: TabBar(
+                indicatorColor: defaultColors.primaryColor,
+                labelColor: defaultColors.navigationSelectedTextColor,
+                unselectedLabelColor:
+                    defaultColors.navigationUnSelectedTextColor,
                 onTap: (index) {
                   ref
                       .read(followListTopNavigationControllerProvider.notifier)

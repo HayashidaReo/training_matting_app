@@ -46,7 +46,7 @@ class InterlocutorMassageHistoryTile extends StatelessWidget {
                     children: [
                       SizedBox(
                         width: 250,
-                        height: 100,
+                        height: 200,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(
                             8.0,
@@ -83,7 +83,7 @@ class InterlocutorMassageHistoryTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Container(
-                        // constraints: const BoxConstraints(maxWidth: 300),
+                        constraints: const BoxConstraints(maxWidth: 300),
                         padding: const EdgeInsets.all(6.0),
                         margin: const EdgeInsets.all(6.0),
                         decoration: BoxDecoration(
@@ -157,36 +157,35 @@ class MyMassageHistoryTile extends StatelessWidget {
                     ? Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        SizedBox(
-                          width: 250,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                            ),
-                            child: Text(
-                              formatTalkTimestamp(talkHistoryData.createdAt),
-                              style: TextStyle(fontSize: FontSize.extraSmall),
-                            ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            formatTalkTimestamp(talkHistoryData.createdAt),
+                            style: TextStyle(fontSize: FontSize.extraSmall),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(
-                            0.0,
-                            8.0,
-                            8.0,
-                            0.0,
-                          ),
-                          child: AutoScaledNetworkImage(
-                            imageUrl: talkHistoryData.imageUrl,
-                            onTap: () {
-                              context.pushNamed(
-                                AppRoute.enlargedTalkImage.name,
-                                queryParameters: {
-                                  'imageUrl': talkHistoryData.imageUrl,
-                                  'imageFilePath': '',
-                                },
-                              );
-                            },
+                        SizedBox(
+                          width: 250,
+                          height: 200,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                              0.0,
+                              8.0,
+                              8.0,
+                              0.0,
+                            ),
+                            child: AutoScaledNetworkImage(
+                              imageUrl: talkHistoryData.imageUrl,
+                              onTap: () {
+                                context.pushNamed(
+                                  AppRoute.enlargedTalkImage.name,
+                                  queryParameters: {
+                                    'imageUrl': talkHistoryData.imageUrl,
+                                    'imageFilePath': '',
+                                  },
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ],
@@ -204,7 +203,7 @@ class MyMassageHistoryTile extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          // constraints: const BoxConstraints(maxWidth: 300),
+                          constraints: const BoxConstraints(maxWidth: 300),
                           padding: const EdgeInsets.all(6.0),
                           margin: const EdgeInsets.all(6.0),
                           decoration: BoxDecoration(

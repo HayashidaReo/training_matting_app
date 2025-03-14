@@ -52,7 +52,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                         children: [
                           IconImage(
                             iconImageUrl: userData.iconImageUrl,
-                            size: 100,
+                            size: 95,
                           ),
                           WidthMarginSizedBox.normal,
                           Expanded(

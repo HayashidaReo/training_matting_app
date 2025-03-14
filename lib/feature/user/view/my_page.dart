@@ -134,7 +134,7 @@ class MyPage extends ConsumerWidget {
                         children: [
                           IconImage(
                             iconImageUrl: userData.iconImageUrl,
-                            size: 100,
+                            size: 95,
                             onTap: () {
                               context.pushNamed(AppRoute.editMyIcon.name);
                             },
@@ -441,6 +441,7 @@ class MyPage extends ConsumerWidget {
                                     },
                                   ),
                                 ),
+                                HeightMarginSizedBox.normal,
                               ],
                             );
                           },

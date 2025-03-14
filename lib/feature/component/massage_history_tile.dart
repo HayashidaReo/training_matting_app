@@ -92,7 +92,12 @@ class InterlocutorMassageHistoryTile extends StatelessWidget {
                         decoration: BoxDecoration(
                           color:
                               defaultColors.talkRoomInterlocutorTextBackColor,
-                          borderRadius: BorderRadius.circular(12.0),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(16),
+                            topRight: Radius.circular(16),
+                            bottomLeft: Radius.circular(3),
+                            bottomRight: Radius.circular(16), // ここだけ小さめにして尖らせる例
+                          ),
                         ),
                         child: Text(
                           talkHistoryData.message,
@@ -220,7 +225,14 @@ class MyMassageHistoryTile extends StatelessWidget {
                           margin: const EdgeInsets.all(6.0),
                           decoration: BoxDecoration(
                             color: defaultColors.talkRoomMyTextBackColor,
-                            borderRadius: BorderRadius.circular(12.0),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                              bottomLeft: Radius.circular(16),
+                              bottomRight: Radius.circular(
+                                3,
+                              ), // ここだけ小さめにして尖らせる例
+                            ),
                           ),
                           child: Text(
                             talkHistoryData.message,

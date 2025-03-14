@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
@@ -6,7 +8,8 @@ import 'package:matching_app/feature/auth/view/auth_top_navigation_page.dart';
 import 'package:matching_app/feature/auth/view/password_remainder_page.dart';
 import 'package:matching_app/feature/navigation/view/bottom_navigation_page.dart';
 import 'package:matching_app/feature/post/view/add_or_edit_post_page.dart';
-import 'package:matching_app/feature/post/view/enlarged_image_page.dart';
+import 'package:matching_app/feature/post/view/enlarged_file_image_page.dart';
+import 'package:matching_app/feature/post/view/enlarged_network_image_page.dart';
 import 'package:matching_app/feature/post/view/post_list_top_navigation.dart';
 import 'package:matching_app/feature/talk/view/talk_list_page.dart';
 import 'package:matching_app/feature/talk/view/talk_room_page.dart';
@@ -93,15 +96,53 @@ GoRouter appRouter(ref) {
                 pageBuilder: (context, state) {
                   return MaterialPage(child: AddOrEditPostPage());
                 },
+                routes: [
+                  GoRoute(
+                    parentNavigatorKey: rootNavigatorKey,
+                    path: AppRoute.enlargedPostImageFromAdd.path,
+                    name: AppRoute.enlargedPostImageFromAdd.name,
+                    pageBuilder: (context, state) {
+                      final String imageUrl =
+                          state.uri.queryParameters['imageUrl'] as String;
+                      return NoTransitionPage(
+                        child: EnlargedNetworkImagePage(imageUrl: imageUrl),
+                      );
+                    },
+                  ),
+                ],
               ),
               GoRoute(
                 parentNavigatorKey: rootNavigatorKey,
                 path: AppRoute.editPost.path,
                 name: AppRoute.editPost.name,
                 pageBuilder: (context, state) {
-                  final postId = state.uri.queryParameters['postId'] as String;
+                  final String postId =
+                      state.uri.queryParameters['postId'] as String;
                   return MaterialPage(child: AddOrEditPostPage(postId: postId));
                 },
+                routes: [
+                  GoRoute(
+                    parentNavigatorKey: rootNavigatorKey,
+                    path: AppRoute.enlargedPostImageFromEdit.path,
+                    name: AppRoute.enlargedPostImageFromEdit.name,
+                    pageBuilder: (context, state) {
+                      final String imageUrl =
+                          state.uri.queryParameters['imageUrl'] as String;
+                      final String imageFilePath =
+                          state.uri.queryParameters['imageFilePath'] as String;
+                      if (imageFilePath.isNotEmpty) {
+                        return NoTransitionPage(
+                          child: EnlargedFileImagePage(
+                            imageFile: File(imageFilePath),
+                          ),
+                        );
+                      }
+                      return NoTransitionPage(
+                        child: EnlargedNetworkImagePage(imageUrl: imageUrl),
+                      );
+                    },
+                  ),
+                ],
               ),
               GoRoute(
                 parentNavigatorKey: rootNavigatorKey,
@@ -111,7 +152,7 @@ GoRouter appRouter(ref) {
                   final imageUrl =
                       state.uri.queryParameters['imageUrl'] as String;
                   return NoTransitionPage(
-                    child: EnlargedImagePage(imageUrl: imageUrl),
+                    child: EnlargedNetworkImagePage(imageUrl: imageUrl),
                   );
                 },
               ),

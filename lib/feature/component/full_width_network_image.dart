@@ -3,12 +3,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 
 /// 画像を横幅いっぱいに広げて表示するウィジェット（アスペクト比保持）
-class FullWidthImage extends StatelessWidget {
+class FullWidthNetworkImage extends StatelessWidget {
   final String imageUrl;
   final BoxFit fit;
   final BorderRadius? borderRadius;
 
-  const FullWidthImage({
+  const FullWidthNetworkImage({
     super.key,
     required this.imageUrl,
     this.fit = BoxFit.cover,

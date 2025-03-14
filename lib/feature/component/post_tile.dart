@@ -12,7 +12,7 @@ import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/bookmark/controller/bookmark_controller.dart';
 import 'package:matching_app/feature/bookmark/model/bookmark.dart';
 import 'package:matching_app/feature/component/expandable_text.dart';
-import 'package:matching_app/feature/component/full_width_image.dart';
+import 'package:matching_app/feature/component/full_width_network_image.dart';
 import 'package:matching_app/feature/component/icon_image.dart';
 import 'package:matching_app/feature/favorite/controller/favorite_controller.dart';
 import 'package:matching_app/feature/favorite/model/favorite.dart';
@@ -150,7 +150,7 @@ class PostTile extends HookConsumerWidget {
                           queryParameters: {'imageUrl': postData.imageUrl},
                         );
                       },
-                      child: FullWidthImage(imageUrl: postData.imageUrl),
+                      child: FullWidthNetworkImage(imageUrl: postData.imageUrl),
                     ),
                   ),
               ],

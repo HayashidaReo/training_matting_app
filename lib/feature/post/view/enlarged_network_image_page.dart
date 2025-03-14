@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 
-class EnlargedImagePage extends ConsumerWidget {
-  const EnlargedImagePage({super.key, required this.imageUrl});
+class EnlargedNetworkImagePage extends ConsumerWidget {
+  const EnlargedNetworkImagePage({super.key, required this.imageUrl});
 
   final String imageUrl;
   @override

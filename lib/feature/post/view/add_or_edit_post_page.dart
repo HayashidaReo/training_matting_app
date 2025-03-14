@@ -8,10 +8,13 @@ import 'package:matching_app/common_widget/loading_dialog.dart';
 import 'package:matching_app/common_widget/toast.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/enum/image_quality_enum.dart';
+import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/component/auto_scaled_file_image.dart';
 import 'package:matching_app/feature/component/auto_scaled_network_image.dart';
 import 'package:matching_app/feature/component/breakable_text_form_field.dart';
+import 'package:matching_app/feature/component/full_width_file_image.dart';
+import 'package:matching_app/feature/component/full_width_network_image.dart';
 import 'package:matching_app/feature/component/un_focus.dart';
 import 'package:matching_app/feature/post/controller/post_controller.dart';
 import 'package:matching_app/feature/post/model/post.dart';
@@ -96,7 +99,24 @@ class AddOrEditPostForm extends HookWidget {
     if (selectedImage.value != null) {
       imageWidget = Stack(
         children: [
-          AutoScaledFileImage(imageFile: selectedImage.value!),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12.0),
+            child: InkWell(
+              onTap: () {
+                context.goNamed(
+                  AppRoute.enlargedPostImageFromEdit.name,
+                  queryParameters: {
+                    'postId': postData!.postId,
+                    'imageFilePath': selectedImage.value!.path,
+                    'imageUrl': '',
+                  },
+                );
+              },
+              child: FullWidthFileImage(imageFile: selectedImage.value!),
+            ),
+          ),
+
+          // AutoScaledFileImage(imageFile: selectedImage.value!),
           Positioned(
             right: 0,
             top: 0,
@@ -166,9 +186,27 @@ class AddOrEditPostForm extends HookWidget {
                             : (imageUrl.value != '')
                             ? Stack(
                               children: [
-                                AutoScaledNetworkImage(
-                                  imageUrl: imageUrl.value,
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  child: InkWell(
+                                    onTap: () {
+                                      context.goNamed(
+                                        AppRoute.enlargedPostImageFromEdit.name,
+                                        queryParameters: {
+                                          'postId': postData!.postId,
+                                          'imageUrl': imageUrl.value,
+                                          'imageFilePath': '',
+                                        },
+                                      );
+                                    },
+                                    child: FullWidthNetworkImage(
+                                      imageUrl: imageUrl.value,
+                                    ),
+                                  ),
                                 ),
+                                // AutoScaledNetworkImage(
+                                //   imageUrl: imageUrl.value,
+                                // ),
                                 Positioned(
                                   right: 0,
                                   top: 0,

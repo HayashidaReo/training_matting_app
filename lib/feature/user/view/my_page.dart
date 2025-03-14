@@ -172,52 +172,6 @@ class MyPage extends ConsumerWidget {
                                   children: [
                                     ref
                                         .watch(
-                                          watchAllMyFollowingUserListControllerProvider(
-                                            ref
-                                                .read(
-                                                  currentUserControllerProvider,
-                                                )!
-                                                .uid,
-                                          ),
-                                        )
-                                        .when(
-                                          data: (
-                                            List<Follow> followingUserList,
-                                          ) {
-                                            return FollowCountPanel(
-                                              followCount:
-                                                  followingUserList.length,
-                                              typeName: 'フォロー',
-                                              tabIndex: 0,
-                                              targetUserId:
-                                                  ref
-                                                      .read(
-                                                        currentUserControllerProvider,
-                                                      )!
-                                                      .uid,
-                                              isMyPage: true,
-                                            );
-                                          },
-                                          error: (error, _) {
-                                            return FollowCountPanel(
-                                              followCount: 0,
-                                              typeName: 'フォロー',
-                                              tabIndex: 0,
-                                              targetUserId:
-                                                  ref
-                                                      .read(
-                                                        currentUserControllerProvider,
-                                                      )!
-                                                      .uid,
-                                              isMyPage: true,
-                                            );
-                                          },
-                                          loading: () {
-                                            return const CircularProgressIndicator();
-                                          },
-                                        ),
-                                    ref
-                                        .watch(
                                           watchAllFollowMeUserListControllerProvider(
                                             ref
                                                 .read(
@@ -249,6 +203,52 @@ class MyPage extends ConsumerWidget {
                                               followCount: 0,
                                               typeName: 'フォロワー',
                                               tabIndex: 1,
+                                              targetUserId:
+                                                  ref
+                                                      .read(
+                                                        currentUserControllerProvider,
+                                                      )!
+                                                      .uid,
+                                              isMyPage: true,
+                                            );
+                                          },
+                                          loading: () {
+                                            return const CircularProgressIndicator();
+                                          },
+                                        ),
+                                    ref
+                                        .watch(
+                                          watchAllMyFollowingUserListControllerProvider(
+                                            ref
+                                                .read(
+                                                  currentUserControllerProvider,
+                                                )!
+                                                .uid,
+                                          ),
+                                        )
+                                        .when(
+                                          data: (
+                                            List<Follow> followingUserList,
+                                          ) {
+                                            return FollowCountPanel(
+                                              followCount:
+                                                  followingUserList.length,
+                                              typeName: 'フォロー',
+                                              tabIndex: 0,
+                                              targetUserId:
+                                                  ref
+                                                      .read(
+                                                        currentUserControllerProvider,
+                                                      )!
+                                                      .uid,
+                                              isMyPage: true,
+                                            );
+                                          },
+                                          error: (error, _) {
+                                            return FollowCountPanel(
+                                              followCount: 0,
+                                              typeName: 'フォロー',
+                                              tabIndex: 0,
                                               targetUserId:
                                                   ref
                                                       .read(

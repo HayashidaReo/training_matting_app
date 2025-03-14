@@ -6,6 +6,7 @@ import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/follow/controller/follow_controller.dart';
 import 'package:matching_app/feature/user/controller/follow_list_top_navigation_controller.dart';
+import 'package:matching_app/function/format_follow_number.dart';
 
 class FollowCountPanel extends ConsumerWidget {
   const FollowCountPanel({
@@ -37,10 +38,10 @@ class FollowCountPanel extends ConsumerWidget {
         },
 
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              followCount.toString(),
+              formatFollowNumber(followCount),
               style: TextStyle(fontSize: FontSize.normal),
             ),
             Text(typeName, style: TextStyle(fontSize: FontSize.smallNormal)),
@@ -103,10 +104,10 @@ class FollowCountPanel extends ConsumerWidget {
                                 }
                                 : null,
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              followCount.toString(),
+                              formatFollowNumber(followCount),
                               style: TextStyle(fontSize: FontSize.normal),
                             ),
                             Text(

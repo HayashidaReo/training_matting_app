@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/decoration/none_border_text_field_decoration.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/component/user_list_tile.dart';
@@ -57,6 +58,11 @@ class UserListPage extends HookConsumerWidget {
                   top: 0,
                   child: PopupMenuButton(
                     icon: const Icon(Icons.sort_outlined),
+                    color: defaultColors.appBackColor, // 背景色
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    elevation: 4,
                     // メニューを選択しないままbottomNavigationBarをタップするとエラーが発生するため、onOpenedとonCanceledで状態を更新
                     onOpened: () {
                       ref

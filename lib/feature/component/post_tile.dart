@@ -59,6 +59,11 @@ class PostTile extends HookConsumerWidget {
                 (isMe)
                     ? PopupMenuButton(
                       icon: const Icon(Icons.more_vert),
+                      color: defaultColors.appBackColor, // 背景色
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      elevation: 4,
                       // メニューを選択しないままbottomNavigationBarをタップするとエラーが発生するため、onOpenedとonCanceledで状態を更新
                       onOpened: () {
                         ref

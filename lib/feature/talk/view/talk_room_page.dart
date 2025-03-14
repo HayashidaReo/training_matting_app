@@ -194,140 +194,145 @@ class TalkRoomPage extends HookConsumerWidget {
                                         ),
                                       ),
                                     ),
-
-                                    Container(
-                                      color: defaultColors.talkRoomGreyColor,
-                                      width: double.infinity,
-                                      padding: const EdgeInsets.all(6.0),
-                                      child: Column(
-                                        children: [
-                                          uploadedImageFile.value != null
-                                              ? SizedBox(
-                                                width: 200,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                    6.0,
-                                                  ),
-                                                  child: Stack(
-                                                    children: [
-                                                      AutoScaledFileImage(
-                                                        imageFile:
-                                                            uploadedImageFile
-                                                                .value!,
-                                                        onTap: () {
-                                                          context.goNamed(
-                                                            AppRoute
-                                                                .enlargedTalkImage
-                                                                .name,
-                                                            queryParameters: {
-                                                              'targetUserId':
-                                                                  targetUserId,
-                                                              'imageFilePath':
-                                                                  uploadedImageFile
-                                                                      .value!
-                                                                      .path,
-                                                              'imageUrl': '',
-                                                            },
-                                                          );
-                                                        },
-                                                      ),
-                                                      Positioned(
-                                                        right: 0,
-                                                        top: 0,
-                                                        child: Container(
-                                                          height: 30,
-                                                          width: 30,
-                                                          decoration: BoxDecoration(
-                                                            color: defaultColors
-                                                                .textBlackColor
-                                                                .withAlpha(150),
-                                                            shape:
-                                                                BoxShape.circle,
-                                                          ),
-                                                          child: Center(
-                                                            child: IconButton(
-                                                              onPressed: () {
-                                                                uploadedImageFile
-                                                                        .value =
-                                                                    null;
+                                    SafeArea(
+                                      child: Container(
+                                        color: defaultColors.talkRoomGreyColor,
+                                        width: double.infinity,
+                                        padding: const EdgeInsets.all(6.0),
+                                        child: Column(
+                                          children: [
+                                            uploadedImageFile.value != null
+                                                ? SizedBox(
+                                                  width: 200,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                          6.0,
+                                                        ),
+                                                    child: Stack(
+                                                      children: [
+                                                        AutoScaledFileImage(
+                                                          imageFile:
+                                                              uploadedImageFile
+                                                                  .value!,
+                                                          onTap: () {
+                                                            context.goNamed(
+                                                              AppRoute
+                                                                  .enlargedTalkImage
+                                                                  .name,
+                                                              queryParameters: {
+                                                                'targetUserId':
+                                                                    targetUserId,
+                                                                'imageFilePath':
+                                                                    uploadedImageFile
+                                                                        .value!
+                                                                        .path,
+                                                                'imageUrl': '',
                                                               },
-                                                              icon: Icon(
-                                                                Icons
-                                                                    .close_rounded,
-                                                                color:
-                                                                    defaultColors
-                                                                        .mainButtonTextWhiteColor,
-                                                                size: 14,
+                                                            );
+                                                          },
+                                                        ),
+                                                        Positioned(
+                                                          right: 0,
+                                                          top: 0,
+                                                          child: Container(
+                                                            height: 30,
+                                                            width: 30,
+                                                            decoration: BoxDecoration(
+                                                              color: defaultColors
+                                                                  .textBlackColor
+                                                                  .withAlpha(
+                                                                    150,
+                                                                  ),
+                                                              shape:
+                                                                  BoxShape
+                                                                      .circle,
+                                                            ),
+                                                            child: Center(
+                                                              child: IconButton(
+                                                                onPressed: () {
+                                                                  uploadedImageFile
+                                                                          .value =
+                                                                      null;
+                                                                },
+                                                                icon: Icon(
+                                                                  Icons
+                                                                      .close_rounded,
+                                                                  color:
+                                                                      defaultColors
+                                                                          .mainButtonTextWhiteColor,
+                                                                  size: 14,
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
+                                                  ),
+                                                )
+                                                : Container(),
+                                            Row(
+                                              children: [
+                                                IconButton(
+                                                  onPressed: () async {
+                                                    // 画像を選択
+                                                    await _getImage(
+                                                      uploadedImageFile,
+                                                    );
+                                                  },
+                                                  icon: Icon(
+                                                    Icons.photo,
+                                                    size: 24,
                                                   ),
                                                 ),
-                                              )
-                                              : Container(),
-                                          Row(
-                                            children: [
-                                              IconButton(
-                                                onPressed: () async {
-                                                  // 画像を選択
-                                                  await _getImage(
-                                                    uploadedImageFile,
-                                                  );
-                                                },
-                                                icon: Icon(
-                                                  Icons.photo,
-                                                  size: 24,
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.symmetric(
-                                                        vertical: 4.0,
-                                                      ),
-                                                  child: TalkMessageTextField(
-                                                    controller:
-                                                        messageTextController,
-                                                    label: 'メッセージを入力',
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.symmetric(
+                                                          vertical: 4.0,
+                                                        ),
+                                                    child: TalkMessageTextField(
+                                                      controller:
+                                                          messageTextController,
+                                                      label: 'メッセージを入力',
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              IconButton(
-                                                onPressed: () {
-                                                  // 送信
-                                                  _sendMassage(
-                                                    messageTextController:
-                                                        messageTextController,
-                                                    uploadedImageFile:
-                                                        uploadedImageFile,
-                                                    ref: ref,
-                                                    talkRoomId: talkRoomId,
-                                                    context: context,
-                                                  );
-                                                },
-                                                icon: Icon(
-                                                  Icons.send,
-                                                  size: 24,
-                                                  color:
-                                                      (messageTextController
-                                                                  .text
-                                                                  .trim()
-                                                                  .isEmpty &&
-                                                              uploadedImageFile
-                                                                      .value ==
-                                                                  null)
-                                                          ? defaultColors
-                                                              .unavailableFrontGreyColor
-                                                          : defaultColors
-                                                              .blueTextColor,
+                                                IconButton(
+                                                  onPressed: () {
+                                                    // 送信
+                                                    _sendMassage(
+                                                      messageTextController:
+                                                          messageTextController,
+                                                      uploadedImageFile:
+                                                          uploadedImageFile,
+                                                      ref: ref,
+                                                      talkRoomId: talkRoomId,
+                                                      context: context,
+                                                    );
+                                                  },
+                                                  icon: Icon(
+                                                    Icons.send,
+                                                    size: 24,
+                                                    color:
+                                                        (messageTextController
+                                                                    .text
+                                                                    .trim()
+                                                                    .isEmpty &&
+                                                                uploadedImageFile
+                                                                        .value ==
+                                                                    null)
+                                                            ? defaultColors
+                                                                .unavailableFrontGreyColor
+                                                            : defaultColors
+                                                                .blueTextColor,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ],

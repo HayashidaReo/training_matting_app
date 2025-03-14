@@ -280,7 +280,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                               text:
                                                   isFollowing
                                                       ? 'フォロー中'
-                                                      : 'フォローする',
+                                                      : 'フォロー',
                                               onPressed: () {
                                                 _changeFollowStatus(
                                                   context,
@@ -288,6 +288,12 @@ class OtherUserProfilePage extends ConsumerWidget {
                                                   ref,
                                                 );
                                               },
+                                              leftIcon:
+                                                  isFollowing
+                                                      ? Icons
+                                                          .person_remove_rounded
+                                                      : Icons
+                                                          .person_add_alt_rounded,
                                               isColorReversed: isFollowing,
                                             ),
                                           ),
@@ -342,6 +348,11 @@ class OtherUserProfilePage extends ConsumerWidget {
                                                           );
                                                         }
                                                       },
+                                                      leftIcon:
+                                                          (isFollowing &&
+                                                                  isFollowed)
+                                                              ? Icons.mail
+                                                              : Icons.lock,
                                                       isColorReversed:
                                                           !(isFollowing &&
                                                               isFollowed),

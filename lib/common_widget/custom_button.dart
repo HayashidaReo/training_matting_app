@@ -8,11 +8,13 @@ class CustomButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.isColorReversed = false,
+    this.leftIcon,
   });
 
   final String text;
   final VoidCallback? onPressed;
   final bool isColorReversed;
+  final IconData? leftIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -33,16 +35,33 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         child: Padding(
           padding: const EdgeInsets.all(4.0),
-          child: Text(
-            text,
-            style: TextStyle(
-              color:
-                  !isColorReversed
-                      ? defaultColors.mainButtonTextColor
-                      : defaultColors.subButtonTextColor,
-              fontWeight: FontWeight.bold,
-              fontSize: FontSize.normal,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              (leftIcon != null)
+                  ? Icon(
+                    leftIcon,
+                    color:
+                        !isColorReversed
+                            ? defaultColors.mainButtonTextColor
+                            : defaultColors.subButtonTextColor,
+                  )
+                  : SizedBox.shrink(),
+              Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    color:
+                        !isColorReversed
+                            ? defaultColors.mainButtonTextColor
+                            : defaultColors.subButtonTextColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: FontSize.normal,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

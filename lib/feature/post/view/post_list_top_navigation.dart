@@ -41,7 +41,7 @@ class PostListTopNavigationPage extends ConsumerWidget {
                     child: Center(
                       child: Text(
                         'ポスト一覧',
-                        style: TextStyle(fontSize: FontSize.normal),
+                        style: TextStyle(fontSize: FontSize.smallNormal),
                       ),
                     ),
                   ),
@@ -50,7 +50,7 @@ class PostListTopNavigationPage extends ConsumerWidget {
                     child: Center(
                       child: Text(
                         'ブックマーク',
-                        style: TextStyle(fontSize: FontSize.normal),
+                        style: TextStyle(fontSize: FontSize.smallNormal),
                       ),
                     ),
                   ),
@@ -59,7 +59,7 @@ class PostListTopNavigationPage extends ConsumerWidget {
                     child: Center(
                       child: Text(
                         '自分のポスト',
-                        style: TextStyle(fontSize: FontSize.normal),
+                        style: TextStyle(fontSize: FontSize.smallNormal),
                       ),
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -43,6 +44,7 @@ class CustomButton extends StatelessWidget {
                       ? defaultColors.mainButtonTextWhiteColor
                       : defaultColors.subButtonTextPinkColor,
               fontWeight: FontWeight.bold,
+              fontSize: FontSize.normal,
             ),
           ),
         ),

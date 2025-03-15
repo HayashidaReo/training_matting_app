@@ -85,6 +85,8 @@ class DefaultColors {
     186,
     186,
   );
+
+  final Color userListFollowedStateTextColor = Colors.grey.shade500;
 }
 
 final defaultColors = DefaultColors();

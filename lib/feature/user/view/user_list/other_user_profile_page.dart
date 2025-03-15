@@ -68,16 +68,62 @@ class OtherUserProfilePage extends ConsumerWidget {
                                     8,
                                     16,
                                   ),
-                                  child: Text(
-                                    userData.userName,
-                                    style: TextStyle(
-                                      fontSize: FontSize.normal,
-                                      color:
-                                          (userData.gender == '男性')
-                                              ? defaultColors.femaleColor
-                                              : defaultColors.maleColor,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ref
+                                          .watch(
+                                            watchWhetherTargetUserFollowMeControllerProvider(
+                                              ref
+                                                  .read(
+                                                    currentUserControllerProvider,
+                                                  )!
+                                                  .uid,
+                                              userData.userId,
+                                            ),
+                                          )
+                                          .when(
+                                            error: (error, _) {
+                                              return Text(
+                                                'エラーが発生しました。再度お試しください。',
+                                                style: TextStyle(
+                                                  fontSize: FontSize.large,
+                                                ),
+                                              );
+                                            },
+                                            loading: () {
+                                              return const CircularProgressIndicator();
+                                            },
+                                            data: (bool isFollowed) {
+                                              if (isFollowed) {
+                                                return Text(
+                                                  'フォローされています',
+                                                  style: TextStyle(
+                                                    fontSize:
+                                                        FontSize.smallNormal,
+                                                    color:
+                                                        defaultColors
+                                                            .userListFollowedStateTextColor,
+                                                  ),
+                                                );
+                                              } else {
+                                                return SizedBox.shrink();
+                                              }
+                                            },
+                                          ),
+                                      Text(
+                                        userData.userName,
+                                        style: TextStyle(
+                                          fontSize: FontSize.normal,
+                                          color:
+                                              (userData.gender == '男性')
+                                                  ? defaultColors.femaleColor
+                                                  : defaultColors.maleColor,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 Row(

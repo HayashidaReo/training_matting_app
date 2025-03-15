@@ -6,6 +6,7 @@ import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/component/icon_image.dart';
+import 'package:matching_app/feature/follow/controller/follow_controller.dart';
 import 'package:matching_app/feature/navigation/controller/bottom_navigation_controller.dart';
 import 'package:matching_app/feature/user/model/userdata.dart';
 
@@ -28,6 +29,37 @@ class UserListTile extends ConsumerWidget {
                   : defaultColors.maleColor,
         ),
       ),
+      subtitle: ref
+          .watch(
+            watchWhetherTargetUserFollowMeControllerProvider(
+              ref.read(currentUserControllerProvider)!.uid,
+              userData.userId,
+            ),
+          )
+          .when(
+            error: (error, _) {
+              return Text(
+                'エラーが発生しました。再度お試しください。',
+                style: TextStyle(fontSize: FontSize.large),
+              );
+            },
+            loading: () {
+              return const CircularProgressIndicator();
+            },
+            data: (bool isFollowed) {
+              if (isFollowed) {
+                return Text(
+                  'フォローされています',
+                  style: TextStyle(
+                    fontSize: FontSize.smallNormal,
+                    color: defaultColors.userListFollowedStateTextColor,
+                  ),
+                );
+              } else {
+                return null;
+              }
+            },
+          ),
       onTap: () async {
         if (userData.userId == ref.read(currentUserControllerProvider)!.uid) {
           ref.read(bottomNavigationControllerProvider.notifier).updateIndex(3);

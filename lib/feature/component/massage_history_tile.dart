@@ -26,16 +26,20 @@ class InterlocutorMassageHistoryTile extends StatelessWidget {
     return Expanded(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          IconImage(
-            iconImageUrl: targetUserData.iconImageUrl,
-            size: 36,
-            onTap: () {
-              context.pushNamed(
-                AppRoute.otherUserProfile.name,
-                queryParameters: {'userId': targetUserData.userId},
-              );
-            },
+          Padding(
+            padding: const EdgeInsets.only(bottom: 6.0),
+            child: IconImage(
+              iconImageUrl: targetUserData.iconImageUrl,
+              size: 32,
+              onTap: () {
+                context.pushNamed(
+                  AppRoute.otherUserProfile.name,
+                  queryParameters: {'userId': targetUserData.userId},
+                );
+              },
+            ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

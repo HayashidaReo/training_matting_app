@@ -102,5 +102,5 @@
 - [x] ユーザーネームで絵文字12個にしたら文字数オーバーになってしまう
 - [x] プロフィールめっちゃ改行いれまくっても、一部しか表示されない
 - [x] フォロワー数とフォロワー一覧にズレがある
-- [] CupertinoActivityIndicatorを使用する
+- [x] CupertinoActivityIndicatorを使用する
  

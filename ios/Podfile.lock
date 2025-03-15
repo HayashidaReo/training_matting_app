@@ -105,6 +105,8 @@ PODS:
     - GoogleUtilities/Logger
     - GoogleUtilities/Privacy
   - GTMSessionFetcher/Core (4.4.0)
+  - image_gallery_saver (2.0.2):
+    - Flutter
   - image_picker_ios (0.0.1):
     - Flutter
   - leveldb-library (1.22.6)
@@ -154,6 +156,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_image_compress_common (from `.symlinks/plugins/flutter_image_compress_common/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - image_gallery_saver (from `.symlinks/plugins/image_gallery_saver/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
@@ -206,6 +209,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_image_compress_common/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
+  image_gallery_saver:
+    :path: ".symlinks/plugins/image_gallery_saver/ios"
   image_picker_ios:
     :path: ".symlinks/plugins/image_picker_ios/ios"
   path_provider_foundation:
@@ -247,6 +252,7 @@ SPEC CHECKSUMS:
   fluttertoast: 21eecd6935e7064cc1fcb733a4c5a428f3f24f0f
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
   GTMSessionFetcher: 75b671f9e551e4c49153d4c4f8659ef4f559b970
+  image_gallery_saver: cb43cc43141711190510e92c460eb1655cd343cb
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   leveldb-library: cc8b8f8e013647a295ad3f8cd2ddf49a6f19be19
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8

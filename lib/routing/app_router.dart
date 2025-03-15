@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
@@ -8,8 +9,8 @@ import 'package:matching_app/feature/auth/view/auth_top_navigation_page.dart';
 import 'package:matching_app/feature/auth/view/password_remainder_page.dart';
 import 'package:matching_app/feature/navigation/view/bottom_navigation_page.dart';
 import 'package:matching_app/feature/post/view/add_or_edit_post_page.dart';
-import 'package:matching_app/feature/post/view/enlarged_file_image_page.dart';
-import 'package:matching_app/feature/post/view/enlarged_network_image_page.dart';
+import 'package:matching_app/feature/image/enlarged_file_image_page.dart';
+import 'package:matching_app/feature/image/enlarged_network_image_page.dart';
 import 'package:matching_app/feature/post/view/post_list_top_navigation.dart';
 import 'package:matching_app/feature/talk/view/talk_list_page.dart';
 import 'package:matching_app/feature/talk/view/talk_room_page.dart';
@@ -107,13 +108,15 @@ GoRouter appRouter(ref) {
                       final String imageFilePath =
                           state.uri.queryParameters['imageFilePath'] as String;
                       if (imageFilePath.isNotEmpty) {
-                        return NoTransitionPage(
+                        return MaterialPage(
+                          fullscreenDialog: true,
                           child: EnlargedFileImagePage(
                             imageFile: File(imageFilePath),
                           ),
                         );
                       }
-                      return NoTransitionPage(
+                      return MaterialPage(
+                        fullscreenDialog: true,
                         child: EnlargedNetworkImagePage(imageUrl: imageUrl),
                       );
                     },
@@ -160,7 +163,8 @@ GoRouter appRouter(ref) {
                 pageBuilder: (context, state) {
                   final imageUrl =
                       state.uri.queryParameters['imageUrl'] as String;
-                  return NoTransitionPage(
+                  return MaterialPage(
+                    fullscreenDialog: true,
                     child: EnlargedNetworkImagePage(imageUrl: imageUrl),
                   );
                 },

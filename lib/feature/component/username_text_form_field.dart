@@ -14,9 +14,6 @@ class UsernameTextFormField extends StatelessWidget {
         if (value == null || value.isEmpty) {
           return '入力してください';
         }
-        if (value.length > 12) {
-          return '12文字以内で入力してください';
-        }
         if (value.trim().isEmpty) {
           return '空白のみは設定できません';
         }

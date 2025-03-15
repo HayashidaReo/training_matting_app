@@ -51,8 +51,8 @@ class FollowListTopNavigationPage extends ConsumerWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  FollowListPage(targetUserId: targetUserId),
                   FollowerListPage(targetUserId: targetUserId),
+                  FollowListPage(targetUserId: targetUserId),
                   MutualFollowListPage(targetUserId: targetUserId),
                 ],
               ),

@@ -21,6 +21,7 @@ import 'package:matching_app/feature/post/controller/post_controller.dart';
 import 'package:matching_app/feature/post/model/post.dart';
 import 'package:matching_app/feature/user/controller/storage_controller.dart';
 import 'package:matching_app/feature/user/model/userdata.dart';
+import 'package:matching_app/function/timestamp_converter.dart';
 
 class PostTile extends HookConsumerWidget {
   PostTile({
@@ -125,7 +126,7 @@ class PostTile extends HookConsumerWidget {
               ),
             ),
             subtitle: Text(
-              postData.createdAt.toDate().toString().substring(0, 16),
+              fromDateToStringWithTime(postData.createdAt.toDate()),
               style: TextStyle(
                 fontSize: FontSize.normal,
                 color: defaultColors.postCreatedAtTextColor,

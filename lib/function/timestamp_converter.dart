@@ -21,3 +21,7 @@ String fromDateToString(DateTime date) {
 DateTime fromStringToDate(String dateString) {
   return DateFormat('yyyy/MM/dd').parse(dateString);
 }
+
+String fromDateToStringWithTime(DateTime date) {
+  return DateFormat('yyyy/MM/dd HH:mm').format(date);
+}

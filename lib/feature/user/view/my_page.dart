@@ -165,151 +165,259 @@ class MyPage extends ConsumerWidget {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    ref
-                                        .watch(
-                                          watchAllFollowMeUserListControllerProvider(
-                                            ref
-                                                .read(
-                                                  currentUserControllerProvider,
-                                                )!
-                                                .uid,
+                                ref
+                                    .watch(
+                                      watchAllFollowMeUserListControllerProvider(
+                                        ref
+                                            .read(
+                                              currentUserControllerProvider,
+                                            )!
+                                            .uid,
+                                      ),
+                                    )
+                                    .when(
+                                      error: (error, _) {
+                                        return Text(
+                                          'エラーが発生しました。再度お試しください。',
+                                          style: TextStyle(
+                                            fontSize: FontSize.large,
                                           ),
-                                        )
-                                        .when(
-                                          data: (
-                                            List<Follow> followingUserList,
-                                          ) {
-                                            return FollowCountPanel(
-                                              followCount:
-                                                  followingUserList.length,
-                                              typeName: 'フォロワー',
-                                              tabIndex: 1,
-                                              targetUserId:
-                                                  ref
-                                                      .read(
-                                                        currentUserControllerProvider,
-                                                      )!
-                                                      .uid,
-                                              isMyPage: true,
+                                        );
+                                      },
+                                      loading: () {
+                                        return const CircularProgressIndicator();
+                                      },
+                                      data: (List<Follow> followerUserList) {
+                                        return ref
+                                            .watch(
+                                              watchAllMyFollowingUserListControllerProvider(
+                                                ref
+                                                    .read(
+                                                      currentUserControllerProvider,
+                                                    )!
+                                                    .uid,
+                                              ),
+                                            )
+                                            .when(
+                                              error: (error, _) {
+                                                return Text(
+                                                  'エラーが発生しました。再度お試しください。',
+                                                  style: TextStyle(
+                                                    fontSize: FontSize.large,
+                                                  ),
+                                                );
+                                              },
+                                              loading: () {
+                                                return const CircularProgressIndicator();
+                                              },
+                                              data: (
+                                                List<Follow> followingUserList,
+                                              ) {
+                                                final String myUserId =
+                                                    ref
+                                                        .read(
+                                                          currentUserControllerProvider,
+                                                        )!
+                                                        .uid;
+                                                final int mutualFollowCount =
+                                                    followerUserList
+                                                        .where(
+                                                          (
+                                                            follower,
+                                                          ) => followingUserList.any(
+                                                            (following) =>
+                                                                follower
+                                                                    .followingUserId ==
+                                                                following
+                                                                    .followerUserId,
+                                                          ),
+                                                        )
+                                                        .length;
+                                                return Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    FollowCountPanel(
+                                                      followCount:
+                                                          followerUserList
+                                                              .length,
+                                                      typeName: 'フォロワー',
+                                                      tabIndex: 0,
+                                                      targetUserId: myUserId,
+                                                      isMyPage: true,
+                                                    ),
+                                                    FollowCountPanel(
+                                                      followCount:
+                                                          followingUserList
+                                                              .length,
+                                                      typeName: 'フォロー',
+                                                      tabIndex: 1,
+                                                      targetUserId: myUserId,
+                                                      isMyPage: true,
+                                                    ),
+                                                    FollowCountPanel(
+                                                      followCount:
+                                                          mutualFollowCount,
+                                                      typeName: '相互フォロー',
+                                                      tabIndex: 2,
+                                                      targetUserId: myUserId,
+                                                      isMyPage: true,
+                                                    ),
+                                                  ],
+                                                );
+                                              },
                                             );
-                                          },
-                                          error: (error, _) {
-                                            return FollowCountPanel(
-                                              followCount: 0,
-                                              typeName: 'フォロワー',
-                                              tabIndex: 1,
-                                              targetUserId:
-                                                  ref
-                                                      .read(
-                                                        currentUserControllerProvider,
-                                                      )!
-                                                      .uid,
-                                              isMyPage: true,
-                                            );
-                                          },
-                                          loading: () {
-                                            return const CircularProgressIndicator();
-                                          },
-                                        ),
-                                    ref
-                                        .watch(
-                                          watchAllMyFollowingUserListControllerProvider(
-                                            ref
-                                                .read(
-                                                  currentUserControllerProvider,
-                                                )!
-                                                .uid,
-                                          ),
-                                        )
-                                        .when(
-                                          data: (
-                                            List<Follow> followingUserList,
-                                          ) {
-                                            return FollowCountPanel(
-                                              followCount:
-                                                  followingUserList.length,
-                                              typeName: 'フォロー',
-                                              tabIndex: 0,
-                                              targetUserId:
-                                                  ref
-                                                      .read(
-                                                        currentUserControllerProvider,
-                                                      )!
-                                                      .uid,
-                                              isMyPage: true,
-                                            );
-                                          },
-                                          error: (error, _) {
-                                            return FollowCountPanel(
-                                              followCount: 0,
-                                              typeName: 'フォロー',
-                                              tabIndex: 0,
-                                              targetUserId:
-                                                  ref
-                                                      .read(
-                                                        currentUserControllerProvider,
-                                                      )!
-                                                      .uid,
-                                              isMyPage: true,
-                                            );
-                                          },
-                                          loading: () {
-                                            return const CircularProgressIndicator();
-                                          },
-                                        ),
-                                    ref
-                                        .watch(
-                                          watchAllMutualFollowUserListControllerProvider(
-                                            ref
-                                                .read(
-                                                  currentUserControllerProvider,
-                                                )!
-                                                .uid,
-                                          ),
-                                        )
-                                        .when(
-                                          data: (
-                                            List<Follow> followingUserList,
-                                          ) {
-                                            return FollowCountPanel(
-                                              followCount:
-                                                  followingUserList.length,
-                                              typeName: '相互フォロー',
-                                              tabIndex: 2,
-                                              targetUserId:
-                                                  ref
-                                                      .read(
-                                                        currentUserControllerProvider,
-                                                      )!
-                                                      .uid,
-                                              isMyPage: true,
-                                            );
-                                          },
-                                          error: (error, _) {
-                                            return FollowCountPanel(
-                                              followCount: 0,
-                                              typeName: '相互フォロー',
-                                              tabIndex: 2,
-                                              targetUserId:
-                                                  ref
-                                                      .read(
-                                                        currentUserControllerProvider,
-                                                      )!
-                                                      .uid,
-                                              isMyPage: true,
-                                            );
-                                          },
-                                          loading: () {
-                                            return const CircularProgressIndicator();
-                                          },
-                                        ),
-                                  ],
-                                ),
+                                      },
+                                    ),
+
+                                // Row(
+                                //   mainAxisSize: MainAxisSize.max,
+                                //   mainAxisAlignment:
+                                //       MainAxisAlignment.spaceEvenly,
+                                //   children: [
+                                //     ref
+                                //         .watch(
+                                //           watchAllFollowMeUserListControllerProvider(
+                                //             ref
+                                //                 .read(
+                                //                   currentUserControllerProvider,
+                                //                 )!
+                                //                 .uid,
+                                //           ),
+                                //         )
+                                //         .when(
+                                //           data: (
+                                //             List<Follow> followingUserList,
+                                //           ) {
+                                //             return FollowCountPanel(
+                                //               followCount:
+                                //                   followingUserList.length,
+                                //               typeName: 'フォロワー',
+                                //               tabIndex: 1,
+                                //               targetUserId:
+                                //                   ref
+                                //                       .read(
+                                //                         currentUserControllerProvider,
+                                //                       )!
+                                //                       .uid,
+                                //               isMyPage: true,
+                                //             );
+                                //           },
+                                //           error: (error, _) {
+                                //             return FollowCountPanel(
+                                //               followCount: 0,
+                                //               typeName: 'フォロワー',
+                                //               tabIndex: 1,
+                                //               targetUserId:
+                                //                   ref
+                                //                       .read(
+                                //                         currentUserControllerProvider,
+                                //                       )!
+                                //                       .uid,
+                                //               isMyPage: true,
+                                //             );
+                                //           },
+                                //           loading: () {
+                                //             return const CircularProgressIndicator();
+                                //           },
+                                //         ),
+                                //     ref
+                                //         .watch(
+                                //           watchAllMyFollowingUserListControllerProvider(
+                                //             ref
+                                //                 .read(
+                                //                   currentUserControllerProvider,
+                                //                 )!
+                                //                 .uid,
+                                //           ),
+                                //         )
+                                //         .when(
+                                //           data: (
+                                //             List<Follow> followingUserList,
+                                //           ) {
+                                //             return FollowCountPanel(
+                                //               followCount:
+                                //                   followingUserList.length,
+                                //               typeName: 'フォロー',
+                                //               tabIndex: 0,
+                                //               targetUserId:
+                                //                   ref
+                                //                       .read(
+                                //                         currentUserControllerProvider,
+                                //                       )!
+                                //                       .uid,
+                                //               isMyPage: true,
+                                //             );
+                                //           },
+                                //           error: (error, _) {
+                                //             return FollowCountPanel(
+                                //               followCount: 0,
+                                //               typeName: 'フォロー',
+                                //               tabIndex: 0,
+                                //               targetUserId:
+                                //                   ref
+                                //                       .read(
+                                //                         currentUserControllerProvider,
+                                //                       )!
+                                //                       .uid,
+                                //               isMyPage: true,
+                                //             );
+                                //           },
+                                //           loading: () {
+                                //             return const CircularProgressIndicator();
+                                //           },
+                                //         ),
+                                //     ref
+                                //         .watch(
+                                //           watchAllMutualFollowUserListControllerProvider(
+                                //             ref
+                                //                 .read(
+                                //                   currentUserControllerProvider,
+                                //                 )!
+                                //                 .uid,
+                                //           ),
+                                //         )
+                                //         .when(
+                                //           data: (
+                                //             List<Follow> followingUserList,
+                                //           ) {
+                                //             return FollowCountPanel(
+                                //               followCount:
+                                //                   followingUserList.length,
+                                //               typeName: '相互フォロー',
+                                //               tabIndex: 2,
+                                //               targetUserId:
+                                //                   ref
+                                //                       .read(
+                                //                         currentUserControllerProvider,
+                                //                       )!
+                                //                       .uid,
+                                //               isMyPage: true,
+                                //             );
+                                //           },
+                                //           error: (error, _) {
+                                //             return FollowCountPanel(
+                                //               followCount: 0,
+                                //               typeName: '相互フォロー',
+                                //               tabIndex: 2,
+                                //               targetUserId:
+                                //                   ref
+                                //                       .read(
+                                //                         currentUserControllerProvider,
+                                //                       )!
+                                //                       .uid,
+                                //               isMyPage: true,
+                                //             );
+                                //           },
+                                //           loading: () {
+                                //             return const CircularProgressIndicator();
+                                //           },
+                                //         ),
+                                //   ],
+                                // ),
                               ],
                             ),
                           ),

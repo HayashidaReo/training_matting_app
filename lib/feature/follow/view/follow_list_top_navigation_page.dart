@@ -33,8 +33,8 @@ class FollowListTopNavigationPage extends ConsumerWidget {
                       .updateIndex(index);
                 },
                 tabs: [
-                  Text('フォロー', style: TextStyle(fontSize: FontSize.normal)),
                   Text('フォロワー', style: TextStyle(fontSize: FontSize.normal)),
+                  Text('フォロー', style: TextStyle(fontSize: FontSize.normal)),
                   Text('相互フォロー', style: TextStyle(fontSize: FontSize.normal)),
                 ],
               ),

@@ -157,6 +157,25 @@ class CreateUserPage extends HookConsumerWidget {
                         DateTime.now().month,
                         DateTime.now().day,
                       ),
+                      builder: (BuildContext context, Widget? child) {
+                        return Theme(
+                          data: ThemeData.light().copyWith(
+                            colorScheme: ColorScheme.light(
+                              primary: defaultColors.primaryColor, // ヘッダーの背景色
+                              onPrimary:
+                                  defaultColors.secondaryColor, // ヘッダーのテキスト色
+                              surface:
+                                  defaultColors.appBackColor, // カレンダー本体の背景色
+                              onSurface:
+                                  defaultColors.mainTextColor, // カレンダー本体のテキスト色
+                            ),
+                            dialogTheme: DialogThemeData(
+                              backgroundColor: defaultColors.appBackColor,
+                            ),
+                          ),
+                          child: child!,
+                        );
+                      },
                     ).then((value) {
                       if (value != null) {
                         birthDateController.text = fromDateToString(value);

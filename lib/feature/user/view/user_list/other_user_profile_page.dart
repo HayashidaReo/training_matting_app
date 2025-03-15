@@ -39,13 +39,13 @@ class OtherUserProfilePage extends ConsumerWidget {
                   );
                 }
 
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,78 +54,72 @@ class OtherUserProfilePage extends ConsumerWidget {
                             iconImageUrl: userData.iconImageUrl,
                             size: 95,
                           ),
-                          WidthMarginSizedBox.normal,
+                          WidthMarginSizedBox.small,
                           Expanded(
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                    8,
-                                    8,
-                                    8,
-                                    16,
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      ref
-                                          .watch(
-                                            watchWhetherTargetUserFollowMeControllerProvider(
-                                              ref
-                                                  .read(
-                                                    currentUserControllerProvider,
-                                                  )!
-                                                  .uid,
-                                              userData.userId,
-                                            ),
-                                          )
-                                          .when(
-                                            error: (error, _) {
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ref
+                                        .watch(
+                                          watchWhetherTargetUserFollowMeControllerProvider(
+                                            ref
+                                                .read(
+                                                  currentUserControllerProvider,
+                                                )!
+                                                .uid,
+                                            userData.userId,
+                                          ),
+                                        )
+                                        .when(
+                                          error: (error, _) {
+                                            return Text(
+                                              'エラーが発生しました。再度お試しください。',
+                                              style: TextStyle(
+                                                fontSize: FontSize.large,
+                                              ),
+                                            );
+                                          },
+                                          loading: () {
+                                            return const CircularProgressIndicator();
+                                          },
+                                          data: (bool isFollowed) {
+                                            if (isFollowed) {
                                               return Text(
-                                                'エラーが発生しました。再度お試しください。',
+                                                'フォローされています',
                                                 style: TextStyle(
-                                                  fontSize: FontSize.large,
+                                                  fontSize:
+                                                      FontSize.smallNormal,
+                                                  color:
+                                                      defaultColors
+                                                          .userListFollowedStateTextColor,
                                                 ),
                                               );
-                                            },
-                                            loading: () {
-                                              return const CircularProgressIndicator();
-                                            },
-                                            data: (bool isFollowed) {
-                                              if (isFollowed) {
-                                                return Text(
-                                                  'フォローされています',
-                                                  style: TextStyle(
-                                                    fontSize:
-                                                        FontSize.smallNormal,
-                                                    color:
-                                                        defaultColors
-                                                            .userListFollowedStateTextColor,
-                                                  ),
-                                                );
-                                              } else {
-                                                return SizedBox.shrink();
-                                              }
-                                            },
-                                          ),
-                                      Text(
-                                        userData.userName,
-                                        style: TextStyle(
-                                          fontSize: FontSize.normal,
-                                          color:
-                                              (userData.gender == '男性')
-                                                  ? defaultColors.femaleColor
-                                                  : defaultColors.maleColor,
+                                            } else {
+                                              return SizedBox.shrink();
+                                            }
+                                          },
                                         ),
-                                        overflow: TextOverflow.ellipsis,
+                                    Text(
+                                      userData.userName,
+                                      style: TextStyle(
+                                        fontSize: FontSize.medium,
+                                        color:
+                                            (userData.gender == '男性')
+                                                ? defaultColors.femaleColor
+                                                : defaultColors.maleColor,
                                       ),
-                                    ],
-                                  ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
                                 ),
+                                HeightMarginSizedBox.small,
                                 ref
                                     .watch(
                                       watchAllFollowMeUserListControllerProvider(
@@ -199,7 +193,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                                       MainAxisSize.max,
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
-                                                          .spaceEvenly,
+                                                          .spaceBetween,
                                                   children: [
                                                     FollowCountPanel(
                                                       followCount:
@@ -238,10 +232,8 @@ class OtherUserProfilePage extends ConsumerWidget {
                           ),
                         ],
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                      child: Row(
+                      HeightMarginSizedBox.normal,
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Column(
@@ -251,11 +243,15 @@ class OtherUserProfilePage extends ConsumerWidget {
                             children: <Widget>[
                               Text(
                                 '性別:',
-                                style: TextStyle(fontSize: FontSize.normal),
+                                style: TextStyle(
+                                  fontSize: FontSize.smallNormal,
+                                ),
                               ),
                               Text(
                                 '生年月日:',
-                                style: TextStyle(fontSize: FontSize.normal),
+                                style: TextStyle(
+                                  fontSize: FontSize.smallNormal,
+                                ),
                               ),
                             ],
                           ),
@@ -267,170 +263,180 @@ class OtherUserProfilePage extends ConsumerWidget {
                             children: <Widget>[
                               Text(
                                 userData.gender,
-                                style: TextStyle(fontSize: FontSize.normal),
+                                style: TextStyle(
+                                  fontSize: FontSize.smallNormal,
+                                ),
                               ),
                               Text(
                                 userData.birthDate.toString(),
-                                style: TextStyle(fontSize: FontSize.normal),
+                                style: TextStyle(
+                                  fontSize: FontSize.smallNormal,
+                                ),
                               ),
                             ],
                           ),
                         ],
                       ),
-                    ),
-                    HeightMarginSizedBox.small,
-                    if (userData.userId !=
-                        ref.read(currentUserControllerProvider)!.uid)
-                      ref
-                          .watch(watchMyUserDataControllerProvider)
-                          .when(
-                            error: (error, _) {
-                              return Text('エラーが発生しました');
-                            },
-                            loading: () {
-                              return const CircularProgressIndicator();
-                            },
-                            data: (UserData? myUserData) {
-                              if (myUserData == null) {
+                      HeightMarginSizedBox.small,
+                      if (userData.userId !=
+                          ref.read(currentUserControllerProvider)!.uid)
+                        ref
+                            .watch(watchMyUserDataControllerProvider)
+                            .when(
+                              error: (error, _) {
                                 return Text('エラーが発生しました');
-                              }
-                              if (myUserData.gender == userData.gender) {
-                                return const SizedBox.shrink();
-                              }
-                              return ref
-                                  .watch(
-                                    WatchWhetherIFollowTargetUserControllerProvider(
-                                      ref
-                                          .read(currentUserControllerProvider)!
-                                          .uid,
-                                      targetUserId,
-                                    ),
-                                  )
-                                  .when(
-                                    error: (error, _) {
-                                      return Text(
-                                        'エラーが発生しました。再度お試しください。',
-                                        style: TextStyle(
-                                          fontSize: FontSize.large,
-                                        ),
-                                      );
-                                    },
-                                    loading: () {
-                                      return const CircularProgressIndicator();
-                                    },
-                                    data: (bool isFollowing) {
-                                      return ref
-                                          .watch(
-                                            watchWhetherTargetUserFollowMeControllerProvider(
-                                              ref
-                                                  .read(
-                                                    currentUserControllerProvider,
-                                                  )!
-                                                  .uid,
-                                              targetUserId,
-                                            ),
-                                          )
-                                          .when(
-                                            error: (error, _) {
-                                              return Text(
-                                                'エラーが発生しました。再度お試しください。',
-                                                style: TextStyle(
-                                                  fontSize: FontSize.large,
-                                                ),
-                                              );
-                                            },
-                                            loading: () {
-                                              return const CircularProgressIndicator();
-                                            },
-                                            data: (bool isFollowed) {
-                                              return Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  SizedBox(
-                                                    width: 170,
-                                                    height: 40,
-                                                    child: CustomButton(
-                                                      text:
-                                                          (isFollowing)
-                                                              ? 'フォロー中'
-                                                              : (isFollowed)
-                                                              ? 'フォロバ'
-                                                              : 'フォロー',
-                                                      onPressed: () {
-                                                        _changeFollowStatus(
-                                                          context,
-                                                          isFollowing,
-                                                          ref,
-                                                        );
-                                                      },
-                                                      leftIcon:
-                                                          isFollowing
-                                                              ? Icons
-                                                                  .person_remove_rounded
-                                                              : Icons
-                                                                  .person_add_alt_rounded,
-                                                      isColorReversed:
-                                                          isFollowing,
-                                                    ),
+                              },
+                              loading: () {
+                                return const CircularProgressIndicator();
+                              },
+                              data: (UserData? myUserData) {
+                                if (myUserData == null) {
+                                  return Text('エラーが発生しました');
+                                }
+                                if (myUserData.gender == userData.gender) {
+                                  return const SizedBox.shrink();
+                                }
+                                return ref
+                                    .watch(
+                                      WatchWhetherIFollowTargetUserControllerProvider(
+                                        ref
+                                            .read(
+                                              currentUserControllerProvider,
+                                            )!
+                                            .uid,
+                                        targetUserId,
+                                      ),
+                                    )
+                                    .when(
+                                      error: (error, _) {
+                                        return Text(
+                                          'エラーが発生しました。再度お試しください。',
+                                          style: TextStyle(
+                                            fontSize: FontSize.large,
+                                          ),
+                                        );
+                                      },
+                                      loading: () {
+                                        return const CircularProgressIndicator();
+                                      },
+                                      data: (bool isFollowing) {
+                                        return ref
+                                            .watch(
+                                              watchWhetherTargetUserFollowMeControllerProvider(
+                                                ref
+                                                    .read(
+                                                      currentUserControllerProvider,
+                                                    )!
+                                                    .uid,
+                                                targetUserId,
+                                              ),
+                                            )
+                                            .when(
+                                              error: (error, _) {
+                                                return Text(
+                                                  'エラーが発生しました。再度お試しください。',
+                                                  style: TextStyle(
+                                                    fontSize: FontSize.large,
                                                   ),
-                                                  SizedBox(
-                                                    width: 170,
-                                                    height: 40,
-                                                    child: CustomButton(
-                                                      text: 'メッセージ',
-                                                      onPressed: () {
-                                                        if (isFollowing &&
-                                                            isFollowed) {
-                                                          context.pushNamed(
-                                                            AppRoute
-                                                                .talkRoom
-                                                                .name,
-                                                            queryParameters: {
-                                                              'targetUserId':
-                                                                  targetUserId,
-                                                            },
-                                                          );
-                                                          return;
-                                                        } else {
-                                                          showCloseOnlyDialog(
-                                                            context,
-                                                            '使用できません',
-                                                            'メッセージ機能は相互フォローの場合のみ使用できます。',
-                                                          );
-                                                        }
-                                                      },
-                                                      leftIcon:
-                                                          (isFollowing &&
-                                                                  isFollowed)
-                                                              ? Icons.mail
-                                                              : Icons.lock,
-                                                      isColorReversed:
-                                                          !(isFollowing &&
-                                                              isFollowed),
+                                                );
+                                              },
+                                              loading: () {
+                                                return const CircularProgressIndicator();
+                                              },
+                                              data: (bool isFollowed) {
+                                                return Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Expanded(
+                                                      child: SizedBox(
+                                                        height: 40,
+                                                        child: CustomButton(
+                                                          text:
+                                                              (isFollowing)
+                                                                  ? 'フォロー中'
+                                                                  : (isFollowed)
+                                                                  ? 'フォロバ'
+                                                                  : 'フォロー',
+                                                          onPressed: () {
+                                                            _changeFollowStatus(
+                                                              context,
+                                                              isFollowing,
+                                                              ref,
+                                                            );
+                                                          },
+                                                          leftIcon:
+                                                              isFollowing
+                                                                  ? Icons
+                                                                      .person_remove_rounded
+                                                                  : Icons
+                                                                      .person_add_alt_rounded,
+                                                          isColorReversed:
+                                                              isFollowing,
+                                                        ),
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                    },
-                                  );
-                            },
+                                                    WidthMarginSizedBox.small,
+                                                    Expanded(
+                                                      child: SizedBox(
+                                                        height: 40,
+                                                        child: CustomButton(
+                                                          text: 'メッセージ',
+                                                          onPressed: () {
+                                                            if (isFollowing &&
+                                                                isFollowed) {
+                                                              context.pushNamed(
+                                                                AppRoute
+                                                                    .talkRoom
+                                                                    .name,
+                                                                queryParameters: {
+                                                                  'targetUserId':
+                                                                      targetUserId,
+                                                                },
+                                                              );
+                                                              return;
+                                                            } else {
+                                                              showCloseOnlyDialog(
+                                                                context,
+                                                                '使用できません',
+                                                                'メッセージ機能は相互フォローの場合のみ使用できます。',
+                                                              );
+                                                            }
+                                                          },
+                                                          leftIcon:
+                                                              (isFollowing &&
+                                                                      isFollowed)
+                                                                  ? Icons.mail
+                                                                  : Icons.lock,
+                                                          isColorReversed:
+                                                              !(isFollowing &&
+                                                                  isFollowed),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                      },
+                                    );
+                              },
+                            ),
+                      HeightMarginSizedBox.normal,
+                      if (userData.profile != '')
+                        SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            textAlign: TextAlign.left,
+                            userData.profile,
+                            style: TextStyle(fontSize: FontSize.smallNormal),
+                            maxLines: 8,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                    HeightMarginSizedBox.normal,
-                    if (userData.profile != '')
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          userData.profile,
-                          style: TextStyle(fontSize: FontSize.normal),
-                          maxLines: 8,
-                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 );
               },
               error: (error, _) {

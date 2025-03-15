@@ -121,13 +121,13 @@ class MyPage extends ConsumerWidget {
                   );
                 }
 
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
+                return Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,32 +139,25 @@ class MyPage extends ConsumerWidget {
                               context.pushNamed(AppRoute.editMyIcon.name);
                             },
                           ),
-                          WidthMarginSizedBox.normal,
+                          WidthMarginSizedBox.small,
                           Expanded(
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                    8,
-                                    8,
-                                    8,
-                                    16,
+                                Text(
+                                  userData.userName,
+                                  style: TextStyle(
+                                    fontSize: FontSize.medium,
+                                    color:
+                                        (userData.gender == '男性')
+                                            ? defaultColors.femaleColor
+                                            : defaultColors.maleColor,
                                   ),
-                                  child: Text(
-                                    userData.userName,
-                                    style: TextStyle(
-                                      fontSize: FontSize.medium,
-                                      color:
-                                          (userData.gender == '男性')
-                                              ? defaultColors.femaleColor
-                                              : defaultColors.maleColor,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
+                                HeightMarginSizedBox.small,
                                 ref
                                     .watch(
                                       watchAllFollowMeUserListControllerProvider(
@@ -238,7 +231,7 @@ class MyPage extends ConsumerWidget {
                                                       MainAxisSize.max,
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
-                                                          .spaceEvenly,
+                                                          .spaceBetween,
                                                   children: [
                                                     FollowCountPanel(
                                                       followCount:
@@ -277,11 +270,8 @@ class MyPage extends ConsumerWidget {
                           ),
                         ],
                       ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                      child: Row(
+                      HeightMarginSizedBox.normal,
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Column(
@@ -291,11 +281,15 @@ class MyPage extends ConsumerWidget {
                             children: <Widget>[
                               Text(
                                 '性別:',
-                                style: TextStyle(fontSize: FontSize.normal),
+                                style: TextStyle(
+                                  fontSize: FontSize.smallNormal,
+                                ),
                               ),
                               Text(
                                 '生年月日:',
-                                style: TextStyle(fontSize: FontSize.normal),
+                                style: TextStyle(
+                                  fontSize: FontSize.smallNormal,
+                                ),
                               ),
                             ],
                           ),
@@ -307,117 +301,110 @@ class MyPage extends ConsumerWidget {
                             children: <Widget>[
                               Text(
                                 userData.gender,
-                                style: TextStyle(fontSize: FontSize.normal),
+                                style: TextStyle(
+                                  fontSize: FontSize.smallNormal,
+                                ),
                               ),
                               Text(
                                 userData.birthDate.toString(),
-                                style: TextStyle(fontSize: FontSize.normal),
+                                style: TextStyle(
+                                  fontSize: FontSize.smallNormal,
+                                ),
                               ),
                             ],
                           ),
                         ],
                       ),
-                    ),
-                    HeightMarginSizedBox.small,
-                    if (userData.profile != '')
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          userData.profile,
-                          style: TextStyle(fontSize: FontSize.normal),
-                          maxLines: 8,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            context.pushNamed(AppRoute.editMyProfile.name);
-                          },
+                      HeightMarginSizedBox.normal,
+                      if (userData.profile != '')
+                        SizedBox(
+                          width: double.infinity,
                           child: Text(
-                            'プロフィール情報を入力',
-                            style: TextStyle(fontSize: FontSize.normal),
+                            userData.profile,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(fontSize: FontSize.smallNormal),
+                            maxLines: 8,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                      ],
-                    ),
-                    ref
-                        .watch(
-                          watchAllOnlyIncomingFollowUserListControllerProvider(
-                            ref.read(currentUserControllerProvider)!.uid,
-                          ),
-                        )
-                        .when(
-                          data: (List<Follow> onlyIncomingFollowList) {
-                            return Column(
-                              children: [
-                                HeightMarginSizedBox.small,
-                                if (onlyIncomingFollowList.isNotEmpty)
-                                  Text(
-                                    '新たな出会いを見つけませんか？',
-                                    style: TextStyle(fontSize: FontSize.normal),
-                                  ),
-                                HeightMarginSizedBox.small,
-                                SizedBox(
-                                  height: 210,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: onlyIncomingFollowList.length,
-                                    itemBuilder: (context, index) {
-                                      final Follow followData =
-                                          onlyIncomingFollowList[index];
-                                      return ref
-                                          .watch(
-                                            watchUserDataControllerProvider(
-                                              followData.followingUserId,
-                                            ),
-                                          )
-                                          .when(
-                                            data: (UserData? userData) {
-                                              if (userData == null) {
+                      ref
+                          .watch(
+                            watchAllOnlyIncomingFollowUserListControllerProvider(
+                              ref.read(currentUserControllerProvider)!.uid,
+                            ),
+                          )
+                          .when(
+                            data: (List<Follow> onlyIncomingFollowList) {
+                              return Column(
+                                children: [
+                                  HeightMarginSizedBox.small,
+                                  if (onlyIncomingFollowList.isNotEmpty)
+                                    Text(
+                                      '新たな出会いを見つけませんか？',
+                                      style: TextStyle(
+                                        fontSize: FontSize.normal,
+                                      ),
+                                    ),
+                                  HeightMarginSizedBox.small,
+                                  SizedBox(
+                                    height: 210,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: onlyIncomingFollowList.length,
+                                      itemBuilder: (context, index) {
+                                        final Follow followData =
+                                            onlyIncomingFollowList[index];
+                                        return ref
+                                            .watch(
+                                              watchUserDataControllerProvider(
+                                                followData.followingUserId,
+                                              ),
+                                            )
+                                            .when(
+                                              data: (UserData? userData) {
+                                                if (userData == null) {
+                                                  return Text(
+                                                    'ユーザー情報が取得できませんでした。',
+                                                    style: TextStyle(
+                                                      fontSize: FontSize.large,
+                                                    ),
+                                                  );
+                                                }
+                                                return RecommendFollowCard(
+                                                  userData: userData,
+                                                );
+                                              },
+                                              error: (error, _) {
                                                 return Text(
-                                                  'ユーザー情報が取得できませんでした。',
+                                                  'エラーが発生しました。再度お試しください。',
                                                   style: TextStyle(
                                                     fontSize: FontSize.large,
                                                   ),
                                                 );
-                                              }
-                                              return RecommendFollowCard(
-                                                userData: userData,
-                                              );
-                                            },
-                                            error: (error, _) {
-                                              return Text(
-                                                'エラーが発生しました。再度お試しください。',
-                                                style: TextStyle(
-                                                  fontSize: FontSize.large,
-                                                ),
-                                              );
-                                            },
-                                            loading: () {
-                                              return const CircularProgressIndicator();
-                                            },
-                                          );
-                                    },
+                                              },
+                                              loading: () {
+                                                return const CircularProgressIndicator();
+                                              },
+                                            );
+                                      },
+                                    ),
                                   ),
-                                ),
-                                HeightMarginSizedBox.normal,
-                              ],
-                            );
-                          },
-                          error: (error, _) {
-                            return Text(
-                              'エラーが発生しました。再度お試しください。',
-                              style: TextStyle(fontSize: FontSize.large),
-                            );
-                          },
-                          loading: () {
-                            return const CircularProgressIndicator();
-                          },
-                        ),
-                  ],
+                                  HeightMarginSizedBox.normal,
+                                ],
+                              );
+                            },
+                            error: (error, _) {
+                              return Text(
+                                'エラーが発生しました。再度お試しください。',
+                                style: TextStyle(fontSize: FontSize.large),
+                              );
+                            },
+                            loading: () {
+                              return const CircularProgressIndicator();
+                            },
+                          ),
+                    ],
+                  ),
                 );
               },
               error: (error, _) {

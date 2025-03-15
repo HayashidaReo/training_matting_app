@@ -258,6 +258,7 @@ class TalkRoomPage extends HookConsumerWidget {
                                                             right: 6,
                                                             top: 6,
                                                             child: HideButtonOnImage(
+                                                              size: 30,
                                                               onPressed: () {
                                                                 uploadedImageFile
                                                                         .value =

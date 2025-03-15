@@ -142,6 +142,7 @@ class AddOrEditPostForm extends HookWidget {
             right: 6,
             top: 6,
             child: HideButtonOnImage(
+              size: 30,
               onPressed: () {
                 if (imageUrl.value != '') {
                   isImageDeleted.value = true;
@@ -249,6 +250,7 @@ class AddOrEditPostForm extends HookWidget {
                                 right: 6,
                                 top: 6,
                                 child: HideButtonOnImage(
+                                  size: 30,
                                   onPressed: () {
                                     if (imageUrl.value != '') {
                                       isImageDeleted.value = true;

@@ -11,6 +11,7 @@ import 'package:matching_app/config/utils/enum/image_quality_enum.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
+import 'package:matching_app/feature/component/hide_button_on_image.dart';
 import 'package:matching_app/feature/user/controller/storage_controller.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/model/userdata.dart';
@@ -75,26 +76,14 @@ class EditMyIconPage extends HookConsumerWidget {
                           Positioned(
                             top: 0,
                             right: 0,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: defaultColors.primaryColor,
-                                shape: BoxShape.circle,
-                              ),
-                              width: 50,
-                              height: 50,
-                              child: InkWell(
-                                onTap: () async {
-                                  if (myUserData.iconImageUrl != '') {
-                                    isIconDeleted.value = true;
-                                  }
-                                  uploadedImageFile.value = null;
-                                },
-                                child: Icon(
-                                  Icons.delete,
-                                  size: 40,
-                                  color: defaultColors.secondaryColor,
-                                ),
-                              ),
+                            child: HideButtonOnImage(
+                              size: 50,
+                              onPressed: () async {
+                                if (myUserData.iconImageUrl != '') {
+                                  isIconDeleted.value = true;
+                                }
+                                uploadedImageFile.value = null;
+                              },
                             ),
                           ),
                         ],
@@ -153,24 +142,12 @@ class EditMyIconPage extends HookConsumerWidget {
                             Positioned(
                               top: 0,
                               right: 0,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: defaultColors.primaryColor,
-                                  shape: BoxShape.circle,
-                                ),
-                                width: 50,
-                                height: 50,
-                                child: InkWell(
-                                  onTap: () async {
-                                    uploadedImageFile.value = null;
-                                    isIconDeleted.value = true;
-                                  },
-                                  child: Icon(
-                                    Icons.delete,
-                                    size: 40,
-                                    color: defaultColors.secondaryColor,
-                                  ),
-                                ),
+                              child: HideButtonOnImage(
+                                size: 50,
+                                onPressed: () async {
+                                  uploadedImageFile.value = null;
+                                  isIconDeleted.value = true;
+                                },
                               ),
                             ),
                           ],
@@ -202,29 +179,19 @@ class EditMyIconPage extends HookConsumerWidget {
                             Positioned(
                               bottom: 0,
                               right: 0,
-                              child: InkWell(
-                                onTap: () async {
+                              child: HideButtonOnImage(
+                                size: 50,
+                                icon: Icons.add_outlined,
+                                onPressed: () async {
                                   final uploadResult =
                                       await getImageFromGallery(
                                         ImageQuality.icon.quality,
                                       );
                                   if (uploadResult != null) {
                                     uploadedImageFile.value = uploadResult;
+                                    isIconDeleted.value = false;
                                   }
                                 },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: defaultColors.primaryColor,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  width: 40,
-                                  height: 40,
-                                  child: Icon(
-                                    Icons.add_outlined,
-                                    size: 40,
-                                    color: defaultColors.secondaryColor,
-                                  ),
-                                ),
                               ),
                             ),
                           ],

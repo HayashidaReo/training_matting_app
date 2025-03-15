@@ -126,7 +126,6 @@ class AddOrEditPostForm extends HookWidget {
                   },
                 );
               } else {
-                // TODO： この時だけエラーになる
                 context.goNamed(
                   AppRoute.enlargedPostImageFromAdd.name,
                   queryParameters: {
@@ -333,12 +332,12 @@ class AddOrEditPostForm extends HookWidget {
     if (!formKey.currentState!.validate()) {
       return;
     }
-    showLoadingDialog('保存中...');
+    showLoadingDialog('送信中...');
     try {
       await ref
           .read(postControllerProvider.notifier)
           .addPost(bodyController.text, selectedImage.value);
-      showToast('postしました');
+      showToast('ポストしました');
       if (context.mounted) {
         context.pop();
       }

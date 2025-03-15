@@ -104,6 +104,15 @@ GoRouter appRouter(ref) {
                     pageBuilder: (context, state) {
                       final String imageUrl =
                           state.uri.queryParameters['imageUrl'] as String;
+                      final String imageFilePath =
+                          state.uri.queryParameters['imageFilePath'] as String;
+                      if (imageFilePath.isNotEmpty) {
+                        return NoTransitionPage(
+                          child: EnlargedFileImagePage(
+                            imageFile: File(imageFilePath),
+                          ),
+                        );
+                      }
                       return NoTransitionPage(
                         child: EnlargedNetworkImagePage(imageUrl: imageUrl),
                       );

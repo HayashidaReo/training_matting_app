@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -48,7 +49,7 @@ class TalkRoomPage extends HookConsumerWidget {
             return Center(child: Text('エラーが発生しました'));
           },
           loading: () {
-            return Center(child: CircularProgressIndicator());
+            return Center(child: CupertinoActivityIndicator());
           },
           data: (targetUserData) {
             if (targetUserData == null) {
@@ -63,7 +64,7 @@ class TalkRoomPage extends HookConsumerWidget {
                       return Center(child: Text('エラーが発生しました'));
                     },
                     loading: () {
-                      return Center(child: CircularProgressIndicator());
+                      return Center(child: CupertinoActivityIndicator());
                     },
                     data: (bool isExistTalkRoom) {
                       if (!isExistTalkRoom) {
@@ -87,7 +88,9 @@ class TalkRoomPage extends HookConsumerWidget {
                               return Center(child: Text('エラーが発生しました'));
                             },
                             loading: () {
-                              return Center(child: CircularProgressIndicator());
+                              return Center(
+                                child: CupertinoActivityIndicator(),
+                              );
                             },
                             data: (List<TalkHistory> talkHistoryDataList) {
                               return UnFocus(

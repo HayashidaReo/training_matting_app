@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -30,7 +31,7 @@ class EditMyProfilePage extends HookConsumerWidget {
               .watch(watchMyUserDataControllerProvider)
               .when(
                 loading: () {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(child: CupertinoActivityIndicator());
                 },
                 error: (error, _) {
                   return Center(child: Text('エラーが発生しました'));

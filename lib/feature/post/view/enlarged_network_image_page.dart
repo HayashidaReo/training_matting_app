@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -23,11 +24,7 @@ class EnlargedNetworkImagePage extends ConsumerWidget {
                     decoration: BoxDecoration(
                       color: defaultColors.talkRoomLoadingImageBackColor,
                     ),
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        value: downloadProgress.progress,
-                      ),
-                    ),
+                    child: Center(child: CupertinoActivityIndicator()),
                   ),
               errorWidget:
                   (context, url, error) => Container(

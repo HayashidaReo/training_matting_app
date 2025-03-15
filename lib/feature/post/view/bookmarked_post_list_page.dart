@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -24,7 +25,7 @@ class BookmarkedPostListPage extends ConsumerWidget {
             return const Center(child: Text('エラーが発生しました'));
           },
           loading: () {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CupertinoActivityIndicator());
           },
           data: (List<Bookmark> bookmarkList) {
             return Scaffold(
@@ -53,7 +54,7 @@ class BookmarkedPostListPage extends ConsumerWidget {
                           },
                           loading: () {
                             return const Center(
-                              child: CircularProgressIndicator(),
+                              child: CupertinoActivityIndicator(),
                             );
                           },
                           data: (Post? postData) {
@@ -75,7 +76,7 @@ class BookmarkedPostListPage extends ConsumerWidget {
                                   },
                                   loading: () {
                                     return const Center(
-                                      child: CircularProgressIndicator(),
+                                      child: CupertinoActivityIndicator(),
                                     );
                                   },
                                   data: (UserData? postUserData) {

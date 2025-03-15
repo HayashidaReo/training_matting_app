@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -88,7 +89,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                             );
                                           },
                                           loading: () {
-                                            return const CircularProgressIndicator();
+                                            return const CupertinoActivityIndicator();
                                           },
                                           data: (bool isFollowed) {
                                             if (isFollowed) {
@@ -141,7 +142,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                         );
                                       },
                                       loading: () {
-                                        return const CircularProgressIndicator();
+                                        return const CupertinoActivityIndicator();
                                       },
                                       data: (List<Follow> followerUserList) {
                                         return ref
@@ -164,7 +165,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                                 );
                                               },
                                               loading: () {
-                                                return const CircularProgressIndicator();
+                                                return const CupertinoActivityIndicator();
                                               },
                                               data: (
                                                 List<Follow> followingUserList,
@@ -288,7 +289,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                 return Text('エラーが発生しました');
                               },
                               loading: () {
-                                return const CircularProgressIndicator();
+                                return const CupertinoActivityIndicator();
                               },
                               data: (UserData? myUserData) {
                                 if (myUserData == null) {
@@ -318,7 +319,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                         );
                                       },
                                       loading: () {
-                                        return const CircularProgressIndicator();
+                                        return const CupertinoActivityIndicator();
                                       },
                                       data: (bool isFollowing) {
                                         return ref
@@ -342,7 +343,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                                 );
                                               },
                                               loading: () {
-                                                return const CircularProgressIndicator();
+                                                return const CupertinoActivityIndicator();
                                               },
                                               data: (bool isFollowed) {
                                                 return Row(
@@ -445,7 +446,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                 );
               },
               loading: () {
-                return const CircularProgressIndicator();
+                return const CupertinoActivityIndicator();
               },
             ),
       ),

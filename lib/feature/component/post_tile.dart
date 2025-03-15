@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -172,7 +173,7 @@ class PostTile extends HookConsumerWidget {
                       return const Text('エラー');
                     },
                     loading: () {
-                      return const CircularProgressIndicator();
+                      return const CupertinoActivityIndicator();
                     },
                     data: (List<Favorite> favoriteListData) {
                       bool isFavorite = favoriteListData.any(
@@ -212,7 +213,7 @@ class PostTile extends HookConsumerWidget {
                           return const Text('エラー');
                         },
                         loading: () {
-                          return const CircularProgressIndicator();
+                          return const CupertinoActivityIndicator();
                         },
                         data: (List<Bookmark> bookmarkListData) {
                           bool isBookmarked = bookmarkListData.any(

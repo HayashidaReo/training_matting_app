@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class IconImage extends StatelessWidget {
@@ -41,11 +42,7 @@ class IconImage extends StatelessWidget {
                     (context, url, downloadProgress) => SizedBox(
                       width: size,
                       height: size,
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          value: downloadProgress.progress,
-                        ),
-                      ),
+                      child: Center(child: CupertinoActivityIndicator()),
                     ),
                 errorWidget:
                     (context, url, error) => SizedBox(

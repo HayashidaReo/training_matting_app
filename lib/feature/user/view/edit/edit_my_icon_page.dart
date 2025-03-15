@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -119,9 +120,7 @@ class EditMyIconPage extends HookConsumerWidget {
                                       width: 200,
                                       height: 200,
                                       child: Center(
-                                        child: CircularProgressIndicator(
-                                          value: downloadProgress.progress,
-                                        ),
+                                        child: CupertinoActivityIndicator(),
                                       ),
                                     );
                                   },
@@ -202,7 +201,7 @@ class EditMyIconPage extends HookConsumerWidget {
                     return const Text('エラーが発生しました。再度お試しください。');
                   },
                   loading: () {
-                    return const CircularProgressIndicator();
+                    return const CupertinoActivityIndicator();
                   },
                 ),
             HeightMarginSizedBox.large,

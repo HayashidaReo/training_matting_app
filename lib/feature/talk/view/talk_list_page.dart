@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
@@ -21,7 +22,7 @@ class TalkListPage extends ConsumerWidget {
               return Text('エラーが発生しました');
             },
             loading: () {
-              return const CircularProgressIndicator();
+              return const CupertinoActivityIndicator();
             },
             data: (List<Talk> talkList) {
               return ListView.separated(
@@ -42,7 +43,7 @@ class TalkListPage extends ConsumerWidget {
                           return Center(child: Text('エラーが発生しました'));
                         },
                         loading: () {
-                          return Center(child: CircularProgressIndicator());
+                          return Center(child: CupertinoActivityIndicator());
                         },
                         data: (UserData? targetUserData) {
                           if (targetUserData == null) {

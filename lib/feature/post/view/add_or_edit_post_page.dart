@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'dart:io';
@@ -42,7 +43,7 @@ class AddOrEditPostPage extends HookConsumerWidget {
               return Text('エラーが発生しました');
             },
             loading: () {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: CupertinoActivityIndicator());
             },
             data: (postData) {
               if (postData == null) {

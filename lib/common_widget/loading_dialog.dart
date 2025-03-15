@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
@@ -19,7 +20,7 @@ void showLoadingDialog(String message) {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const CircularProgressIndicator(),
+              const CupertinoActivityIndicator(),
               HeightMarginSizedBox.normal,
               Text(
                 message,

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -54,7 +55,7 @@ class MyPage extends ConsumerWidget {
                         return const Text('?');
                       },
                       loading: () {
-                        return const CircularProgressIndicator();
+                        return const CupertinoActivityIndicator();
                       },
                       data: (int count) {
                         if (count == 0) {
@@ -179,7 +180,7 @@ class MyPage extends ConsumerWidget {
                                         );
                                       },
                                       loading: () {
-                                        return const CircularProgressIndicator();
+                                        return const CupertinoActivityIndicator();
                                       },
                                       data: (List<Follow> followerUserList) {
                                         return ref
@@ -202,7 +203,7 @@ class MyPage extends ConsumerWidget {
                                                 );
                                               },
                                               loading: () {
-                                                return const CircularProgressIndicator();
+                                                return const CupertinoActivityIndicator();
                                               },
                                               data: (
                                                 List<Follow> followingUserList,
@@ -382,7 +383,7 @@ class MyPage extends ConsumerWidget {
                                                 );
                                               },
                                               loading: () {
-                                                return const CircularProgressIndicator();
+                                                return const CupertinoActivityIndicator();
                                               },
                                             );
                                       },
@@ -399,7 +400,7 @@ class MyPage extends ConsumerWidget {
                               );
                             },
                             loading: () {
-                              return const CircularProgressIndicator();
+                              return const CupertinoActivityIndicator();
                             },
                           ),
                     ],
@@ -413,7 +414,7 @@ class MyPage extends ConsumerWidget {
                 );
               },
               loading: () {
-                return const CircularProgressIndicator();
+                return const CupertinoActivityIndicator();
               },
             ),
       ),

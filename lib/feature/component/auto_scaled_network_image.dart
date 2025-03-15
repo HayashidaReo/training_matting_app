@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
@@ -34,11 +35,7 @@ class AutoScaledNetworkImage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       color: defaultColors.talkRoomLoadingImageBackColor,
                     ),
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        value: downloadProgress.progress,
-                      ),
-                    ),
+                    child: Center(child: CupertinoActivityIndicator()),
                   ),
               errorWidget:
                   (context, url, error) => Container(

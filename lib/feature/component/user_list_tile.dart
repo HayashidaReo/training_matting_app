@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -44,7 +45,7 @@ class UserListTile extends ConsumerWidget {
               );
             },
             loading: () {
-              return const CircularProgressIndicator();
+              return const CupertinoActivityIndicator();
             },
             data: (bool isFollowed) {
               if (isFollowed) {

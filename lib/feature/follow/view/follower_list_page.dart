@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:matching_app/feature/component/user_list_tile.dart';
@@ -21,7 +22,7 @@ class FollowerListPage extends ConsumerWidget {
                 return const Center(child: Text('エラーが発生しました'));
               },
               loading: () {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: CupertinoActivityIndicator());
               },
               data: (List<Follow> followingListData) {
                 return ListView.separated(

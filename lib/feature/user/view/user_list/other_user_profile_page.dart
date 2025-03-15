@@ -126,109 +126,113 @@ class OtherUserProfilePage extends ConsumerWidget {
                                     ],
                                   ),
                                 ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    ref
-                                        .watch(
-                                          watchAllMyFollowingUserListControllerProvider(
-                                            targetUserId,
+                                ref
+                                    .watch(
+                                      watchAllFollowMeUserListControllerProvider(
+                                        ref
+                                            .read(
+                                              currentUserControllerProvider,
+                                            )!
+                                            .uid,
+                                      ),
+                                    )
+                                    .when(
+                                      error: (error, _) {
+                                        return Text(
+                                          'エラーが発生しました。再度お試しください。',
+                                          style: TextStyle(
+                                            fontSize: FontSize.large,
                                           ),
-                                        )
-                                        .when(
-                                          data: (
-                                            List<Follow> followingUserList,
-                                          ) {
-                                            return FollowCountPanel(
-                                              followCount:
-                                                  followingUserList.length,
-                                              typeName: 'フォロー',
-                                              tabIndex: 0,
-                                              targetUserId: targetUserId,
-                                              isMyPage: false,
+                                        );
+                                      },
+                                      loading: () {
+                                        return const CircularProgressIndicator();
+                                      },
+                                      data: (List<Follow> followerUserList) {
+                                        return ref
+                                            .watch(
+                                              watchAllMyFollowingUserListControllerProvider(
+                                                ref
+                                                    .read(
+                                                      currentUserControllerProvider,
+                                                    )!
+                                                    .uid,
+                                              ),
+                                            )
+                                            .when(
+                                              error: (error, _) {
+                                                return Text(
+                                                  'エラーが発生しました。再度お試しください。',
+                                                  style: TextStyle(
+                                                    fontSize: FontSize.large,
+                                                  ),
+                                                );
+                                              },
+                                              loading: () {
+                                                return const CircularProgressIndicator();
+                                              },
+                                              data: (
+                                                List<Follow> followingUserList,
+                                              ) {
+                                                final String myUserId =
+                                                    ref
+                                                        .read(
+                                                          currentUserControllerProvider,
+                                                        )!
+                                                        .uid;
+                                                final int mutualFollowCount =
+                                                    followerUserList
+                                                        .where(
+                                                          (
+                                                            follower,
+                                                          ) => followingUserList.any(
+                                                            (following) =>
+                                                                follower
+                                                                    .followingUserId ==
+                                                                following
+                                                                    .followerUserId,
+                                                          ),
+                                                        )
+                                                        .length;
+                                                return Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    FollowCountPanel(
+                                                      followCount:
+                                                          followerUserList
+                                                              .length,
+                                                      typeName: 'フォロワー',
+                                                      tabIndex: 0,
+                                                      targetUserId: myUserId,
+                                                      isMyPage: false,
+                                                    ),
+                                                    FollowCountPanel(
+                                                      followCount:
+                                                          followingUserList
+                                                              .length,
+                                                      typeName: 'フォロー',
+                                                      tabIndex: 1,
+                                                      targetUserId: myUserId,
+                                                      isMyPage: false,
+                                                    ),
+                                                    FollowCountPanel(
+                                                      followCount:
+                                                          mutualFollowCount,
+                                                      typeName: '相互フォロー',
+                                                      tabIndex: 2,
+                                                      targetUserId: myUserId,
+                                                      isMyPage: false,
+                                                    ),
+                                                  ],
+                                                );
+                                              },
                                             );
-                                          },
-                                          error: (error, _) {
-                                            return FollowCountPanel(
-                                              followCount: 0,
-                                              typeName: 'フォロー',
-                                              tabIndex: 0,
-                                              targetUserId: targetUserId,
-                                              isMyPage: false,
-                                            );
-                                          },
-                                          loading: () {
-                                            return const CircularProgressIndicator();
-                                          },
-                                        ),
-                                    ref
-                                        .watch(
-                                          watchAllFollowMeUserListControllerProvider(
-                                            targetUserId,
-                                          ),
-                                        )
-                                        .when(
-                                          data: (
-                                            List<Follow> followingUserList,
-                                          ) {
-                                            return FollowCountPanel(
-                                              followCount:
-                                                  followingUserList.length,
-                                              typeName: 'フォロワー',
-                                              tabIndex: 1,
-                                              targetUserId: targetUserId,
-                                              isMyPage: false,
-                                            );
-                                          },
-                                          error: (error, _) {
-                                            return FollowCountPanel(
-                                              followCount: 0,
-                                              typeName: 'フォロワー',
-                                              tabIndex: 1,
-                                              targetUserId: targetUserId,
-                                              isMyPage: false,
-                                            );
-                                          },
-                                          loading: () {
-                                            return const CircularProgressIndicator();
-                                          },
-                                        ),
-                                    ref
-                                        .watch(
-                                          watchAllMutualFollowUserListControllerProvider(
-                                            targetUserId,
-                                          ),
-                                        )
-                                        .when(
-                                          data: (
-                                            List<Follow> followingUserList,
-                                          ) {
-                                            return FollowCountPanel(
-                                              followCount:
-                                                  followingUserList.length,
-                                              typeName: '相互フォロー',
-                                              tabIndex: 2,
-                                              targetUserId: targetUserId,
-                                              isMyPage: false,
-                                            );
-                                          },
-                                          error: (error, _) {
-                                            return FollowCountPanel(
-                                              followCount: 0,
-                                              typeName: '相互フォロー',
-                                              tabIndex: 2,
-                                              targetUserId: targetUserId,
-                                              isMyPage: false,
-                                            );
-                                          },
-                                          loading: () {
-                                            return const CircularProgressIndicator();
-                                          },
-                                        ),
-                                  ],
-                                ),
+                                      },
+                                    ),
                               ],
                             ),
                           ),

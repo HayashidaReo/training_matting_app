@@ -21,7 +21,7 @@ class DefaultColors {
   final Color accentTextColor = Colors.black;
 
   final Color toastTextColor = Colors.white;
-  final Color toastBackColor = Color.fromARGB(255, 255, 74, 161);
+  final Color toastBackColor = Colors.blue;
 
   final Color dialogTitleColor = Colors.black87;
   final Color dialogBodyTextColor = Colors.black54;

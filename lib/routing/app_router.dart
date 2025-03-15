@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
@@ -44,12 +42,9 @@ GoRouter appRouter(ref) {
     // 認証状態に応じてリダイレクト処理を実装
     redirect: (BuildContext context, GoRouterState state) {
       final bool loggedIn = ref.read(authRepoProvider) != null;
-      final String currentPath = state.uri.toString();
-      final bool onAuthPage =
-          (currentPath == AppRoute.authTopNavigation.name) ||
-          (currentPath ==
-              '/${AppRoute.authTopNavigation.name}/${AppRoute.passwordRemainder.name}');
-
+      final bool onAuthPage = state.uri.toString().startsWith(
+        AppRoute.authTopNavigation.path,
+      );
       // ログインしていない場合、認証ページ, パスワード再設定ページ以外なら認証ページへリダイレクト
       if (!loggedIn) {
         return onAuthPage ? null : AppRoute.authTopNavigation.path;

@@ -6,10 +6,10 @@ void showToast(String msg) {
   Fluttertoast.showToast(
     msg: msg,
     toastLength: Toast.LENGTH_SHORT,
-    gravity: ToastGravity.BOTTOM,
+    gravity: ToastGravity.TOP,
     timeInSecForIosWeb: 1,
     backgroundColor: defaultColors.toastBackColor,
     textColor: defaultColors.toastTextColor,
-    fontSize: FontSize.large,
+    fontSize: FontSize.normal,
   );
 }

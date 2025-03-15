@@ -287,7 +287,7 @@ class PostTile extends HookConsumerWidget {
     }
     // 削除
     ref.watch(postControllerProvider.notifier).deletePost(postData.postId);
-    showToast('削除しました');
+    showToast('ポストを削除しました');
     return;
   }
 }

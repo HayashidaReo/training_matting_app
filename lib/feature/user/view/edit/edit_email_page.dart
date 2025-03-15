@@ -109,7 +109,7 @@ class EditEmailPage extends HookConsumerWidget {
             );
         hideLoadingDialog();
         if (result == 'success') {
-          showToast('メールを送信しました');
+          showToast('確認のメールを送信しました');
         } else {
           if (context.mounted) {
             showCloseOnlyDialog(context, 'エラー', result);

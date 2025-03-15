@@ -254,7 +254,7 @@ class EditMyIconPage extends HookConsumerWidget {
       await _updateImageUrl(ref, context, downloadUrl);
     }
     hideLoadingDialog();
-    showToast('変更完了');
+    showToast('アイコンを変更しました');
     return;
   }
 
@@ -268,7 +268,7 @@ class EditMyIconPage extends HookConsumerWidget {
           docId: ref.read(currentUserControllerProvider)!.uid,
         );
     hideLoadingDialog();
-    showToast('削除が完了しました');
+    showToast('アイコンを削除しました');
     return;
   }
 

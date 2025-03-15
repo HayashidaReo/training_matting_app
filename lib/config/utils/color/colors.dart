@@ -6,7 +6,7 @@ class DefaultColors {
   final Color primaryColor = Colors.blueAccent;
   final Color secondaryColor = Colors.white;
   final Color accentColor = Colors.blueAccent;
-
+  final Color errorColor = Colors.red;
   final Color enlargedImageBackColor = Colors.black;
 
   final Color maleColor = Colors.pink;

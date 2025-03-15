@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matching_app/common_widget/loading_dialog.dart';
 import 'package:matching_app/common_widget/toast.dart';
+import 'package:matching_app/config/utils/color/colors.dart';
 import 'package:matching_app/config/utils/enum/image_quality_enum.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
+import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 import 'package:matching_app/feature/component/auto_scaled_file_image.dart';
@@ -101,11 +103,13 @@ class AddOrEditPostForm extends HookWidget {
     bool isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
     final keyboardDismissed = useState(false);
     final bodyTextLength = useState<int>(bodyController.text.length);
+    final ValueNotifier<bool> showNotUploadImageState = useState(false);
 
     useEffect(() {
       if (isKeyboardVisible == false) {
         // キーボードが完全に消えたら手動で設定したkeyboardDismissedをfalseに初期化
         keyboardDismissed.value = false;
+        showNotUploadImageState.value = false;
       }
       return null;
     }, [isKeyboardVisible, bodyController.text]);
@@ -257,6 +261,7 @@ class AddOrEditPostForm extends HookWidget {
                                     }
                                     selectedImage.value = null;
                                     imageUrl.value = '';
+                                    showNotUploadImageState.value = false;
                                   },
                                 ),
                               ),
@@ -280,11 +285,27 @@ class AddOrEditPostForm extends HookWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconButton(
-                        icon: const Icon(Icons.photo),
-                        onPressed: () async {
-                          await _showImagePicker(selectedImage);
-                        },
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.photo),
+                            onPressed: () async {
+                              await _showImagePicker(
+                                selectedImage,
+                                imageUrl.value,
+                                showNotUploadImageState,
+                              );
+                            },
+                          ),
+                          if (showNotUploadImageState.value)
+                            Text(
+                              '画像は１枚までです',
+                              style: TextStyle(
+                                fontSize: FontSize.smallNormal,
+                                color: defaultColors.errorColor,
+                              ),
+                            ),
+                        ],
                       ),
                       SizedBox.shrink(),
                       Row(
@@ -314,12 +335,21 @@ class AddOrEditPostForm extends HookWidget {
     );
   }
 
-  Future<void> _showImagePicker(ValueNotifier<File?> selectedImage) async {
-    if (selectedImage.value != null) return;
-    selectedImage.value = await getImageFromGallery(ImageQuality.post.quality);
-
-    isImageDeleted.value = false;
-
+  Future<void> _showImagePicker(
+    ValueNotifier<File?> selectedImage,
+    String imageUrl,
+    ValueNotifier<bool> showNotUploadImageState,
+  ) async {
+    if (selectedImage.value != null || imageUrl.isNotEmpty) {
+      showNotUploadImageState.value = true;
+    } else {
+      selectedImage.value = await getImageFromGallery(
+        ImageQuality.post.quality,
+      );
+      if (selectedImage.value != null) {
+        isImageDeleted.value = false;
+      }
+    }
     return;
   }
 

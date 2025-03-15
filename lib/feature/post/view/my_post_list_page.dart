@@ -70,6 +70,10 @@ class MyPostListPage extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: defaultColors.accentButtonBackColor,
         foregroundColor: defaultColors.accentButtonTextColor,
+        tooltip: '新しい投稿',
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(32.0),
+        ),
         onPressed: () {
           context.pushNamed(AppRoute.addPost.name);
         },

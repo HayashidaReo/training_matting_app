@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:matching_app/config/firebase/firebase_auth_error_text.dart';
 import 'package:matching_app/config/firebase/firebase_instance_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -49,9 +51,17 @@ class AuthRepo extends _$AuthRepo {
           .createUserWithEmailAndPassword(email: email, password: password);
       state = ref.read(firebaseAuthInstanceProvider).currentUser;
       return 'success';
-    } on FirebaseAuthException catch (e) {
+    } on PlatformException catch (e, stackTrace) {
+      debugPrint('PlatformException: ${e.code}, ${e.message}');
+      debugPrint(stackTrace.toString());
+      return 'Platform error occurred: ${e.message}';
+    } on FirebaseAuthException catch (e, stackTrace) {
+      debugPrint('FirebaseAuthException: ${e.code}, ${e.message}');
+      debugPrint(stackTrace.toString());
       return FirebaseAuthErrorExt.fromCode(e.code).message;
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('Unknown error: $e');
+      debugPrint(stackTrace.toString());
       return 'error';
     }
   }

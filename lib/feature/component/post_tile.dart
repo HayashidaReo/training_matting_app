@@ -139,10 +139,13 @@ class PostTile extends HookConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ExpandableText(
-                  text: postData.body,
-                  style: TextStyle(fontSize: FontSize.normal),
-                  maxLines: 7,
+                SizedBox(
+                  width: double.infinity,
+                  child: ExpandableText(
+                    text: postData.body,
+                    style: TextStyle(fontSize: FontSize.normal),
+                    maxLines: 7,
+                  ),
                 ),
                 if (postData.imageUrl.isNotEmpty) HeightMarginSizedBox.small,
                 if (postData.imageUrl.isNotEmpty)

@@ -19,6 +19,7 @@ class DefaultColors {
   final Color mainBackColor = Colors.white;
   final Color mainTextColor = Colors.black;
   final Color accentTextColor = Colors.black;
+  final Color readMoreTextColor = Colors.blueAccent;
 
   final Color toastTextColor = Colors.white;
   final Color toastBackColor = const Color.fromARGB(240, 53, 51, 51);

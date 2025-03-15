@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:readmore/readmore.dart';
 
 class ExpandableText extends HookWidget {
   const ExpandableText({
@@ -15,47 +17,16 @@ class ExpandableText extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isExpanded = useState<bool>(false);
-
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        // TextPainter でテキストのサイズを測定し、オーバーフローしているかを判定する
-        final TextSpan textSpan = TextSpan(text: text, style: style);
-        final TextPainter textPainter = TextPainter(
-          text: textSpan,
-          maxLines: maxLines,
-          textDirection: TextDirection.ltr,
-        );
-        textPainter.layout(maxWidth: constraints.maxWidth);
-        final computedOverflow = textPainter.didExceedMaxLines;
-
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Flexible(
-                  child: Text(
-                    text,
-                    style: style,
-                    maxLines: isExpanded.value ? null : maxLines,
-                    overflow:
-                        isExpanded.value
-                            ? TextOverflow.visible
-                            : TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
-            ),
-            if (!isExpanded.value && computedOverflow)
-              TextButton(
-                onPressed: () => isExpanded.value = true,
-                child: const Text('さらに表示...'),
-              ),
-          ],
-        );
-      },
+    return ReadMoreText(
+      text,
+      textAlign: TextAlign.start,
+      trimLines: maxLines,
+      trimMode: TrimMode.Line,
+      trimCollapsedText: ' さらに表示',
+      trimExpandedText: ' 折りたたむ',
+      style: style,
+      moreStyle: style?.copyWith(color: defaultColors.readMoreTextColor),
+      lessStyle: style?.copyWith(color: defaultColors.readMoreTextColor),
     );
   }
 }

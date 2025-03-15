@@ -66,6 +66,7 @@ class InterlocutorMassageHistoryTile extends StatelessWidget {
                                 queryParameters: {
                                   'imageUrl': talkHistoryData.imageUrl,
                                   'imageFilePath': '',
+                                  'canDownloadImage': 'true',
                                 },
                               );
                             },
@@ -200,6 +201,7 @@ class MyMassageHistoryTile extends StatelessWidget {
                                   queryParameters: {
                                     'imageUrl': talkHistoryData.imageUrl,
                                     'imageFilePath': '',
+                                    'canDownloadImage': 'true',
                                   },
                                 );
                               },

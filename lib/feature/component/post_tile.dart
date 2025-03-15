@@ -156,7 +156,10 @@ class PostTile extends HookConsumerWidget {
                     onTap: () {
                       context.goNamed(
                         AppRoute.enlargedPostImage.name,
-                        queryParameters: {'imageUrl': postData.imageUrl},
+                        queryParameters: {
+                          'imageUrl': postData.imageUrl,
+                          'canDownloadImage': 'true',
+                        },
                       );
                     },
                   ),

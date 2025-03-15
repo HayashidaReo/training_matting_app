@@ -8,9 +8,14 @@ import 'package:matching_app/feature/component/hide_button_on_image.dart';
 import 'package:matching_app/function/download_image.dart';
 
 class EnlargedNetworkImagePage extends ConsumerWidget {
-  const EnlargedNetworkImagePage({super.key, required this.imageUrl});
+  const EnlargedNetworkImagePage({
+    super.key,
+    required this.imageUrl,
+    this.canDownloadImage,
+  });
 
   final String imageUrl;
+  final bool? canDownloadImage;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Dismissible(
@@ -47,16 +52,16 @@ class EnlargedNetworkImagePage extends ConsumerWidget {
             left: 0,
             child: HideButtonOnImage(onPressed: () => context.pop(), size: 50),
           ),
-          Positioned(
-            top: 60,
-            right: 0,
-
-            child: HideButtonOnImage(
-              onPressed: () => downloadImage(imageUrl),
-              size: 50,
-              icon: Icons.save,
+          if (canDownloadImage != null && canDownloadImage!)
+            Positioned(
+              top: 60,
+              right: 0,
+              child: HideButtonOnImage(
+                onPressed: () => downloadImage(imageUrl),
+                size: 50,
+                icon: Icons.file_download_outlined,
+              ),
             ),
-          ),
         ],
       ),
     );

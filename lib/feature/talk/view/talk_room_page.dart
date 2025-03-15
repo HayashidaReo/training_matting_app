@@ -253,6 +253,8 @@ class TalkRoomPage extends HookConsumerWidget {
                                                                           .path,
                                                                   'imageUrl':
                                                                       '',
+                                                                  'canDownloadImage':
+                                                                      'false',
                                                                 },
                                                               );
                                                             },

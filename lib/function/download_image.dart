@@ -2,12 +2,14 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:matching_app/common_widget/loading_dialog.dart';
 import 'package:matching_app/common_widget/toast.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// オンラインの画像をダウンロードして一時ディレクトリに保存し、File を返す
 /// 成功した場合はダウンロードした画像の [File]、失敗した場合は null
 Future<void> downloadImage(String imageUrl) async {
+  showLoadingDialog('保存中...');
   try {
     // HTTPリクエストで画像を取得
     final response = await http.get(Uri.parse(imageUrl));
@@ -24,12 +26,15 @@ Future<void> downloadImage(String imageUrl) async {
       await file.writeAsBytes(bytes);
       Uint8List buffer = await file.readAsBytes();
       await ImageGallerySaver.saveImage(buffer);
+      hideLoadingDialog();
       showToast('画像を保存しました');
       return;
     }
+    hideLoadingDialog();
     showToast('画像の保存に失敗しました');
     return;
   } catch (e) {
+    hideLoadingDialog();
     showToast('画像の保存に失敗しました');
     return;
   }

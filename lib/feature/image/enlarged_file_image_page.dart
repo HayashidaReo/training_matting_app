@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/feature/component/hide_button_on_image.dart';
 
 class EnlargedFileImagePage extends ConsumerWidget {
   const EnlargedFileImagePage({super.key, required this.imageFile});
@@ -36,12 +37,7 @@ class EnlargedFileImagePage extends ConsumerWidget {
           Positioned(
             top: 60,
             left: 0,
-            child: IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () {
-                context.pop();
-              },
-            ),
+            child: HideButtonOnImage(onPressed: () => context.pop(), size: 50),
           ),
         ],
       ),

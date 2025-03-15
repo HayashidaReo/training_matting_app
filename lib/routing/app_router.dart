@@ -161,11 +161,16 @@ GoRouter appRouter(ref) {
                 path: AppRoute.enlargedPostImage.path,
                 name: AppRoute.enlargedPostImage.name,
                 pageBuilder: (context, state) {
-                  final imageUrl =
+                  final String imageUrl =
                       state.uri.queryParameters['imageUrl'] as String;
+                  final String canDownloadImage =
+                      state.uri.queryParameters['canDownloadImage'] as String;
                   return MaterialPage(
                     fullscreenDialog: true,
-                    child: EnlargedNetworkImagePage(imageUrl: imageUrl),
+                    child: EnlargedNetworkImagePage(
+                      imageUrl: imageUrl,
+                      canDownloadImage: canDownloadImage == 'true',
+                    ),
                   );
                 },
               ),
@@ -219,6 +224,9 @@ GoRouter appRouter(ref) {
                           state.uri.queryParameters['imageUrl'] as String;
                       final String imageFilePath =
                           state.uri.queryParameters['imageFilePath'] as String;
+                      final String canDownloadImage =
+                          state.uri.queryParameters['canDownloadImage']
+                              as String;
                       if (imageFilePath.isNotEmpty) {
                         return NoTransitionPage(
                           child: EnlargedFileImagePage(
@@ -227,7 +235,10 @@ GoRouter appRouter(ref) {
                         );
                       }
                       return NoTransitionPage(
-                        child: EnlargedNetworkImagePage(imageUrl: imageUrl),
+                        child: EnlargedNetworkImagePage(
+                          imageUrl: imageUrl,
+                          canDownloadImage: canDownloadImage == 'true',
+                        ),
                       );
                     },
                   ),

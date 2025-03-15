@@ -10,6 +10,7 @@ import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
 import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
+import 'package:matching_app/feature/component/expandable_text.dart';
 import 'package:matching_app/feature/component/follow_count_panel.dart';
 import 'package:matching_app/feature/component/icon_image.dart';
 import 'package:matching_app/feature/follow/controller/follow_controller.dart';
@@ -427,12 +428,10 @@ class OtherUserProfilePage extends ConsumerWidget {
                       if (userData.profile != '')
                         SizedBox(
                           width: double.infinity,
-                          child: Text(
-                            textAlign: TextAlign.left,
-                            userData.profile,
+                          child: ExpandableText(
+                            text: userData.profile,
                             style: TextStyle(fontSize: FontSize.smallNormal),
-                            maxLines: 8,
-                            overflow: TextOverflow.ellipsis,
+                            maxLines: 5,
                           ),
                         ),
                     ],

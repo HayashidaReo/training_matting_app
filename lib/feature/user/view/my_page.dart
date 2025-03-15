@@ -12,6 +12,7 @@ import 'package:matching_app/config/utils/margin/width_margin_sized_box.dart';
 import 'package:matching_app/feature/auth/controller/auth_controller.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/component/badge_count_widget.dart';
+import 'package:matching_app/feature/component/expandable_text.dart';
 import 'package:matching_app/feature/component/follow_count_panel.dart';
 import 'package:matching_app/feature/component/hamburger_tile.dart';
 import 'package:matching_app/feature/component/icon_image.dart';
@@ -319,12 +320,10 @@ class MyPage extends ConsumerWidget {
                       if (userData.profile != '')
                         SizedBox(
                           width: double.infinity,
-                          child: Text(
-                            userData.profile,
-                            textAlign: TextAlign.left,
+                          child: ExpandableText(
+                            text: userData.profile,
                             style: TextStyle(fontSize: FontSize.smallNormal),
-                            maxLines: 8,
-                            overflow: TextOverflow.ellipsis,
+                            maxLines: 5,
                           ),
                         ),
                       ref

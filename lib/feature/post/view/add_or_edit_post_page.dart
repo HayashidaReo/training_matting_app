@@ -99,7 +99,7 @@ class AddOrEditPostForm extends HookWidget {
     final imageUrl = useState<String>(postData?.imageUrl ?? '');
     bool isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
     final keyboardDismissed = useState(false);
-    final bodyTextLength = useState<int>(0);
+    final bodyTextLength = useState<int>(bodyController.text.length);
 
     useEffect(() {
       if (isKeyboardVisible == false) {

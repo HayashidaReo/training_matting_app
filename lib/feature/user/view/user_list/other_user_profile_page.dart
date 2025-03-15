@@ -269,64 +269,67 @@ class OtherUserProfilePage extends ConsumerWidget {
                                       return const CircularProgressIndicator();
                                     },
                                     data: (bool isFollowing) {
-                                      return Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          SizedBox(
-                                            width: 170,
-                                            height: 40,
-                                            child: CustomButton(
-                                              text:
-                                                  isFollowing
-                                                      ? 'フォロー中'
-                                                      : 'フォロー',
-                                              onPressed: () {
-                                                _changeFollowStatus(
-                                                  context,
-                                                  isFollowing,
-                                                  ref,
-                                                );
-                                              },
-                                              leftIcon:
-                                                  isFollowing
-                                                      ? Icons
-                                                          .person_remove_rounded
-                                                      : Icons
-                                                          .person_add_alt_rounded,
-                                              isColorReversed: isFollowing,
+                                      return ref
+                                          .watch(
+                                            watchWhetherTargetUserFollowMeControllerProvider(
+                                              ref
+                                                  .read(
+                                                    currentUserControllerProvider,
+                                                  )!
+                                                  .uid,
+                                              targetUserId,
                                             ),
-                                          ),
-                                          ref
-                                              .watch(
-                                                watchWhetherTargetUserFollowMeControllerProvider(
-                                                  ref
-                                                      .read(
-                                                        currentUserControllerProvider,
-                                                      )!
-                                                      .uid,
-                                                  targetUserId,
+                                          )
+                                          .when(
+                                            error: (error, _) {
+                                              return Text(
+                                                'エラーが発生しました。再度お試しください。',
+                                                style: TextStyle(
+                                                  fontSize: FontSize.large,
                                                 ),
-                                              )
-                                              .when(
-                                                error: (error, _) {
-                                                  return Text(
-                                                    'エラーが発生しました。再度お試しください。',
-                                                    style: TextStyle(
-                                                      fontSize: FontSize.large,
+                                              );
+                                            },
+                                            loading: () {
+                                              return const CircularProgressIndicator();
+                                            },
+                                            data: (bool isFollowed) {
+                                              return Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  SizedBox(
+                                                    width: 170,
+                                                    height: 40,
+                                                    child: CustomButton(
+                                                      text:
+                                                          (isFollowing)
+                                                              ? 'フォロー中'
+                                                              : (isFollowed)
+                                                              ? 'フォロバ'
+                                                              : 'フォロー',
+                                                      onPressed: () {
+                                                        _changeFollowStatus(
+                                                          context,
+                                                          isFollowing,
+                                                          ref,
+                                                        );
+                                                      },
+                                                      leftIcon:
+                                                          isFollowing
+                                                              ? Icons
+                                                                  .person_remove_rounded
+                                                              : Icons
+                                                                  .person_add_alt_rounded,
+                                                      isColorReversed:
+                                                          isFollowing,
                                                     ),
-                                                  );
-                                                },
-                                                loading: () {
-                                                  return const CircularProgressIndicator();
-                                                },
-                                                data: (bool isFollowed) {
-                                                  return SizedBox(
+                                                  ),
+                                                  SizedBox(
                                                     width: 170,
                                                     height: 40,
                                                     child: CustomButton(
                                                       text: 'メッセージ',
-
                                                       onPressed: () {
                                                         if (isFollowing &&
                                                             isFollowed) {
@@ -357,16 +360,15 @@ class OtherUserProfilePage extends ConsumerWidget {
                                                           !(isFollowing &&
                                                               isFollowed),
                                                     ),
-                                                  );
-                                                },
-                                              ),
-                                        ],
-                                      );
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
                                     },
                                   );
                             },
                           ),
-
                     HeightMarginSizedBox.normal,
                     if (userData.profile != '')
                       Padding(

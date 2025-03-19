@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/common_widget/close_only_dialog.dart';
@@ -25,11 +26,21 @@ import 'package:matching_app/feature/talk/controller/talk_history_controller.dar
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/model/userdata.dart';
 
-class MyPage extends ConsumerWidget {
+class MyPage extends HookConsumerWidget {
   const MyPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final ScrollController scrollController = useScrollController();
+    scrollController.addListener(() {
+      if (scrollController.position.atEdge &&
+          scrollController.position.pixels > 0) {
+        ref
+            .read(allOnlyIncomingFollowUserLimitControllerProvider.notifier)
+            .incrementLimit();
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('マイページ'),
@@ -334,6 +345,7 @@ class MyPage extends ConsumerWidget {
                             ),
                           )
                           .when(
+                            skipLoadingOnReload: true,
                             data: (List<Follow> onlyIncomingFollowList) {
                               return Column(
                                 children: [
@@ -348,8 +360,8 @@ class MyPage extends ConsumerWidget {
                                   HeightMarginSizedBox.small,
                                   SizedBox(
                                     height: 210,
-                                    // TODO: 無限スクロールの実装
                                     child: ListView.builder(
+                                      controller: scrollController,
                                       scrollDirection: Axis.horizontal,
                                       itemCount: onlyIncomingFollowList.length,
                                       itemBuilder: (context, index) {

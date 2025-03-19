@@ -20,7 +20,7 @@ extension FollowStatusExtention on SnapshotLimit {
       case SnapshotLimit.allFollowMeUser:
         return 50;
       case SnapshotLimit.allOnlyIncomingFollowUser:
-        return 50;
+        return 30;
       case SnapshotLimit.allMutualFollowUser:
         return 70;
       case SnapshotLimit.allPosts:

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:matching_app/config/utils/enum/snapshot_limit_enum.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/post/model/post.dart';
@@ -90,23 +91,43 @@ class PostController extends _$PostController {
 /// steamで全ての投稿を取得して監視
 @riverpod
 Stream<List<Post>> watchAllPostsController(ref) {
-  return ref.watch(postRepoProvider.notifier).watchAllPosts();
+  final int limit = ref.watch(allPostsLimitControllerProvider);
+  return ref.watch(postRepoProvider.notifier).watchAllPosts(limit);
+}
+
+@riverpod
+class AllPostsLimitController extends _$AllPostsLimitController {
+  @override
+  int build() {
+    return SnapshotLimit.allPosts.limit;
+  }
+
+  void incrementLimit() {
+    state += SnapshotLimit.allPosts.limit;
+  }
 }
 
 /// steamで自分の投稿を全て取得して監視
 @riverpod
 Stream<List<Post>> watchMyAllPostsController(ref) {
-  return ref.watch(postRepoProvider.notifier).watchMyAllPosts();
+  final int limit = ref.watch(myAllPostsLimitControllerProvider);
+  return ref.watch(postRepoProvider.notifier).watchMyAllPosts(limit);
+}
+
+@riverpod
+class MyAllPostsLimitController extends _$MyAllPostsLimitController {
+  @override
+  int build() {
+    return SnapshotLimit.myAllPosts.limit;
+  }
+
+  void incrementLimit() {
+    state += SnapshotLimit.myAllPosts.limit;
+  }
 }
 
 /// steamでpostIdからドキュメントを取得して監視
 @riverpod
 Stream<Post?> watchPostController(ref, String postId) {
   return ref.watch(postRepoProvider.notifier).watchPost(postId);
-}
-
-/// steamで自分がブックマークしたpostsコレクションを全て取得して監視
-@riverpod
-Stream<List<Post>> watchMyAllBookmarkPostsController(ref) {
-  return ref.watch(postRepoProvider.notifier).watchMyAllBookmarkPosts();
 }

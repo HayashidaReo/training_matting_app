@@ -7,7 +7,7 @@ part of 'bookmark_controller.dart';
 // **************************************************************************
 
 String _$watchMyAllBookmarksControllerHash() =>
-    r'c1e753e4cc8764d86b6ef30e858f306f7f478dbe';
+    r'814bfe5d4d22b93dd07344b6f322154c608f35f1';
 
 /// See also [watchMyAllBookmarksController].
 @ProviderFor(watchMyAllBookmarksController)
@@ -208,5 +208,23 @@ final bookmarkControllerProvider =
     );
 
 typedef _$BookmarkController = AutoDisposeNotifier<AsyncValue>;
+String _$myAllBookmarksLimitControllerHash() =>
+    r'0abf44223b3d86e33476da7ecafa8218c5041bac';
+
+/// See also [MyAllBookmarksLimitController].
+@ProviderFor(MyAllBookmarksLimitController)
+final myAllBookmarksLimitControllerProvider =
+    AutoDisposeNotifierProvider<MyAllBookmarksLimitController, int>.internal(
+      MyAllBookmarksLimitController.new,
+      name: r'myAllBookmarksLimitControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$myAllBookmarksLimitControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$MyAllBookmarksLimitController = AutoDisposeNotifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

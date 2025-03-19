@@ -23,9 +23,10 @@ class PostRepo extends _$PostRepo {
   }
 
   /// steamで全ての投稿を取得
-  Stream<List<Post>> watchAllPosts() {
+  Stream<List<Post>> watchAllPosts(int limit) {
     return state
         .orderBy(FirebasePostDataKey.createdAt, descending: true)
+        .limit(limit)
         .snapshots()
         .map((QuerySnapshot<Post> snapshot) {
           return snapshot.docs.map((QueryDocumentSnapshot<Post> doc) {
@@ -35,13 +36,14 @@ class PostRepo extends _$PostRepo {
   }
 
   /// streamで自分の投稿を全て取得
-  Stream<List<Post>> watchMyAllPosts() {
+  Stream<List<Post>> watchMyAllPosts(int limit) {
     return state
         .orderBy(FirebasePostDataKey.createdAt, descending: true)
         .where(
           FirebasePostDataKey.userId,
           isEqualTo: ref.read(currentUserControllerProvider)!.uid,
         )
+        .limit(limit)
         .snapshots()
         .map((QuerySnapshot<Post> snapshot) {
           return snapshot.docs.map((QueryDocumentSnapshot<Post> doc) {

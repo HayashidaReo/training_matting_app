@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:matching_app/config/utils/keys/firebase_key.dart';
+import 'package:matching_app/config/utils/enum/snapshot_limit_enum.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/bookmark/model/bookmark.dart';
+import 'package:matching_app/feature/bookmark/repo/bookmark_group_repo.dart';
 import 'package:matching_app/feature/bookmark/repo/bookmark_repo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -55,24 +56,22 @@ class BookmarkController extends _$BookmarkController {
 // 自分がブックマークしたbookmarksコレクションを全て取得
 @riverpod
 Stream<List<Bookmark>> watchMyAllBookmarksController(ref) {
-  return FirebaseFirestore.instance
-      .collectionGroup(FirebaseBookmarkDataKey.bookmarkCollection)
-      .withConverter<Bookmark>(
-        fromFirestore: (snapshot, _) => Bookmark.fromJson(snapshot.data()!),
-        toFirestore: (Bookmark value, _) => value.toJson(),
-      )
-      .where(
-        FirebaseBookmarkDataKey.userId,
-        isEqualTo: ref.read(currentUserControllerProvider)!.uid,
-      )
-      // ブックマークした順
-      .orderBy(FirebaseBookmarkDataKey.createdAt, descending: true)
-      .snapshots()
-      .map((QuerySnapshot<Bookmark> snapshot) {
-        return snapshot.docs.map((QueryDocumentSnapshot<Bookmark> doc) {
-          return doc.data();
-        }).toList();
-      });
+  final int limit = ref.watch(myAllBookmarksLimitControllerProvider);
+  return ref
+      .read(bookmarkGroupRepoProvider.notifier)
+      .watchMyAllBookmarks(limit);
+}
+
+@riverpod
+class MyAllBookmarksLimitController extends _$MyAllBookmarksLimitController {
+  @override
+  int build() {
+    return SnapshotLimit.myAllBookmarks.limit;
+  }
+
+  void incrementLimit() {
+    state += SnapshotLimit.myAllBookmarks.limit;
+  }
 }
 
 /// streamでpostに紐づくbookmarksコレクションを全て取得して監視

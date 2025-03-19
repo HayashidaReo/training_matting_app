@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
@@ -11,15 +12,24 @@ import 'package:matching_app/feature/post/model/post.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/model/userdata.dart';
 
-class AllPostListPage extends ConsumerWidget {
+class AllPostListPage extends HookConsumerWidget {
   const AllPostListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final ScrollController scrollController = useScrollController();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        ref.read(allPostsLimitControllerProvider.notifier).incrementLimit();
+      }
+    });
+
     return Scaffold(
       body: ref
           .watch(watchAllPostsControllerProvider)
           .when(
+            skipLoadingOnReload: true,
             error: (error, _) {
               return const Center(child: Text('エラーが発生しました'));
             },
@@ -28,7 +38,7 @@ class AllPostListPage extends ConsumerWidget {
             },
             data: (List<Post> postListData) {
               return SingleChildScrollView(
-                // TODO: 無限スクロールの実装
+                controller: scrollController,
                 child: ListView.separated(
                   physics: NeverScrollableScrollPhysics(),
                   separatorBuilder: (context, index) {

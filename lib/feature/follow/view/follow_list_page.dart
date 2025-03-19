@@ -36,7 +36,6 @@ class FollowListPage extends HookConsumerWidget {
                 return const Center(child: CupertinoActivityIndicator());
               },
               data: (List<Follow> followingListData) {
-                // []TODO: 無限スクロールの実装
                 return ListView.separated(
                   controller: scrollController,
                   itemCount: followingListData.length,

@@ -4,6 +4,9 @@ enum SnapshotLimit {
   allFollowMeUser,
   allOnlyIncomingFollowUser,
   allMutualFollowUser,
+  allPosts,
+  myAllBookmarks,
+  myAllPosts,
 }
 
 extension FollowStatusExtention on SnapshotLimit {
@@ -17,6 +20,12 @@ extension FollowStatusExtention on SnapshotLimit {
         return 50;
       case SnapshotLimit.allMutualFollowUser:
         return 70;
+      case SnapshotLimit.allPosts:
+        return 50;
+      case SnapshotLimit.myAllBookmarks:
+        return 50;
+      case SnapshotLimit.myAllPosts:
+        return 50;
     }
   }
 }

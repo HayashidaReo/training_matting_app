@@ -18,7 +18,7 @@ class FollowerListPage extends HookConsumerWidget {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         ref
-            .read(allFollowMeUserLimitControllerProvider.notifier) // <-適宜変える
+            .read(allFollowMeUserLimitControllerProvider.notifier)
             .incrementLimit();
       }
     });
@@ -36,7 +36,6 @@ class FollowerListPage extends HookConsumerWidget {
                 return const Center(child: CupertinoActivityIndicator());
               },
               data: (List<Follow> followingListData) {
-                //[] TODO: 無限スクロールの実装
                 return ListView.separated(
                   controller: scrollController,
                   itemCount: followingListData.length,

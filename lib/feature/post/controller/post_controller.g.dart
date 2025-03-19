@@ -7,7 +7,7 @@ part of 'post_controller.dart';
 // **************************************************************************
 
 String _$watchAllPostsControllerHash() =>
-    r'c5a3e480f542734877927269c232667fa4554788';
+    r'9d1a4a652c9a00c34555ca3edfaf6202dfffa40c';
 
 /// steamで全ての投稿を取得して監視
 ///
@@ -29,7 +29,7 @@ final watchAllPostsControllerProvider =
 // ignore: unused_element
 typedef WatchAllPostsControllerRef = AutoDisposeStreamProviderRef<List<Post>>;
 String _$watchMyAllPostsControllerHash() =>
-    r'b10c716c7ef25fc954bea94a0f3a53c64acfcfd1';
+    r'a9e5af582a3e6616900ae3ee7e3f5bed73926a9c';
 
 /// steamで自分の投稿を全て取得して監視
 ///
@@ -205,30 +205,7 @@ class _WatchPostControllerProviderElement
   String get postId => (origin as WatchPostControllerProvider).postId;
 }
 
-String _$watchMyAllBookmarkPostsControllerHash() =>
-    r'a4824d2a3f387f19db7d042fe90c4e5df174037f';
-
-/// steamで自分がブックマークしたpostsコレクションを全て取得して監視
-///
-/// Copied from [watchMyAllBookmarkPostsController].
-@ProviderFor(watchMyAllBookmarkPostsController)
-final watchMyAllBookmarkPostsControllerProvider =
-    AutoDisposeStreamProvider<List<Post>>.internal(
-      watchMyAllBookmarkPostsController,
-      name: r'watchMyAllBookmarkPostsControllerProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$watchMyAllBookmarkPostsControllerHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef WatchMyAllBookmarkPostsControllerRef =
-    AutoDisposeStreamProviderRef<List<Post>>;
-String _$postControllerHash() => r'8ab8144c061c49c184d3cd905d1961663788dd89';
+String _$postControllerHash() => r'67a2d52059a27b77b625ac0ea8457ead0c06c8c5';
 
 /// See also [PostController].
 @ProviderFor(PostController)
@@ -245,5 +222,41 @@ final postControllerProvider =
     );
 
 typedef _$PostController = AutoDisposeNotifier<AsyncValue>;
+String _$allPostsLimitControllerHash() =>
+    r'f6780b9ec45109e266290d27eb5976a1b8f98335';
+
+/// See also [AllPostsLimitController].
+@ProviderFor(AllPostsLimitController)
+final allPostsLimitControllerProvider =
+    AutoDisposeNotifierProvider<AllPostsLimitController, int>.internal(
+      AllPostsLimitController.new,
+      name: r'allPostsLimitControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$allPostsLimitControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$AllPostsLimitController = AutoDisposeNotifier<int>;
+String _$myAllPostsLimitControllerHash() =>
+    r'fbc92545b9b487d06e4836150fffb8ecc0609de3';
+
+/// See also [MyAllPostsLimitController].
+@ProviderFor(MyAllPostsLimitController)
+final myAllPostsLimitControllerProvider =
+    AutoDisposeNotifierProvider<MyAllPostsLimitController, int>.internal(
+      MyAllPostsLimitController.new,
+      name: r'myAllPostsLimitControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$myAllPostsLimitControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$MyAllPostsLimitController = AutoDisposeNotifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

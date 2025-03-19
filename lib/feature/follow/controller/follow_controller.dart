@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:matching_app/config/utils/enum/snapshot_limit_enum.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/follow/model/follow.dart';
 import 'package:matching_app/feature/follow/repo/follow_repo.dart';
@@ -78,17 +79,44 @@ Stream<List<Follow>> watchAllMyFollowingUserListController(
   ref,
   String myUserId,
 ) {
+  final int limit = ref.watch(allMyFollowingUserLimitControllerProvider);
   return ref
       .watch(followRepoProvider.notifier)
-      .watchAllMyFollowingUserList(myUserId);
+      .watchAllMyFollowingUserList(myUserId, limit);
+}
+
+@riverpod
+class AllMyFollowingUserLimitController
+    extends _$AllMyFollowingUserLimitController {
+  @override
+  int build() {
+    return SnapshotLimit.allMyFollowingUser.limit;
+  }
+
+  void incrementLimit() {
+    state += SnapshotLimit.allMyFollowingUser.limit;
+  }
 }
 
 @riverpod
 /// 自分をfollowしているユーザーを全て取得(follower)
 Stream<List<Follow>> watchAllFollowMeUserListController(ref, String myUserId) {
+  final int limit = ref.watch(allFollowMeUserLimitControllerProvider);
   return ref
       .watch(followRepoProvider.notifier)
-      .watchAllFollowMeUserList(myUserId);
+      .watchAllFollowMeUserList(myUserId, limit);
+}
+
+@riverpod
+class AllFollowMeUserLimitController extends _$AllFollowMeUserLimitController {
+  @override
+  int build() {
+    return SnapshotLimit.allFollowMeUser.limit;
+  }
+
+  void incrementLimit() {
+    state += SnapshotLimit.allFollowMeUser.limit;
+  }
 }
 
 @riverpod
@@ -97,9 +125,23 @@ Stream<List<Follow>> watchAllOnlyIncomingFollowUserListController(
   ref,
   String myUserId,
 ) {
+  final int limit = ref.watch(allOnlyIncomingFollowUserLimitControllerProvider);
   return ref
       .watch(followRepoProvider.notifier)
-      .watchAllOnlyIncomingFollowUserList(myUserId);
+      .watchAllOnlyIncomingFollowUserList(myUserId, limit);
+}
+
+@riverpod
+class AllOnlyIncomingFollowUserLimitController
+    extends _$AllOnlyIncomingFollowUserLimitController {
+  @override
+  int build() {
+    return SnapshotLimit.allOnlyIncomingFollowUser.limit;
+  }
+
+  void incrementLimit() {
+    state += SnapshotLimit.allOnlyIncomingFollowUser.limit;
+  }
 }
 
 @riverpod
@@ -108,7 +150,21 @@ Stream<List<Follow>> watchAllMutualFollowUserListController(
   ref,
   String myUserId,
 ) {
+  final int limit = ref.watch(allMutualFollowUserLimitControllerProvider);
   return ref
       .watch(followRepoProvider.notifier)
-      .watchAllMutualFollowUserList(myUserId);
+      .watchAllMutualFollowUserList(myUserId, limit);
+}
+
+@riverpod
+class AllMutualFollowUserLimitController
+    extends _$AllMutualFollowUserLimitController {
+  @override
+  int build() {
+    return SnapshotLimit.allMutualFollowUser.limit;
+  }
+
+  void incrementLimit() {
+    state += SnapshotLimit.allMutualFollowUser.limit;
+  }
 }

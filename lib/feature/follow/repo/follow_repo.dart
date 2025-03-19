@@ -65,31 +65,37 @@ class FollowRepo extends _$FollowRepo {
         .map((snapshot) => snapshot.docs.isNotEmpty);
   }
 
-  /// 自分(myUser)がfollowしているユーザーとのFollowを全て取得(follow)
-  Stream<List<Follow>> watchAllMyFollowingUserList(String myUserId) {
+  /// 自分(myUser)がフォローしているユーザーとのFollowを全て取得(follow)
+  Stream<List<Follow>> watchAllMyFollowingUserList(String myUserId, int limit) {
     return state
         .where(FirebaseFollowDataKey.followingUserId, isEqualTo: myUserId)
         // .orderBy(FirebaseFollowDataKey.updateAt, descending: true)
+        .limit(limit)
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
-  /// 自分(myUser)をfollowしているユーザーとのFollowを全て取得(follower)
-  Stream<List<Follow>> watchAllFollowMeUserList(String myUserId) {
+  /// 自分(myUser)をフォローしているユーザーとのFollowを全て取得(follower)
+  Stream<List<Follow>> watchAllFollowMeUserList(String myUserId, int limit) {
     return state
         .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
         // .orderBy(FirebaseFollowDataKey.updateAt, descending: true)
+        .limit(limit)
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
   /// 自分(myUser)はフォローしていないが、相手(targetUser)から一方的にフォローされているユーザーとのFollowを全て取得
-  Stream<List<Follow>> watchAllOnlyIncomingFollowUserList(String myUserId) {
+  Stream<List<Follow>> watchAllOnlyIncomingFollowUserList(
+    String myUserId,
+    int limit,
+  ) {
     // 自分をフォローしている全てのフォロー情報を取得
     return state
         // フォローされている人が自分
         .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
         // .orderBy(FirebaseFollowDataKey.updateAt, descending: true)
+        .limit(limit)
         .snapshots()
         .asyncMap((snapshot) async {
           final follows = snapshot.docs.map((doc) => doc.data()).toList();
@@ -120,11 +126,15 @@ class FollowRepo extends _$FollowRepo {
   }
 
   /// 相互フォローしているFollowを全て取得
-  Stream<List<Follow>> watchAllMutualFollowUserList(String myUserId) {
+  Stream<List<Follow>> watchAllMutualFollowUserList(
+    String myUserId,
+    int limit,
+  ) {
     // 自分をフォローしている全てのフォロー情報を取得
     return state
         .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
         // .orderBy(FirebaseFollowDataKey.updateAt, descending: true)
+        .limit(limit)
         .snapshots()
         .asyncMap((snapshot) async {
           final follows = snapshot.docs.map((doc) => doc.data()).toList();

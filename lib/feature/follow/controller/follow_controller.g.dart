@@ -362,7 +362,7 @@ class _WatchWhetherTargetUserFollowMeControllerProviderElement
 }
 
 String _$watchAllMyFollowingUserListControllerHash() =>
-    r'70b0dc9d783247894f3ecf93a32eee2658806c8f';
+    r'9f0b77f2bc1a161a8e92b0313a86b86016f3fc86';
 
 /// 自分がfollowしているユーザーを全て取得(follow)
 ///
@@ -509,7 +509,7 @@ class _WatchAllMyFollowingUserListControllerProviderElement
 }
 
 String _$watchAllFollowMeUserListControllerHash() =>
-    r'06e16740b51c86c0575bbea12d716317172c934f';
+    r'6cbe3aacbaa22a1f121ef8b17ddf0cbe81b85845';
 
 /// 自分をfollowしているユーザーを全て取得(follower)
 ///
@@ -655,7 +655,7 @@ class _WatchAllFollowMeUserListControllerProviderElement
 }
 
 String _$watchAllOnlyIncomingFollowUserListControllerHash() =>
-    r'0f664a060ff7f46df8c16cbd842d5c3e421717a5';
+    r'38f0310d60e62d4f242bb518e4ee891568ad2c0b';
 
 /// 自分はフォローしていないが、相手から一方的にフォローされているユーザーを全て取得
 ///
@@ -803,7 +803,7 @@ class _WatchAllOnlyIncomingFollowUserListControllerProviderElement
 }
 
 String _$watchAllMutualFollowUserListControllerHash() =>
-    r'87f47cce16072a4d58db1284bc09640f91529486';
+    r'2ca871f04584de26d90499ba2dab2d7bfcbf61c1';
 
 /// 相互フォローしているユーザーを全て取得
 ///
@@ -967,5 +967,84 @@ final followControllerProvider =
     );
 
 typedef _$FollowController = AutoDisposeNotifier<AsyncValue>;
+String _$allMyFollowingUserLimitControllerHash() =>
+    r'b45075b0d954b958d8ea7f6981c5d61f0f95dcbd';
+
+/// See also [AllMyFollowingUserLimitController].
+@ProviderFor(AllMyFollowingUserLimitController)
+final allMyFollowingUserLimitControllerProvider = AutoDisposeNotifierProvider<
+  AllMyFollowingUserLimitController,
+  int
+>.internal(
+  AllMyFollowingUserLimitController.new,
+  name: r'allMyFollowingUserLimitControllerProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$allMyFollowingUserLimitControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$AllMyFollowingUserLimitController = AutoDisposeNotifier<int>;
+String _$allFollowMeUserLimitControllerHash() =>
+    r'27fc6992cf998dc20423ec2bc4a622fd1277af8e';
+
+/// See also [AllFollowMeUserLimitController].
+@ProviderFor(AllFollowMeUserLimitController)
+final allFollowMeUserLimitControllerProvider =
+    AutoDisposeNotifierProvider<AllFollowMeUserLimitController, int>.internal(
+      AllFollowMeUserLimitController.new,
+      name: r'allFollowMeUserLimitControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$allFollowMeUserLimitControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$AllFollowMeUserLimitController = AutoDisposeNotifier<int>;
+String _$allOnlyIncomingFollowUserLimitControllerHash() =>
+    r'06d81e213baef2cb0745240da3e75a3a1a5e989e';
+
+/// See also [AllOnlyIncomingFollowUserLimitController].
+@ProviderFor(AllOnlyIncomingFollowUserLimitController)
+final allOnlyIncomingFollowUserLimitControllerProvider =
+    AutoDisposeNotifierProvider<
+      AllOnlyIncomingFollowUserLimitController,
+      int
+    >.internal(
+      AllOnlyIncomingFollowUserLimitController.new,
+      name: r'allOnlyIncomingFollowUserLimitControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$allOnlyIncomingFollowUserLimitControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$AllOnlyIncomingFollowUserLimitController = AutoDisposeNotifier<int>;
+String _$allMutualFollowUserLimitControllerHash() =>
+    r'61de8d4b801521a39650f31415598d3250512969';
+
+/// See also [AllMutualFollowUserLimitController].
+@ProviderFor(AllMutualFollowUserLimitController)
+final allMutualFollowUserLimitControllerProvider = AutoDisposeNotifierProvider<
+  AllMutualFollowUserLimitController,
+  int
+>.internal(
+  AllMutualFollowUserLimitController.new,
+  name: r'allMutualFollowUserLimitControllerProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$allMutualFollowUserLimitControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$AllMutualFollowUserLimitController = AutoDisposeNotifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

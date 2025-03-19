@@ -362,7 +362,7 @@ class _WatchWhetherTargetUserFollowMeControllerProviderElement
 }
 
 String _$watchAllMyFollowingUserListControllerHash() =>
-    r'9f0b77f2bc1a161a8e92b0313a86b86016f3fc86';
+    r'70b0dc9d783247894f3ecf93a32eee2658806c8f';
 
 /// 自分がfollowしているユーザーを全て取得(follow)
 ///
@@ -508,8 +508,156 @@ class _WatchAllMyFollowingUserListControllerProviderElement
       (origin as WatchAllMyFollowingUserListControllerProvider).myUserId;
 }
 
+String _$watchAllMyFollowingUserListLimitedControllerHash() =>
+    r'c31a634c986b4faa50cc6ffc4335a343b96659f5';
+
+/// 自分がfollowしているユーザーを数制限ありで取得(follow)
+///
+/// Copied from [watchAllMyFollowingUserListLimitedController].
+@ProviderFor(watchAllMyFollowingUserListLimitedController)
+const watchAllMyFollowingUserListLimitedControllerProvider =
+    WatchAllMyFollowingUserListLimitedControllerFamily();
+
+/// 自分がfollowしているユーザーを数制限ありで取得(follow)
+///
+/// Copied from [watchAllMyFollowingUserListLimitedController].
+class WatchAllMyFollowingUserListLimitedControllerFamily
+    extends Family<AsyncValue<List<Follow>>> {
+  /// 自分がfollowしているユーザーを数制限ありで取得(follow)
+  ///
+  /// Copied from [watchAllMyFollowingUserListLimitedController].
+  const WatchAllMyFollowingUserListLimitedControllerFamily();
+
+  /// 自分がfollowしているユーザーを数制限ありで取得(follow)
+  ///
+  /// Copied from [watchAllMyFollowingUserListLimitedController].
+  WatchAllMyFollowingUserListLimitedControllerProvider call(String myUserId) {
+    return WatchAllMyFollowingUserListLimitedControllerProvider(myUserId);
+  }
+
+  @override
+  WatchAllMyFollowingUserListLimitedControllerProvider getProviderOverride(
+    covariant WatchAllMyFollowingUserListLimitedControllerProvider provider,
+  ) {
+    return call(provider.myUserId);
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'watchAllMyFollowingUserListLimitedControllerProvider';
+}
+
+/// 自分がfollowしているユーザーを数制限ありで取得(follow)
+///
+/// Copied from [watchAllMyFollowingUserListLimitedController].
+class WatchAllMyFollowingUserListLimitedControllerProvider
+    extends AutoDisposeStreamProvider<List<Follow>> {
+  /// 自分がfollowしているユーザーを数制限ありで取得(follow)
+  ///
+  /// Copied from [watchAllMyFollowingUserListLimitedController].
+  WatchAllMyFollowingUserListLimitedControllerProvider(String myUserId)
+    : this._internal(
+        (ref) => watchAllMyFollowingUserListLimitedController(
+          ref as WatchAllMyFollowingUserListLimitedControllerRef,
+          myUserId,
+        ),
+        from: watchAllMyFollowingUserListLimitedControllerProvider,
+        name: r'watchAllMyFollowingUserListLimitedControllerProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$watchAllMyFollowingUserListLimitedControllerHash,
+        dependencies:
+            WatchAllMyFollowingUserListLimitedControllerFamily._dependencies,
+        allTransitiveDependencies:
+            WatchAllMyFollowingUserListLimitedControllerFamily
+                ._allTransitiveDependencies,
+        myUserId: myUserId,
+      );
+
+  WatchAllMyFollowingUserListLimitedControllerProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.myUserId,
+  }) : super.internal();
+
+  final String myUserId;
+
+  @override
+  Override overrideWith(
+    Stream<List<Follow>> Function(
+      WatchAllMyFollowingUserListLimitedControllerRef provider,
+    )
+    create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: WatchAllMyFollowingUserListLimitedControllerProvider._internal(
+        (ref) => create(ref as WatchAllMyFollowingUserListLimitedControllerRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        myUserId: myUserId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeStreamProviderElement<List<Follow>> createElement() {
+    return _WatchAllMyFollowingUserListLimitedControllerProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is WatchAllMyFollowingUserListLimitedControllerProvider &&
+        other.myUserId == myUserId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, myUserId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin WatchAllMyFollowingUserListLimitedControllerRef
+    on AutoDisposeStreamProviderRef<List<Follow>> {
+  /// The parameter `myUserId` of this provider.
+  String get myUserId;
+}
+
+class _WatchAllMyFollowingUserListLimitedControllerProviderElement
+    extends AutoDisposeStreamProviderElement<List<Follow>>
+    with WatchAllMyFollowingUserListLimitedControllerRef {
+  _WatchAllMyFollowingUserListLimitedControllerProviderElement(super.provider);
+
+  @override
+  String get myUserId =>
+      (origin as WatchAllMyFollowingUserListLimitedControllerProvider).myUserId;
+}
+
 String _$watchAllFollowMeUserListControllerHash() =>
-    r'6cbe3aacbaa22a1f121ef8b17ddf0cbe81b85845';
+    r'06e16740b51c86c0575bbea12d716317172c934f';
 
 /// 自分をfollowしているユーザーを全て取得(follower)
 ///
@@ -652,6 +800,154 @@ class _WatchAllFollowMeUserListControllerProviderElement
   @override
   String get myUserId =>
       (origin as WatchAllFollowMeUserListControllerProvider).myUserId;
+}
+
+String _$watchAllFollowMeUserListLimitedControllerHash() =>
+    r'f4d7a4a0d4579dfd4bdeaa75099ef5ab9ae16b9b';
+
+/// 自分をfollowしているユーザーを数制限ありで取得(follower)
+///
+/// Copied from [watchAllFollowMeUserListLimitedController].
+@ProviderFor(watchAllFollowMeUserListLimitedController)
+const watchAllFollowMeUserListLimitedControllerProvider =
+    WatchAllFollowMeUserListLimitedControllerFamily();
+
+/// 自分をfollowしているユーザーを数制限ありで取得(follower)
+///
+/// Copied from [watchAllFollowMeUserListLimitedController].
+class WatchAllFollowMeUserListLimitedControllerFamily
+    extends Family<AsyncValue<List<Follow>>> {
+  /// 自分をfollowしているユーザーを数制限ありで取得(follower)
+  ///
+  /// Copied from [watchAllFollowMeUserListLimitedController].
+  const WatchAllFollowMeUserListLimitedControllerFamily();
+
+  /// 自分をfollowしているユーザーを数制限ありで取得(follower)
+  ///
+  /// Copied from [watchAllFollowMeUserListLimitedController].
+  WatchAllFollowMeUserListLimitedControllerProvider call(String myUserId) {
+    return WatchAllFollowMeUserListLimitedControllerProvider(myUserId);
+  }
+
+  @override
+  WatchAllFollowMeUserListLimitedControllerProvider getProviderOverride(
+    covariant WatchAllFollowMeUserListLimitedControllerProvider provider,
+  ) {
+    return call(provider.myUserId);
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'watchAllFollowMeUserListLimitedControllerProvider';
+}
+
+/// 自分をfollowしているユーザーを数制限ありで取得(follower)
+///
+/// Copied from [watchAllFollowMeUserListLimitedController].
+class WatchAllFollowMeUserListLimitedControllerProvider
+    extends AutoDisposeStreamProvider<List<Follow>> {
+  /// 自分をfollowしているユーザーを数制限ありで取得(follower)
+  ///
+  /// Copied from [watchAllFollowMeUserListLimitedController].
+  WatchAllFollowMeUserListLimitedControllerProvider(String myUserId)
+    : this._internal(
+        (ref) => watchAllFollowMeUserListLimitedController(
+          ref as WatchAllFollowMeUserListLimitedControllerRef,
+          myUserId,
+        ),
+        from: watchAllFollowMeUserListLimitedControllerProvider,
+        name: r'watchAllFollowMeUserListLimitedControllerProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$watchAllFollowMeUserListLimitedControllerHash,
+        dependencies:
+            WatchAllFollowMeUserListLimitedControllerFamily._dependencies,
+        allTransitiveDependencies:
+            WatchAllFollowMeUserListLimitedControllerFamily
+                ._allTransitiveDependencies,
+        myUserId: myUserId,
+      );
+
+  WatchAllFollowMeUserListLimitedControllerProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.myUserId,
+  }) : super.internal();
+
+  final String myUserId;
+
+  @override
+  Override overrideWith(
+    Stream<List<Follow>> Function(
+      WatchAllFollowMeUserListLimitedControllerRef provider,
+    )
+    create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: WatchAllFollowMeUserListLimitedControllerProvider._internal(
+        (ref) => create(ref as WatchAllFollowMeUserListLimitedControllerRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        myUserId: myUserId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeStreamProviderElement<List<Follow>> createElement() {
+    return _WatchAllFollowMeUserListLimitedControllerProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is WatchAllFollowMeUserListLimitedControllerProvider &&
+        other.myUserId == myUserId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, myUserId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin WatchAllFollowMeUserListLimitedControllerRef
+    on AutoDisposeStreamProviderRef<List<Follow>> {
+  /// The parameter `myUserId` of this provider.
+  String get myUserId;
+}
+
+class _WatchAllFollowMeUserListLimitedControllerProviderElement
+    extends AutoDisposeStreamProviderElement<List<Follow>>
+    with WatchAllFollowMeUserListLimitedControllerRef {
+  _WatchAllFollowMeUserListLimitedControllerProviderElement(super.provider);
+
+  @override
+  String get myUserId =>
+      (origin as WatchAllFollowMeUserListLimitedControllerProvider).myUserId;
 }
 
 String _$watchAllOnlyIncomingFollowUserListControllerHash() =>

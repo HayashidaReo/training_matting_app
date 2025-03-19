@@ -26,7 +26,9 @@ class FollowerListPage extends HookConsumerWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ref
-            .watch(watchAllFollowMeUserListControllerProvider(targetUserId))
+            .watch(
+              watchAllFollowMeUserListLimitedControllerProvider(targetUserId),
+            )
             .when(
               skipLoadingOnReload: true,
               error: (error, _) {

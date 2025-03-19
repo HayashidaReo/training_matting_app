@@ -79,10 +79,21 @@ Stream<List<Follow>> watchAllMyFollowingUserListController(
   ref,
   String myUserId,
 ) {
+  return ref
+      .watch(followRepoProvider.notifier)
+      .watchAllMyFollowingUserList(myUserId);
+}
+
+@riverpod
+/// 自分がfollowしているユーザーを数制限ありで取得(follow)
+Stream<List<Follow>> watchAllMyFollowingUserListLimitedController(
+  ref,
+  String myUserId,
+) {
   final int limit = ref.watch(allMyFollowingUserLimitControllerProvider);
   return ref
       .watch(followRepoProvider.notifier)
-      .watchAllMyFollowingUserList(myUserId, limit);
+      .watchAllMyFollowingUserListLimited(myUserId, limit);
 }
 
 @riverpod
@@ -101,10 +112,21 @@ class AllMyFollowingUserLimitController
 @riverpod
 /// 自分をfollowしているユーザーを全て取得(follower)
 Stream<List<Follow>> watchAllFollowMeUserListController(ref, String myUserId) {
+  return ref
+      .watch(followRepoProvider.notifier)
+      .watchAllFollowMeUserList(myUserId);
+}
+
+@riverpod
+/// 自分をfollowしているユーザーを数制限ありで取得(follower)
+Stream<List<Follow>> watchAllFollowMeUserListLimitedController(
+  ref,
+  String myUserId,
+) {
   final int limit = ref.watch(allFollowMeUserLimitControllerProvider);
   return ref
       .watch(followRepoProvider.notifier)
-      .watchAllFollowMeUserList(myUserId, limit);
+      .watchAllFollowMeUserListLimited(myUserId, limit);
 }
 
 @riverpod

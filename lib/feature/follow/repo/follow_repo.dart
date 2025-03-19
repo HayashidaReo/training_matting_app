@@ -65,22 +65,42 @@ class FollowRepo extends _$FollowRepo {
         .map((snapshot) => snapshot.docs.isNotEmpty);
   }
 
-  /// 自分(myUser)がフォローしているユーザーとのFollowを全て取得(follow)
-  Stream<List<Follow>> watchAllMyFollowingUserList(String myUserId, int limit) {
+  /// 自分(myUser)がフォローしているユーザーとのFollowを数制限ありで取得(follow)
+  Stream<List<Follow>> watchAllMyFollowingUserListLimited(
+    String myUserId,
+    int limit,
+  ) {
     return state
         .where(FirebaseFollowDataKey.followingUserId, isEqualTo: myUserId)
-        // .orderBy(FirebaseFollowDataKey.updateAt, descending: true)
+        .limit(limit)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
+  }
+
+  /// 自分(myUser)がフォローしているユーザーとのFollowを全て取得(follow)
+  Stream<List<Follow>> watchAllMyFollowingUserList(String myUserId) {
+    return state
+        .where(FirebaseFollowDataKey.followingUserId, isEqualTo: myUserId)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
+  }
+
+  /// 自分(myUser)をフォローしているユーザーとのFollowを全て取得(follower)
+  Stream<List<Follow>> watchAllFollowMeUserListLimited(
+    String myUserId,
+    int limit,
+  ) {
+    return state
+        .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
         .limit(limit)
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 
   /// 自分(myUser)をフォローしているユーザーとのFollowを全て取得(follower)
-  Stream<List<Follow>> watchAllFollowMeUserList(String myUserId, int limit) {
+  Stream<List<Follow>> watchAllFollowMeUserList(String myUserId) {
     return state
         .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
-        // .orderBy(FirebaseFollowDataKey.updateAt, descending: true)
-        .limit(limit)
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
@@ -94,7 +114,6 @@ class FollowRepo extends _$FollowRepo {
     return state
         // フォローされている人が自分
         .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
-        // .orderBy(FirebaseFollowDataKey.updateAt, descending: true)
         .limit(limit)
         .snapshots()
         .asyncMap((snapshot) async {
@@ -133,7 +152,6 @@ class FollowRepo extends _$FollowRepo {
     // 自分をフォローしている全てのフォロー情報を取得
     return state
         .where(FirebaseFollowDataKey.followerUserId, isEqualTo: myUserId)
-        // .orderBy(FirebaseFollowDataKey.updateAt, descending: true)
         .limit(limit)
         .snapshots()
         .asyncMap((snapshot) async {

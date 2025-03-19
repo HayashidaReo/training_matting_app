@@ -1,4 +1,4 @@
-/// 画像をアップロードするときの画質
+/// スナップショットでデータを取得するときの一度に取得する件数
 enum SnapshotLimit {
   allMyFollowingUser,
   allFollowMeUser,

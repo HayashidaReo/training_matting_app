@@ -20,6 +20,19 @@ class UserListPage extends HookConsumerWidget {
         useTextEditingController();
     final searchText = useState<String>('');
 
+    final ScrollController scrollController = useScrollController();
+
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        ref
+            .read(
+              forwardMatchingWithQueryTextUsersLimitControllerProvider.notifier,
+            )
+            .incrementLimit();
+      }
+    });
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,
@@ -52,6 +65,13 @@ class UserListPage extends HookConsumerWidget {
                   ),
                   onChanged: (text) {
                     searchText.value = text;
+                    // 検索文字が変化したらデータの取得も１からになるので、limitをリセット
+                    ref
+                        .read(
+                          forwardMatchingWithQueryTextUsersLimitControllerProvider
+                              .notifier,
+                        )
+                        .resetLimit();
                   },
                 ),
                 Positioned(
@@ -76,6 +96,13 @@ class UserListPage extends HookConsumerWidget {
                           .updateState(false);
                     },
                     onSelected: (value) async {
+                      // limitをリセット
+                      ref
+                          .read(
+                            forwardMatchingWithQueryTextUsersLimitControllerProvider
+                                .notifier,
+                          )
+                          .resetLimit();
                       ref
                           .read(popupMenuControllerProvider.notifier)
                           .updateState(false);
@@ -127,13 +154,13 @@ class UserListPage extends HookConsumerWidget {
                     .watch(
                       watchForwardMatchingWithQueryTextUsersControllerProvider(
                         searchText.value,
-
                         (ref.watch(userListStatusControllerProvider) == 0)
                             ? myUserData.gender
                             : null,
                       ),
                     )
                     .when(
+                      skipLoadingOnReload: true,
                       error: (error, _) {
                         return const Center(child: Text('エラーが発生しました'));
                       },
@@ -143,8 +170,8 @@ class UserListPage extends HookConsumerWidget {
                         );
                       },
                       data: (List<UserData> userDataList) {
-                        // TODO: 無限スクロールの実装
                         return ListView.separated(
+                          controller: scrollController,
                           itemCount: userDataList.length,
                           separatorBuilder: (context, index) {
                             return Divider();

@@ -7,7 +7,7 @@ part of 'talk_history_controller.dart';
 // **************************************************************************
 
 String _$watchAllTalkHistoryControllerHash() =>
-    r'fd094943320fb7c8f6fcc12b05de0ca51a822695';
+    r'7268f8f59883b9c49bc559048a380000428bd17d';
 
 /// Copied from Dart SDK
 class _SystemHash {

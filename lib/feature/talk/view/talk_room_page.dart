@@ -48,7 +48,7 @@ class TalkRoomPage extends HookConsumerWidget {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         ref
-            .read(allTalkHistoryLimitControllerProvider.notifier) // <-適宜変える
+            .read(allTalkHistoryLimitControllerProvider.notifier)
             .incrementLimit();
       }
     });

@@ -55,9 +55,10 @@ class UserRepo extends _$UserRepo {
   }
 
   // streamでuserListを取得
-  Stream<List<UserData>> watchAllUsers() {
+  Stream<List<UserData>> watchAllUsers(int limit) {
     return state
         .orderBy(FirebaseUserDataKey.createdAt, descending: true)
+        .limit(limit)
         .snapshots()
         .map((QuerySnapshot<UserData> snapshot) {
           return snapshot.docs.map((QueryDocumentSnapshot<UserData> doc) {
@@ -67,10 +68,11 @@ class UserRepo extends _$UserRepo {
   }
 
   // streamで性別を指定してuserListを取得
-  Stream<List<UserData>> watchOppositeGenderUsers(String myGender) {
+  Stream<List<UserData>> watchOppositeGenderUsers(String myGender, int limit) {
     return state
         .where(FirebaseUserDataKey.gender, isNotEqualTo: myGender)
         .orderBy(FirebaseUserDataKey.createdAt, descending: true)
+        .limit(limit)
         .snapshots()
         .map((QuerySnapshot<UserData> snapshot) {
           return snapshot.docs.map((QueryDocumentSnapshot<UserData> doc) {
@@ -82,11 +84,13 @@ class UserRepo extends _$UserRepo {
   // streamで指定した文字列と前方一致のuserのuserListを取得
   Stream<List<UserData>> watchForwardMatchingWithQueryTextUsers(
     String queryText,
+    int limit,
   ) {
     return state
         .orderBy(FirebaseUserDataKey.createdAt, descending: true)
         .where(FirebaseUserDataKey.userName, isGreaterThanOrEqualTo: queryText)
         .where(FirebaseUserDataKey.userName, isLessThan: '$queryText\uf8ff')
+        .limit(limit)
         .snapshots()
         .map((QuerySnapshot<UserData> snapshot) {
           return snapshot.docs.map((QueryDocumentSnapshot<UserData> doc) {
@@ -99,12 +103,14 @@ class UserRepo extends _$UserRepo {
   Stream<List<UserData>> watchForwardMatchingWithQueryTextAndGenderUsers(
     String queryText,
     String myGender,
+    int limit,
   ) {
     return state
         .orderBy(FirebaseUserDataKey.createdAt, descending: true)
         .where(FirebaseUserDataKey.userName, isGreaterThanOrEqualTo: queryText)
         .where(FirebaseUserDataKey.gender, isNotEqualTo: myGender)
         .where(FirebaseUserDataKey.userName, isLessThan: '$queryText\uf8ff')
+        .limit(limit)
         .snapshots()
         .map((QuerySnapshot<UserData> snapshot) {
           return snapshot.docs.map((QueryDocumentSnapshot<UserData> doc) {

@@ -193,7 +193,7 @@ final watchAllUsersControllerProvider =
 typedef WatchAllUsersControllerRef =
     AutoDisposeStreamProviderRef<List<UserData>>;
 String _$watchForwardMatchingWithQueryTextUsersControllerHash() =>
-    r'f503f98b341e5d57b92deeaf271fc8ce9f7bfd5d';
+    r'bc53a21bb24bc7f15502fb004f6b92fcecb3c364';
 
 /// See also [watchForwardMatchingWithQueryTextUsersController].
 @ProviderFor(watchForwardMatchingWithQueryTextUsersController)
@@ -360,7 +360,7 @@ class _WatchForwardMatchingWithQueryTextUsersControllerProviderElement
           .myGender;
 }
 
-String _$userControllerHash() => r'22855f078a3f2a602c308e124eefbe9de2f5c334';
+String _$userControllerHash() => r'fa51042c11254d4b1baf055cae50f16ca23592da';
 
 /// See also [UserController].
 @ProviderFor(UserController)
@@ -377,5 +377,27 @@ final userControllerProvider =
     );
 
 typedef _$UserController = AutoDisposeNotifier<AsyncValue>;
+String _$forwardMatchingWithQueryTextUsersLimitControllerHash() =>
+    r'4c332f60b0b36a58bc5d4f99a0ab9c543a86d97f';
+
+/// See also [ForwardMatchingWithQueryTextUsersLimitController].
+@ProviderFor(ForwardMatchingWithQueryTextUsersLimitController)
+final forwardMatchingWithQueryTextUsersLimitControllerProvider =
+    AutoDisposeNotifierProvider<
+      ForwardMatchingWithQueryTextUsersLimitController,
+      int
+    >.internal(
+      ForwardMatchingWithQueryTextUsersLimitController.new,
+      name: r'forwardMatchingWithQueryTextUsersLimitControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$forwardMatchingWithQueryTextUsersLimitControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$ForwardMatchingWithQueryTextUsersLimitController =
+    AutoDisposeNotifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

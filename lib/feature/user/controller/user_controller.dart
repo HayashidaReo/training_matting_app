@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:matching_app/config/utils/enum/snapshot_limit_enum.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/auth/repo/auth_repo.dart';
 import 'package:matching_app/feature/user/model/userdata.dart';
@@ -100,23 +101,47 @@ Stream<List<UserData>> watchForwardMatchingWithQueryTextUsersController(
   String queryText,
   String? myGender,
 ) {
+  final int limit = ref.watch(
+    forwardMatchingWithQueryTextUsersLimitControllerProvider,
+  );
   if (queryText.isEmpty) {
     if (myGender != null) {
       return ref
           .watch(userRepoProvider.notifier)
-          .watchOppositeGenderUsers(myGender);
+          .watchOppositeGenderUsers(myGender, limit);
     } else {
-      return ref.watch(userRepoProvider.notifier).watchAllUsers();
+      return ref.watch(userRepoProvider.notifier).watchAllUsers(limit);
     }
   } else {
     if (myGender != null) {
       return ref
           .watch(userRepoProvider.notifier)
-          .watchForwardMatchingWithQueryTextAndGenderUsers(queryText, myGender);
+          .watchForwardMatchingWithQueryTextAndGenderUsers(
+            queryText,
+            myGender,
+            limit,
+          );
     } else {
       return ref
           .watch(userRepoProvider.notifier)
-          .watchForwardMatchingWithQueryTextUsers(queryText);
+          .watchForwardMatchingWithQueryTextUsers(queryText, limit);
     }
+  }
+}
+
+@riverpod
+class ForwardMatchingWithQueryTextUsersLimitController
+    extends _$ForwardMatchingWithQueryTextUsersLimitController {
+  @override
+  int build() {
+    return SnapshotLimit.userList.limit;
+  }
+
+  void incrementLimit() {
+    state += SnapshotLimit.userList.limit;
+  }
+
+  void resetLimit() {
+    state = SnapshotLimit.userList.limit;
   }
 }

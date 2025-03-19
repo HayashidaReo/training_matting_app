@@ -125,11 +125,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                 ref
                                     .watch(
                                       watchAllFollowMeUserListControllerProvider(
-                                        ref
-                                            .read(
-                                              currentUserControllerProvider,
-                                            )!
-                                            .uid,
+                                        targetUserId,
                                       ),
                                     )
                                     .when(
@@ -148,11 +144,7 @@ class OtherUserProfilePage extends ConsumerWidget {
                                         return ref
                                             .watch(
                                               watchAllMyFollowingUserListControllerProvider(
-                                                ref
-                                                    .read(
-                                                      currentUserControllerProvider,
-                                                    )!
-                                                    .uid,
+                                                targetUserId,
                                               ),
                                             )
                                             .when(

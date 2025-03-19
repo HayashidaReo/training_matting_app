@@ -42,13 +42,14 @@ class TalkRepo extends _$TalkRepo {
   }
 
   /// トークルーム一覧を取得
-  Stream<List<Talk>> watchAllTalkRoomList() {
+  Stream<List<Talk>> watchAllTalkRoomList(int limit) {
     return state
         .where(
           FirebaseTalkDataKey.userIds,
           arrayContains: ref.read(currentUserControllerProvider)!.uid,
         )
         .orderBy(FirebaseTalkDataKey.updatedAt, descending: true)
+        .limit(limit)
         .snapshots()
         .map((QuerySnapshot<Talk> snapshot) {
           return snapshot.docs.map((QueryDocumentSnapshot<Talk> doc) {

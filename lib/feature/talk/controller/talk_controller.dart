@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:matching_app/config/utils/enum/snapshot_limit_enum.dart';
 import 'package:matching_app/feature/talk/model/talk.dart';
 import 'package:matching_app/feature/talk/repo/talk_repo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -50,7 +51,20 @@ class TalkController extends _$TalkController {
 @riverpod
 /// トークルーム一覧を取得
 Stream<List<Talk>> watchAllTalkRoomListController(ref) {
-  return ref.watch(talkRepoProvider.notifier).watchAllTalkRoomList();
+  final int limit = ref.watch(allTalkRoomListLimitControllerProvider);
+  return ref.watch(talkRepoProvider.notifier).watchAllTalkRoomList(limit);
+}
+
+@riverpod
+class AllTalkRoomListLimitController extends _$AllTalkRoomListLimitController {
+  @override
+  int build() {
+    return SnapshotLimit.allTalkRoom.limit;
+  }
+
+  void incrementLimit() {
+    state += SnapshotLimit.allTalkRoom.limit;
+  }
 }
 
 @riverpod

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/component/talk_list_user_tile.dart';
 import 'package:matching_app/feature/talk/controller/talk_controller.dart';
@@ -8,16 +9,26 @@ import 'package:matching_app/feature/talk/model/talk.dart';
 import 'package:matching_app/feature/user/controller/user_controller.dart';
 import 'package:matching_app/feature/user/model/userdata.dart';
 
-class TalkListPage extends ConsumerWidget {
+class TalkListPage extends HookConsumerWidget {
   const TalkListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final ScrollController scrollController = useScrollController();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        ref
+            .read(allTalkRoomListLimitControllerProvider.notifier)
+            .incrementLimit();
+      }
+    });
     return Scaffold(
       appBar: AppBar(title: const Text('メッセージ一覧')),
       body: ref
           .watch(watchAllTalkRoomListControllerProvider)
           .when(
+            skipLoadingOnReload: true,
             error: (error, stackTrace) {
               return Text('エラーが発生しました');
             },
@@ -25,8 +36,8 @@ class TalkListPage extends ConsumerWidget {
               return const CupertinoActivityIndicator();
             },
             data: (List<Talk> talkList) {
-              // TODO: 無限スクロールの実装
               return ListView.separated(
+                controller: scrollController,
                 itemCount: talkList.length,
                 separatorBuilder: (context, index) {
                   return const Divider();

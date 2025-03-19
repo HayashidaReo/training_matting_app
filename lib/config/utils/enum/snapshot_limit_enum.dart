@@ -7,6 +7,7 @@ enum SnapshotLimit {
   allPosts,
   myAllBookmarks,
   myAllPosts,
+  allTalkRoom,
 }
 
 extension FollowStatusExtention on SnapshotLimit {
@@ -26,6 +27,8 @@ extension FollowStatusExtention on SnapshotLimit {
         return 50;
       case SnapshotLimit.myAllPosts:
         return 50;
+      case SnapshotLimit.allTalkRoom:
+        return 30;
     }
   }
 }

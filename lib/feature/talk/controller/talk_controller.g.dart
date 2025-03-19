@@ -7,7 +7,7 @@ part of 'talk_controller.dart';
 // **************************************************************************
 
 String _$watchAllTalkRoomListControllerHash() =>
-    r'9bc0f31345b12df21c1f950ce71b88f94cf16a18';
+    r'9976bafaa415ad4a18a1a0e1ab281b6d61b3c5ad';
 
 /// トークルーム一覧を取得
 ///
@@ -208,5 +208,23 @@ final talkControllerProvider =
     );
 
 typedef _$TalkController = AutoDisposeNotifier<AsyncValue>;
+String _$allTalkRoomListLimitControllerHash() =>
+    r'c3315294affad3a07c6cda4345a39bd3e60fcd9d';
+
+/// See also [AllTalkRoomListLimitController].
+@ProviderFor(AllTalkRoomListLimitController)
+final allTalkRoomListLimitControllerProvider =
+    AutoDisposeNotifierProvider<AllTalkRoomListLimitController, int>.internal(
+      AllTalkRoomListLimitController.new,
+      name: r'allTalkRoomListLimitControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$allTalkRoomListLimitControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$AllTalkRoomListLimitController = AutoDisposeNotifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

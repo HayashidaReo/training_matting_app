@@ -348,6 +348,7 @@ class MyPage extends ConsumerWidget {
                                   HeightMarginSizedBox.small,
                                   SizedBox(
                                     height: 210,
+                                    // TODO: 無限スクロールの実装
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       itemCount: onlyIncomingFollowList.length,

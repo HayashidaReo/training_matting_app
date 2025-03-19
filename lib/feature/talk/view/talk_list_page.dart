@@ -25,6 +25,7 @@ class TalkListPage extends ConsumerWidget {
               return const CupertinoActivityIndicator();
             },
             data: (List<Talk> talkList) {
+              // TODO: 無限スクロールの実装
               return ListView.separated(
                 itemCount: talkList.length,
                 separatorBuilder: (context, index) {

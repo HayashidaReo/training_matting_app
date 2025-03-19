@@ -25,6 +25,7 @@ class FollowerListPage extends ConsumerWidget {
                 return const Center(child: CupertinoActivityIndicator());
               },
               data: (List<Follow> followingListData) {
+                // TODO: 無限スクロールの実装
                 return ListView.separated(
                   itemCount: followingListData.length,
                   separatorBuilder: (context, index) {

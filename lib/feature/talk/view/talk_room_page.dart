@@ -102,6 +102,7 @@ class TalkRoomPage extends HookConsumerWidget {
                                     Expanded(
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
+                                        // TODO: 無限スクロールの実装
                                         child: ListView.builder(
                                           reverse: true,
                                           itemCount: talkHistoryDataList.length,

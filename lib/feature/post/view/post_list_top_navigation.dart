@@ -12,9 +12,15 @@ class PostListTopNavigationPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final List<Widget> tabList = [
+      AllPostListPage(),
+      BookmarkedPostListPage(),
+      MyPostListPage(),
+    ];
+
     return DefaultTabController(
       initialIndex: ref.watch(postListTopNavigationControllerProvider),
-      length: 3,
+      length: tabList.length,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: defaultColors.navigationBackColor,
@@ -58,15 +64,7 @@ class PostListTopNavigationPage extends ConsumerWidget {
                 ],
               ),
             ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  AllPostListPage(),
-                  BookmarkedPostListPage(),
-                  MyPostListPage(),
-                ],
-              ),
-            ),
+            Expanded(child: TabBarView(children: tabList)),
           ],
         ),
       ),

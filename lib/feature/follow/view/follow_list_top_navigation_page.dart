@@ -13,9 +13,14 @@ class FollowListTopNavigationPage extends ConsumerWidget {
   final String targetUserId;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final List<Widget> tabList = [
+      FollowerListPage(targetUserId: targetUserId),
+      FollowListPage(targetUserId: targetUserId),
+      MutualFollowListPage(targetUserId: targetUserId),
+    ];
     return DefaultTabController(
       initialIndex: ref.watch(followListTopNavigationControllerProvider),
-      length: 3,
+      length: tabList.length,
       child: Scaffold(
         appBar: AppBar(title: Text('フォロー一覧')),
         body: Column(
@@ -48,15 +53,7 @@ class FollowListTopNavigationPage extends ConsumerWidget {
                 ],
               ),
             ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  FollowerListPage(targetUserId: targetUserId),
-                  FollowListPage(targetUserId: targetUserId),
-                  MutualFollowListPage(targetUserId: targetUserId),
-                ],
-              ),
-            ),
+            Expanded(child: TabBarView(children: tabList)),
           ],
         ),
       ),

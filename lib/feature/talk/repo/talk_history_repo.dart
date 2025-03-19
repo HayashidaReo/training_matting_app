@@ -56,9 +56,10 @@ class TalkHistoryRepo extends _$TalkHistoryRepo {
   }
 
   /// streamでtalkRoomIdに紐づくtalk_historyコレクションを全て取得
-  Stream<List<TalkHistory>> watchAllTalkHistory() {
+  Stream<List<TalkHistory>> watchAllTalkHistory(int limit) {
     return state
         .orderBy(FirebaseTalkHistoryDataKey.createdAt, descending: true)
+        .limit(limit)
         .snapshots()
         .map(
           (QuerySnapshot<TalkHistory> snapshot) =>

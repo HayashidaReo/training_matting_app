@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:matching_app/config/utils/enum/snapshot_limit_enum.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/talk/controller/talk_controller.dart';
@@ -90,15 +91,28 @@ class TalkHistoryController extends _$TalkHistoryController {
   }
 }
 
-/// streamでpostに紐づくfavoritesコレクションを全て取得して監視
+/// streamでpostに紐づくtalk_historyコレクションを全て取得して監視
 @riverpod
 Stream<List<TalkHistory>> watchAllTalkHistoryController(
   ref,
   String talkRoomId,
 ) {
+  final int limit = ref.watch(allTalkHistoryLimitControllerProvider);
   return ref
       .watch(talkHistoryRepoProvider(talkRoomId).notifier)
-      .watchAllTalkHistory();
+      .watchAllTalkHistory(limit);
+}
+
+@riverpod
+class AllTalkHistoryLimitController extends _$AllTalkHistoryLimitController {
+  @override
+  int build() {
+    return SnapshotLimit.allTalkHistory.limit;
+  }
+
+  void incrementLimit() {
+    state += SnapshotLimit.allTalkHistory.limit;
+  }
 }
 
 /// streamでtalkRoomIdに紐づく最新のtalk_historyコレクションを１件取得

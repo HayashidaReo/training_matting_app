@@ -42,6 +42,17 @@ class TalkRoomPage extends HookConsumerWidget {
     final TextEditingController messageTextController =
         useTextEditingController();
     useValueListenable(messageTextController); // 入力状態に応じて画面表示を変えるため
+
+    final ScrollController scrollController = useScrollController();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        ref
+            .read(allTalkHistoryLimitControllerProvider.notifier) // <-適宜変える
+            .incrementLimit();
+      }
+    });
+
     return ref
         .watch(watchUserDataControllerProvider(targetUserId))
         .when(
@@ -84,6 +95,7 @@ class TalkRoomPage extends HookConsumerWidget {
                             watchAllTalkHistoryControllerProvider(talkRoomId),
                           )
                           .when(
+                            skipLoadingOnReload: true,
                             error: (error, _) {
                               return Center(child: Text('エラーが発生しました'));
                             },
@@ -102,8 +114,8 @@ class TalkRoomPage extends HookConsumerWidget {
                                     Expanded(
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        // TODO: 無限スクロールの実装
                                         child: ListView.builder(
+                                          controller: scrollController,
                                           reverse: true,
                                           itemCount: talkHistoryDataList.length,
                                           itemBuilder: (context, index) {

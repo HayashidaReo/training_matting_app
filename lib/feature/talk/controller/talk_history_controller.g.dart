@@ -30,24 +30,24 @@ class _SystemHash {
   }
 }
 
-/// streamでpostに紐づくfavoritesコレクションを全て取得して監視
+/// streamでpostに紐づくtalk_historyコレクションを全て取得して監視
 ///
 /// Copied from [watchAllTalkHistoryController].
 @ProviderFor(watchAllTalkHistoryController)
 const watchAllTalkHistoryControllerProvider =
     WatchAllTalkHistoryControllerFamily();
 
-/// streamでpostに紐づくfavoritesコレクションを全て取得して監視
+/// streamでpostに紐づくtalk_historyコレクションを全て取得して監視
 ///
 /// Copied from [watchAllTalkHistoryController].
 class WatchAllTalkHistoryControllerFamily
     extends Family<AsyncValue<List<TalkHistory>>> {
-  /// streamでpostに紐づくfavoritesコレクションを全て取得して監視
+  /// streamでpostに紐づくtalk_historyコレクションを全て取得して監視
   ///
   /// Copied from [watchAllTalkHistoryController].
   const WatchAllTalkHistoryControllerFamily();
 
-  /// streamでpostに紐づくfavoritesコレクションを全て取得して監視
+  /// streamでpostに紐づくtalk_historyコレクションを全て取得して監視
   ///
   /// Copied from [watchAllTalkHistoryController].
   WatchAllTalkHistoryControllerProvider call(String talkRoomId) {
@@ -76,12 +76,12 @@ class WatchAllTalkHistoryControllerFamily
   String? get name => r'watchAllTalkHistoryControllerProvider';
 }
 
-/// streamでpostに紐づくfavoritesコレクションを全て取得して監視
+/// streamでpostに紐づくtalk_historyコレクションを全て取得して監視
 ///
 /// Copied from [watchAllTalkHistoryController].
 class WatchAllTalkHistoryControllerProvider
     extends AutoDisposeStreamProvider<List<TalkHistory>> {
-  /// streamでpostに紐づくfavoritesコレクションを全て取得して監視
+  /// streamでpostに紐づくtalk_historyコレクションを全て取得して監視
   ///
   /// Copied from [watchAllTalkHistoryController].
   WatchAllTalkHistoryControllerProvider(String talkRoomId)
@@ -504,5 +504,23 @@ final talkHistoryControllerProvider =
     );
 
 typedef _$TalkHistoryController = AutoDisposeNotifier<AsyncValue>;
+String _$allTalkHistoryLimitControllerHash() =>
+    r'6d08a5a87b347d1bb6a9590fc8e0b2abbd718286';
+
+/// See also [AllTalkHistoryLimitController].
+@ProviderFor(AllTalkHistoryLimitController)
+final allTalkHistoryLimitControllerProvider =
+    AutoDisposeNotifierProvider<AllTalkHistoryLimitController, int>.internal(
+      AllTalkHistoryLimitController.new,
+      name: r'allTalkHistoryLimitControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$allTalkHistoryLimitControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$AllTalkHistoryLimitController = AutoDisposeNotifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

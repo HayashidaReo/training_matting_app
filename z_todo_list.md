@@ -104,4 +104,13 @@
 - [x] フォロワー数とフォロワー一覧にズレがある
 - [x] CupertinoActivityIndicatorを使用する
 - [x] 認証画面にいるかの状態を監視する方法を改善
- 
+
+# er図修正
+- [x] タイトルはコレクション名にする。
+例 ) userData → users
+- [x] 型は全て小文字にする。
+例 ) String → string
+- genderはStringではなくintにする。(1 : 男性、2 : 女性みたいな、文字列で登録しない。)
+- FavoriteとBookmarkにユニークIdを持たせる。(ドキュメントIdをFavoriteId、BookmarkIdみたいにする。firestoreにもフィールドを追加。)
+- [x] サブコレは親のコレクションの下にくっつける。
+- [x] 横長になってもいいので、1列が1コレクションにする。(見やすくするため。)

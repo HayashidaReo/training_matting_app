@@ -7,6 +7,7 @@ import 'package:matching_app/common_widget/close_only_dialog.dart';
 import 'package:matching_app/common_widget/confirm_dialog.dart';
 import 'package:matching_app/common_widget/toast.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/enum/gender_key.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
@@ -164,7 +165,7 @@ class MyPage extends HookConsumerWidget {
                                   style: TextStyle(
                                     fontSize: FontSize.medium,
                                     color:
-                                        (userData.gender == 0)
+                                        (userData.gender == GenderKey.female)
                                             ? defaultColors.femaleColor
                                             : defaultColors.maleColor,
                                   ),
@@ -313,7 +314,9 @@ class MyPage extends HookConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                (userData.gender == 0) ? '男性' : '女性',
+                                (userData.gender == GenderKey.female)
+                                    ? '男性'
+                                    : '女性',
                                 style: TextStyle(
                                   fontSize: FontSize.smallNormal,
                                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/enum/gender_key.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/margin/height_margin_sized_box.dart';
@@ -47,7 +48,7 @@ class RecommendFollowCard extends StatelessWidget {
                       fontSize: FontSize.normal,
                       overflow: TextOverflow.ellipsis,
                       color:
-                          (userData.gender == 0)
+                          (userData.gender == GenderKey.female)
                               ? defaultColors.femaleColor
                               : defaultColors.maleColor,
                     ),

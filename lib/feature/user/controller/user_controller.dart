@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:matching_app/config/utils/enum/gender_key.dart';
 import 'package:matching_app/config/utils/enum/snapshot_limit_enum.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
 import 'package:matching_app/feature/auth/repo/auth_repo.dart';
@@ -42,7 +43,8 @@ class UserController extends _$UserController {
     required List<bool> genderList,
   }) async {
     state = const AsyncLoading();
-    final int gender = genderList[0] ? 0 : 1; // 0:男性, 1:女性
+    final int gender =
+        genderList[0] ? GenderKey.female : GenderKey.male; // 0:男性, 1:女性
     UserData addUserData = UserData(
       userId: ref.read(currentUserControllerProvider)!.uid,
       userName: username,

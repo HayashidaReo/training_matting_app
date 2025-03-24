@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/enum/gender_key.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/feature/auth/controller/current_user_controller.dart';
@@ -74,7 +75,7 @@ class TalkListUserTile extends ConsumerWidget {
         style: TextStyle(
           fontSize: FontSize.normal,
           color:
-              (targetUserData.gender == 0)
+              (targetUserData.gender == GenderKey.female)
                   ? defaultColors.femaleColor
                   : defaultColors.maleColor,
         ),

@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:matching_app/common_widget/confirm_dialog.dart';
 import 'package:matching_app/common_widget/toast.dart';
 import 'package:matching_app/config/utils/color/colors.dart';
+import 'package:matching_app/config/utils/enum/gender_key.dart';
 import 'package:matching_app/config/utils/enum/router_enum.dart';
 import 'package:matching_app/config/utils/fontStyle/font_size.dart';
 import 'package:matching_app/config/utils/keys/firebase_key.dart';
@@ -120,7 +121,7 @@ class PostTile extends HookConsumerWidget {
                 style: TextStyle(
                   fontSize: FontSize.normal,
                   color:
-                      (postUser.gender == 0)
+                      (postUser.gender == GenderKey.female)
                           ? defaultColors.femaleColor
                           : defaultColors.maleColor,
                 ),

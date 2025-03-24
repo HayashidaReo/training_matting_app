@@ -22,6 +22,7 @@ class FirebasePostDataKey {
 class FirebaseBookmarkDataKey {
   //Bookmarkコレクション関連
   static String bookmarkCollection = 'bookmarks';
+  static String bookmarkId = 'bookmarkId';
   static String postId = 'postId';
   static String userId = 'userId';
   static String createdAt = 'createdAt';
@@ -31,6 +32,7 @@ class FirebaseBookmarkDataKey {
 class FirebaseFavoriteDataKey {
   //Favoriteコレクション関連
   static String favoriteCollection = 'favorites';
+  static String favoriteId = 'favoriteId';
   static String postId = 'postId';
   static String userId = 'userId';
   static String createdAt = 'createdAt';

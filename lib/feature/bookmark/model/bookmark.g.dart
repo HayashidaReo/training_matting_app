@@ -7,6 +7,7 @@ part of 'bookmark.dart';
 // **************************************************************************
 
 _Bookmark _$BookmarkFromJson(Map<String, dynamic> json) => _Bookmark(
+  bookmarkId: json['bookmarkId'] as String,
   userId: json['userId'] as String,
   postId: json['postId'] as String,
   createdAt: const TimestampConverter().fromJson(
@@ -18,6 +19,7 @@ _Bookmark _$BookmarkFromJson(Map<String, dynamic> json) => _Bookmark(
 );
 
 Map<String, dynamic> _$BookmarkToJson(_Bookmark instance) => <String, dynamic>{
+  'bookmarkId': instance.bookmarkId,
   'userId': instance.userId,
   'postId': instance.postId,
   'createdAt': const TimestampConverter().toJson(instance.createdAt),

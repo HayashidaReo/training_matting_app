@@ -8,6 +8,7 @@ part 'bookmark.g.dart';
 @freezed
 class Bookmark with _$Bookmark {
   factory Bookmark({
+    required String bookmarkId,
     required String userId,
     required String postId,
     @TimestampConverter() required Timestamp createdAt,

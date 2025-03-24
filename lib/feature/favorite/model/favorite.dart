@@ -8,6 +8,7 @@ part 'favorite.g.dart';
 @freezed
 class Favorite with _$Favorite {
   factory Favorite({
+    required String favoriteId,
     required String userId,
     required String postId,
     @TimestampConverter() required Timestamp createdAt,

@@ -20,7 +20,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Favorite {
 
- String get userId=> throw _privateConstructorUsedError; String get postId=> throw _privateConstructorUsedError;@TimestampConverter() Timestamp get createdAt=> throw _privateConstructorUsedError;@TimestampConverter() Timestamp get updatedAt=> throw _privateConstructorUsedError;
+ String get favoriteId => throw _privateConstructorUsedError; String get userId => throw _privateConstructorUsedError; String get postId => throw _privateConstructorUsedError;@TimestampConverter() Timestamp get createdAt => throw _privateConstructorUsedError;@TimestampConverter() Timestamp get updatedAt => throw _privateConstructorUsedError;
 /// Create a copy of Favorite
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,21 +28,21 @@ mixin _$Favorite {
 $FavoriteCopyWith<Favorite> get copyWith => _$FavoriteCopyWithImpl<Favorite>(this as Favorite, _$identity);
 
   /// Serializes this Favorite to a JSON map.
-  Map<String, dynamic> toJson()=> throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Favorite&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Favorite&&(identical(other.favoriteId, favoriteId) || other.favoriteId == favoriteId)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,userId,postId,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,favoriteId,userId,postId,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'Favorite(userId: $userId, postId: $postId, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'Favorite(favoriteId: $favoriteId, userId: $userId, postId: $postId, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -53,7 +53,7 @@ abstract mixin class $FavoriteCopyWith<$Res>  {
   factory $FavoriteCopyWith(Favorite value, $Res Function(Favorite) _then) = _$FavoriteCopyWithImpl;
 @useResult
 $Res call({
- String userId, String postId,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
+ String favoriteId, String userId, String postId,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
 });
 
 
@@ -70,9 +70,10 @@ class _$FavoriteCopyWithImpl<$Res>
 
 /// Create a copy of Favorite
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? postId = null,Object? createdAt = null,Object? updatedAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? favoriteId = null,Object? userId = null,Object? postId = null,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_self.copyWith(
-userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+favoriteId: null == favoriteId ? _self.favoriteId : favoriteId // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as Timestamp,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -87,9 +88,10 @@ as Timestamp,
 @JsonSerializable()
 
 class _Favorite implements Favorite {
-   _Favorite({required this.userId, required this.postId, @TimestampConverter() required this.createdAt, @TimestampConverter() required this.updatedAt});
+   _Favorite({required this.favoriteId, required this.userId, required this.postId, @TimestampConverter() required this.createdAt, @TimestampConverter() required this.updatedAt});
   factory _Favorite.fromJson(Map<String, dynamic> json) => _$FavoriteFromJson(json);
 
+@override final  String favoriteId;
 @override final  String userId;
 @override final  String postId;
 @override@TimestampConverter() final  Timestamp createdAt;
@@ -108,16 +110,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Favorite&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Favorite&&(identical(other.favoriteId, favoriteId) || other.favoriteId == favoriteId)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,userId,postId,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,favoriteId,userId,postId,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'Favorite(userId: $userId, postId: $postId, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'Favorite(favoriteId: $favoriteId, userId: $userId, postId: $postId, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -128,7 +130,7 @@ abstract mixin class _$FavoriteCopyWith<$Res> implements $FavoriteCopyWith<$Res>
   factory _$FavoriteCopyWith(_Favorite value, $Res Function(_Favorite) _then) = __$FavoriteCopyWithImpl;
 @override @useResult
 $Res call({
- String userId, String postId,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
+ String favoriteId, String userId, String postId,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
 });
 
 
@@ -145,9 +147,10 @@ class __$FavoriteCopyWithImpl<$Res>
 
 /// Create a copy of Favorite
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? postId = null,Object? createdAt = null,Object? updatedAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? favoriteId = null,Object? userId = null,Object? postId = null,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_Favorite(
-userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+favoriteId: null == favoriteId ? _self.favoriteId : favoriteId // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as Timestamp,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable

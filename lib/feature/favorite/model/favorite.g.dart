@@ -7,6 +7,7 @@ part of 'favorite.dart';
 // **************************************************************************
 
 _Favorite _$FavoriteFromJson(Map<String, dynamic> json) => _Favorite(
+  favoriteId: json['favoriteId'] as String,
   userId: json['userId'] as String,
   postId: json['postId'] as String,
   createdAt: const TimestampConverter().fromJson(
@@ -18,6 +19,7 @@ _Favorite _$FavoriteFromJson(Map<String, dynamic> json) => _Favorite(
 );
 
 Map<String, dynamic> _$FavoriteToJson(_Favorite instance) => <String, dynamic>{
+  'favoriteId': instance.favoriteId,
   'userId': instance.userId,
   'postId': instance.postId,
   'createdAt': const TimestampConverter().toJson(instance.createdAt),

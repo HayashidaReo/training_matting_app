@@ -117,3 +117,5 @@
 - [x] FavoriteとBookmarkにユニークIdを持たせる。(ドキュメントIdをFavoriteId、BookmarkIdみたいにする。fireStoreにもフィールドを追加。)
 - [x] サブコレは親のコレクションの下にくっつける。
 - [x] 横長になってもいいので、1列が1コレクションにする。(見やすくするため。)
+- [x] コレクション名の下に日本語で説明を追記する
+- [x] list<string> → array<string>

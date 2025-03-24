@@ -164,7 +164,7 @@ class MyPage extends HookConsumerWidget {
                                   style: TextStyle(
                                     fontSize: FontSize.medium,
                                     color:
-                                        (userData.gender == '男性')
+                                        (userData.gender == 0)
                                             ? defaultColors.femaleColor
                                             : defaultColors.maleColor,
                                   ),
@@ -313,7 +313,7 @@ class MyPage extends HookConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                userData.gender,
+                                (userData.gender == 0) ? '男性' : '女性',
                                 style: TextStyle(
                                   fontSize: FontSize.smallNormal,
                                 ),

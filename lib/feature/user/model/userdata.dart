@@ -13,7 +13,7 @@ class UserData with _$UserData {
     required String userId,
     required String iconImageUrl,
     required String birthDate,
-    required String gender,
+    required int gender, // 0:男性, 1:女性
     @TimestampConverter() required Timestamp createdAt,
     @TimestampConverter() required Timestamp updatedAt,
   }) = _UserData;

@@ -68,7 +68,7 @@ class UserRepo extends _$UserRepo {
   }
 
   // streamで性別を指定してuserListを取得
-  Stream<List<UserData>> watchOppositeGenderUsers(String myGender, int limit) {
+  Stream<List<UserData>> watchOppositeGenderUsers(int myGender, int limit) {
     return state
         .where(FirebaseUserDataKey.gender, isNotEqualTo: myGender)
         .orderBy(FirebaseUserDataKey.createdAt, descending: true)
@@ -102,7 +102,7 @@ class UserRepo extends _$UserRepo {
   // streamで指定した性別で指定した文字列と前方一致のuserのuserListを取得
   Stream<List<UserData>> watchForwardMatchingWithQueryTextAndGenderUsers(
     String queryText,
-    String myGender,
+    int myGender,
     int limit,
   ) {
     return state

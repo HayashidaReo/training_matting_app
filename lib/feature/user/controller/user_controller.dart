@@ -42,7 +42,7 @@ class UserController extends _$UserController {
     required List<bool> genderList,
   }) async {
     state = const AsyncLoading();
-    final gender = genderList[0] ? "男性" : "女性";
+    final int gender = genderList[0] ? 0 : 1; // 0:男性, 1:女性
     UserData addUserData = UserData(
       userId: ref.read(currentUserControllerProvider)!.uid,
       userName: username,
@@ -99,7 +99,7 @@ Stream<List<UserData>> watchAllUsersController(ref) {
 Stream<List<UserData>> watchForwardMatchingWithQueryTextUsersController(
   ref,
   String queryText,
-  String? myGender,
+  int? myGender,
 ) {
   final int limit = ref.watch(
     forwardMatchingWithQueryTextUsersLimitControllerProvider,

@@ -17,10 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
+
 /// @nodoc
 mixin _$UserData {
 
- String get userName => throw _privateConstructorUsedError; String get profile => throw _privateConstructorUsedError; String get userId => throw _privateConstructorUsedError; String get iconImageUrl => throw _privateConstructorUsedError; String get birthDate => throw _privateConstructorUsedError; String get gender => throw _privateConstructorUsedError;@TimestampConverter() Timestamp get createdAt => throw _privateConstructorUsedError;@TimestampConverter() Timestamp get updatedAt => throw _privateConstructorUsedError;
+ String get userName => throw _privateConstructorUsedError; String get profile => throw _privateConstructorUsedError; String get userId => throw _privateConstructorUsedError; String get iconImageUrl => throw _privateConstructorUsedError; String get birthDate => throw _privateConstructorUsedError; int get gender => throw _privateConstructorUsedError;@TimestampConverter() Timestamp get createdAt => throw _privateConstructorUsedError;@TimestampConverter() Timestamp get updatedAt => throw _privateConstructorUsedError;
 /// Create a copy of UserData
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -53,7 +54,7 @@ abstract mixin class $UserDataCopyWith<$Res>  {
   factory $UserDataCopyWith(UserData value, $Res Function(UserData) _then) = _$UserDataCopyWithImpl;
 @useResult
 $Res call({
- String userName, String profile, String userId, String iconImageUrl, String birthDate, String gender,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
+ String userName, String profile, String userId, String iconImageUrl, String birthDate, int gender,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
 });
 
 
@@ -78,7 +79,7 @@ as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullabl
 as String,iconImageUrl: null == iconImageUrl ? _self.iconImageUrl : iconImageUrl // ignore: cast_nullable_to_non_nullable
 as String,birthDate: null == birthDate ? _self.birthDate : birthDate // ignore: cast_nullable_to_non_nullable
 as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
-as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as Timestamp,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as Timestamp,
   ));
@@ -99,7 +100,7 @@ class _UserData implements UserData {
 @override final  String userId;
 @override final  String iconImageUrl;
 @override final  String birthDate;
-@override final  String gender;
+@override final  int gender;
 @override@TimestampConverter() final  Timestamp createdAt;
 @override@TimestampConverter() final  Timestamp updatedAt;
 
@@ -136,7 +137,7 @@ abstract mixin class _$UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res>
   factory _$UserDataCopyWith(_UserData value, $Res Function(_UserData) _then) = __$UserDataCopyWithImpl;
 @override @useResult
 $Res call({
- String userName, String profile, String userId, String iconImageUrl, String birthDate, String gender,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
+ String userName, String profile, String userId, String iconImageUrl, String birthDate, int gender,@TimestampConverter() Timestamp createdAt,@TimestampConverter() Timestamp updatedAt
 });
 
 
@@ -161,7 +162,7 @@ as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullabl
 as String,iconImageUrl: null == iconImageUrl ? _self.iconImageUrl : iconImageUrl // ignore: cast_nullable_to_non_nullable
 as String,birthDate: null == birthDate ? _self.birthDate : birthDate // ignore: cast_nullable_to_non_nullable
 as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
-as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as Timestamp,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as Timestamp,
   ));

@@ -25,7 +25,7 @@ class UserListTile extends ConsumerWidget {
         style: TextStyle(
           fontSize: FontSize.normal,
           color:
-              (userData.gender == '男性')
+              (userData.gender == 0)
                   ? defaultColors.femaleColor
                   : defaultColors.maleColor,
         ),

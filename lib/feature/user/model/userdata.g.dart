@@ -12,7 +12,7 @@ _UserData _$UserDataFromJson(Map<String, dynamic> json) => _UserData(
   userId: json['userId'] as String,
   iconImageUrl: json['iconImageUrl'] as String,
   birthDate: json['birthDate'] as String,
-  gender: json['gender'] as String,
+  gender: (json['gender'] as num).toInt(),
   createdAt: const TimestampConverter().fromJson(
     json['createdAt'] as Timestamp,
   ),

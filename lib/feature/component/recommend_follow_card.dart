@@ -47,7 +47,7 @@ class RecommendFollowCard extends StatelessWidget {
                       fontSize: FontSize.normal,
                       overflow: TextOverflow.ellipsis,
                       color:
-                          (userData.gender == '男性')
+                          (userData.gender == 0)
                               ? defaultColors.femaleColor
                               : defaultColors.maleColor,
                     ),

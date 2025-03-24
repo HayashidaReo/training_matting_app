@@ -120,7 +120,7 @@ class PostTile extends HookConsumerWidget {
                 style: TextStyle(
                   fontSize: FontSize.normal,
                   color:
-                      (postUser.gender == '男性')
+                      (postUser.gender == 0)
                           ? defaultColors.femaleColor
                           : defaultColors.maleColor,
                 ),

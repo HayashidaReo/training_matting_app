@@ -74,7 +74,7 @@ class TalkListUserTile extends ConsumerWidget {
         style: TextStyle(
           fontSize: FontSize.normal,
           color:
-              (targetUserData.gender == '男性')
+              (targetUserData.gender == 0)
                   ? defaultColors.femaleColor
                   : defaultColors.maleColor,
         ),

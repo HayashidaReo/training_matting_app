@@ -193,7 +193,7 @@ final watchAllUsersControllerProvider =
 typedef WatchAllUsersControllerRef =
     AutoDisposeStreamProviderRef<List<UserData>>;
 String _$watchForwardMatchingWithQueryTextUsersControllerHash() =>
-    r'bc53a21bb24bc7f15502fb004f6b92fcecb3c364';
+    r'595c11df828b148fcffd032b72f81191f855942c';
 
 /// See also [watchForwardMatchingWithQueryTextUsersController].
 @ProviderFor(watchForwardMatchingWithQueryTextUsersController)
@@ -209,7 +209,7 @@ class WatchForwardMatchingWithQueryTextUsersControllerFamily
   /// See also [watchForwardMatchingWithQueryTextUsersController].
   WatchForwardMatchingWithQueryTextUsersControllerProvider call(
     String queryText,
-    String? myGender,
+    int? myGender,
   ) {
     return WatchForwardMatchingWithQueryTextUsersControllerProvider(
       queryText,
@@ -246,7 +246,7 @@ class WatchForwardMatchingWithQueryTextUsersControllerProvider
   /// See also [watchForwardMatchingWithQueryTextUsersController].
   WatchForwardMatchingWithQueryTextUsersControllerProvider(
     String queryText,
-    String? myGender,
+    int? myGender,
   ) : this._internal(
         (ref) => watchForwardMatchingWithQueryTextUsersController(
           ref as WatchForwardMatchingWithQueryTextUsersControllerRef,
@@ -281,7 +281,7 @@ class WatchForwardMatchingWithQueryTextUsersControllerProvider
   }) : super.internal();
 
   final String queryText;
-  final String? myGender;
+  final int? myGender;
 
   @override
   Override overrideWith(
@@ -340,7 +340,7 @@ mixin WatchForwardMatchingWithQueryTextUsersControllerRef
   String get queryText;
 
   /// The parameter `myGender` of this provider.
-  String? get myGender;
+  int? get myGender;
 }
 
 class _WatchForwardMatchingWithQueryTextUsersControllerProviderElement
@@ -355,12 +355,12 @@ class _WatchForwardMatchingWithQueryTextUsersControllerProviderElement
       (origin as WatchForwardMatchingWithQueryTextUsersControllerProvider)
           .queryText;
   @override
-  String? get myGender =>
+  int? get myGender =>
       (origin as WatchForwardMatchingWithQueryTextUsersControllerProvider)
           .myGender;
 }
 
-String _$userControllerHash() => r'fa51042c11254d4b1baf055cae50f16ca23592da';
+String _$userControllerHash() => r'3138e1fd93f8bcb77615baf5e598d44ec10a90ff';
 
 /// See also [UserController].
 @ProviderFor(UserController)

@@ -111,6 +111,6 @@
 - [x] 型は全て小文字にする。
 例 ) String → string
 - [x] genderはStringではなくintにする。(1 : 男性、2 : 女性みたいな、文字列で登録しない。)
-- FavoriteとBookmarkにユニークIdを持たせる。(ドキュメントIdをFavoriteId、BookmarkIdみたいにする。firestoreにもフィールドを追加。)
+- [x] FavoriteとBookmarkにユニークIdを持たせる。(ドキュメントIdをFavoriteId、BookmarkIdみたいにする。firestoreにもフィールドを追加。)
 - [x] サブコレは親のコレクションの下にくっつける。
 - [x] 横長になってもいいので、1列が1コレクションにする。(見やすくするため。)

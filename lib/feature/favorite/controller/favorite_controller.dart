@@ -4,6 +4,7 @@ import 'package:matching_app/feature/auth/controller/current_user_controller.dar
 import 'package:matching_app/feature/favorite/model/favorite.dart';
 import 'package:matching_app/feature/favorite/repo/favorite_repo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:uuid/uuid.dart';
 
 part 'favorite_controller.g.dart';
 
@@ -18,7 +19,9 @@ class FavoriteController extends _$FavoriteController {
   Future<void> addFavorite(String postId) async {
     state = const AsyncLoading();
     final Timestamp now = Timestamp.now();
+    String favoriteId = const Uuid().v4();
     final Favorite addFavoriteData = Favorite(
+      favoriteId: favoriteId,
       userId: ref.read(currentUserControllerProvider)!.uid,
       postId: postId,
       createdAt: now,
@@ -31,11 +34,11 @@ class FavoriteController extends _$FavoriteController {
   }
 
   /// いいね解除
-  Future<void> deleteFavorite(String postId, String userId) async {
+  Future<void> deleteFavorite(String postId, String favoriteId) async {
     state = const AsyncLoading();
     await ref
         .read(favoriteRepoProvider(postId).notifier)
-        .deleteFavorite(userId);
+        .deleteFavorite(favoriteId);
     state = const AsyncData(null);
   }
 

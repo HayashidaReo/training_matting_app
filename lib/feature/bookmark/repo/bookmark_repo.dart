@@ -23,12 +23,12 @@ class BookmarkRepo extends _$BookmarkRepo {
 
   /// ブックマーク追加
   Future<void> addBookmark(Bookmark addBookmarkData) async {
-    await state.doc(addBookmarkData.userId).set(addBookmarkData);
+    await state.doc(addBookmarkData.bookmarkId).set(addBookmarkData);
   }
 
   /// ブックマーク解除
-  Future<void> deleteBookmark(String userId) async {
-    await state.doc(userId).delete();
+  Future<void> deleteBookmark(String bookmarkId) async {
+    await state.doc(bookmarkId).delete();
   }
 
   //postに紐づくbookmarksコレクション全体を削除

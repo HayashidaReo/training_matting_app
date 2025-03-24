@@ -193,7 +193,7 @@ class _WatchAllFavoritesControllerProviderElement
 }
 
 String _$favoriteControllerHash() =>
-    r'6fbfb08b431c31c3fe69a7a22daed4232ba1ab85';
+    r'71eeae09feb8b207c484ed75ffa123b920444a27';
 
 /// See also [FavoriteController].
 @ProviderFor(FavoriteController)

@@ -179,9 +179,17 @@ class PostTile extends HookConsumerWidget {
                       return const CupertinoActivityIndicator();
                     },
                     data: (List<Favorite> favoriteListData) {
-                      bool isFavorite = favoriteListData.any(
-                        (doc) => doc.userId == uid,
-                      );
+                      bool isFavorite = false;
+                      String favoriteId = '';
+                      try {
+                        final Favorite myFavoriteData = favoriteListData
+                            .firstWhere((doc) => doc.userId == uid);
+                        isFavorite = true;
+                        favoriteId = myFavoriteData.favoriteId;
+                      } catch (e) {
+                        isFavorite = false;
+                        favoriteId = '';
+                      }
                       int favoriteCount = favoriteListData.length;
                       return Row(
                         mainAxisSize: MainAxisSize.min,
@@ -195,7 +203,7 @@ class PostTile extends HookConsumerWidget {
                                     )
                                     : const Icon(Icons.favorite_border),
                             onPressed: () async {
-                              await _addOrDeleteFavorite(isFavorite, ref);
+                              await _addOrDeleteFavorite(favoriteId, ref);
                             },
                           ),
                           Text(
@@ -206,44 +214,40 @@ class PostTile extends HookConsumerWidget {
                       );
                     },
                   ),
-              (isBookmarked == null)
-                  ? ref
-                      .watch(
-                        watchAllBookmarksControllerProvider(postData.postId),
-                      )
-                      .when(
-                        error: (error, _) {
-                          return const Text('エラー');
-                        },
-                        loading: () {
-                          return const CupertinoActivityIndicator();
-                        },
-                        data: (List<Bookmark> bookmarkListData) {
-                          bool isBookmarked = bookmarkListData.any(
-                            (doc) => doc.userId == uid,
-                          );
+              ref
+                  .watch(watchAllBookmarksControllerProvider(postData.postId))
+                  .when(
+                    error: (error, _) {
+                      return const Text('エラー');
+                    },
+                    loading: () {
+                      return const CupertinoActivityIndicator();
+                    },
+                    data: (List<Bookmark> bookmarkListData) {
+                      bool isBookmarked = false;
+                      String bookmarkId = '';
+                      try {
+                        final Bookmark myBookmarkData = bookmarkListData
+                            .firstWhere((doc) => doc.userId == uid);
+                        isBookmarked = true;
+                        bookmarkId = myBookmarkData.bookmarkId;
+                      } catch (e) {
+                        isBookmarked = false;
+                        bookmarkId = '';
+                      }
 
-                          return IconButton(
-                            icon:
-                                (isBookmarked)
-                                    ? Icon(
-                                      Icons.bookmark,
-                                      color: defaultColors.postBookmarkColor,
-                                    )
-                                    : const Icon(Icons.bookmark_border),
-                            onPressed: () async {
-                              await _addOrDeleteBookmark(isBookmarked, ref);
-                            },
-                          );
+                      return IconButton(
+                        icon:
+                            (isBookmarked)
+                                ? Icon(
+                                  Icons.bookmark,
+                                  color: defaultColors.postBookmarkColor,
+                                )
+                                : const Icon(Icons.bookmark_border),
+                        onPressed: () async {
+                          await _addOrDeleteBookmark(bookmarkId, ref);
                         },
-                      )
-                  : IconButton(
-                    icon:
-                        (isBookmarked!)
-                            ? const Icon(Icons.bookmark)
-                            : const Icon(Icons.bookmark_border),
-                    onPressed: () async {
-                      await _addOrDeleteBookmark(isBookmarked!, ref);
+                      );
                     },
                   ),
             ],
@@ -253,12 +257,12 @@ class PostTile extends HookConsumerWidget {
     );
   }
 
-  Future<void> _addOrDeleteFavorite(bool isFavorite, WidgetRef ref) async {
-    if (isFavorite) {
+  Future<void> _addOrDeleteFavorite(String favoriteId, WidgetRef ref) async {
+    if (favoriteId.isNotEmpty) {
       // いいねを削除
       await ref
           .read(favoriteControllerProvider.notifier)
-          .deleteFavorite(postData.postId, uid);
+          .deleteFavorite(postData.postId, favoriteId);
     } else {
       // いいねを追加
       await ref
@@ -268,12 +272,12 @@ class PostTile extends HookConsumerWidget {
     return;
   }
 
-  Future<void> _addOrDeleteBookmark(bool isBookmarked, WidgetRef ref) async {
-    if (isBookmarked) {
+  Future<void> _addOrDeleteBookmark(String bookmarkId, WidgetRef ref) async {
+    if (bookmarkId.isNotEmpty) {
       // ブックマークを削除
       ref
           .read(bookmarkControllerProvider.notifier)
-          .deleteBookmark(postData.postId, uid);
+          .deleteBookmark(postData.postId, bookmarkId);
     } else {
       // ブックマークを追加
       await ref

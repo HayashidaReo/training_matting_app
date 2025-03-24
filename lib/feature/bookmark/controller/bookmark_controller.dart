@@ -5,6 +5,7 @@ import 'package:matching_app/feature/bookmark/model/bookmark.dart';
 import 'package:matching_app/feature/bookmark/repo/bookmark_group_repo.dart';
 import 'package:matching_app/feature/bookmark/repo/bookmark_repo.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:uuid/uuid.dart';
 
 part 'bookmark_controller.g.dart';
 
@@ -19,7 +20,9 @@ class BookmarkController extends _$BookmarkController {
   Future<void> addBookmark(String postId) async {
     state = const AsyncLoading();
     final Timestamp now = Timestamp.now();
+    String bookmarkId = const Uuid().v4();
     final Bookmark addBookmarkData = Bookmark(
+      bookmarkId: bookmarkId,
       userId: ref.read(currentUserControllerProvider)!.uid,
       postId: postId,
       createdAt: now,
@@ -32,11 +35,11 @@ class BookmarkController extends _$BookmarkController {
   }
 
   /// ブックマーク解除
-  Future<void> deleteBookmark(String postId, String userId) async {
+  Future<void> deleteBookmark(String postId, String bookmarkId) async {
     state = const AsyncLoading();
     await ref
         .read(bookmarkRepoProvider(postId).notifier)
-        .deleteBookmark(userId);
+        .deleteBookmark(bookmarkId);
     state = const AsyncData(null);
   }
 

@@ -6,7 +6,7 @@ part of 'bookmark_repo.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$bookmarkRepoHash() => r'6792cf2766fd482c69d03d964f90575d7d17b96c';
+String _$bookmarkRepoHash() => r'cacace27dc62a6e46a2cb8f2e9a1534e59819452';
 
 /// Copied from Dart SDK
 class _SystemHash {

@@ -23,12 +23,12 @@ class FavoriteRepo extends _$FavoriteRepo {
 
   /// いいね追加
   Future<void> addFavorite(Favorite addFavoriteData) async {
-    await state.doc(addFavoriteData.userId).set(addFavoriteData);
+    await state.doc(addFavoriteData.favoriteId).set(addFavoriteData);
   }
 
   /// いいね解除
-  Future<void> deleteFavorite(String userId) async {
-    await state.doc(userId).delete();
+  Future<void> deleteFavorite(String favoriteId) async {
+    await state.doc(favoriteId).delete();
   }
 
   /// postに紐づくfavoriteコレクション全体を削除

@@ -53,5 +53,6 @@ freezed: DBのモデル定義
 <p align="left">
    <img src="screenshot/マイページ.png" alt="マイページ" width="300" style="margin-right: 20px;">
    <img src="screenshot/ハンバーガー.png" alt="ハンバーガー" width="300" style="margin-right: 20px;">
+   <img src="screenshot/アイコン編集.png" alt="アイコン編集" width="300" style="margin-right: 20px;">
    <img src="screenshot/プロフィール編集.png" alt="プロフィール編集" width="300">
 </p>
